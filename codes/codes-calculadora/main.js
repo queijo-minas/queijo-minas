@@ -6,8 +6,8 @@ function Calcular() {
     const GastoKg = Number(input_gasto_por_KG.value); // Custo por Kg de produção
     const AnosQueDesejaInvestir = Number(input_anos_que_deseja_investir.value); // Anos que deseja investir
 
-    // Cálculo da perda por produção (supondo que 10% da produção é perdida)
-    var PerdaPorProducao = ProduzidoAnual * 0.10;
+    // Cálculo da perda por produção (supondo que 20% da produção é perdida)
+    var PerdaPorProducao = ProduzidoAnual * 0.20;
 
     // Cálculo do ganho por Kg produzido (diferença entre valor de venda e custo por Kg)
     var GanhoPorProducaoKg = valorKg - GastoKg;
@@ -15,8 +15,8 @@ function Calcular() {
     // Cálculo da perda cessante (perda total multiplicada pelo ganho por Kg)
     var PerdaCessanteAnual = PerdaPorProducao * GanhoPorProducaoKg;
 
-    // Ajuste de 90% sobre a perda cessante
-    var PerdaCessanteAjustadaAnual = PerdaCessanteAnual * 0.90;
+    // Ajuste de 80% sobre a perda cessante
+    var PerdaCessanteAjustadaAnual = PerdaCessanteAnual * 0.80;
 
     // Variável para acumular a perda cessante ao longo dos anos
     var TotalPerdaCessante = 0;
@@ -26,10 +26,12 @@ function Calcular() {
     for (var ano = 1; ano <= AnosQueDesejaInvestir; ano++) {
         TotalPerdaCessante += PerdaCessanteAjustadaAnual;
 
-        div_exibir.innerHTML += `Perda Cessante no ano ${ano}: R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })} <br>`
+        div_exibir.innerHTML += `Perda Cessante no <b>${ano} º ano</b> pode ser até: 
+                        <b>R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })}</b><br>`
     }
 
     // Exibir o resultado final
-    div_exibir.innerHTML += `Perda Cessante Total ao longo de  ${AnosQueDesejaInvestir} anos: R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })}  <br>`
+    div_exibir.innerHTML += `Perda Cessante Total ao longo de <b> ${AnosQueDesejaInvestir} anos</b> pode chegar até:
+                 <b>R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })}</b>  <br>`
     
 }
