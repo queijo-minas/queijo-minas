@@ -25,7 +25,7 @@ function Calcular() {
      div_exibir.innerHTML = ``
     for (var ano = 1; ano <= AnosQueDesejaInvestir; ano++) {
         TotalPerdaCessante += PerdaCessanteAjustadaAnual;
-
+ 
         div_exibir.innerHTML += `Perda Cessante no <b>${ano} º ano</b> pode ser até: 
                         <b>R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })}</b><br>`
     }
@@ -35,3 +35,7 @@ function Calcular() {
                  <b>R$ ${TotalPerdaCessante.toLocaleString('pt-BR', { slyte: 'currency', currency: 'BRL' })}</b>  <br>`
     
 }
+ //de onde vem a informação
+ //a perda cessante e lucro cessante
+ //pesquisar queijo estragado, multas...
+ //quanto tempo o produtor deixa o quijo maturando
