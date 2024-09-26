@@ -10,4 +10,4 @@ MELHORAS PARA PRÓXIMA SEMANA:
 
 - Sprint Backlog atualizada;
 
-- Contextualização do Processo de Fabricação do Queijo Minas, focando nos locais para implementação dos sensores, e ligando com Banco de Dados.
+- Contextualização do Processo de Fabricação do Queijo Minas, focando nos locais para implementação dos sensores, e ligando com Banco de Dados.s
