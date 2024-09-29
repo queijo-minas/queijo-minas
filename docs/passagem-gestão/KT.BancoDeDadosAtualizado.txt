@@ -35,10 +35,30 @@ MELHORAS PARA PRÓXIMA SEMANA:
 (Pois pensamos que a tabela cadastro e implementacaoSensores deveria ter comunicação, um usuário cadastrado poderá ter várias implementações de sensores, mas isso terá que ser analisado na documentação, e pesquisa e discussão mais aprofundada de como 
 será feita essa implementação, onde exatamente estará o sensor, entre outras questões para definir nosso banco e as relações entre as tabelas)
 *Também necessário averiguar se essa terceira tabela, "implementacaoSensores" seria ideal, ou apenas o nome dela, pois teríamos que saber de onde estaria vindo esses dados, pois eles serão dinâmicos e não mocados, ou seja, como entrará esses dados, através de um formulário? tentar elucidar essas questões, e entender melhor essa terceira tabela com a professora, se é a mais adequada para nosso contexto de negócio.																 --próximos passos seria: entender com a professora, e validar, se estamos no caminho certo com essas tabelas(a terceira principalmente);
-         -- implementar modelo lógico
-         -- Criar relações(1:n, 1:1) entre as tabelas de acordo com nosso modelo de negócio(olhar na documentação);
-         -- foreign Keys, unique se precisar...e fazer JOINs e selects
+        
+          -- implementar modelo lógico
+
+         -- Criar relações(1:1, 1:n) entre as tabelas de acordo com nosso modelo de negócio(olhar na documentação, colocaremos os sensores na prateleira e discutir com o grupo:
+onde de fato estará os nossos sensores? Nas prateleiras?teremos muitos sensores em uma prateleira?);
+
+         -- foreign Keys, unique se precisar...e fazer JOINs e Selects
+
+
+
+         - CONSIDERAÇÕES DA PROFESSORA VIVIAN:
+         - A tabela implementaçãoSensores, tem informações que deveriam estar em outras tabelas, e deveria ter uma tabela onde estará os sensores;
+         - Campo "TIPO" do sensor, deveria estar na tabela sensor, e/ou tabela "medidas" ou "historico"(criar uma das duas que receberá os dados em tempo real da coleta de dados)
+         - nome da empresa, redundante, não precisaria ter nessa tabela;
+         Ou seja, precisamos ter tabelas: Cadastro(considerando que esse cadastro é de um produtor, que tem uma 'empresa'), tabela Sensores(terá campos como, idSensores e tipo do sensor)
+                                          tabela Medidas ou Historico(que terá conexão com a tabela sensor, e terá as medidas dos sensores, para ter o histórico dessas medidas),
+                                          tabela "Prateleira" por exemplo, ou onde estará o sensores, pois precisamos ter uma relação de conexão com a tabela sensores
+                                             (como: 1 prateleira terá 1 ou mais de um sensor, caso ele tenha só uma prateleira, ainda sim precisará da relação com a tabela sensor, 
+                                              pode ser tabela "CâmaraDeMaturação", uma câmara de maturação terá 1 sensor, ou câmara de maturação terá vários sensores, temos que definir isso)
 																																																																																																																												
+
+
+
+																																																																																																																			
 
 
 
