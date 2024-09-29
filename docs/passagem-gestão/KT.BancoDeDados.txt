@@ -1,0 +1,44 @@
+DOCUMENTO DE PASSAGEM DE GESTÃO: Banco de dados
+
+QUAL A FRENTE:	Banco de dados (Bia e Liz)
+
+
+SEMANA 1:
+
+Oque fizemos:
+
+No antigo banco de dados chamado "cadastro" e  havia 3 tabelas: 
+
+1-Tabela "informacoes", com os campos:
+
+idUsuario, nome, email, senha, endereço, telefone, CNPJ.
+
+
+
+2- Tabela "sensores", com os campos:
+
+id, dataHora, temperatura, umidade.
+
+3-Tabela "implementacaoSensores", com os campos:
+
+id, nomeEmpresa, localizacaoInstalacao, tipoSensor, modeloSensor, dataInstalacao, statusSensor.
+
+-Renomeamos o nome do banco de dados para "queijoNoPontoDB".
+-Renomeamos também a tabela "informacoes" para "cadastro";
+-Mantemos na tabela "cadastro", os campos antigos: idUsuario, nome, email, senha, endereço, telefone, CNPJ.
+-Mantemos na tabela "Sensores", os campos: antigos: id, dataHora, temperatura, umidade.
+-Alteramos a tabela "implementacaoSensores" adicionando uma constraint	na criação da tabela, fk_usuario.
+-Fizemos 2 Joins simples, apenas pra mostrar a conexão entre as duas, nome da empresa e o respectivo usuário cadastrado, por ex.
+
+
+MELHORAS PARA PRÓXIMA SEMANA: 
+(Pois pensamos que a tabela cadastro e implementacaoSensores deveria ter comunicação, um usuário cadastrado poderá ter várias implementações de sensores, mas isso terá que ser analisado na documentação, e pesquisa e discussão mais aprofundada de como 
+será feita essa implementação, onde exatamente estará o sensor, entre outras questões para definir nosso banco e as relações entre as tabelas)
+*Também necessário averiguar se essa terceira tabela, "implementacaoSensores" seria ideal, ou apenas o nome dela, pois teríamos que saber de onde estaria vindo esses dados, pois eles serão dinâmicos e não mocados, ou seja, como entrará esses dados, através de um formulário? tentar elucidar essas questões, e entender melhor essa terceira tabela com a professora, se é a mais adequada para nosso contexto de negócio.																 --próximos passos seria: entender com a professora, e validar, se estamos no caminho certo com essas tabelas(a terceira principalmente);
+         -- implementar modelo lógico
+         -- Criar relações(1:n, 1:1) entre as tabelas de acordo com nosso modelo de negócio(olhar na documentação);
+         -- foreign Keys, unique se precisar...e fazer JOINs e selects
+																																																																																																																												
+
+
+
