@@ -1,36 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calculadoraArtesanal</title>
+    <title>Simulador Queijo no Ponto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+           
+        }
+
+    </style>
 </head>
-
 <body>
-    <center>
-            <div id="div_exibir">
-            <p>
-                <b>
-                    <h1>calculadora Artesanal</h1>
-                </b>
-            </p>
+    <div>
+        <h1>Otimize sua produção de queijo:<br> Simulador de perdas e lucros</h1>
 
-
-            <p><b>Informe sua produção anual em Kg:</b></p>
-            <input type="number" id="input_produção_Kilos">
-            <p><b>Informe o valor de venda por Kg:</b></p>
-            <input type="number" id="input_venda_Kilo">
-            <p><b>Informe seu gasto por KG para produção:</b></p>
-            <input type="number" id="input_gasto_por_KG">
-            <p><b>Informe quanto anos você deseja investir no projeto:</b></p>
-            <input type="number" id="input_anos_que_deseja_investir"><br><br>
-
-            <button onclick="Calcular()">Calcular</button><br><br>
+        <div>
+           
+            <p>Selecione a medida de tempo da produção</p>
+            <select>
+                <option id="">Selecione</option>
+            <option value="">Mensal</option>
+            <option>Anual</option>
+        </select><br>
+        <p>Produção de queijo (Kg):</p>
+            <input type="number" id="input_producao_Kilos" placeholder="Ex: 500">
         </div>
-        </center>
+
+        <div>
+            <p>Valor de venda por Kg (R$):</p>
+            <input type="number" id="input_venda_Kilo" placeholder="Ex: 25">
+        </div>
+
+        <div>
+            <p>Gasto por Kg (R$):</p>
+            <input type="number" id="input_gasto_por_KG" placeholder="Ex: 10">
+        </div>
+
+        <div>
+            <p>Escolha a taxa de perda ou informe a sua:</p>
+            <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
+                <option value="padrao">Usar perda padrão de 20%</option>
+                <option value="manual">Inserir minha própria taxa de perda</option>
+            </select>
+
+            <div id="div_perda_manual" style="display:none;">
+                <p>Taxa de perda (%):</p>
+                <input type="number" id="input_perda_porcentagem">
+            </div>
+        </div>
+
+        <br><button onclick="Calcular()">Calcular</button>
+
+        <div class="resultados-container" id="resultadosCard">
+            <h2>Resultados</h2>
+            <p class="resultado-texto" id="resultadoPerda"></p>
+            <p class="resultado-texto" id="resultadoEconomia"></p>
+            <p class="resultado-impacto" id="impactoFinal"></p>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar ou esconder os campos de taxa de perda 
+        function mostrarCamposPerda() {
+            var opcaoPerda = Number(input_perda_opcao.value);
+            if (opcaoPerda === 'manual') {
+                div_perda_manual.style.display = 'block';
+            } else {
+                div_perda_manual.style.display = 'none';
+            }
+        }
+
+        function Calcular() {
+            const ProduzidoMensal = Number(input_producao_Kilos.value);
+            const valorKg = Number(input_venda_Kilo.value);
+            const GastoKg = Number(input_gasto_por_KG.value);
+            var taxaPerda = 0.20;  // Valor padrão de perda de 20%
+            var porcentagemEconomia = 0.80;  // Porcentagem de economia padrão para taxa de perda 20%
+
+            const opcaoPerda = input_perda_opcao.value;
+            if (opcaoPerda === 'manual') {
+                taxaPerda = Number(input_perda_porcentagem.value) / 100;
+                porcentagemEconomia = taxaPerda / 100;
+            }
+
+            var lucro = valorKg - GastoKg;  
+            const PerdaSemMonitoramento = ProduzidoMensal * taxaPerda * lucro;  
+            const EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia;  
+
+            resultadoPerda.innerHTML = `Sem monitoramento, você pode perder até: <b>R$ ${PerdaSemMonitoramento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> por mês devido a perdas no processo de maturação.`;
+            resultadoEconomia.innerHTML = `Com nosso sistema de monitoramento, você pode economizar até: <b>R$ ${EconomiaComSistema}</b> por mês.`;
+            impactoFinal.innerHTML = `Invista no nosso sistema e reduza suas perdas em até ${porcentagemEconomia * 100}%, aumentando sua produção e seu lucro!`;
+            resultadosCard.style.display = 'block';
+        }
+    </script>
 </body>
-
 </html>
-
-<script src="main.js"></script>
+<!--Um campo para ele colocar quanto perde kg durante maturação ou outro motivo, pra especificar mais os resultados pro caso do usuário,
+Também a taxa de porcentagemEconomia deveria ser flexivel pra caso ele colocar a porcentagem dele, não só 80% -->
