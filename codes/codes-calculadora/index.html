@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Calculadora Artesanal</title>
 </head>
 
@@ -15,8 +16,23 @@
                     <h1>Calculadora Artesanal</h1>
                 </b>
             </p>
+=======
+    <title>Simulador Queijo no Ponto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+    <div class="container">
+        <div id="conteudo" class="conteudo">
+            <img src="image/logo 1.svg" alt="">
+>>>>>>> 5f0d7fe1d3749844524ad89623b8416925a24414
 
+            <div class="title">
+                <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
+            </div>
+            
+
+<<<<<<< HEAD
             <p><b>Informe sua produção anual em Kg:</b></p>
             <input type="number" id="input_produção_Kilos">
             <p><b>Informe o valor de venda por Kg:</b></p>
@@ -24,12 +40,144 @@
             <p><b>Informe seu gasto por KG para produção:</b></p>
             <input type="number" id="input_gasto_por_KG">
             
+=======
+            <div class="quadro">
+                <p>Selecione a medida de tempo da produção:</p>
+                <select id="input_tempo_producao">
+                    <option value="mensal">Mensal</option>
+                    <option value="anual">Anual</option>
+                </select>
+>>>>>>> 5f0d7fe1d3749844524ad89623b8416925a24414
 
-            <button onclick="Calcular()">Calcular</button><br><br>
+                <p>Produção de queijo (Kg):</p>
+                <input type="number" id="input_producao_Kilos" placeholder="Ex: 500">
+            </div>
+
+            <div class="vendaKilo">
+                <p>Valor de venda por Kg (R$):</p>
+                <input type="number" id="input_venda_Kilo" placeholder="Ex: 25">
+            </div>
+
+            <div class="gastoKilo">
+                <p>Gasto por Kg (R$):</p>
+                <input type="number" id="input_gasto_por_KG" placeholder="Ex: 10">
+            </div>
+
+            <div class="taxaPerda">
+                <p>Escolha a taxa de perda ou informe a sua:</p>
+                <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
+                    <option value="default">Usar perda padrão de 20%</option>
+                    <option value="manual">Inserir minha própria taxa de perda</option>
+                </select>
+
+                <div id="div_perda_manual"></div>
+            </div>
+
+            <button onclick="Calcular()">Calcular</button>
         </div>
-        </center>
+
+        <div class="resultadosCard"  id="resultadosCard" style="display:none;">
+            <h2>Resultados</h2>
+            <div id="resultadoPerda"></div>
+            <div id="resultadoEconomia"></div>
+            <div id="impactoFinal"></div>
+        </div>
+    </div>
+
+
+    <script>
+        function mostrarCamposPerda() {
+            const opcaoPerda = document.getElementById('input_perda_opcao').value;
+            const divPerdaManual = document.getElementById('div_perda_manual');
+
+            if (opcaoPerda === 'manual') {
+                divPerdaManual.innerHTML = `
+                    <p>Taxa de perda na fase de maturação (%):</p>
+                    <input type="number" id="input_perda_maturacao"><br><br>
+                    <p>Taxa de perda por outros motivos (%):</p>
+                    <input type="number" id="input_perda_outros"><br><br>
+                `;
+            } else {
+                divPerdaManual.innerHTML = '';
+            }
+        }
+
+        function Calcular() {
+            // Pegando a escolha de mensal ou anual
+            const medidaTempo = document.getElementById('input_tempo_producao').value;
+
+            // Pegando os valores de entrada
+            const producao = Number(document.getElementById('input_producao_Kilos').value); // Produção de queijo (em Kg)
+            const valorKg = Number(document.getElementById('input_venda_Kilo').value); // Valor de venda por Kg
+            const GastoKg = Number(document.getElementById('input_gasto_por_KG').value); // Gasto por Kg de produção
+
+            // Valores padrão de taxa de perda
+            let taxaPerdaMaturacao = 0.12; // 12% perda na maturação
+            let taxaPerdaOutros = 0.08;     // 8% perda por outros motivos
+            let taxaPerdaTotal = 0.20;      // 20% taxa de perda total
+            let porcentagemEconomia = 0.80; // 80% de economia sobre a perda na maturação
+
+            // Se o usuário escolheu inserir manualmente as taxas de perda
+            if (document.getElementById('input_perda_opcao').value === 'manual') {
+                taxaPerdaMaturacao = Number(document.getElementById('input_perda_maturacao').value) / 100;
+                taxaPerdaOutros = Number(document.getElementById('input_perda_outros').value) / 100;
+                taxaPerdaTotal = taxaPerdaMaturacao + taxaPerdaOutros;
+
+                // A porcentagem de economia será baseada na taxa de perda na maturação
+                porcentagemEconomia = taxaPerdaMaturacao / taxaPerdaTotal;
+            }
+
+            // Calculando o lucro por Kg (valor de venda - custo de produção)
+            const lucro = valorKg - GastoKg;
+
+            // Cálculos de perda e economia com base na escolha (mensal ou anual)
+            let PerdaSemMonitoramento, EconomiaComSistema, periodoTexto;
+
+
+            if (medidaTempo === 'mensal') {
+                // Cálculos para mensal
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao + taxaPerdaOutros) * lucro; // Calcula a perda total mensal
+                EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia com o sistema mensal
+                periodoTexto = "mês";
+            } else {
+                // Cálculos para anual (multiplicando por 12)
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao + taxaPerdaOutros) * lucro * 12; // Calcula a perda total anual
+                EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia anual
+                periodoTexto = "ano";
+            }
+
+            // Texto de saída com mais informações e nosso maaarketing
+            const textoMarketing = `
+            <b>Detalhamento das Perdas:</b><br>
+            Sem um monitoramento adequado da maturação, você enfrenta uma perda de aproximadamente <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> nessa fase crucial.
+            Com uma produção de <b>${producao.toFixed(2)} kg</b> de queijo por ${periodoTexto}, e um lucro de <b>${lucro}</b> por quilo,
+            você pode perder até <b>${PerdaSemMonitoramento}</b> por ${periodoTexto} devido a perdas totais!<br><br>
+
+            <b>Como Nosso Sistema de Monitoramento Pode Ajudar:</b><br>
+            Nosso sistema foca em reduzir a perda na fase de maturação, que representa <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> de suas perdas.
+            Com a implementação da nossa tecnologia, você pode economizar até <b>${EconomiaComSistema}</b> por ${periodoTexto},
+            diminuindo significativamente as perdas nessa etapa e aumentando seu lucro.<br><br>
+
+            <b>Benefícios Diretos:</b><br>
+            - Redução específica das perdas na fase de maturação.<br>
+            - Melhoria na qualidade do queijo, garantindo textura e sabor consistentes.<br>
+            - Aumento da confiança do cliente na qualidade constante do produto.<br>
+            - Maior controle sobre o processo produtivo, permitindo ajustes rápidos.<br><br>
+
+            <b>Invista no Futuro da Sua Produção:</b><br>
+            Ao investir no nosso sistema de monitoramento, você foca na redução das perdas onde elas mais impactam seu negócio.
+            Invista em tecnologia para proteger sua produção e aumentar a satisfação dos seus clientes!
+            `;
+
+            // Exibindo os resultados na tela
+            document.getElementById('resultadosCard').style.display = 'block';
+            document.getElementById('resultadoPerda').innerHTML = `Sem monitoramento, você pode perder até: <b>${PerdaSemMonitoramento}</b> por ${periodoTexto}.`;
+            document.getElementById('resultadoEconomia').innerHTML = `Com nosso sistema de monitoramento, você pode economizar até: <b>${EconomiaComSistema}</b> por ${periodoTexto}.`;
+            document.getElementById('impactoFinal').innerHTML = textoMarketing;
+        }
+    </script>
 </body>
 
 </html>
-
-<script src="main.js"></script>
+<!--Um campo para ele colocar quanto perde kg durante maturação ou outro motivo, pra especificar mais os resultados pro caso do usuário,
+Também a taxa de porcentagemEconomia deveria ser flexivel pra caso ele colocar a porcentagem dele, não só 80% -->
