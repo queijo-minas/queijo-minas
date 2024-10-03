@@ -165,3 +165,10 @@
     transition: 0.3s;
 }
 
+.resultadosCard{
+    color: white;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+}
+
