@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Queijo no Ponto | Página Inicial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="nav-logo">
+                <!-- <img src="imgs/logo.png" style="height: 50px;"> -->
+                <h2 class="logo-text"> Queijo no Ponto</h2>
+            </a>
+
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu" class="nav-link">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contato</a>
+                </li>
+            </ul>
+
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero section -->
+        <section class="hero-section">
+            <div class="section-content">
+                <div class="hero-details">
+                    <h2 class="title">Bem-Vindo(a) ao Queijo no Ponto</h2>
+                    <h3 class="subtitle">
+                        Especialistas no <span>monitoramento</span> da <span>maturação</span> do autêntico
+                        <span>Queijo Minas Artesanal</span>
+                    </h3>
+                    <p class="description">
+                        Descubra o verdadeiro sabor da tradição! Acompanhamos de perto cada fase da maturação, garantindo que cada queijo atinja seu ponto ideal de sabor e textura, <br> trazendo a arte de fazer queijo à perfeição.
+                    </p>
+                    <div class="buttons">
+                        <a href="#contact" class="button contact-us">Contate-nos</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="imgs/cheese_image.png" alt="Queijo Artesanal" class="hero-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- About section -->
+        <section class="about-section" id="about">
+            <div class="section-content">
+                <div class="about-image-wrapper">
+                    <img src="images/about-image.jpg" alt="Sobre nós" class="about-image" />
+                </div>
+                <div class="about-details">
+                    <h2 class="section-title">Sobre Nós</h2>
+                    <p class="text">No Queijo no Ponto, temos orgulho em ser referência no monitoramento de temperatura e umidade no processo de maturação do Queijo Minas Artesanal. Nossa missão é garantir que cada queijo atinja seu ponto ideal, preservando o sabor e a tradição artesanal. Oferecemos soluções tecnológicas de alta precisão em um ambiente dedicado à excelência, permitindo que produtores acompanhem cada etapa do processo com total confiança. Aqui, tradição e inovação se encontram para levar o melhor do queijo artesanal à mesa dos nossos clientes.</p>
+                    <div class="social-link-list">
+                        <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services section (Menu modified) -->
+        <section class="menu-section" id="menu">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="section-content">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <img src="images/temperature-monitoring.jpg" alt="Monitoramento de Temperatura" class="menu-image" />
+                        <div class="menu-details">
+                            <h3 class="name">Monitoramento de Temperatura</h3>
+                            <p class="text">Tecnologia avançada para garantir que a temperatura esteja sempre no ponto certo durante a maturação do queijo.</p>
+                        </div>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/humidity-control.jpg" alt="Controle de Umidade" class="menu-image" />
+                        <div class="menu-details">
+                            <h3 class="name">Controle de Umidade</h3>
+                            <p class="text">Soluções precisas para manter a umidade ideal, preservando o sabor e a qualidade do queijo artesanal.</p>
+                        </div>
+                    </li>
+                    <li class="menu-item">
+                        <img src="imgs/analise-de-dados.png" alt="Análise de Dados" class="menu-image" />
+                        <div class="menu-details">
+                            <h3 class="name">Análise de Dados</h3>
+                            <p class="text">Acompanhamento em tempo real e relatórios detalhados sobre cada fase do processo de maturação.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact section -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">Contato</h2>
+            <div class="section-content">
+                <ul class="contact-info-list">
+                    <li class="contact-info">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p>Rua Haddock Lobo, 595 - Cerqueira César, São Paulo - SP</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-envelope"></i>
+                        <p>contato@queijonoponto.com.br</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-phone"></i>
+                        <p>(11) 99999-9999</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Segunda - Sexta: 10h15 - 16h15</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Sábado: 10:00 - 14:00</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Domingo: Fechado</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>www.queijonoponto.com.br</p>
+                    </li>
+                </ul>
+
+                <form action="#" class="contact-form">
+                    <input type="text" placeholder="Seu nome" class="form-input" required />
+                    <input type="email" placeholder="Seu email" class="form-input" required />
+                    <textarea placeholder="Sua mensagem" class="form-input" required></textarea>
+                    <button type="submit" class="button submit-button">Enviar</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer section -->
+        <footer class="footer-section">
+            <div class="section-content">
+                <p class="copyright-text">© 2024 Queijo no Ponto</p>
+
+                <div class="social-link-list">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+
+                <p class="policy-text">
+                    <a href="#" class="policy-link">Política de Privacidade</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="policy-link">Política de Reembolso</a>
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
