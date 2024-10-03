@@ -1,6 +1,6 @@
 DOCUMENTO DE PASSAGEM DE GESTÃO: Documentação/Trello
 
-QUAL A FRENTE:	Documentação (Rafael e Samara)
+---QUAL A FRENTE:	Documentação (Rafael e Samara)
 
 SEMANA 1: Reorganizado e reescrito algumas partes da documentação. Adicionado novos tópicos relacionados ao projeto relevantes para a 
 documentação. Reorganização do Trello adicionando novos requisitos e pendências no Backlog fazendo alterações nas etiquetas e checklist
@@ -10,4 +10,22 @@ MELHORAS PARA PRÓXIMA SEMANA:
 
 - Sprint Backlog atualizada;
 
-- Contextualização do Processo de Fabricação do Queijo Minas, focando nos locais para implementação dos sensores, e ligando com Banco de Dados.s
+- Contextualização do Processo de Fabricação do Queijo Minas, focando nos locais para implementação dos sensores, e ligando com Banco de Dados.
+
+
+---QUAL A FRENTE:	Documentação (Liz)
+
+
+SEMANA 2: Acrescentado mais sobre o contexto do projeto e método de produção e maturação do queijo. Acrescentado um infográfico. Trello feito e reorganizado. Backlog atualizado e acrescentado a Sprint Backlog. Refeito o diagrama de visão de negócio (seguindo orientações passadas pelos professores de PI) e feito o diagrama de solução de negócio.
+
+MELHORAS PARA PRÓXIMA SEMANA: 
+
+Documentação:
+*Próximo deverá acrescentar mais infográficos, preferencialmente sobre a relação de perda de produtividade com a variação de temperatura e umidade.
+
+Diagrama:
+*Validar com o Frizza os diagramas de solução e visão de negócios e atualizar no CANVA o que precisar (como fontes, ordem e possíveis acréscimos).
+
+Trello e Backlog:
+*Atualizar Trello com tarefas já feitas.
+*Acrescentar no Backlog análise de riscos e método Fibonacci.
