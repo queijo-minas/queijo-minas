@@ -54,6 +54,37 @@ onde de fato estará os nossos sensores? Nas prateleiras?teremos muitos sensores
                                           tabela "Prateleira" por exemplo, ou onde estará o sensores, pois precisamos ter uma relação de conexão com a tabela sensores
                                              (como: 1 prateleira terá 1 ou mais de um sensor, caso ele tenha só uma prateleira, ainda sim precisará da relação com a tabela sensor, 
                                               pode ser tabela "CâmaraDeMaturação", uma câmara de maturação terá 1 sensor, ou câmara de maturação terá vários sensores, temos que definir isso)
+
+
+DOCUMENTO DE PASSAGEM DE GESTÃO: PEDRO E EDUARDA
+QUAL A FRENTE: BANCO DE DADOS
+
+SEMANA 2:
+
+
+na semana 2 foi feita a modelagem de dados onde fizemos as relações normalizando as tables, como isso é feito? indico a leitura deste artigo onde explica melhor (https://www.hashtagtreinamentos.com/o-que-sao-formas-normais-em-bancos-de-dados-sql?gad_source=1&gclid=CjwKCAjwgfm3BhBeEiwAFfxrGxhVB097lZW-y8dN8mD5IYS5ziV8McVP8VVH1ODsrzVzg0nKggcRUxoCB5IQAvD_BwE).
+
+com isso também fizemos os scripts e inserção de dados. 
+
+quais pontos ficaram pendentes?
+
+fazer joins com as tabelas e case.
+
+
+ponto importante, foi feita a persistência dos dados do Arduino para maquina física e maquina virtual.
+
+para ficar guardado:
+
+para fazer a conexão com a vm precisa se dar o comando no cmd local (mysql -u aluno -p -P 3307), na virtual da mesma forma (mysql -u aluno -p -P 3306). 
+
+tendo a conexão pelo workbench usando sempre a porta 3307.
+
+
+MELHORAS PARA PRÓXIMA SEMANA:
+
+validar com a vivian se vai poder continuar com a modelagem normalizada ou precisa tirar a tabela de relação que seria a localMaturaçãoUsuário por que usuário pode ter no mínimo um local de maturação para ser responsável e no máximo vários e um local de maturação pode ter no mínimo um responsável e no máximo vários. (RELAÇÃO N:N).
+
+Fazer os joins e case.
 																																																																																																																												
 
 

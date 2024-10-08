@@ -122,17 +122,17 @@
                 EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia anual
                 periodoTexto = "ano";
             }
-
+            
             // Texto de saída com mais informações e nosso maaarketing
             const textoMarketing = `
             <b>Detalhamento das Perdas:</b><br>
             Sem um monitoramento adequado da maturação, você enfrenta uma perda de aproximadamente <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> nessa fase crucial.
-            Com uma produção de <b>${producao.toFixed(2)} kg</b> de queijo por ${periodoTexto}, e um lucro de <b>${lucro}</b> por quilo,
-            você pode perder até <b>${PerdaSemMonitoramento}</b> por ${periodoTexto} devido a perdas totais!<br><br>
+            Com uma produção de <b>${producao.toFixed(2)} kg</b> de queijo por ${periodoTexto}, e um lucro de <b>R$${lucro.toLocaleString("pt-BR")}</b> por quilo,
+            você pode perder até <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b> por ${periodoTexto} devido a perdas totais!<br><br>
 
             <b>Como Nosso Sistema de Monitoramento Pode Ajudar:</b><br>
             Nosso sistema foca em reduzir a perda na fase de maturação, que representa <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> de suas perdas.
-            Com a implementação da nossa tecnologia, você pode economizar até <b>${EconomiaComSistema}</b> por ${periodoTexto},
+            Com a implementação da nossa tecnologia, você pode economizar até <b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b> por ${periodoTexto},
             diminuindo significativamente as perdas nessa etapa e aumentando seu lucro.<br><br>
 
             <b>Benefícios Diretos:</b><br>
@@ -148,8 +148,8 @@
 
             // Exibindo os resultados na tela
             document.getElementById('resultadosCard').style.display = 'block';
-            document.getElementById('resultadoPerda').innerHTML = `Sem monitoramento, você pode perder até: <b>${PerdaSemMonitoramento}</b> por ${periodoTexto}.`;
-            document.getElementById('resultadoEconomia').innerHTML = `Com nosso sistema de monitoramento, você pode economizar até: <b>${EconomiaComSistema}</b> por ${periodoTexto}.`;
+            document.getElementById('resultadoPerda').innerHTML = `Sem monitoramento, você pode perder até: <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b> por ${periodoTexto}.`;
+            document.getElementById('resultadoEconomia').innerHTML = `Com nosso sistema de monitoramento, você pode economizar até: <b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b> por ${periodoTexto}.`;
             document.getElementById('impactoFinal').innerHTML = textoMarketing;
         }
     </script>
