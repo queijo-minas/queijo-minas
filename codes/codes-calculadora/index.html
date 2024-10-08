@@ -11,48 +11,49 @@
 <body>
     <div class="container">
         <div id="conteudo" class="conteudo">
-            <img src="image/logo 1.svg" alt="">
+            <div class="caixa">
+                <img src="image/logo 1.svg" alt="">
 
-            <div class="title">
-                <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
+                <div class="title">
+                    <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
+                </div>
+
+
+                <div class="quadro">
+                    <p>Selecione a medida de tempo da produção:</p>
+                    <select id="input_tempo_producao">
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                    </select>
+
+                    <p>Produção de queijo (Kg):</p>
+                    <input type="number" id="input_producao_Kilos" placeholder="Ex: 500">
+                </div>
+
+                <div class="vendaKilo">
+                    <p>Valor de venda por Kg (R$):</p>
+                    <input type="number" id="input_venda_Kilo" placeholder="Ex: 25">
+                </div>
+
+                <div class="gastoKilo">
+                    <p>Gasto por Kg (R$):</p>
+                    <input type="number" id="input_gasto_por_KG" placeholder="Ex: 10">
+                </div>
+
+                <div class="taxaPerda">
+                    <p>Escolha a taxa de perda ou informe a sua:</p>
+                    <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
+                        <option value="default">Usar perda padrão de 20%</option>
+                        <option value="manual">Inserir minha própria taxa de perda</option>
+                    </select>
+
+                    <div class="document" id="div_perda_manual"></div>
+                </div>  
+                <button onclick="Calcular()">Calcular</button>      
             </div>
-            
-
-            <div class="quadro">
-                <p>Selecione a medida de tempo da produção:</p>
-                <select id="input_tempo_producao">
-                    <option value="mensal">Mensal</option>
-                    <option value="anual">Anual</option>
-                </select>
-
-                <p>Produção de queijo (Kg):</p>
-                <input type="number" id="input_producao_Kilos" placeholder="Ex: 500">
-            </div>
-
-            <div class="vendaKilo">
-                <p>Valor de venda por Kg (R$):</p>
-                <input type="number" id="input_venda_Kilo" placeholder="Ex: 25">
-            </div>
-
-            <div class="gastoKilo">
-                <p>Gasto por Kg (R$):</p>
-                <input type="number" id="input_gasto_por_KG" placeholder="Ex: 10">
-            </div>
-
-            <div class="taxaPerda">
-                <p>Escolha a taxa de perda ou informe a sua:</p>
-                <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
-                    <option value="default">Usar perda padrão de 20%</option>
-                    <option value="manual">Inserir minha própria taxa de perda</option>
-                </select>
-
-                <div id="div_perda_manual"></div>
-            </div>
-
-            <button onclick="Calcular()">Calcular</button>
         </div>
 
-        <div class="resultadosCard"  id="resultadosCard" style="display:none;">
+        <div class="resultadosCard" id="resultadosCard" style="display:none;">
             <h2>Resultados</h2>
             <div id="resultadoPerda"></div>
             <div id="resultadoEconomia"></div>
