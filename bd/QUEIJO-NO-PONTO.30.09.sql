@@ -70,14 +70,15 @@ CREATE TABLE SensorPrateleira (
     FOREIGN KEY (idPrateleira) REFERENCES Prateleira(idPrateleira) -- Relaciona com a prateleira
 );
 
-CREATE TABLE DadosSensor (
+CREATE TABLE DadosSensores (
     idDadosSensor INT AUTO_INCREMENT PRIMARY KEY,
     idSensorTemperatura INT, 
-	idSensorUmidade INT,
+    idSensorUmidade INT,
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Armazena o momento da leitura
     temperatura DECIMAL(5,2), -- Armazena a temperatura coletada
     umidade DECIMAL(5,2), -- Armazena a umidade coletada
-    FOREIGN KEY (idSensor) REFERENCES SensorPrateleira(idSensor) -- Relaciona com o sensor
+    FOREIGN KEY (idSensorTemperatura) REFERENCES SensorPrateleira(idSensor), -- Relaciona com o sensor de temperatura
+    FOREIGN KEY (idSensorUmidade) REFERENCES SensorPrateleira(idSensor) -- Relaciona com o sensor de umidade
 );
 
 CREATE TABLE AlertaSensor (
@@ -150,10 +151,21 @@ INSERT INTO AlertaSensor (idSensor, tipoAlerta, descricaoAlerta) VALUES
 SHOW TABLES;
 SELECT * FROM empresa;
 SELECT * FROM usuario;
-SELECT * FROM localmaturacao;
+SELECT * FROM LocalMaturacao;
 SELECT * FROM DadosSensor;
 SELECT * FROM alertasensor;
-SELECT * FROM sensorprateleira;
-SELECT * FROM prateleira;
+SELECT * FROM UsuarioLocalMaturacao;
+SELECT * FROM SensorPrateleira;
+SELECT * FROM Prateleira;
+
+INSERT INTO SensorPrateleira (idSensor, tipoSensor, modeloSensor, dataInstalacao) 
+VALUES (1, 'Umidade', 'DHT11', '2024-01-01'); -- Sensor de umidade
+
+INSERT INTO SensorPrateleira (idSensor, tipoSensor, modeloSensor, dataInstalacao) 
+VALUES (2, 'Temperatura', 'LM35', '2024-01-01'); -- Sensor de temperatura
+
+
+SELECT * FROM SensorPrateleira WHERE idSensor IN (1, 2);
+
 
  
