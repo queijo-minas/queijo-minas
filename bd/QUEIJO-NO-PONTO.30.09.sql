@@ -72,7 +72,8 @@ CREATE TABLE SensorPrateleira (
 
 CREATE TABLE DadosSensor (
     idDadosSensor INT AUTO_INCREMENT PRIMARY KEY,
-    idSensor INT, -- Relaciona com o sensor específico
+    idSensorTemperatura INT, 
+	idSensorUmidade INT,
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Armazena o momento da leitura
     temperatura DECIMAL(5,2), -- Armazena a temperatura coletada
     umidade DECIMAL(5,2), -- Armazena a umidade coletada
@@ -150,7 +151,7 @@ SHOW TABLES;
 SELECT * FROM empresa;
 SELECT * FROM usuario;
 SELECT * FROM localmaturacao;
-SELECT * FROM dadossensor;
+SELECT * FROM DadosSensor;
 SELECT * FROM alertasensor;
 SELECT * FROM sensorprateleira;
 SELECT * FROM prateleira;

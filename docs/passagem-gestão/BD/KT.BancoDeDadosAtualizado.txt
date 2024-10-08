@@ -85,6 +85,9 @@ MELHORAS PARA PRÓXIMA SEMANA:
 validar com a vivian se vai poder continuar com a modelagem normalizada ou precisa tirar a tabela de relação que seria a localMaturaçãoUsuário por que usuário pode ter no mínimo um local de maturação para ser responsável e no máximo vários e um local de maturação pode ter no mínimo um responsável e no máximo vários. (RELAÇÃO N:N).
 
 Fazer os joins e case.
+
+
+FAZER UMA AUTO RELAÇÃO COM NIVEL DE ACESSO E USUARIO, RELAÇÃO DEPENDENTE COM SENSOR E DADOS SENSOR, FAZER TABELA ENDERECO COM COM RELAÇÃO DE UM PRA UM COM EMPRESA E RELAÇÃO DE UM PRA UM COM USUARIO E LOGIN FAZZER TABELA LOGIN.
 																																																																																																																												
 
 

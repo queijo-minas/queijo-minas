@@ -13,9 +13,9 @@
 :root {
   /* Cores */
   --white-color: #fff; /* Cor branca */
-  --dark-color: #252525; /* Cor escura */
+  --dark-color: #030320; /* Cor escura */
   --primary-color: #8C7853; /* Cor primária */
-  --secondary-color: #eeb400; /* Cor secundária */
+  --secondary-color: #c59506; /* Cor secundária */
   --light-pink-color: #faf4f5; /* Cor rosa claro */
   --medium-gray-color: #ccc; /* Cinza médio */
 
@@ -96,12 +96,13 @@ header {
   z-index: 5; /* Coloca o header acima de outros elementos */
   width: 100%; /* O header ocupa 100% da largura da tela */
   position: fixed; /* Fixa o header no topo durante o scroll */
-  background: var(--primary-color); /* Define a cor de fundo do header */
+  background: var(--dark-color); /* Define a cor de fundo do header */
 }
 
 header .navbar {
   display: flex; /* Utiliza flexbox para alinhar itens */
   padding: 20px; /* Adiciona espaçamento */
+  padding-left: 40px;
   align-items: center; /* Alinha os itens verticalmente */
   margin: 0 auto; /* Centraliza horizontalmente */
   justify-content: space-between; /* Distribui os itens com espaço entre eles */
@@ -121,7 +122,7 @@ header .navbar {
 
 .navbar .nav-menu .nav-link {
   padding: 10px 18px; /* Adiciona espaçamento interno */
-  color: var(--white-color); /* Define a cor do link */
+  color:var(--white-color); /* Define a cor do link */
   font-size: var(--font-size-m); /* Define o tamanho da fonte */
   border-radius: var(--border-radius-m); /* Define bordas arredondadas */
   transition: 0.3s ease; /* Adiciona transição suave */
@@ -139,15 +140,16 @@ header .navbar {
 
 /* Estilização da seção de herói (hero section) */
 .hero-section {
-  min-height: 100vh; /* Define a altura mínima para 100% da altura da tela */
-  background: var(--primary-color); /* Define a cor de fundo da seção */
+  min-height: 70vh; /* Define a altura mínima para 100% da altura da tela */
+  background: var( --dark-color); /* Define a cor de fundo da seção */
 }
 
 .hero-section .section-content {
   display: flex; /* Utiliza flexbox para layout */
-  padding-top: 40px; /* Adiciona espaçamento superior */
+  padding-top: 90px; /* Adiciona espaçamento superior */
+  padding-left: 40px;
   align-items: center; /* Alinha os itens verticalmente */
-  min-height: 100vh; /* Altura mínima de 100% da tela */
+  min-height: 96vh; /* Altura mínima de 100% da tela */
   justify-content: space-between; /* Espaço entre os itens */
 }
 
@@ -203,280 +205,288 @@ header .navbar {
   color: var(--primary-color); /* Altera a cor do texto */
   background: var(--secondary-color); /* Altera a cor de fundo */
   border-color: var(--secondary-color); /* Altera a cor da borda */
+
 }
-/* Estilos para imagens na seção hero */
+
 .hero-section .hero-image-wrapper {
-    max-width: 500px; /* Define a largura máxima da imagem na seção hero */
-    margin-right: 30px; /* Adiciona uma margem à direita da imagem */
-  }
-  
-  /* Estilização da seção sobre (About) */
-  .about-section {
-    padding: 120px 0; /* Adiciona espaçamento superior e inferior à seção */
-    background: var(--light-pink-color); /* Define a cor de fundo da seção */
-  }
-  
-  .about-section .section-content {
-    display: flex; /* Utiliza o flexbox para o layout */
-    gap: 50px; /* Define o espaçamento entre os elementos filhos */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-    justify-content: space-between; /* Distribui o espaço entre os itens */
-  }
-  
-  .about-section .about-image-wrapper .about-image {
-    height: 400px; /* Define a altura da imagem */
-    width: 400px; /* Define a largura da imagem */
-    object-fit: cover; /* Faz com que a imagem preencha seu espaço sem distorcer */
-    border-radius: var(--border-radius-circle); /* Aplica bordas arredondadas à imagem */
-  }
-  
-  .about-section .about-details {
-    max-width: 50%; /* Define a largura máxima para os detalhes sobre */
-  }
-  
-  .about-section .about-details .section-title {
-    padding: 0; /* Remove o espaçamento padrão do título */
-  }
-  
-  .about-section .about-details .text {
-    line-height: 30px; /* Define a altura da linha para melhor legibilidade */
-    margin: 50px 0 30px; /* Define margens superior e inferior */
-    text-align: center; /* Centraliza o texto */
-    font-size: var(--font-size-m); /* Define o tamanho da fonte */
-  }
-  
-  .about-section .social-link-list {
-    display: flex; /* Utiliza flexbox para a lista de links sociais */
-    gap: 25px; /* Define o espaçamento entre os links */
-    justify-content: center; /* Centraliza os links na linha */
-  }
-  
-  .about-section .social-link-list .social-link {
-    color: var(--primary-color); /* Define a cor do link social */
-    font-size: var(--font-size-l); /* Define o tamanho da fonte do link */
-    transition: 0.2s ease; /* Define uma transição suave para mudanças de estilo */
-  }
-  
-  .about-section .social-link-list .social-link:hover {
-    color: var(--secondary-color); /* Altera a cor do link ao passar o mouse */
-  }
-  
-  /* Estilização da seção de menu */
-  .menu-section {
-    color: var(--white-color); /* Define a cor do texto na seção de menu */
-    background: var(--dark-color); /* Define a cor de fundo da seção */
-    padding: 50px 0 100px; /* Adiciona espaçamento superior e inferior */
-  }
-  
-  .menu-section .menu-list {
-    display: flex; /* Utiliza flexbox para o layout da lista de menu */
-    gap: 110px; /* Define o espaçamento entre os itens do menu */
-    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha, se necessário */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-    justify-content: space-between; /* Distribui o espaço entre os itens */
-  }
-  
-  .menu-section .menu-list .menu-item {
-    display: flex; /* Utiliza flexbox para o layout do item de menu */
-    text-align: center; /* Centraliza o texto dentro do item de menu */
-    flex-direction: column; /* Alinha os filhos em coluna */
-    align-items: center; /* Centraliza os itens filhos na horizontal */
-    justify-content: space-between; /* Distribui o espaço entre os itens filhos */
-    width: calc(100% / 3 - 110px); /* Define a largura dos itens de menu */
-  }
-  
-  .menu-section .menu-list .menu-item .menu-image {
-    width: 83%; /* Define a largura da imagem do item de menu */
-    aspect-ratio: 1; /* Mantém a proporção quadrada da imagem */
-    margin-bottom: 15px; /* Adiciona uma margem inferior à imagem */
-    object-fit: contain; /* Faz com que a imagem se ajuste ao espaço sem distorcer */
-  }
-  
-  .menu-section .menu-list .menu-item .name {
-    margin: 12px 0; /* Define margens superior e inferior para o nome do item */
-    font-size: var(--font-size-l); /* Define o tamanho da fonte para o nome do item */
-    font-weight: var(--font-weight-semibold); /* Aplica um peso de fonte semibold */
-  }
-  
-  .menu-section .menu-list .menu-item .text {
-    font-size: var(--font-size-m); /* Define o tamanho da fonte para a descrição do item */
-  }
-  
-  /* Estilização da seção de depoimentos (Testimonials) */
-  .testimonials-section {
-    padding: 50px 0 100px; /* Adiciona espaçamento superior e inferior */
-    background: var(--light-pink-color); /* Define a cor de fundo da seção */
-  }
-  
-  .testimonials-section .slider-wrapper {
-    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse os limites do contêiner */
-    margin: 0 60px 50px; /* Define margens para a parte superior, inferior e laterais */
-  }
-  
-  .testimonials-section .testimonial {
-    user-select: none; /* Impede que o usuário selecione o texto */
-    padding: 35px; /* Adiciona preenchimento interno à seção de depoimentos */
-    display: flex; /* Utiliza flexbox para o layout do depoimento */
-    flex-direction: column; /* Alinha os filhos em coluna */
-    justify-content: center; /* Centraliza os itens verticalmente */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    text-align: center; /* Centraliza o texto dentro do depoimento */
-  }
-  
-  .testimonials-section .testimonial .user-image {
-    width: 180px; /* Define a largura da imagem do usuário */
-    height: 180px; /* Define a altura da imagem do usuário */
-    margin-bottom: 50px; /* Adiciona uma margem inferior à imagem do usuário */
-    object-fit: cover; /* Faz com que a imagem preencha seu espaço sem distorcer */
-    border-radius: var(--border-radius-circle); /* Aplica bordas arredondadas à imagem */
-  }
-  
-  .testimonials-section .testimonial .name {
-    margin-bottom: 16px; /* Adiciona margem inferior ao nome do usuário */
-    font-size: var(--font-size-m); /* Define o tamanho da fonte para o nome do usuário */
-  }
-  
-  .testimonials-section .testimonial .feedback {
-    line-height: 25px; /* Define a altura da linha para melhor legibilidade do feedback */
-  }
-  
-  .testimonials-section .swiper-pagination-bullet {
-    width: 15px; /* Define a largura dos pontos de paginação */
-    height: 15px; /* Define a altura dos pontos de paginação */
-    opacity: 1; /* Define a opacidade dos pontos de paginação */
-    background: var(--secondary-color); /* Define a cor de fundo dos pontos de paginação */
-  }
-  
-  .testimonials-section .swiper-slide-button {
-    color: var(--secondary-color); /* Define a cor do botão de navegação */
-    margin-top: -50px; /* Ajusta a posição do botão para cima */
-    transition: 0.3s ease; /* Define uma transição suave para mudanças de estilo */
-  }
-  
-  .testimonials-section .swiper-slide-button:hover {
-    color: var(--primary-color); /* Altera a cor do botão ao passar o mouse */
-  }
-  
-  /* Estilização da seção de galeria */
-  .gallery-section {
-    padding: 50px 0 100px; /* Adiciona espaçamento superior e inferior */
-  }
-  
-  .gallery-section .gallery-list {
-    display: flex; /* Utiliza flexbox para o layout da lista de galeria */
-    gap: 32px; /* Define o espaçamento entre os itens da galeria */
-    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha, se necessário */
-  }
-  
-  .gallery-section .gallery-list .gallery-item {
-    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse os limites do item da galeria */
-    border-radius: var(--border-radius-s); /* Aplica bordas arredondadas ao item da galeria */
-    width: calc(100% / 3 - 32px); /* Define a largura do item da galeria */
-  }
-  
-  .gallery-section .gallery-item .gallery-image {
-    width: 100%; /* Define a largura da imagem da galeria */
-    height: 100%; /* Define a altura da imagem da galeria */
-    cursor: zoom-in; /* Altera o cursor para indicar que a imagem pode ser ampliada */
-    transition: 0.3s ease; /* Define uma transição suave para mudanças de estilo */
-  }
-  
-  .gallery-section .gallery-item:hover .gallery-image {
-    transform: scale(1.3); /* Aumenta a imagem ao passar o mouse */
-  }
-  
-  /* Estilização da seção de contato */
-  .contact-section {
-    padding: 50px 0 100px; /* Adiciona espaçamento superior e inferior */
-    background: var(--light-pink-color); /* Define a cor de fundo da seção */
-  }
-  
-  .contact-section .section-content {
-    display: flex; /* Utiliza flexbox para o layout da seção de contato */
-    gap: 48px; /* Define o espaçamento entre os elementos */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-  }
-  
-  .contact-section .contact-details {
-    max-width: 50%; /* Define a largura máxima para os detalhes de contato */
-  }
-  
-  .contact-section .contact-details .section-title {
-    padding: 0; /* Remove o espaçamento padrão do título */
-  }
-  
-  .contact-section .contact-details .text {
-    line-height: 30px; /* Define a altura da linha para melhor legibilidade */
-    margin: 20px 0; /* Define margens superior e inferior */
-  }
-  
-  .contact-section .contact-details .text .bold {
-    font-weight: var(--font-weight-semibold); /* Aplica um peso de fonte semibold ao texto em negrito */
-  }
-  
-  .contact-section .contact-form {
-    width: 100%; /* Define a largura total do formulário de contato */
-    border: 1px solid var(--dark-color); /* Define uma borda para o formulário */
-    border-radius: var(--border-radius-s); /* Aplica bordas arredondadas ao formulário */
-    padding: 30px; /* Adiciona preenchimento interno ao formulário */
-    background: white; /* Define a cor de fundo do formulário */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Aplica sombra ao formulário */
-  }
-  
-  .contact-section .contact-form input,
-  .contact-section .contact-form textarea {
-    width: 100%; /* Define a largura total dos campos de entrada e textarea */
-    margin-bottom: 20px; /* Adiciona margem inferior aos campos */
-    padding: 12px; /* Adiciona preenchimento interno aos campos */
-    border: 1px solid var(--dark-color); /* Define uma borda para os campos */
-    border-radius: var(--border-radius-s); /* Aplica bordas arredondadas aos campos */
-    transition: border-color 0.3s ease; /* Define uma transição suave para mudanças de borda */
-  }
-  
-  .contact-section .contact-form input:focus,
-  .contact-section .contact-form textarea:focus {
-    border-color: var(--secondary-color); /* Altera a cor da borda ao focar nos campos */
-  }
-  
-  .contact-section .contact-form button {
-    background: var(--primary-color); /* Define a cor de fundo do botão */
-    color: white; /* Define a cor do texto do botão */
-    padding: 12px; /* Adiciona preenchimento interno ao botão */
-    border: none; /* Remove a borda padrão do botão */
-    border-radius: var(--border-radius-s); /* Aplica bordas arredondadas ao botão */
-    cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
-    transition: background 0.3s ease; /* Define uma transição suave para mudanças de fundo */
-  }
-  
-  .contact-section .contact-form button:hover {
-    background: var(--secondary-color); /* Altera a cor de fundo do botão ao passar o mouse */
-  }
-  
-  /* Estilização para rodapé */
-  footer {
-    padding: 50px 0; /* Adiciona espaçamento superior e inferior ao rodapé */
-    background: var(--dark-color); /* Define a cor de fundo do rodapé */
-  }
-  
-  footer .footer-content {
-    display: flex; /* Utiliza flexbox para o layout do conteúdo do rodapé */
-    gap: 50px; /* Define o espaçamento entre os elementos do rodapé */
-    justify-content: center; /* Centraliza os itens do rodapé */
-  }
-  
-  footer .footer-content .footer-item {
-    text-align: center; /* Centraliza o texto dentro do item do rodapé */
-    color: var(--white-color); /* Define a cor do texto do item do rodapé */
-  }
-  
-  footer .footer-content .footer-item a {
-    color: var(--white-color); /* Define a cor dos links no rodapé */
-    transition: color 0.3s ease; /* Define uma transição suave para mudanças de cor dos links */
-  }
-  
-  footer .footer-content .footer-item a:hover {
-    color: var(--secondary-color); /* Altera a cor do link ao passar o mouse */
-  }
-  
-  
-  
+  max-width: 500px;
+  margin-right: 80px;
+}
+
+/* About section styling */
+.about-section {
+  padding: 120px 0;
+  background: var(--light-pink-color);
+}
+
+.about-section .section-content {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-section .about-image-wrapper .about-image {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+  border-radius: var(--border-radius-circle);
+}
+
+.about-section .about-details {
+  max-width: 50%;
+}
+
+.about-section .about-details .section-title {
+  padding: 0;
+}
+
+.about-section .about-details .text {
+  line-height: 30px;
+  margin: 50px 0 30px;
+  text-align: center;
+  font-size: var(--font-size-m);
+}
+
+.about-section .social-link-list {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.about-section .social-link-list .social-link {
+  color: var(--primary-color);
+  font-size: var(--font-size-l);
+  transition: 0.2s ease;
+}
+
+.about-section .social-link-list .social-link:hover {
+  color: var(--secondary-color);
+}
+
+/* Menu section styling */
+.menu-section {
+  color: var(--white-color);
+  background: var(--dark-color);
+  padding: 50px 0 100px;
+}
+
+.menu-section .menu-list {
+  display: flex;
+  gap: 110px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-section .menu-list .menu-item {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% / 3 - 110px);
+}
+
+.menu-section .menu-list .menu-item .menu-image {
+  width: 83%;
+  aspect-ratio: 1;
+  margin-bottom: 15px;
+  object-fit: contain;
+}
+
+.menu-section .menu-list .menu-item .name {
+  margin: 12px 0;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+.menu-section .menu-list .menu-item .text {
+  font-size: var(--font-size-m);
+}
+
+/* Testimonials section styling */
+.testimonials-section {
+  padding: 50px 0 100px;
+  background: var(--light-pink-color);
+}
+
+.testimonials-section .slider-wrapper {
+  overflow: hidden;
+  margin: 0 60px 50px;
+}
+
+.testimonials-section .testimonial {
+  user-select: none;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonials-section .testimonial .user-image {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 50px;
+  object-fit: cover;
+  border-radius: var(--border-radius-circle);
+}
+
+.testimonials-section .testimonial .name {
+  margin-bottom: 16px;
+  font-size: var(--font-size-m);
+}
+
+.testimonials-section .testimonial .feedback {
+  line-height: 25px;
+}
+
+.testimonials-section .swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  opacity: 1;
+  background: var(--secondary-color);
+}
+
+.testimonials-section .swiper-slide-button {
+  color: var(--secondary-color);
+  margin-top: -50px;
+  transition: 0.3s ease;
+}
+
+.testimonials-section .swiper-slide-button:hover {
+  color: var(--primary-color);
+}
+
+/* Gallery section styling */
+.gallery-section {
+  padding: 50px 0 100px;
+}
+
+.gallery-section .gallery-list {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.gallery-section .gallery-list .gallery-item {
+  overflow: hidden;
+  border-radius: var(--border-radius-s);
+  width: calc(100% / 3 - 32px);
+}
+
+.gallery-section .gallery-item .gallery-image {
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+  transition: 0.3s ease;
+}
+
+.gallery-section .gallery-item:hover .gallery-image {
+  transform: scale(1.3);
+}
+
+/* Contact section styling */
+.contact-section {
+  padding: 50px 0 100px;
+  background: var(--light-pink-color);
+}
+
+.contact-section .section-content {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-section .contact-info-list .contact-info {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.contact-section .contact-info-list .contact-info i {
+  font-size: var(--font-size-m);
+}
+
+.contact-section .contact-form .form-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 12px;
+  outline: none;
+  margin-bottom: 16px;
+  font-size: var(--font-size-s);
+  border-radius: var(--border-radius-s);
+  border: 1px solid var(--medium-gray-color);
+}
+
+.contact-section .contact-form {
+  max-width: 50%;
+}
+
+.contact-section .contact-form textarea.form-input {
+  height: 100px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.contact-section .contact-form .form-input:focus {
+  border-color: var(--secondary-color);
+}
+
+.contact-section .contact-form .submit-button {
+  padding: 10px 28px;
+  outline: none;
+  margin-top: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius-m);
+  background: var(--primary-color);
+  color: var(--white-color);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: 0.3s ease;
+}
+
+.contact-section .contact-form .submit-button:hover {
+  color: var(--primary-color);
+  background: transparent;
+}
+
+/* Footer section styling */
+.footer-section {
+  padding: 20px 0;
+  background: var(--dark-color);
+}
+
+.footer-section .section-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-section :where(.copyright-text, .social-link, .policy-link) {
+  color: var(--white-color);
+  transition: 0.2s ease;
+}
+
+.footer-section .social-link-list {
+  display: flex;
+  gap: 25px;
+}
+
+.footer-section .social-link-list .social-link {
+  font-size: var(--font-size-l);
+}
+
+.footer-section .social-link-list .social-link:hover,
+.footer-section .policy-text .policy-link:hover {
+  color: var(--secondary-color);
+}
+
+.footer-section .policy-text .separator {
+  color: #fff;
+  margin: 0 5px;
+}
