@@ -27,17 +27,17 @@
                     </select>
 
                     <p>Produção de queijo (Kg):</p>
-                    <input type="number" id="input_producao_Kilos" placeholder="Ex: 500">
+                    <input type="number" id="input_producao_Kilos" placeholder="Ex: 500Kg de queijo produzido">
                 </div>
 
                 <div class="vendaKilo">
                     <p>Valor de venda por Kg (R$):</p>
-                    <input type="number" id="input_venda_Kilo" placeholder="Ex: 25">
+                    <input type="number" id="input_venda_Kilo" placeholder="Ex: R$ 25,00 reais o Kg do queijo">
                 </div>
 
                 <div class="gastoKilo">
                     <p>Gasto por Kg (R$):</p>
-                    <input type="number" id="input_gasto_por_KG" placeholder="Ex: 10">
+                    <input type="number" id="input_gasto_por_KG" placeholder="Ex: R$ 10,00 para produzir um Kg">
                 </div>
 
                 <div class="taxaPerda">
@@ -48,16 +48,18 @@
                     </select>
 
                     <div class="document" id="div_perda_manual"></div>
-                </div>  
-                <button onclick="Calcular()">Calcular</button>      
+                </div>
+                <button onclick="Calcular()">Calcular</button>
             </div>
         </div>
 
         <div class="resultadosCard" id="resultadosCard" style="display:none;">
-            <h2>Resultados</h2>
-            <div id="resultadoPerda"></div>
-            <div id="resultadoEconomia"></div>
-            <div id="impactoFinal"></div>
+            <div class="contentFilho">
+                <h2>Resultados</h2>
+                <div id="resultadoPerda"></div>
+                <div id="resultadoEconomia"></div>
+                <div id="impactoFinal"></div>
+            </div>
         </div>
     </div>
 
@@ -70,9 +72,9 @@
             if (opcaoPerda === 'manual') {
                 divPerdaManual.innerHTML = `
                     <p>Taxa de perda na fase de maturação (%):</p>
-                    <input type="number" id="input_perda_maturacao"><br><br>
+                    <input type="number" id="input_perda_maturacao">
                     <p>Taxa de perda por outros motivos (%):</p>
-                    <input type="number" id="input_perda_outros"><br><br>
+                    <input type="number" id="input_perda_outros">
                 `;
             } else {
                 divPerdaManual.innerHTML = '';
@@ -122,10 +124,10 @@
                 EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia anual
                 periodoTexto = "ano";
             }
-            
+
             // Texto de saída com mais informações e nosso maaarketing
             const textoMarketing = `
-            <b>Detalhamento das Perdas:</b><br>
+            <br><b>Detalhamento das Perdas:</b><br>
             Sem um monitoramento adequado da maturação, você enfrenta uma perda de aproximadamente <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> nessa fase crucial.
             Com uma produção de <b>${producao.toFixed(2)} kg</b> de queijo por ${periodoTexto}, e um lucro de <b>R$${lucro.toLocaleString("pt-BR")}</b> por quilo,
             você pode perder até <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b> por ${periodoTexto} devido a perdas totais!<br><br>
