@@ -1,0 +1,14 @@
+Atualizar:
+index acrescentar link de login + cadastro
+
+*navbar pra azul escuro
+*colocar link da calculadora no index + na pagina de login/cadastro
+
+*nome da empresa/CNPJ em cadastro (+ banco de dados)
+
+
+
+
+
+
+
