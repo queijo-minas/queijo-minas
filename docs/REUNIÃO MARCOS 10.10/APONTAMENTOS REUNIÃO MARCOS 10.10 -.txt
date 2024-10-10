@@ -1,5 +1,8 @@
 APONTAMENTOS REUNIÃO MARCOS 10/10 -
 
+DOCUMENTAÇÃO:
+
+
 - Gráfico de crescimento do mercado de queijos
 - Implementar fontes para perdas e ganhos na documentação
 - Detalhar ferramentas a serem utilizadas no escopo
@@ -17,6 +20,7 @@ APONTAMENTOS REUNIÃO MARCOS 10/10 -
 - PROBLEMA, SOLUÇÃO, IMPLEMENTAÇÃO, SUCESSO
 
 
+SITE INSTITUCIONAL:
 
 - Separação da Missão, visão e valores na aba 'Sobre Nós', e encurtar o texto do Sobre nós
 - Acrescentar uma foto do Grupo, e as frentes da equipe com foto de cada um (talvez uma outra janela)
@@ -25,6 +29,7 @@ APONTAMENTOS REUNIÃO MARCOS 10/10 -
 - Razão social, CNPJ, nome fantasia e representante legal na aba de cadastro
 
 
+SIMULADOR FINANCEIRO:
 
 - Ajustar espaçamentos no simulador financeiro (Espaço entre inputs)
 - Não julgar o Cliente (Não assumir que o cliente tenha perdas. O cliente sabe o que produz e o quanto perde) OU
@@ -35,12 +40,14 @@ APONTAMENTOS REUNIÃO MARCOS 10/10 -
 - Acrescentar um botão de 'refazer'
 - Caso não tenha perdas, 'De acordo com fontes...'
 
+BANCO DE DADOS:
 
 - Alterar nomes da modelagem para Razão social, CNPJ, e assim por diante
 - 'No momento, apenas conseguimos cadastrar 1 usuário, mas estamos trabalhando em mudanças para permitir a criação de mais usuários'
 - Pesquisar raio de captação dos sensores para implementação no Banco de dados
 - Decidir onde colocar os sensores (Prateleiras, ambiente ou níveis de prateleira)
 
+DASHBOARDS NO GERAL:
 
 - Detalhar métricas (KPI) das dashboards
 - Legenda para detalhar margem 'Legal' para gráficos
