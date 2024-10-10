@@ -1,4 +1,4 @@
-DOCUMENTO DE PASSAGEM DE GESTÃO: Banco de dados
+﻿DOCUMENTO DE PASSAGEM DE GESTÃO: Banco de dados
 
 QUAL A FRENTE:	Banco de dados (Bia e Liz)
 
@@ -87,9 +87,16 @@ validar com a vivian se vai poder continuar com a modelagem normalizada ou preci
 Fazer os joins e case.
 
 
-FAZER UMA AUTO RELAÇÃO COM NIVEL DE ACESSO E USUARIO, RELAÇÃO DEPENDENTE COM SENSOR E DADOS SENSOR, FAZER TABELA ENDERECO COM COM RELAÇÃO DE UM PRA UM COM EMPRESA E RELAÇÃO DE UM PRA UM COM USUARIO E LOGIN FAZZER TABELA LOGIN.
+1. FAZER UMA AUTO RELAÇÃO COM NIVEL DE ACESSO E USUARIO, 2. RELAÇÃO DEPENDENTE COM SENSOR E DADOS SENSOR | FAZER TABELA ENDERECO COM COM RELAÇÃO DE UM PRA UM COM EMPRESA E RELAÇÃO DE UM PRA UM COM USUARIO E LOGIN FAZZER TABELA LOGIN.
 																																																																																																																												
 
+- Fazer Joins e Cases;
+- Criar tabela de (Endereço e Login); e fazer a relação 1x1 com empresa
+- Relacionamento:
+	Endereço = Uma empresa vai ter apenas um endereço & Um usuário vai ter apenas um Endereço; 
+	Login = Um usuário só pode ter um Login;)
+- Fazer uma relação com a tabela: (Nível de Acesso e Usuário);alto relação
+- Fazer relação dependente na tabela: (Sensor e Dados Sensor);
 
 
 																																																																																																																			
