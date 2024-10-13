@@ -57,7 +57,7 @@ CREATE TABLE UsuarioLocalMaturacao (
     PRIMARY KEY (fkLocalMaturacao, fkUsuario),
     FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao),
     FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario)
-); 
+);
 
 CREATE TABLE Prateleira (
     idPrateleira INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE Prateleira (
     fkEmpresa INT,
     FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao),
 	FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
-); 
+);
 
 CREATE TABLE SensorPrateleira (
     idSensor INT AUTO_INCREMENT PRIMARY KEY,
@@ -105,6 +105,20 @@ CREATE TABLE AlertaSensor (
     FOREIGN KEY (fkPrateleira) REFERENCES Prateleira(idPrateleira),
     FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao),
     FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+);
+
+CREATE TABLE tipoSensor (
+    idTipoSensor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL, -- Nome do sensor (LM35, DHT11)
+    tipo VARCHAR(45) NOT NULL, -- Tipo de grandeza medida (Temperatura, Umidade)
+    unidadeMedida VARCHAR(5) NOT NULL, -- Unidade de medida (°C, %)
+    valorMinimo DECIMAL(5,2), -- Faixa mínima de operação
+    valorMaximo DECIMAL(5,2), -- Faixa máxima de operação
+    quantidadeTotal INT, -- Quantidade total desse tipo de sensor
+    fkSensorPrateleira INT,
+    fkDadosSensores INT,
+	FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira (idSensor),
+    FOREIGN KEY (fkDadosSensores) REFERENCES DadosSensores (idDadosSensor)
 );
 
 INSERT INTO login (email, senha) VALUES
@@ -170,6 +184,10 @@ INSERT INTO AlertaSensor (tipoAlerta, descricaoAlerta, fkSensorPrateleira, fkPra
 ('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira B2', 4, 4, 2, 2),
 ('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira C1', 5, 5, 3, 2);
 
+INSERT INTO tipoSensor VALUES
+('LM35', 'Temperatura', '°C', 8, 18, 10, 1, 2),
+('DHT11', 'Temperatura e Umidade', '%', 75, 85, 15, 2, 1);
+
 
 SHOW TABLES;
 SELECT * FROM login;
@@ -183,6 +201,4 @@ SELECT * FROM SensorPrateleira;
 SELECT * FROM DadosSensores;
 SELECT * FROM AlertaSensor;
 SELECT * FROM SensorPrateleira WHERE idSensor IN (1, 2);
-
-
- 
+SELECT * FROM tipoSensor;
