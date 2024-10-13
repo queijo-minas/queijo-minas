@@ -1,0 +1,17 @@
+PESQUISA DOS SENSORES
+
+LM35 - Como é um sensor do tipo analógico, ele deve estar fisicamente próximo ao ponto onde a temperatura será medida. O LM35 é ideal para medições pontuais, como em circuitos eletrônicos, máquinas ou espaços confinados. É possível usar cabos para estender o sinal do sensor até alguns metros, mas em distâncias muito longas, o sinal analógico pode sofrer ruídos. Para aplicações que exigem medições distantes, é recomendável o uso de amplificadores ou a conversão do sinal para digital. Se você precisar medir a temperatura em um espaço maior ou de forma remota, pode ser necessário combinar o LM35 com outros dispositivos (como microcontroladores ou transmissores).
+
+Fonte: https://chatgpt.com/backend-api/bing/redirect?query=LM35+sensor+range+specifications+datasheet
+https://www.ti.com/lit/ds/symlink/lm35.pdf
+https://components101.com/sensors/lm35-temperature-sensor
+https://infodatasheet.com/lm-35-datasheet.html
+https://www.datasheethub.com/lm35-precision-centigrade-temperature-sensor/
+
+
+
+
+DHT11 - O sensor DHT11 mede a temperatura e a umidade apenas no ponto onde está instalado, não sendo um sensor de leitura a distância. Ele deve ser colocado próximo da área onde se deseja monitorar o ambiente, pois sua precisão e funcionamento são projetados para leituras locais. A especificação do DHT11 menciona que, embora o sinal digital possa ser transmitido por cabos de até 20 metros, isso se refere à comunicação entre o sensor e o microcontrolador, e não a uma capacidade de detecção a distância​. Portanto, o DHT11 precisa estar fisicamente no local de medição, como em salas, estufas ou gabinetes, para fornecer leituras precisas de temperatura e umidade.
+
+Fonte: https://www.digikey.com/htmldatasheets/production/2071106/0/0/1/kit0003.html
+https://osoyoo.com/driver/DHT11-datasheet.pdf
