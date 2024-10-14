@@ -1,0 +1,27 @@
+Monitoramento de Queijo: Queijo no Ponto
+Passagem de Função: Front - End
+
+Realizado:
+Levantamento de inspirações de identidade visual;
+Resgate de protótipo editável, para realização de teste antes de passar para o CSS;
+
+A fazer:
+Definir identidade visual a partir das imagens geradas, e cores selecionadas voltadas para uma empresa de tecnologia que atende produtores de queijo;
+Aplicar CSS no Simulador Financeiro, a partir da identidade visual;
+Separar Diagrama ATUAL em Diagrama de SOLUÇÃO e diagrama de NEGÓCIO;
+•	Diagrama de Solução – Como a Queijo no Ponto funciona e o Fluxo dos dados coletados 
+•	Diagrama de Negócio – Venda para o cliente leigo em tecnologia
+Assim que o HTML do site Institucional estiver elaborado, iniciar aplicação CSS no mesmo.
+
+
+SEMANA 2 FRONT - END (Ana Vitória e Rafael Pires):
+
+
+- Estilização do Simulador Financeiro concluído;
+- Estilização da Página Inicial do Site Institucional iniciado;
+- Reformulação da Estilização utilizando nova Identidade visual, com outra paleta de cores, nome e logo atualizada.
+
+MELHORAS PARA PRÓXIMA SEMANA:
+
+- Continuação da Estilização do Site Institucional	
+

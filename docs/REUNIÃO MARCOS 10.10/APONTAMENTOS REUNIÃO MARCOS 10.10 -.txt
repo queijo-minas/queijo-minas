@@ -1,0 +1,56 @@
+APONTAMENTOS REUNIÃO MARCOS 10/10 -
+
+DOCUMENTAÇÃO:
+
+
+- Gráfico de crescimento do mercado de queijos
+- Implementar fontes para perdas e ganhos na documentação
+- Detalhar ferramentas a serem utilizadas no escopo
+- Atentar na ''mistura'' de tópicos, Seguir um padrão
+- Separação de alguns tópicos nas premissas, além de uma objetividade maior, e detalhamento EXTENSO
+- Inclusão de mais premissas para o projeto como todo (Exemplo: Será necessária um ponto de energia de 127volts em cada prateleira (50cm, de exemplo) da sala de maturação)
+- 'Quando for feita a instalação, aa prateleiras devem estar desocupadas'
+- Em requisitos, acrescentar 'O sistema'
+- Recursos necessários no COMEÇO DO ESCOPO
+- Requisitos (backlog) após Restrições
+- Acrescentar Prints a mais, do backlog, e outros
+- Diagrama de negócio, e após, diagrama de solução
+- Detalhar metodologia de atuação, com print de tal
+- Detalhar o PROBLEMA no diagrama de NEGÓCIO (Exemplo: colocar um queijo mofado em excesso para representar um problema, ou algo para remeter a temperatura e umidade)
+- PROBLEMA, SOLUÇÃO, IMPLEMENTAÇÃO, SUCESSO
+
+
+SITE INSTITUCIONAL:
+
+- Separação da Missão, visão e valores na aba 'Sobre Nós', e encurtar o texto do Sobre nós
+- Acrescentar uma foto do Grupo, e as frentes da equipe com foto de cada um (talvez uma outra janela)
+- Adicionar uma frase chamativa para atrair o cliente (SABIA QUE SUA PRODUÇÃO DE QUEIJO ESTÁ EM PERIGO? TEMOS UMA SOLUÇÃO!)
+- Alteração das imagens do ''nossos serviços'', para ser menos 'infantil'
+- Razão social, CNPJ, nome fantasia e representante legal na aba de cadastro
+
+
+SIMULADOR FINANCEIRO:
+
+- Ajustar espaçamentos no simulador financeiro (Espaço entre inputs)
+- Não julgar o Cliente (Não assumir que o cliente tenha perdas. O cliente sabe o que produz e o quanto perde) OU
+- Adicionar uma 'fonte' que justifique a perda retratada, caso quisermos manter tal
+- Negativos = Vermelho. Positivos = Verde, ou qualquer cor que encaixe na paleta de cores
+- (SUGESTÃO) Fazer tabelas para exibição de dados com monitoramento e sem monitoramento, para melhor entendimento do cliente (O ser humano gosta dessas coisas mais 'encaixotadas')
+- (SUGESTÃO) Ao final das tabelas, 'Baseado em dados fornecidos por ...'
+- Acrescentar um botão de 'refazer'
+- Caso não tenha perdas, 'De acordo com fontes...'
+
+BANCO DE DADOS:
+
+- Alterar nomes da modelagem para Razão social, CNPJ, e assim por diante
+- 'No momento, apenas conseguimos cadastrar 1 usuário, mas estamos trabalhando em mudanças para permitir a criação de mais usuários'
+- Pesquisar raio de captação dos sensores para implementação no Banco de dados
+- Decidir onde colocar os sensores (Prateleiras, ambiente ou níveis de prateleira)
+
+DASHBOARDS NO GERAL:
+
+- Detalhar métricas (KPI) das dashboards
+- Legenda para detalhar margem 'Legal' para gráficos
+- Sub dashboards para detalhamento de Métricas, com medidas temp atual, umidade atual e último horário do alerta
+- (SUGESTÃO) Histórico de alertas dinâmico 
+- (SUGESTÃO) neste sub menu, fazer um botão para troca de estufa

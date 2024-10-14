@@ -1,0 +1,30 @@
+DOCUMENTO DE PASSAGEM DE GESTÃO BACKEND
+
+
+SEMANA 1
+(Maria Eduarda e Ana Vitória)
+
+Refizemos a ideia inicial de como funcionará a calculadora, onde usamos os seguintes dados fixos:  colocamos como premissa que o produtor perde 20% da 
+sua produção total. Com esses 20% dizemos que com nosso sistema de monitoramento ele pode deixar de perder 20%, isto é, 20% virou 100% e tiramos 20% 
+desses 100%.
+
+
+
+METAS PARA PRÓXIMA SEMANA:
+
+Como falado na Sprint Review foi indicado dar mais embasamento no resultado da simulação e retirar o input de quanto tempo deseja investir mas continuar 
+com a lógica de amostragem do retorno em anos, além de retirar a palavra "perda cessante". 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SEMANA 2
+(Beatriz Batista e Samara Martins)
+
+Finalizamos e alteramos alguns pontos da calculadora, demos início ao site institucional sendo a tela inicial, cadastro, login e simulador financeiro, que se 
+encaixam nos requisitos essenciais do projeto.
+
+
+
+METAS PARA A PRÓXIMA SEMANA
+
+Continuidade e finalização do HTML e Script do site e suporte necessário para a galera do Front. Validação de login e cadastro com o conteúdo apreendido em sala

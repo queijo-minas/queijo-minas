@@ -1,0 +1,105 @@
+﻿DOCUMENTO DE PASSAGEM DE GESTÃO: Banco de dados
+
+QUAL A FRENTE:	Banco de dados (Bia e Liz)
+
+
+SEMANA 1:
+
+Oque fizemos:
+
+No antigo banco de dados chamado "cadastro" e  havia 3 tabelas: 
+
+1-Tabela "informacoes", com os campos:
+
+idUsuario, nome, email, senha, endereço, telefone, CNPJ.
+
+
+
+2- Tabela "sensores", com os campos:
+
+id, dataHora, temperatura, umidade.
+
+3-Tabela "implementacaoSensores", com os campos:
+
+id, nomeEmpresa, localizacaoInstalacao, tipoSensor, modeloSensor, dataInstalacao, statusSensor.
+
+-Renomeamos o nome do banco de dados para "queijoNoPontoDB".
+-Renomeamos também a tabela "informacoes" para "cadastro";
+-Mantemos na tabela "cadastro", os campos antigos: idUsuario, nome, email, senha, endereço, telefone, CNPJ.
+-Mantemos na tabela "Sensores", os campos: antigos: id, dataHora, temperatura, umidade.
+-Alteramos a tabela "implementacaoSensores" adicionando uma constraint	na criação da tabela, fk_usuario.
+-Fizemos 2 Joins simples, apenas pra mostrar a conexão entre as duas, nome da empresa e o respectivo usuário cadastrado, por ex.
+
+
+MELHORAS PARA PRÓXIMA SEMANA: 
+(Pois pensamos que a tabela cadastro e implementacaoSensores deveria ter comunicação, um usuário cadastrado poderá ter várias implementações de sensores, mas isso terá que ser analisado na documentação, e pesquisa e discussão mais aprofundada de como 
+será feita essa implementação, onde exatamente estará o sensor, entre outras questões para definir nosso banco e as relações entre as tabelas)
+*Também necessário averiguar se essa terceira tabela, "implementacaoSensores" seria ideal, ou apenas o nome dela, pois teríamos que saber de onde estaria vindo esses dados, pois eles serão dinâmicos e não mocados, ou seja, como entrará esses dados, através de um formulário? tentar elucidar essas questões, e entender melhor essa terceira tabela com a professora, se é a mais adequada para nosso contexto de negócio.																 --próximos passos seria: entender com a professora, e validar, se estamos no caminho certo com essas tabelas(a terceira principalmente);
+        
+          -- implementar modelo lógico
+
+         -- Criar relações(1:1, 1:n) entre as tabelas de acordo com nosso modelo de negócio(olhar na documentação, colocaremos os sensores na prateleira e discutir com o grupo:
+onde de fato estará os nossos sensores? Nas prateleiras?teremos muitos sensores em uma prateleira?);
+
+         -- foreign Keys, unique se precisar...e fazer JOINs e Selects
+
+
+
+         - CONSIDERAÇÕES DA PROFESSORA VIVIAN:
+         - A tabela implementaçãoSensores, tem informações que deveriam estar em outras tabelas, e deveria ter uma tabela onde estará os sensores;
+         - Campo "TIPO" do sensor, deveria estar na tabela sensor, e/ou tabela "medidas" ou "historico"(criar uma das duas que receberá os dados em tempo real da coleta de dados)
+         - nome da empresa, redundante, não precisaria ter nessa tabela;
+         Ou seja, precisamos ter tabelas: Cadastro(considerando que esse cadastro é de um produtor, que tem uma 'empresa'), tabela Sensores(terá campos como, idSensores e tipo do sensor)
+                                          tabela Medidas ou Historico(que terá conexão com a tabela sensor, e terá as medidas dos sensores, para ter o histórico dessas medidas),
+                                          tabela "Prateleira" por exemplo, ou onde estará o sensores, pois precisamos ter uma relação de conexão com a tabela sensores
+                                             (como: 1 prateleira terá 1 ou mais de um sensor, caso ele tenha só uma prateleira, ainda sim precisará da relação com a tabela sensor, 
+                                              pode ser tabela "CâmaraDeMaturação", uma câmara de maturação terá 1 sensor, ou câmara de maturação terá vários sensores, temos que definir isso)
+
+
+DOCUMENTO DE PASSAGEM DE GESTÃO: PEDRO E EDUARDA
+QUAL A FRENTE: BANCO DE DADOS
+
+SEMANA 2:
+
+
+na semana 2 foi feita a modelagem de dados onde fizemos as relações normalizando as tables, como isso é feito? indico a leitura deste artigo onde explica melhor (https://www.hashtagtreinamentos.com/o-que-sao-formas-normais-em-bancos-de-dados-sql?gad_source=1&gclid=CjwKCAjwgfm3BhBeEiwAFfxrGxhVB097lZW-y8dN8mD5IYS5ziV8McVP8VVH1ODsrzVzg0nKggcRUxoCB5IQAvD_BwE).
+
+com isso também fizemos os scripts e inserção de dados. 
+
+quais pontos ficaram pendentes?
+
+fazer joins com as tabelas e case.
+
+
+ponto importante, foi feita a persistência dos dados do Arduino para maquina física e maquina virtual.
+
+para ficar guardado:
+
+para fazer a conexão com a vm precisa se dar o comando no cmd local (mysql -u aluno -p -P 3307), na virtual da mesma forma (mysql -u aluno -p -P 3306). 
+
+tendo a conexão pelo workbench usando sempre a porta 3307.
+
+
+MELHORAS PARA PRÓXIMA SEMANA:
+
+validar com a vivian se vai poder continuar com a modelagem normalizada ou precisa tirar a tabela de relação que seria a localMaturaçãoUsuário por que usuário pode ter no mínimo um local de maturação para ser responsável e no máximo vários e um local de maturação pode ter no mínimo um responsável e no máximo vários. (RELAÇÃO N:N).
+
+Fazer os joins e case.
+
+
+1. FAZER UMA AUTO RELAÇÃO COM NIVEL DE ACESSO E USUARIO, 2. RELAÇÃO DEPENDENTE COM SENSOR E DADOS SENSOR | FAZER TABELA ENDERECO COM COM RELAÇÃO DE UM PRA UM COM EMPRESA E RELAÇÃO DE UM PRA UM COM USUARIO E LOGIN FAZZER TABELA LOGIN.
+																																																																																																																												
+
+- Fazer Joins e Cases;
+- Criar tabela de (Endereço e Login); e fazer a relação 1x1 com empresa
+- Relacionamento:
+	Endereço = Uma empresa vai ter apenas um endereço & Um usuário vai ter apenas um Endereço; 
+	Login = Um usuário só pode ter um Login;)
+- Fazer uma relação com a tabela: (Nível de Acesso e Usuário);alto relação
+- Fazer relação dependente na tabela: (Sensor e Dados Sensor);
+
+
+																																																																																																																			
+
+
+
