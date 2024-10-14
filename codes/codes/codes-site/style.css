@@ -1,0 +1,718 @@
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* bloco para personalizar a página toda */
+* {
+  padding: 0; /* Remove espaçamento interno */
+  margin: 0; /* Remove espaçamento externo */
+  box-sizing: border-box; /* Define a box model para incluir borda e padding no tamanho do elemento */
+  font-family: "Poppins", sans-serif; /* Define a fonte padrão para o site */
+}
+
+
+/* bloco de criação de variavéis para padronização */
+:root {
+  /* Cores */
+  --white-color: #fff; /* Cor branca */
+  --dark-color: #030320; /* Cor escura */
+  --primary-color: #3a2809; /* Cor primária */
+  --secondary-color: #c59506; /* Cor secundária */
+  --secondary-color-variacao: #dfa805;
+  --light-pink-color: #faf4f5; /* Cor rosa claro */ 
+  --medium-gray-color: #ccc; /* Cinza médio */
+  --black-color: #000000;
+  --golden-yellow: #FFD700;
+  --warm-beige: #F5DEB3;
+  --soft-brown: #A0522D;
+  --dark-charcoal: #2F2F2F;
+  --cream-white: #f3f2db;
+  --amber-orange: #FFBF00;
+  --midnight-blue: #191970;
+  --dark-slate-blue: #483D8B;
+  --navy-blue: #000080;
+  --prussian-blue: #003153;
+  --indigo-dye: #00416A;
+  --oxford-blue: #002147;
+  --space-cadet: #1d2951ee;
+  --backgroud-transparent: #00000088;
+  --bg-gradient: linear-gradient(to left,  rgb(0, 0, 69), #030320, #1a1a40, #1b1b37, #252537);
+  
+
+  /* Tamanhos de fonte */
+  --font-size-s: 0.9rem; /* Fonte pequena */
+  --font-size-n: 1rem; /* Fonte normal */
+  --font-size-m: 1.12rem; /* Fonte média */
+  --font-size-l: 1.5rem; /* Fonte grande */
+  --font-size-xl: 2rem; /* Fonte extra grande */
+  --font-size-xxl: 2.3rem; /* Fonte extra extra grande */
+
+  /* Espessuras da fonte */
+  --font-weight-normal: 400; /* Peso normal */
+  --font-weight-medium: 500; /* Peso médio */
+  --font-weight-semibold: 600; /* Peso semi-negrito */
+  --font-weight-bold: 700; /* Peso negrito */
+
+  /* Raio da borda */
+  --border-radius-s: 8px; /* Raio pequeno */
+  --border-radius-m: 30px; /* Raio médio */
+  --border-radius-circle: 50%; /* Bordas circulares */
+
+  /* Largura máxima do site */
+  --site-max-width: 1300px; /* Largura máxima do conteúdo */
+}
+
+
+
+
+
+
+/* Comportamento do scroll suave */
+html {
+  scroll-behavior: smooth; /* Faz o scroll da página ser suave */
+}
+
+ul {
+  list-style: none; /* Remove marcadores das listas */
+}
+a {
+  text-decoration: none; /* Remove sublinhado de links */
+}
+button {
+  cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+  background: none; /* Remove cor de fundo */
+  border: none; /* Remove borda */
+}
+img {
+  width: 100%; /* Define as imagens para ocupar 100% da largura do elemento pai */
+}
+
+
+
+
+
+
+
+/* Bloco de estilização para seções e rodapé */
+:where(section, footer) .section-content {
+  margin: 0 auto; /* Centraliza o conteúdo */
+  padding: 0 20px; /* Adiciona espaçamento nas laterais */
+  max-width: var(--site-max-width); /* Define largura máxima */
+}
+/* Bloco de título das seções */
+section .section-title {
+  text-align: center; /* Centraliza o texto */
+  padding: 60px 0 100px; /* Adiciona espaçamento acima e abaixo */
+  text-transform: uppercase; /* Transforma o texto em maiúsculas */
+  font-size: var(--font-size-xl); /* Define o tamanho da fonte */
+  
+}
+section .section-title::after {
+  content: ""; /* Adiciona conteúdo vazio após o título */
+  width: 80px; /* Define largura da linha */
+  height: 5px; /* Define altura da linha */
+  display: block; /* Exibe o elemento como bloco */
+  margin: 10px auto 0; /* Adiciona margens */
+  background: var(--golden-yellow); /* Define cor da linha */
+  border-radius: var(--border-radius-s); /* Define bordas arredondadas */
+}
+
+
+
+
+
+
+/* Bloco Estilização da barra de navegação (navbar) */
+header {
+  z-index: 5; /* Coloca o header acima de outros elementos */
+  width: 100%; /* O header ocupa 100% da largura da tela */
+  position: fixed; /* Fixa o header no topo durante o scroll */
+  top: 0; /* Garante que o header fique fixo no topo */
+  left: 0; /* Garante que o header ocupe toda a largura */
+  background-color: var(--oxford-blue);/* Cor inicial semi-transparente */
+  transition: background-color 0.5s ease; /* Suaviza a transição de cor */
+  padding: 10px 0; /* Adiciona espaçamento no topo e na parte inferior */
+}
+header .navbar {
+  display: flex; /* Utiliza flexbox para alinhar itens */
+  padding-left: 0px; /* Ajusta o espaçamento à esquerda */
+  align-items: center; /* Alinha os itens verticalmente */
+  justify-content: space-between; /* Distribui os itens com espaço entre eles */
+  max-width: var(--site-max-width); /* Define a largura máxima da navbar */
+}
+/* .navbar .nav-logo {
+  color: var(--white-color); 
+  font-size: var(--font-size-xl); 
+  font-weight: var(--font-weight-semibold); 
+} */
+.navbar .nav-menu {
+  gap: 5px; /* Define o espaço entre os itens do menu */
+  display: flex; /* Utiliza flexbox para os itens do menu */
+}
+.navbar .nav-menu .nav-link {
+  padding: 10px 18px; /* Adiciona espaçamento interno */
+  color: var(--cream-white); /* Define a cor do link */
+  font-size: var(--font-size-m); /* Define o tamanho da fonte */
+  border-radius: var(--border-radius-m); /* Define bordas arredondadas */
+  transition: 0.3s ease; /* Adiciona transição suave */
+}
+.navbar .nav-menu .nav-link:hover {
+  color: var(--white-color); /* Altera a cor do texto ao passar o mouse */
+  background: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
+}
+/* bloco para esconder os botões do menu para telas grandes */
+.navbar :where(#menu-open-button, #menu-close-button) {
+  display: none; /* Não exibe os botões de abrir e fechar o menu */
+}
+.hero-details .subtitle span{
+  font-weight:var(--font-weight-bold);
+ }
+
+ 
+
+
+
+
+/* bloco de recepção do site */
+.hero-section {
+  min-height: 70vh; /* Define a altura mínima para 100% da altura da tela */
+ 
+}
+.hero-section .section-content {
+  display: flex; /* Utiliza flexbox para layout */
+  padding-top: 90px; /* Adiciona espaçamento superior */
+  padding-left: 40px;
+  align-items: center; /* Alinha os itens verticalmente */
+  min-height: 96vh; /* Altura mínima de 100% da tela */
+  justify-content: space-between; /* Espaço entre os itens */
+}
+/* define uma camada escura na frente do banner */
+.bloco{
+  width: 100%;
+  height: 100%;
+  background-color:var(--backgroud-transparent);
+
+}
+#section-image{
+  width: 100%;
+  background-image: url('imgs/salaMaturacao.png' );
+ 
+}
+.hero-section .hero-details {
+  color: var(--white-color); /* Define a cor do texto na seção */
+}
+.hero-section .hero-details .title {
+  font-size: var(--font-size-xxl); /* Define o tamanho da fonte do título */
+  color: var(--secondary-color); /* Define a cor do título */
+  font-family: "Miniver", sans-serif; /* Define a fonte personalizada */
+}
+.hero-section .hero-details .subtitle {
+  margin-top: 8px; /* Adiciona margem superior */
+  max-width: 45%; /* Define a largura máxima */
+  font-size: var(--font-size-xxl); /* Define o tamanho da fonte */
+  font-weight: var(--font-weight-semibold); /* Define o peso da fonte */
+}
+.hero-section .hero-details .description {
+  max-width: 70%; /* Define a largura máxima */
+  margin: 24px 0 40px; /* Adiciona margens */
+  font-size: var(--font-size-m); /* Define o tamanho da fonte */
+}
+.hero-section .hero-details .buttons {
+  display: flex; /* Utiliza flexbox para alinhar os botões */
+  gap: 23px; /* Define o espaço entre os botões */
+}
+.hero-section .hero-details .button {
+  padding: 10px 26px; /* Adiciona espaçamento interno */
+  display: block; /* Exibe como bloco */
+  border: 2px solid transparent; /* Define borda transparente */
+  border-radius: var(--border-radius-m); /* Define bordas arredondadas */
+  background: var(--secondary-color); /* Define a cor de fundo */
+  color: var(--primary-color); /* Define a cor do texto */
+  font-size: var(--font-size-m); /* Define o tamanho da fonte */
+  font-weight: var(--font-weight-medium); /* Define o peso da fonte */
+  transition: 0.3s ease; /* Adiciona transição suave */
+}
+
+
+
+
+
+
+/* Bloco de estilo dos botões ao passar o mouse */
+.hero-section .hero-details .button:hover,
+.hero-section .hero-details .button.contact-us {
+  color: var(--white-color); /* Altera a cor do texto */
+  border-color: var(--white-color); /* Altera a cor da borda */
+  background: transparent; /* Remove a cor de fundo */
+}
+.hero-section .hero-details .button.contact-us:hover {
+  color: var(--white-color); /* Altera a cor do texto */
+  background: var(--secondary-color); /* Altera a cor de fundo */
+  border-color: var(--secondary-color); /* Altera a cor da borda */
+
+}
+.hero-section .hero-image-wrapper {
+  max-width: 500px;
+  margin-right: 80px;
+}
+.section-content .container {
+  text-align: center;
+  
+}
+
+
+
+
+
+/* bloco simulação financeira */
+.about-section {
+  padding: 120px 0;
+  background: var(--space-cadet);
+}
+.about-section .section-content {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+.about-section .about-image-wrapper .about-image {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+  border-radius: var(--border-radius-circle);
+}
+.about-section .about-details {
+  max-width: 50%;
+}
+.about-section .about-details .section-title, p {
+  padding: 0;
+  color: var(--white-color);
+}
+.about-section .about-details .text {
+  line-height: 30px;
+  margin: 50px 0 30px;
+  text-align: center;
+  font-size: var(--font-size-m);
+}
+.about-section .social-link-list {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+.about-section .social-link-list .social-link {
+  color: var(--white-color);
+  font-size: var(--font-size-l);
+  transition: 0.2s ease;
+}
+.about-section .social-link-list .social-link:hover {
+  color: var(--secondary-color);
+}
+.btn {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  background-color:var(--amber-orange);
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.btn:hover {
+  background-color: var(--golden-yellow);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+.btn:focus {
+  outline: none;
+}
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+
+
+
+/* bloco do nossos serviços */
+.menu-section {
+  color: var(--black-color);
+  background: var(--light-pink-color);
+  padding: 50px 0 100px;
+}
+.menu-section .menu-list {
+  display: flex;
+  gap: 30px; /*  o espaçamento para ficar mais harmônico */
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza os itens */
+}
+.menu-section .menu-list .menu-item {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(33.33% - 20px); /* Melhor controle do tamanho */
+  border-radius: 10px; /* Bordas arredondadas para os cards */
+  padding: 50px;
+  background: var(--oxford-blue); /* Fundo para destacar os cards */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar um efeito de profundidade */
+  transition: transform 0.3s ease; /* Transição suave ao passar o mouse */
+}
+.menu-item:hover {
+  animation: bounce 0.5s ease; 
+  transform: translateY(-10px); /* Sobe um pouco ao passar o mouse */
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); /* Altura do pulo */
+  }
+}
+.menu-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+.menu-section .menu-item .name {
+  margin: 12px 0;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--white-color); /* Para destacar o título */
+}
+
+
+
+
+
+
+/* Testimonials section styling */
+.testimonials-section {
+  padding: 50px 0 100px;
+  background: var(--light-pink-color);
+}
+.testimonials-section .slider-wrapper {
+  overflow: hidden;
+  margin: 0 60px 50px;
+}
+.testimonials-section .testimonial {
+  user-select: none;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.testimonials-section .testimonial .user-image {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 50px;
+  object-fit: cover;
+  border-radius: var(--border-radius-circle);
+}
+.testimonials-section .testimonial .name {
+  margin-bottom: 16px;
+  font-size: var(--font-size-m);
+}
+.testimonials-section .testimonial .feedback {
+  line-height: 25px;
+}
+.testimonials-section .swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  opacity: 1;
+  background: var(--secondary-color);
+}
+.testimonials-section .swiper-slide-button {
+  color: var(--secondary-color);
+  margin-top: -50px;
+  transition: 0.3s ease;
+}
+.testimonials-section .swiper-slide-button:hover {
+  color: var(--primary-color);
+}
+
+
+
+
+
+
+/* Gallery section styling */
+.gallery-section {
+  padding: 50px 0 100px;
+}
+.gallery-section .gallery-list {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.gallery-section .gallery-list .gallery-item {
+  overflow: hidden;
+  border-radius: var(--border-radius-s);
+  width: calc(100% / 3 - 32px);
+}
+.gallery-section .gallery-item .gallery-image {
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+  transition: 0.3s ease;
+}
+.gallery-section .gallery-item:hover .gallery-image {
+  transform: scale(1.3);
+}
+
+
+
+/* Bloco de contate-nos */
+.contact-section {
+  padding: 50px 0 100px;
+  background: var(--space-cadet);
+}
+.contact-section .section-content {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: space-between;
+ 
+}
+.contact-section .section-title{
+  color: var(--white-color);
+}
+.contact-section .contact-info-list .contact-info {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  align-items: center;
+  color: var(--white-color);
+}
+.contact-section .contact-info-list .contact-info i {
+  font-size: var(--font-size-m);
+}
+.contact-section .contact-info-list{
+  color: var(--black-color);
+}
+.contact-section .contact-form .form-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 12px;
+  outline: none;
+  margin-bottom: 16px;
+  font-size: var(--font-size-s);
+  border-radius: var(--border-radius-s);
+  border: 1px solid var(--medium-gray-color);
+}
+.contact-section .contact-form {
+  max-width: 50%;
+}
+.contact-section .contact-form textarea.form-input {
+  height: 100px;
+  padding: 12px;
+  resize: vertical;
+}
+.contact-section .contact-form .form-input:focus {
+  border-color: var(--secondary-color);
+}
+.contact-section .contact-form .submit-button {
+  padding: 10px 28px;
+  outline: none;
+  margin-top: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius-m);
+  background: var(--secondary-color);
+  color: var(--white-color);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: 0.3s ease;
+}
+.contact-section .contact-form .submit-button:hover {
+  color: var(--amber-orange);
+  background: transparent;
+}
+
+
+
+
+
+
+/* Bloco de Rodapé */
+.footer-section {
+  padding: 20px 0;
+  background: var(--prussian-blue);
+}
+.footer-section .section-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-section :where(.copyright-text, .social-link, .policy-link) {
+  color: var(--white-color);
+  transition: 0.2s ease;
+}
+.footer-section .social-link-list {
+  display: flex;
+  gap: 25px;
+}
+.footer-section .social-link-list .social-link {
+  font-size: var(--font-size-l);
+}
+.footer-section .social-link-list .social-link:hover,
+.footer-section .policy-text .policy-link:hover {
+  color: var(--secondary-color);
+}
+.footer-section .policy-text .separator {
+  color: #fff;
+  margin: 0 5px;
+}
+
+
+
+
+
+
+
+/* bloco de respansividade se max width 900px */
+@media screen and (max-width: 900px) {
+  :root {
+    --font-size-m: 1rem;
+    --font-size-l: 1.3rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+  }
+  body.show-mobile-menu {
+    overflow: hidden;
+  }
+  body.show-mobile-menu header::before {
+    content: "";
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .navbar :is(#menu-open-button, #menu-close-button) {
+    font-size: var(--font-size-l);
+
+    display: block;
+  }
+  .navbar :is(#menu-open-button, #menu-close-button):hover {
+    color: var(--secondary-color) !important;
+  }
+  .navbar #menu-open-button {
+    color: #fff;
+  }
+  .navbar .nav-menu #menu-close-button {
+    position: absolute;
+    right: 0px;
+    top: 30px;
+  }
+  .navbar .nav-menu {
+    display: block;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    transition: left 0.2s ease;
+  }
+  body.show-mobile-menu .nav-menu {
+    left: 0;
+  }
+  .navbar .nav-menu .nav-link {
+    display: block;
+    margin-top: 17px;
+    padding: 10px 22px;
+    color: var(--dark-color);
+    font-size: var(--font-size-l);
+  }
+  .hero-section .section-content {
+    text-align: center;
+    gap: 50px;
+    padding: 30px 20px 20px;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .hero-section .hero-details :is(.subtitle, .description),
+  .about-section .about-details,
+  .contact-section .contact-form {
+    max-width: 100%;
+  }
+  .hero-section .hero-details .buttons {
+    justify-content: center;
+  }
+  .hero-section .hero-image-wrapper {
+    max-width: 270px;
+    margin-right: 0;
+  }
+  .about-section .section-content {
+    gap: 70px;
+    flex-direction: column-reverse;
+  }
+  .about-section .about-image-wrapper .about-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    max-width: 250px;
+  }
+  .menu-section .menu-list {
+    gap: 30px;
+  }
+  .menu-section .menu-list .menu-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .menu-section .menu-list .menu-item .menu-image {
+    max-width: 200px;
+  }
+  .gallery-section .gallery-list {
+    gap: 30px;
+  }
+  .gallery-section .gallery-list .gallery-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .contact-section .section-content {
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+
+/* Segundo bloco de respansividade se max width 640px */
+/* @media screen and (max-width: 640px) {
+  .menu-section .menu-list .menu-item,
+  .gallery-section .gallery-list .gallery-item {
+    width: 100%;
+  }
+  .menu-section .menu-list {
+    gap: 60px;
+  }
+  .testimonials-section .slider-wrapper {
+    margin: 0 0 30px;
+  }
+  .testimonials-section .swiper-slide-button {
+    display:none;
+  }
+  .footer-section .section-content {
+    flex-direction: column;
+    gap:20px;
+  }
+} */
