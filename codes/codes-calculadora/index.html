@@ -9,6 +9,8 @@
 </head>
 
 <body>
+
+
     <div class="container">
         <div id="conteudo" class="conteudo">
             <div class="caixa">
@@ -17,7 +19,6 @@
                 <div class="title">
                     <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
                 </div>
-
 
                 <div class="quadro">
                     <p>Selecione a medida de tempo da produção:</p>
@@ -55,14 +56,22 @@
 
         <div class="resultadosCard" id="resultadosCard" style="display:none;">
             <div class="contentFilho">
-                <h2>Resultados</h2>
-                <div id="resultadoPerda"></div>
-                <div id="resultadoEconomia"></div>
-                <div id="impactoFinal"></div>
+                <div class="contentPerda">
+                    <div class="teste">
+                        <p>Sem monitoramento:</p>
+                    </div>
+                    <div id="resultadoPerda"></div>
+                </div>
+                <div class="contentEconomia">
+                    <div class="teste2">
+                        <p>Com o nosso monitoramento:</p>
+                    </div>
+                    <div id="resultadoEconomia"></div>
+                    <div id="impactoFinal"></div>
+                </div>
             </div>
         </div>
     </div>
-
 
     <script>
         function mostrarCamposPerda() {
@@ -112,7 +121,6 @@
             // Cálculos de perda e economia com base na escolha (mensal ou anual)
             let PerdaSemMonitoramento, EconomiaComSistema, periodoTexto;
 
-
             if (medidaTempo === 'mensal') {
                 // Cálculos para mensal
                 PerdaSemMonitoramento = producao * (taxaPerdaMaturacao + taxaPerdaOutros) * lucro; // Calcula a perda total mensal
@@ -125,38 +133,38 @@
                 periodoTexto = "ano";
             }
 
-            // Texto de saída com mais informações e nosso maaarketing
-            const textoMarketing = `
-            <br><b>Detalhamento das Perdas:</b><br>
-            Sem um monitoramento adequado da maturação, você enfrenta uma perda de aproximadamente <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> nessa fase crucial.
-            Com uma produção de <b>${producao.toFixed(2)} kg</b> de queijo por ${periodoTexto}, e um lucro de <b>R$${lucro.toLocaleString("pt-BR")}</b> por quilo,
-            você pode perder até <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b> por ${periodoTexto} devido a perdas totais!<br><br>
+            // Atualização para exibir resultados
+            const resultadoSemMonitoramento = `
+       
+        <p><b>Perda estimada: </b><br> ${(taxaPerdaMaturacao * 100).toFixed(2)}% na fase de maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b> <br> <b> ${producao.toFixed(2)} kg</b> de queijo.</p>
+        <hr>    
+        <p><b>Lucro por quilo:</b> <br> <b>R$${lucro.toFixed(2)}</b></p>
+        <hr>
+        <p><b>Perda total por ${periodoTexto}:</b> <br> <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b></p>
+        
+    `;
 
-            <b>Como Nosso Sistema de Monitoramento Pode Ajudar:</b><br>
-            Nosso sistema foca em reduzir a perda na fase de maturação, que representa <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> de suas perdas.
-            Com a implementação da nossa tecnologia, você pode economizar até <b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b> por ${periodoTexto},
-            diminuindo significativamente as perdas nessa etapa e aumentando seu lucro.<br><br>
-
-            <b>Benefícios Diretos:</b><br>
-            - Redução específica das perdas na fase de maturação.<br>
-            - Melhoria na qualidade do queijo, garantindo textura e sabor consistentes.<br>
-            - Aumento da confiança do cliente na qualidade constante do produto.<br>
-            - Maior controle sobre o processo produtivo, permitindo ajustes rápidos.<br><br>
-
-            <b>Invista no Futuro da Sua Produção:</b><br>
-            Ao investir no nosso sistema de monitoramento, você foca na redução das perdas onde elas mais impactam seu negócio.
-            Invista em tecnologia para proteger sua produção e aumentar a satisfação dos seus clientes!
-            `;
+            const resultadoComMonitoramento = `
+        
+        <p><b>Redução das perdas:</b><br> ${(taxaPerdaMaturacao * 100).toFixed(2)}% na maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b><br> <b>${producao.toFixed(2)} kg</b> de queijo.</p>
+        <hr>
+        <p><b>Lucro por quilo:<b> <br><b>R$${lucro.toFixed(2)}</b></p>
+        <hr>
+        <p><b>Economia mensal:<b> <br><b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b></p>
+                `;
+            ;
 
             // Exibindo os resultados na tela
             document.getElementById('resultadosCard').style.display = 'block';
-            document.getElementById('resultadoPerda').innerHTML = `Sem monitoramento, você pode perder até: <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b> por ${periodoTexto}.`;
-            document.getElementById('resultadoEconomia').innerHTML = `Com nosso sistema de monitoramento, você pode economizar até: <b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b> por ${periodoTexto}.`;
-            document.getElementById('impactoFinal').innerHTML = textoMarketing;
+            document.getElementById('resultadoPerda').innerHTML = resultadoSemMonitoramento;
+            document.getElementById('resultadoEconomia').innerHTML = resultadoComMonitoramento;
         }
+
     </script>
 </body>
 
 </html>
-<!--Um campo para ele colocar quanto perde kg durante maturação ou outro motivo, pra especificar mais os resultados pro caso do usuário,
-Também a taxa de porcentagemEconomia deveria ser flexivel pra caso ele colocar a porcentagem dele, não só 80% -->

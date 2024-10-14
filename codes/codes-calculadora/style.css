@@ -12,9 +12,9 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    background-color: #030320;
-   
+    background-color: #161101;;
 }
+
 
 .conteudo {
     display: flex;
@@ -87,7 +87,7 @@
 
 }
 
-.taxaPerda select{
+.taxaPerda select {
     margin-bottom: 20px;
 }
 
@@ -189,7 +189,7 @@
     margin-top: 50px;
     border: none;
     outline: none;
-    background: linear-gradient(#030320, #2b2b57);
+    background: linear-gradient(#030320, #0a0a46);
     color: white;
     font-size: 18px;
     font-weight: 600;
@@ -218,11 +218,83 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: center;
 }
 
 .contentFilho {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 50px;
+}
+
+.contentPerda {
+    width: 100%;
+    height: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+    color: #161101;
+    border-radius: 20px;
+}
+
+.contentEconomia {
+    width: 100%;
+    height: 400px;
+    background-color:#ffffff;
+    padding: 20px;
+    color: #161101;
+    border-radius: 20px;
+}
+
+.contentFilho h2 {
+    color:#ffffff;
+    font-weight: 600;
+    line-height: 35px;
+    letter-spacing: -1px;
+    font-size: 25px;
+}
+
+.teste {
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    color: #ffffff;
+    background-color: #630404;
+    border-radius: 10px;
+}
+
+#resultadoPerda  {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#resultadoPerda p {
+    line-height: 32px;
+}
+
+.teste2 {
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    color: #ffffff;
     background-color: #030320;
-    padding: 40px;
-    color: white;
+    border-radius: 10px;
+}
+
+#resultadoEconomia {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#resultadoEconomia p {
+    line-height: 32px;
 }
