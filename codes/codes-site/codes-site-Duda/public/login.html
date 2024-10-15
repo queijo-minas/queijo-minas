@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueijoNoPonto | Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/icon/logo.png">
+</head>
+<body>
+    
+
+
+  <nav class="navbar">
+    <ul>
+      <li>
+        <a href="index.html">
+          <img src="assets/imgs/logo.png" alt="Logo" class="logo" />
+        </a>
+      </li>
+      
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">Sobre nós</a></li>
+      <li><a href="simulador.html">Simulador financeiro</a></li>
+      <li><a href="contate.html">Contate-nos</a></li>
+      <li><a href="cadastro.html">Cadastro</a></li>
+    </ul>
+  </nav>
+
+
+
+
+  <div class="login-container">
+    <form class="login-card">
+      <h2 class="tituloCard">Login</h2>
+      <p class="texto">Acesse com um e-mail existente</p>
+      
+      <div class="socialMedia">
+        <img src="" alt="Social" />
+        <img src="" alt="LinkedIn" />
+        <img src="" alt="Twitter" />
+      </div>
+      
+      <p class="texto">Ou faça o login com os dados criados aqui</p>
+      <div class="inputs">
+        <div class="div-input">
+          <input type="text" placeholder="E-mail" id="input_email" />
+        </div>
+        <div id="div_mensagemErroEmail" class="mensagensErros"></div>
+
+        <div class="div-input">
+          <input type="password" placeholder="Senha" id="input_senha" />
+          <br />
+        </div>
+        <div id="div_mensagemErroSenha" class="mensagensErros"></div>
+      </div>
+      <button onclick="validarLogin()">LOGIN</button>
+      <a class="esqueciSenha" href="#">Esqueci a senha</a>
+
+      <span id="span_mensagem_concluido" class="mensagem_concluido"></span>
+    </form>
+  </div>
+
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 QueijoNoPonto Company. Todos os direitos reservados.</p>
+      <p>
+        <a href="privacy.html">Política de Privacidade</a> | 
+        <a href="terms.html">Termos de Uso</a> | 
+        <a href="contact.html">Contato</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
+<style>
+    body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.logo {
+  width: 50px;
+  height: auto;
+}
+
+
+</style>
