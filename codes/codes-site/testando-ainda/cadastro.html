@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Queijo no Ponto | Cadastro</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style_login.css" />
   <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -17,7 +18,6 @@
   <header>
       <nav class="navbar">
           <a href="#" class="nav-logo">
-              <!-- <img src="imgs/logo.png" style="height: 50px;"> -->
               <h2 class="logo-text"> Queijo no Ponto</h2>
           </a>
 
@@ -50,59 +50,34 @@
         <h2>Bem-vindo!</h2>
         <div class="formulario">
           <div class="campo">
-            <span>Razão Social:</span>
-            <input id="razao_input" type="text" placeholder="  Razão Social" />
+            <span>Nome:</span>
+            <input id="nome_input" type="text" placeholder="Seu nome" />
           </div>
-  
           <div class="campo">
-            <span>Nome fantasia:</span>
-            <input id="nome_input" type="text" placeholder="  Nome da Empresa" />
-          </div>
-
- <div class="campo">
             <span>CNPJ:</span>
-            <input id="cnpj_input" type="text" placeholder="  12345678900000" />
+            <input id="nome_input" type="text" placeholder="XXX.XXX.XXX-XX" />
           </div>
-         
-          <div class="campo">
-            <span>Representante legal:</span>
-            <input id="representante_input" type="text" placeholder="  Nome do Representante" />
-          </div>
-          <div class="campo">
-            <span>CPF:</span>
-            <input id="cnpj_input" type="text" placeholder="  12345678900" />
-          </div>
-          
           <div class="campo">
             <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="  meuemail@provedor.com" />
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
           </div>
           <div class="campo">
             <span>Telefone:</span>
-            <input id="telefone_input" type="text" placeholder="  (12) 12345-6789 " />
+            <input id="telefone_input" type="text" placeholder="XXXX-XXXX" />
           </div>
           <div class="campo">
             <span>Endereço:</span>
-            <input id="endereco_input" type="text" placeholder="  Rua xxxx, número 123" />
+            <input id="endereco_input" type="text" placeholder="Rua xxxx, número xxx" />
           </div>
-          <div class="campo">
-            <span>Cidade:</span>
-            <input id="cidade_input" type="text" placeholder="  Sua Cidade" />
-          </div>
-          <div class="campo">
-            <span>CEP:</span>
-            <input id="cep_input" type="text" placeholder="  01234-567" />
-          </div>
-          
           <div class="campo">
             <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="  ******" />
+            <input id="senha_input" type="password" placeholder="******" />
           </div>
           <div class="campo">
             <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="  ******" />
+            <input id="confirmacao_senha_input" type="password" placeholder="******" />
           </div>
-          <button class="botao">Cadastrar</button><br>
+          <button class="botao">Cadastrar</button>
         </div>
       </div>
     </div>
