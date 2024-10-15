@@ -343,8 +343,8 @@ h2::after {
 .cadastro {
    
     width: 100%;
-    background-image: url("../imgs/background_cadastro.jpg");
-    
+    background-image: url("imgs/background_cadastro.jpg");
+    background-color: #00000088;
     display: flex;
     justify-content: center;
     align-items: center;

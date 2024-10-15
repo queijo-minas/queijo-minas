@@ -2,14 +2,17 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Queijo no Ponto | Cadastro</title>
 
+  <script src="validacao.js"></script>
+
   <link rel="stylesheet" href="style_login.css" />
-  <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon">
+
+  <link rel="shortcut icon" href="imgs/logo.svg" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
@@ -29,16 +32,16 @@
                  <a href="index.html" class="nav-link">Início</a>
              </li>
              <li class="nav-item">
-                 <a href="#menu" class="nav-link">Serviços</a>
+                 <a href="index.html#menu" class="nav-link">Serviços</a>
              </li>
              <li class="nav-item">
-                 <a href="#about" class="nav-link">Sobre</a>
+                 <a href="index.html#about" class="nav-link">Sobre</a>
              </li>
              <li class="nav-item">
-                 <a href="#menu" class="nav-link">Equipe</a>
+                 <a href="index.html#menu" class="nav-link">Equipe</a>
              </li>
              <li class="nav-item">
-                 <a href="#contact" class="nav-link">Contato</a>
+                 <a href="index.html#contact" class="nav-link">Contato</a>
              </li>
              <li class="nav-item">
                  <a href="login.html" class="nav-link">Login</a>
@@ -70,7 +73,7 @@
 
  <div class="campo">
             <span>CNPJ:</span>
-            <input id="cnpj_input" type="text" placeholder="  12345678900000" />
+            <input id="cnpj_input" type="text" placeholder="  12345678900000" onkeyup="validarCNPJ()" />
           </div>
          
           <div class="campo">
@@ -105,7 +108,7 @@
           
           <div class="campo">
             <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="  ******" />
+            <input id="senha_input" type="password" placeholder="  ******" onkeyup="validarSenha()" />
           </div>
           <div class="campo">
             <span>Confirmação da Senha:</span>
