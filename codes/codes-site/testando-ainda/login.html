@@ -18,34 +18,43 @@
 
 <body>
 
-    <header>
-        <nav class="navbar">
-            <a href="#" class="nav-logo">
-                <!-- <img src="imgs/logo.png" style="height: 50px;"> -->
-                <h2 class="logo-text"> Queijo no Ponto</h2>
-            </a>
 
-            <ul class="nav-menu">
-                <button id="menu-close-button" class="fas fa-times"></button>
+ <!-- Header / Navbar -->
+ <header id="scroll-element">
+    <nav class="navbar">
+        <a href="#" class="nav-logo">
+            <div>
+                <img src="imgs/logo-navegador-xxl.png" alt="">
+            </div>
+        </a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Início</a>
+            </li>
+            <li class="nav-item">
+                <a href="#menu" class="nav-link">Serviços</a>
+            </li>
+            <li class="nav-item">
+                <a href="#about" class="nav-link">Sobre</a>
+            </li>
+            <li class="nav-item">
+                <a href="#menu" class="nav-link">Equipe</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link">Contato</a>
+            </li>
+            <li class="nav-item">
+                <a href="login.html" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="cadastro.html" class="nav-link">Cadastro</a>
+            </li>
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
 
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="cadastro.html" class="nav-link">Cadastro</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Simulador</a>
-                </li>
-            </ul>
-
-            <button id="menu-open-button" class="fas fa-bars"></button>
-        </nav>
-    </header>
-    
 
     <div class="login">
   
@@ -61,7 +70,8 @@
                         <span>Senha:</span>
                         <input id="senha_input" type="password" placeholder="  ******">
                     </div>
-                    <button class="botao">Entrar</button>
+                    <button class="botao">Entrar</button><br>
+                    Não tem conta? <a href="cadastro.html">Cadastre-se</a>
                 </div>
 
             </div>
