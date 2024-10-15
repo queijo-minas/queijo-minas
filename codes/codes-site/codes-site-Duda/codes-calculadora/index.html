@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador Queijo no Ponto</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo.svg">
 </head>
 
-<body >
+<body>
+
 
     <div class="container">
         <div id="conteudo" class="conteudo">
             <div class="caixa">
-                <img src="logo.svg" alt="">
+                <img src="image/logo 1.svg" alt="">
 
                 <div class="title">
                     <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
@@ -26,6 +26,7 @@
                         <option value="mensal">Mensal</option>
                         <option value="anual">Anual</option>
                     </select>
+
                     <p>Produção de queijo (Kg):</p>
                     <input type="number" id="input_producao_Kilos" placeholder="Ex: 500Kg de queijo produzido">
                 </div>
@@ -46,11 +47,9 @@
                         <option value="default">Usar perda padrão de 20%</option>
                         <option value="manual">Inserir minha própria taxa de perda</option>
                     </select>
-            
+
                     <div class="document" id="div_perda_manual"></div>
-                    <a class="font" href="https://www.epamig.br/ilct/wp-content/uploads/2020/07/QUEIJO-MINAS-ARTESANAL-PRINCIPAIS-PROBLEMAS.pdf">Link | Queijo Minas Artesanal | Principais Problemas</a>
-                    
-                                    </div>
+                </div>
                 <button onclick="Calcular()">Calcular</button>
             </div>
         </div>
@@ -59,13 +58,13 @@
             <div class="contentFilho">
                 <div class="contentPerda">
                     <div class="teste">
-                        <p>Sem monitoramento</p>
+                        <p>Sem monitoramento:</p>
                     </div>
                     <div id="resultadoPerda"></div>
                 </div>
                 <div class="contentEconomia">
                     <div class="teste2">
-                        <p>Com o nosso monitoramento | Queijo no Ponto </p>
+                        <p>Com o nosso monitoramento:</p>
                     </div>
                     <div id="resultadoEconomia"></div>
                     <div id="impactoFinal"></div>
@@ -137,7 +136,7 @@
             // Atualização para exibir resultados
             const resultadoSemMonitoramento = `
        
-        <p><b>Perda estimada: </b><br> <b>${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> na fase de maturação.</p>
+        <p><b>Perda estimada: </b><br> ${(taxaPerdaMaturacao * 100).toFixed(2)}% na fase de maturação.</p>
         <hr>
         <p><b>Produção ${medidaTempo}:</b> <br> <b> ${producao.toFixed(2)} kg</b> de queijo.</p>
         <hr>    
@@ -149,17 +148,15 @@
 
             const resultadoComMonitoramento = `
         
-        <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> na maturação.</p>
+        <p><b>Redução das perdas:</b><br> ${(taxaPerdaMaturacao * 100).toFixed(2)}% na maturação.</p>
         <hr>
         <p><b>Produção ${medidaTempo}:</b><br> <b>${producao.toFixed(2)} kg</b> de queijo.</p>
         <hr>
         <p><b>Lucro por quilo:<b> <br><b>R$${lucro.toFixed(2)}</b></p>
         <hr>
         <p><b>Economia mensal:<b> <br><b>R$${EconomiaComSistema.toLocaleString("pt-BR")}</b></p>
-        <hr class="bottom">
-        <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
-                         `;
-            
+                `;
+            ;
 
             // Exibindo os resultados na tela
             document.getElementById('resultadosCard').style.display = 'block';

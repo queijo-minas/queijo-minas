@@ -50,7 +50,7 @@ CREATE TABLE usuario(
     FOREIGN KEY (fkLogin) REFERENCES login(idLogin)
 ); 
 
-CREATE TABLE UsuarioLocalMaturacao (
+CREATE TABLE LocalMaturacaoUsuario (
 	fkLocalMaturacao INT,
     fkUsuario INT,  
     dataAssociacao DATE,
@@ -67,20 +67,16 @@ CREATE TABLE Prateleira (
     largura DECIMAL(5,2), -- Largura da prateleira (em metros)
     profundidade DECIMAL(5,2), -- Profundidade da prateleira (em metros)
 	fkLocalMaturacao INT, -- Relaciona a prateleira com o local de maturação
-    fkEmpresa INT,
-    FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao),
-	FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+    FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao)
 );
 
 CREATE TABLE SensorPrateleira (
-    idSensor INT AUTO_INCREMENT PRIMARY KEY,
-    tipoSensor VARCHAR(50), -- Tipo do sensor (ex: "Temperatura", "Umidade")
+    idSensorPrateleira INT AUTO_INCREMENT PRIMARY KEY,
     modeloSensor VARCHAR(50), -- Modelo do sensor (ex: "DHT22", "SHT31")
     dataInstalacao DATE, -- Data de instalação do sensor
+    quantidadeTotal INT,
 	fkPrateleira INT,
-    fkEmpresa INT,
-    FOREIGN KEY (fkPrateleira) REFERENCES Prateleira(idPrateleira), -- Relaciona com a prateleira
-    FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa) 
+    FOREIGN KEY (fkPrateleira) REFERENCES Prateleira(idPrateleira)
 );
 
 CREATE TABLE DadosSensores (
@@ -93,28 +89,23 @@ CREATE TABLE DadosSensores (
 );
 
 CREATE TABLE AlertaSensor (
-    idAlerta INT AUTO_INCREMENT PRIMARY KEY,
+    idAlertaSensor INT AUTO_INCREMENT PRIMARY KEY,
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora do alerta
     tipoAlerta VARCHAR(50), -- Ex: "Temperatura Alta", "Umidade Baixa"
     descricaoAlerta VARCHAR(255),
-	fkSensorPrateleira INT, 
-    fkPrateleira INT,
-    fkLocalMaturacao INT,
-    fkEmpresa INT,
-    FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira(idSensor),
-    FOREIGN KEY (fkPrateleira) REFERENCES Prateleira(idPrateleira),
-    FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao),
-    FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+	valorMinimo DECIMAL(5,2), -- Faixa mínima de operação
+    valorMaximo DECIMAL(5,2), -- Faixa máxima de operação
+	fkSensorPrateleira INT,
+    FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira(idSensor)
 );
 
 CREATE TABLE tipoSensor (
     idTipoSensor INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL, -- Nome do sensor (LM35, DHT11)
+    CONSTRAINT chkNome check (nome in('LM35', 'DHT121')),
     tipo VARCHAR(45) NOT NULL, -- Tipo de grandeza medida (Temperatura, Umidade)
     unidadeMedida VARCHAR(5) NOT NULL, -- Unidade de medida (°C, %)
-    valorMinimo DECIMAL(5,2), -- Faixa mínima de operação
-    valorMaximo DECIMAL(5,2), -- Faixa máxima de operação
-    quantidadeTotal INT, -- Quantidade total desse tipo de sensor
+	quantidadeTotal INT, -- Quantidade total desse tipo de sensor
     fkSensorPrateleira INT,
     fkDadosSensores INT,
 	FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira (idSensor),
@@ -164,11 +155,11 @@ INSERT INTO Prateleira (identificacaoPrateleira, capacidadeMaxima, altura, largu
 ('Prateleira C1', 55, 2.3, 1.4, 0.8, 3, 2);
 
 INSERT INTO SensorPrateleira (tipoSensor, modeloSensor, dataInstalacao, fkPrateleira, fkEmpresa) VALUES
-('Temperatura', 'DHT22', '2024-08-01', 1, 1),
-('Umidade', 'SHT31', '2024-08-01', 1, 1),
-('Temperatura', 'DHT11', '2024-08-02', 2, 1),
-('Umidade', 'DHT22', '2024-08-03', 3, 2),
-('Temperatura', 'SHT31', '2024-08-04', 4, 2);
+('Temperatura', 'LM35', '2024-08-01', 1, 1),
+('Umidade', 'DHT11', '2024-08-01', 1, 1),
+('Temperatura', 'LM35', '2024-08-02', 2, 1),
+('Umidade', 'DHT11', '2024-08-03', 3, 2),
+('Temperatura', 'LM35', '2024-08-04', 4, 2);
 
 INSERT INTO DadosSensores (temperatura, umidade, fkSensorPrateleira) VALUES
 (12.4, 79.8, 1),
