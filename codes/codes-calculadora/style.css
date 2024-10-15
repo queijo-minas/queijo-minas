@@ -63,27 +63,32 @@
 }
 
 .quadro p {
-    font-size: 16px;
-    color: #333;
+    font-size: 18px;
+    color: #030320;
     font-weight: 500;
+    margin-top: 20px;
 }
 
 .vendaKilo p {
-    font-size: 16px;
-    color: #333;
+    font-size: 18px;
+    color:#030320;
     font-weight: 500;
+    margin-top: 15px;
+    
 }
 
 .gastoKilo p {
-    font-size: 16px;
-    color: #333;
+    font-size: 18px;
+    color: #030320;
     font-weight: 500;
+    margin-top: 15px;
 }
 
 .taxaPerda {
-    font-size: 16px;
-    color: #333;
+    font-size: 18px;
+    color: #030320;
     font-weight: 500;
+    margin-top: 15px;
 
 }
 
@@ -100,7 +105,7 @@
     font-size: 20px;
     outline: none;
     color: rgb(0, 0, 0);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -113,7 +118,7 @@
     font-size: 20px;
     outline: none;
     color: black;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -126,25 +131,28 @@
     font-size: 20px;
     outline: none;
     color: black;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
 
 .quadro input::placeholder {
-    color: #030320;
+    color: #333;
     font-weight: 400;
+    font-size: 17px;
 }
 
 
 .vendaKilo input::placeholder {
-    color: #030320;
+    color: #333;
     font-weight: 400;
+    font-size: 17px;
 }
 
 .gastoKilo input::placeholder {
-    color: #030320;
+    color:#333;
     font-weight: 400;
+    font-size: 17px;
 }
 
 .quadro select {
@@ -153,9 +161,9 @@
     border: 0;
     outline: none;
     border-bottom: 2px solid rgb(117, 117, 158);
-    color: #030320;
-    font-size: 20px;
-    font-weight: 600;
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 
@@ -172,9 +180,9 @@
     border: 0;
     outline: none;
     border-bottom: 2px solid rgb(117, 117, 158);
-    color: #030320;
-    font-size: 20px;
-    font-weight: 500;
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 .taxaPerda option {
@@ -186,7 +194,7 @@
 .conteudo button {
     height: 60px;
     height: 50px;
-    margin-top: 50px;
+    margin-top: 40px;
     border: none;
     outline: none;
     background: linear-gradient(#030320, #0a0a46);
@@ -194,6 +202,11 @@
     font-size: 18px;
     font-weight: 600;
     transition: 0.3s;
+    border-radius: 3px;
+}
+
+button:hover {
+    color: rgb(118, 114, 182);
 }
 
 .document {
@@ -241,7 +254,7 @@
 
 .contentEconomia {
     width: 100%;
-    height: 400px;
+    height: 450px;
     background-color:#ffffff;
     padding: 20px;
     color: #161101;
@@ -297,4 +310,25 @@
 
 #resultadoEconomia p {
     line-height: 32px;
+}
+
+.fonte {
+    width: 5px;
+    height: 5px;
+    color: #030320;
+}
+
+.bottom{
+    margin-bottom: 12px;
+}
+
+#resultadoEconomia .font{
+    color: #551A8B;
+    font-size: 15px;
+} 
+
+.font{
+    color: #551A8B;
+    font-size: 15px;
+    font-weight: 600;
 }
