@@ -1,4 +1,4 @@
-CREATE DATABASE queijoNoPontoDB;
+
 USE queijoNoPontoDB;
 
 CREATE TABLE empresa(
@@ -11,7 +11,7 @@ CREATE TABLE empresa(
     email VARCHAR(60),
     telefone VARCHAR(15),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+)auto_increment=101;
 
 CREATE TABLE endereco(
 	idEndereco INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,7 +21,7 @@ CREATE TABLE endereco(
 	cep CHAR(9),
 	fkEmpresa INT unique,
 	FOREIGN KEY (fkEmpresa)  REFERENCES empresa(idEmpresa)
-);
+)auto_increment=101;
 
 CREATE TABLE usuario(
     idUsuario int primary key auto_increment,
@@ -33,7 +33,7 @@ CREATE TABLE usuario(
     fkNivelAcesso int,
     FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
     FOREIGN KEY (fkNivelAcesso) REFERENCES usuario(idUsuario)
-); 
+)auto_increment=101; 
 
 CREATE TABLE login(
 	idLogin INT auto_increment,
@@ -42,7 +42,7 @@ CREATE TABLE login(
 	senha VARCHAR(45),
 	FOREIGN KEY (fKUsuario) REFERENCES usuario(idUsuario),
     PRIMARY KEY (idLogin, fKUsuario)
-);
+)auto_increment=101;
 
 CREATE TABLE LocalMaturacao (
     idLocalMaturacao INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,9 +51,9 @@ CREATE TABLE LocalMaturacao (
     temperaturaIdeal DECIMAL(5,2), -- Temperatura ideal para maturação
     umidadeIdeal DECIMAL(5,2), -- Umidade ideal para maturação
     capacidadePrateleiras INT, -- Número de prateleiras na sala
-    fkEmpresa int unique,
+    fkEmpresa int,
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa) -- Relaciona com a empresa que possui o local
-);
+)auto_increment=101;
 
 CREATE TABLE LocalMaturacaoUsuario (
 	fkLocalMaturacao INT,
@@ -76,7 +76,7 @@ CREATE TABLE Prateleira (
 	fkLocalMaturacao INT, -- Relaciona a prateleira com o local de maturação
     primary key (idPrateleira, fkLocalMaturacao),
     FOREIGN KEY (fkLocalMaturacao) REFERENCES LocalMaturacao(idLocalMaturacao)
-);
+)auto_increment=101;
 
 CREATE TABLE SensorPrateleira (
     idSensorPrateleira INT AUTO_INCREMENT,
@@ -86,7 +86,7 @@ CREATE TABLE SensorPrateleira (
 	fkPrateleira INT,
     primary key (idSensorPrateleira, fkPrateleira),
     FOREIGN KEY (fkPrateleira) REFERENCES Prateleira(idPrateleira)
-);
+)auto_increment=101;
 
 CREATE TABLE tipoSensor (
     idSensor INT AUTO_INCREMENT,
@@ -97,7 +97,7 @@ CREATE TABLE tipoSensor (
     fkSensorPrateleira INT,
     PRIMARY KEY (idSensor, fkSensorPrateleira),
 	FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira (idSensorPrateleira)
-);
+)auto_increment=101;
 
 CREATE TABLE DadosSensores (
     idDadosSensor INT AUTO_INCREMENT,
@@ -109,7 +109,7 @@ CREATE TABLE DadosSensores (
     PRIMARY KEY (idDadosSensor, fkSensorPrateleira,fkTipoSensor),
 	FOREIGN KEY (fkTipoSensor) REFERENCES tipoSensor(idSensor),
     FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira(idSensorPrateleira) -- Relaciona com o sensor de temperatura
-);
+)auto_increment=101;
 
 CREATE TABLE AlertaSensor (
     idAlertaSensor INT AUTO_INCREMENT,
@@ -121,7 +121,7 @@ CREATE TABLE AlertaSensor (
 	fkSensorPrateleira INT,
     primary key (idAlertaSensor, fkSensorPrateleira),
     FOREIGN KEY (fkSensorPrateleira) REFERENCES SensorPrateleira(idSensorPrateleira)
-);
+)auto_increment=101;
 
 INSERT INTO empresa (razaoSocial, nomeFantasia, representanteLegal, cnpj, email, telefone) VALUES
 ('Queijaria do Ponto Ltda.','Queijaria do Ponto', 'Cesar Augusto', '12345678000101', 'contato@queijariadoponto.com', '11988887777'),
@@ -131,22 +131,22 @@ INSERT INTO empresa (razaoSocial, nomeFantasia, representanteLegal, cnpj, email,
 ('Queijos Artesanais Ltda.','Queijos Artesanais', 'Frizzarini Cluadio', '55566677000105', 'artesanal@queijosartesanais.com', '11999885555');
 
 INSERT INTO endereco (logradouro, numero, cidade, cep, fkEmpresa) VALUES
-('Rua do Queijo', '123', 'Centro', '01001000', 1),
-('Av. da Maturação', '321', 'Rio', '22041010', 2),
-('Estrada do Leite', '55', 'Campinas', '13040000', 3),
-('Rua dos Fazendeiros', '88', 'Sorocaba', '18035000', 4),
-('Travessa do Sabor', '22', 'Belo Horizonte', '30140000', 5);
+('Rua do Queijo', '123', 'Centro', '01001000', 101),
+('Av. da Maturação', '321', 'Rio', '22041010', 102),
+('Estrada do Leite', '55', 'Campinas', '13040000', 103),
+('Rua dos Fazendeiros', '88', 'Sorocaba', '18035000', 104),
+('Travessa do Sabor', '22', 'Belo Horizonte', '30140000', 105);
 
 
 INSERT INTO usuario (nome, cpf, telefone, nomeNivelAcesso, fkNivelAcesso) VALUES
-('João Silva', '12345678901', '11987654321','Administrador', 1),
-('Maria Souza', '23456789012', '11991234567','Comum', 2), 
-('José Ferreira', '34567890123', '11999887766', 'Comum', 2);
+('João Silva', '12345678901', '11987654321','Administrador', 101),
+('Maria Souza', '23456789012', '11991234567','Comum', 102), 
+('José Ferreira', '34567890123', '11999887766', 'Comum', 102);
 
 INSERT INTO login (email, senha, FkUsuario) VALUES
-('contato@queijariadoponto.com', 'qj536$55', 1),
-('vendas@queijosdaserra.com', 'qj536$55', 2),
-('recrusosHumanos@queijosdaserra.com', 'qj536$55', 3);
+('contato@queijariadoponto.com', 'qj536$55', 101),
+('vendas@queijosdaserra.com', 'qj536$55', 102),
+('recrusosHumanos@queijosdaserra.com', 'qj536$55', 103);
 
 INSERT INTO LocalMaturacao (nomeLocal, descricaoLocal, temperaturaIdeal, umidadeIdeal, capacidadePrateleiras) VALUES
 ('Sala de Maturação 1', 'Sala principal com 10 prateleiras para maturação de queijos', 12.5, 80.0, 10),
@@ -156,38 +156,38 @@ INSERT INTO LocalMaturacao (nomeLocal, descricaoLocal, temperaturaIdeal, umidade
 ('Câmara Externa de Maturação', 'Área adicional para maturação em temperatura ambiente', 15.0, 75.0, 4);
 
 INSERT INTO LocalMaturacaoUsuario (fkLocalMaturacao, fkUsuario, dataAssociacao) VALUES
-(1, 1, '2024-09-20'),
-(2, 2, '2024-01-10'),
-(5, 3, '2024-07-05');
+(101, 101, '2024-09-20'),
+(102, 102, '2024-01-10'),
+(105, 103, '2024-07-05');
 
 INSERT INTO Prateleira (identificacaoPrateleira, capacidadeMaxima, altura, largura, profundidade, fkLocalMaturacao) VALUES
-('Prateleira A1', 50, '2.0', '1.5', '0.6', 1),
-('Prateleira A2', 60, '2.5', '1.8', '0.7', 1),
-('Prateleira B1', 40, '1.8', '1.2', '0.5', 2),
-('Prateleira B2', 45, '2.0', '1.3', '0.6', 2),
-('Prateleira C1', 55, '2.3', '1.4', '0.8', 5);
+('Prateleira A1', 50, '2.0', '1.5', '0.6', 101),
+('Prateleira A2', 60, '2.5', '1.8', '0.7', 101),
+('Prateleira B1', 40, '1.8', '1.2', '0.5', 102),
+('Prateleira B2', 45, '2.0', '1.3', '0.6', 102),
+('Prateleira C1', 55, '2.3', '1.4', '0.8', 105);
 
 INSERT INTO SensorPrateleira ( nivelPrateleira, dataInstalacao, quantidadeTotal, fkPrateleira) VALUES
-(1, '2024-08-01', 2, 1),
-(2, '2024-08-01', 2, 1),
-(4, '2024-08-02', 2, 2),
-(3, '2024-08-03', 3, 2),
-(7, '2024-08-04', 4, 5);
+(1, '2024-08-01', 2, 101),
+(2, '2024-08-01', 2, 101),
+(4, '2024-08-02', 2, 102),
+(3, '2024-08-03', 3, 102),
+(7, '2024-08-04', 4, 105);
 
 INSERT INTO tipoSensor (nome, tipo, unidadeMedida, fkSensorPrateleira) VALUES
-('LM35', 'Temperatura', '°C', 3),
-('DHT11', 'Umidade', '%', 5);
+('LM35', 'Temperatura', '°C', 103),
+('DHT11', 'Umidade', '%', 105);
 
 INSERT INTO DadosSensores (fkSensorPrateleira, FkTipoSensor, temperatura, umidade) VALUES 
-(4, 7, 18, 77),
-(3, 8, 16, 83);
+(102, 101, 18, 77),
+(101, 102, 16, 83);
 
 INSERT INTO AlertaSensor (tipoAlerta, descricaoAlerta, fkSensorPrateleira) VALUES
-('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira A1', 3),
-('Umidade Alta', 'A umidade está acima do ideal na Prateleira B1', 5),
-('Temperatura Baixa', 'A temperatura está abaixo do ideal na Prateleira A2', 1),
-('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira B2', 2),
-('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira C1', 4);
+('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira A1', 103),
+('Umidade Alta', 'A umidade está acima do ideal na Prateleira B1', 105),
+('Temperatura Baixa', 'A temperatura está abaixo do ideal na Prateleira A2', 101),
+('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira B2', 102),
+('Temperatura Alta', 'A temperatura está acima do ideal na Prateleira C1', 104);
 
 SHOW TABLES;
 SELECT * FROM login;
@@ -202,3 +202,38 @@ SELECT * FROM DadosSensores;
 SELECT * FROM AlertaSensor;
 SELECT * FROM SensorPrateleira;
 SELECT * FROM tipoSensor;
+
+
+SELECT 
+    usuario.idUsuario AS 'ID Usuário',
+    usuario.nome AS 'Nome do Usuário',
+    usuario.cpf AS 'CPF',
+    nivelAcesso.nomeNivelAcesso AS 'Nível de Acesso',
+    login.email AS 'Login Email',
+    login.senha AS 'Senha'
+FROM 
+    usuario as usuario
+LEFT JOIN usuario as nivelAcesso ON usuario.fkNivelAcesso = nivelAcesso.idUsuario
+-- Join com a tabela de login
+LEFT JOIN login ON login.fKUsuario = usuario.idUsuario;
+
+
+
+SELECT 
+    ds.idDadosSensor,
+    ds.temperatura,
+    ds.umidade,
+    asensor.tipoAlerta,
+    asensor.descricaoAlerta,
+    asensor.dataHora AS 'Data do Alerta',
+    -- Condicional para verificar os limites e ativar o alerta
+    CASE 
+        WHEN ds.temperatura > 14 or ds.umidade < 70 THEN 'Alerta Ativo'
+        ELSE 'Normal'
+    END AS 'Status Alerta'
+FROM 
+    DadosSensores ds
+LEFT JOIN 
+    AlertaSensor asensor ON ds.fkSensorPrateleira = asensor.fkSensorPrateleira
+    AND asensor.valorMinimo <= ds.umidade AND asensor.valorMaximo >= ds.temperatura;
+
