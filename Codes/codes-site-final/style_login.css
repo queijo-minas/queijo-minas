@@ -82,8 +82,8 @@ header .navbar {
   padding-right: 0px; /* Ajusta o espaçamento à esquerda */
   align-items: center; /* Alinha os itens verticalmente */
   justify-content: space-between;
-  gap: 50px;
-  max-width: var(--site-max-width); /* Define a largura máxima da navbar */
+  gap: 0px;
+  max-width: 100%; /* Define a largura máxima da navbar */
 }
 .navbar .nav-logo {
  margin-left: 40px;
@@ -91,6 +91,7 @@ header .navbar {
 .navbar .nav-menu {
   display: flex; /* Utiliza flexbox para os itens do menu */
   width: 15%;
+  width: fit-content;
   gap: 5px; /* Define o espaço entre os itens do menu */
 }
 .navbar .nav-menu .nav-link {
@@ -368,7 +369,7 @@ height: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column; 
-    margin-top:100px;  
+    margin-top:125px;  
     margin-bottom: 45px; 
     
     

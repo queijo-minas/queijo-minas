@@ -1,5 +1,5 @@
 function validarSenha(){
-    const senha = input_senha.value 
+    const senha = senha_input.value 
 
     if( senha.length >= 7 ){
         validacaoSenha.innerHTML = `Senha Válida`
@@ -7,6 +7,16 @@ function validarSenha(){
         validacaoSenha.innerHTML = `Sua senha está inválida`
     }
 
+
+}
+
+function confirmacaoSenha(){
+    const senha = senha_input.value
+    const confirmacaoSenha = confirmacao_senha_input.value
+    
+    if(senha == confirmacaoSenha){
+
+    }
 }
 
 function gerarSenha(){
@@ -18,13 +28,17 @@ for(i=0; i<7; i++){
     senhaAutoGerada += Catalogo[parseInt(Math.random() * 71)]
 }
 
-input_senha.value = senhaAutoGerada
+senha_input.value = senhaAutoGerada
 
 validarSenha()
 
 }
 
 
+
+    function Validacao() {
+        alert("Bem Vindo a Queijo no Ponto, obrigado pela confiança!")
+    }
 
 // Estrutura do CNPJ 99.999.999/9999-99
 
@@ -52,14 +66,9 @@ var fraseCorrigida = ``
         validacaoCNPJ.innerHTML = `CNPJ válido, ${fraseCorrigida}`
 
     }
-
-    
-
-} else {
-    validacaoCNPJ.innerHTML = `CNPJ inválido, insira apenas os números necessários (14 digitos)` 
-}
-
-
+    } else {
+        validacaoCNPJ.innerHTML = `CNPJ inválido, insira apenas os números necessários (14 digitos)` 
+    }
 
 
 }
@@ -78,7 +87,7 @@ function validarEmail(){
 
 
 function validarCPF(){
-    const cpf = input_CPF.value 
+    const cpf = cpf_input.value 
     var cpfSemantico = ``
 
     if(cpf.length == 11){
@@ -93,7 +102,7 @@ function validarCPF(){
 
             validacaoCPF.innerHTML = `Seu CPF está válido ${cpfSemantico}`
 
-            input_CPF.value = cpfSemantico
+            cpf_input.value = cpfSemantico
 
         }
     }else {

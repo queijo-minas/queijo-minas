@@ -138,6 +138,8 @@ header .navbar {
   justify-content: space-between;
   gap: 50px;
   max-width: 100%; /* Define a largura máxima da navbar */
+  justify-content: space-between;
+
 }
 .navbar .nav-logo {
  margin-left: 40px;
@@ -145,6 +147,7 @@ header .navbar {
 .navbar .nav-menu {
   display: flex; /* Utiliza flexbox para os itens do menu */
   width: 15%;
+  width: fit-content;
   gap: 5px; /* Define o espaço entre os itens do menu */
 }
 .navbar .nav-menu .nav-link {
