@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Monitoramento - Queijo no Ponto</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="imgs/logo.svg" type="image/svg+xml"">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--biblioteca chart.js-->
 </head>
 
 <body>
    
     <aside class="navbar">
-        <img src="https://thumbs.dreamstime.com/b/homem-cinzento-do-placeholder-da-foto-pessoa-gen%C3%A9rica-silhueta-cinzenta-em-um-fundo-branco-144511705.jpg" alt="Foto do usuário">
+    <!--  <a href="index.html">
+            <img src="imgs/logo.svg" alt="Logo" class="logo">
+        </a>-->  
+        
+        <img src="imgs/profile.webp" alt="Imagem profile">
         <h2>Bem-vindo, Usuário!</h2>
         <nav>
-            <a href="#">Página Inicial</a>
-            <a href="#">Relatórios</a>
-            <a href="#">Sobre nós</a>
+            <a href="index.html">Página Inicial</a>
+            <a href="">Relatórios</a>
+            <a href="index.html#about">Sobre</a>
             
             <div class="opcoes">
                 <span>Selecione a sala de maturação:</span>
@@ -39,28 +44,28 @@
         <div class="kpi-bar">
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="img/tempAcima.webp" alt="Ícone de Temperatura">
+                    <img src="imgs/kpiTemperatura.webp" alt="Ícone de Temperatura">
                     <h3>Temperatura Média</h3>
                 </div>
                 <p>18°C</p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="img/umdi-removebg-preview.png" alt="Ícone de Umidade">
+                    <img src="imgs/kpiUmidade.png" alt="Ícone de Umidade">
                     <h3>Umidade Média</h3>
                 </div>
                 <p><b>90%</b></p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="img/alerta-removebg-preview.png" alt="Ícone de Alerta">
+                    <img src="imgs/kpiUltimoAlerta.png" alt="Ícone de Alerta">
                     <h3>Último Alerta</h3>
                 </div>
-                <p><b>11/10/2024 15:35</b></p>
+                <p><b>11/10/2024 17:00</b></p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="img/salasEmAlerta.png" alt="Ícone de Alerta">
+                    <img src="imgs/kpiSalasEmAlerta.png" alt="Ícone de Salas em Alerta">
                     <h3>Salas em Alerta</h3>
                 </div>
                 <p><b>2</b></p>
@@ -226,7 +231,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                 }
             },
             y: { 
-                beginAtZero: false,   //aqui é pra definir se começa em zero, coloquei false no graf de umidade
+                beginAtZero: true,   //aqui é pra definir se começa em zero, coloquei false no graf de umidade
                 title: { 
                     display: true, 
                     text: 'Umidade (%)', 
@@ -244,8 +249,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
 
 
 
+ //GRÁFICO DE BARRAS DAS MÉDIAS DAS SALAS
 
-        //GRÁFICO DE BARRAS DAS MÉDIAS DAS SALAS
         new Chart(document.getElementById('barChart').getContext('2d'), {
             type: 'bar',
             data: {
@@ -369,11 +374,25 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         align-items: center;
         box-sizing: border-box;
         border-right: 2px solid white;
+        position: relative;
     }
 
+
+
+    /*.logo-link {
+        position: absolute;
+        top: 40px;
+        left: 300px; 
+    }
+
+    .logo {
+        height: 50px;
+        cursor: pointer;
+    }   */
+
     .navbar img {
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
         border-radius: 50%;
         margin-bottom: 15px;
         border: 2px solid var(--white-color);
@@ -476,6 +495,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         justify-content: center;
     }
 
+
+    /*  Conteiner dos gráficos */
     .chart-container {
         flex: 1;
         max-width: 450px;
