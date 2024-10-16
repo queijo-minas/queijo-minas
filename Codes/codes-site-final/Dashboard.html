@@ -23,14 +23,14 @@
             <a href="index.html#about">Sobre</a>
             
             <div class="opcoes">
-                <span>Selecione a sala de maturação:</span>
+                <span>Selecione a Prateleira:</span>
                 <select class="custom-select">
-                    <option value="2">Sala 3</option>
-                    <option value="2">Sala 1</option>
-                    <option value="2">Sala 2</option>
-                    <option value="3" style="background-color: red; color: white;">Sala 3</option>
-                    <option value="4" style="background-color: red; color: white;">Sala 4</option>
-                    <option value="5">Sala 5</option>
+                    <option value="2">Prateleira 3</option>
+                    <option value="2">Prateleira 1</option>
+                    <option value="2">Prateleira 2</option>
+                    <option value="3" style="background-color: red; color: white;">Prateleira 3</option>
+                    <option value="4" style="background-color: red; color: white;">Prateleira 4</option>
+                    <option value="5">Prateleira 5</option>
                 </select>
             </div>
             <a href="#">Sair</a>
@@ -66,7 +66,7 @@
             <div class="kpi">
                 <div class="kpi-header">
                     <img src="imgs/kpiSalasEmAlerta.png" alt="Ícone de Salas em Alerta">
-                    <h3>Salas em Alerta</h3>
+                    <h3>Prateleiras em Alerta</h3>
                 </div>
                 <p><b>2</b></p>
             </div>
@@ -137,10 +137,10 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         plugins: {
             legend: {
                 labels: {
-                    boxWidth: 40, // Ddiminui o tamanho dos quadradinhos
+                    boxWidth: 25, // Ddiminui o tamanho dos quadradinhos
                     color: 'white', // Altera a cor do texto da legenda do graf
                     font: {
-                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
+                        size: 10 // Ajusta o tamanho do texto da legenda do frafico
                     }
                 }
             }
@@ -152,11 +152,14 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                 }
             },
             y: { 
-                beginAtZero: true, 
+                beginAtZero: false, 
                 title: { 
                     display: true, 
                     text: 'Temperatura (°C)', 
-                    color: 'white' 
+                    color: 'white',
+                    font: {
+                        size: 11 // Ajusta o tamanho do texto da legenda do frafico
+                    } 
                 },
                 ticks: {
                     color: 'white' // Altera a cor dos rótulos do eixo Y
@@ -231,7 +234,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                 }
             },
             y: { 
-                beginAtZero: true,   //aqui é pra definir se começa em zero, coloquei false no graf de umidade
+                beginAtZero: false,   //aqui é pra definir se começa em zero, coloquei false no graf de umidade
                 title: { 
                     display: true, 
                     text: 'Umidade (%)', 
@@ -254,7 +257,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         new Chart(document.getElementById('barChart').getContext('2d'), {
             type: 'bar',
             data: {
-                labels: ['Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'],
+                labels: ['Prateleira 1', 'Prateleira 2', 'Prateleira 3', 'Prateleira 4', 'Prateleira 5'],
                 datasets: [{
                     label: 'Temperatura Média (°C)',
                     backgroundColor: ['orange', 'orange', 'red', 'red', 'orange'],
@@ -288,7 +291,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                 beginAtZero: true, 
                 title: { 
                     display: true, 
-                    text: 'Temperatura Média das Salas(°C)', 
+                    text: 'Temp Média das Prateleiras(°C)', 
                     color: 'white' 
                 },
                 ticks: {
