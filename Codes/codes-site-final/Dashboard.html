@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Monitoramento - Queijo no Ponto</title>
-    <link rel="icon" href="imgs/logo.svg" type="image/svg+xml"">
+    <link rel="icon" href="imgs/logo.svg" type="image/svg+xml">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--biblioteca chart.js-->
 </head>
 
 <body>
    
-    <aside class="navbar">
-    <!--  <a href="index.html">
-            <img src="imgs/logo.svg" alt="Logo" class="logo">
-        </a>-->  
-        
+    <aside class="navbar">      
         <img src="imgs/profile.webp" alt="Imagem profile">
         <h2>Bem-vindo, Usuário!</h2>
         <nav>
@@ -28,13 +24,17 @@
                     <option value="2">Prateleira 3</option>
                     <option value="2">Prateleira 1</option>
                     <option value="2">Prateleira 2</option>
-                    <option value="3" style="background-color: red; color: white;">Prateleira 3</option>
-                    <option value="4" style="background-color: red; color: white;">Prateleira 4</option>
+                    <option value="3" style="background-color: #920a0a;">Prateleira 3</option>
+                    <option value="4" style="background-color: #920a0a;">Prateleira 4</option>
                     <option value="5">Prateleira 5</option>
                 </select>
             </div>
             <a href="#">Sair</a>
         </nav>
+
+        <div class="logo">
+            <img clas="logo" src="imgs/logo.svg" alt="">
+        </div>
     </aside>
 
     <!--Aqui abaixo são as divs da dashboard no html
@@ -44,28 +44,28 @@
         <div class="kpi-bar">
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="imgs/kpiTemperatura.webp" alt="Ícone de Temperatura">
+                    <img src="imgs/alta-temperatura-em-um-termometro.png" alt="Ícone de Temperatura">
                     <h3>Temperatura Média</h3>
                 </div>
                 <p>18°C</p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="imgs/kpiUmidade.png" alt="Ícone de Umidade">
+                    <img src="imgs/umidade.png" alt="Ícone de Umidade">
                     <h3>Umidade Média</h3>
                 </div>
                 <p><b>90%</b></p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="imgs/kpiUltimoAlerta.png" alt="Ícone de Alerta">
+                    <img src="imgs/sinal-de-aviso.png" alt="Ícone de Alerta">
                     <h3>Último Alerta</h3>
                 </div>
                 <p><b>11/10/2024 17:00</b></p>
             </div>
             <div class="kpi">
                 <div class="kpi-header">
-                    <img src="imgs/kpiSalasEmAlerta.png" alt="Ícone de Salas em Alerta">
+                    <img src="imgs/sino.png" alt="Ícone de Salas em Alerta">
                     <h3>Prateleiras em Alerta</h3>
                 </div>
                 <p><b>2</b></p>
@@ -97,8 +97,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         datasets: [
             {
                 label: 'Temp Atual (°C)', 
-                borderColor: 'red',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: '#c59506',
                 data: [18, 16, 17, 18, 19, 17],
                 fill: true
             },
@@ -113,8 +112,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
             },
             {
                 label: 'Mínima (°C)', 
-                borderColor: 'green',
-                backgroundColor: 'green',
+                borderColor: '#096b21',
+                backgroundColor: '#096b21',
                 data: [7, 7, 7, 7, 7, 7],
                 borderDash: [10, 5],
                 fill: false,
@@ -122,8 +121,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
             },
             {
                 label: 'Máxima (°C)', 
-                borderColor: 'yellow',
-                backgroundColor: 'yellow',
+                borderColor: '#920a0a',
+                backgroundColor: '#920a0a',
                 data: [14, 14, 14, 14, 14, 14],
                 borderDash: [10, 5],
                 fill: false,
@@ -137,10 +136,10 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         plugins: {
             legend: {
                 labels: {
-                    boxWidth: 25, // Ddiminui o tamanho dos quadradinhos
+                    boxWidth: 40, // Ddiminui o tamanho dos quadradinhos
                     color: 'white', // Altera a cor do texto da legenda do graf
                     font: {
-                        size: 10 // Ajusta o tamanho do texto da legenda do frafico
+                        size: 12// Ajusta o tamanho do texto da legenda do frafico
                     }
                 }
             }
@@ -158,7 +157,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                     text: 'Temperatura (°C)', 
                     color: 'white',
                     font: {
-                        size: 11 // Ajusta o tamanho do texto da legenda do frafico
+                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
                     } 
                 },
                 ticks: {
@@ -180,8 +179,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                 datasets: [
                     {
                         label: 'Umidade (%)',
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: '#030320',
                         data: [90, 95, 89, 92, 100, 98],
                         fill: true
                     },
@@ -196,8 +194,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                     },
                     {
                         label: 'Mínima (%)',
-                        borderColor: 'green',
-                        backgroundColor: 'green',
+                        borderColor: '#096b21',
+                        backgroundColor: '#096b21',
                         data: [75, 75, 75, 75, 75, 75],
                         borderDash: [10, 5],
                         fill: false,
@@ -205,8 +203,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
                     },
                     {
                         label: 'Máxima (%)',
-                        borderColor: 'yellow',
-                        backgroundColor: 'yellow',
+                        borderColor: '#920a0a',
+                        backgroundColor: '#920a0a',
                         data: [95, 95, 95, 95, 95, 95],
                         borderDash: [10, 5],
                         fill: false,
@@ -259,8 +257,8 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
             data: {
                 labels: ['Prateleira 1', 'Prateleira 2', 'Prateleira 3', 'Prateleira 4', 'Prateleira 5'],
                 datasets: [{
-                    label: 'Temperatura Média (°C)',
-                    backgroundColor: ['orange', 'orange', 'red', 'red', 'orange'],
+                    label: 'Temperatura Media (°C)',
+                    backgroundColor: ['orange', 'orange', '#920a0a', '#920a0a', 'orange'],
                     data: [10, 7, 18, 20, 13]
                 }]
             },
@@ -358,7 +356,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
 
     body {
         font-family: Arial, sans-serif;
-        background-color: black;
+        background-color: #1d1103;
         color: var(--dark-color);
         display: flex;
         margin: 0;
@@ -368,37 +366,31 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
   
     .navbar {
         width: 240px;
-        height: 100vh;
-        background-color: var(--dark-color);
-        color: var(--white-color);
+        height: 130vh;
+        background-color: #351f07;
+        color:#fdfde9;
         padding: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
-        border-right: 2px solid white;
         position: relative;
     }
-
-
-
-    /*.logo-link {
-        position: absolute;
-        top: 40px;
-        left: 300px; 
-    }
-
-    .logo {
-        height: 50px;
-        cursor: pointer;
-    }   */
 
     .navbar img {
         width: 75px;
         height: 75px;
         border-radius: 50%;
         margin-bottom: 15px;
-        border: 2px solid var(--white-color);
+    }
+
+    .navbar .logo{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: none;
+        margin-top: 360px;
     }
 
     .navbar h2 {
@@ -408,7 +400,7 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
     }
 
     .navbar nav a {
-        color: white;
+        color: #fdfde9;
         text-decoration: none;
         margin: 8px 0;
         font-size: 0.9em;
@@ -417,25 +409,25 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
         padding: 6px;
         border-radius: 5px;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: #4e3412;
         cursor: pointer;
     }
 
     .navbar select {
         background-color: transparent;
-        color: #c59506;  
+        color: #ffffff;  
         cursor: pointer;
-        border: 1px solid var(--white-color);
+        background-color: #6d4816;
+        outline: none;
+        border: none;
         padding: 4px;
         border-radius: 4px;
         width: 100%;
-       
     }
 
     .navbar nav a:hover {
-        background-color: #edbb25; 
+        background-color: #6d4816; 
     }
-
     
     .opcoes {
         display: flex;
@@ -470,14 +462,14 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
     .kpi {
         flex: 1;
         padding: 5px;
-        border-radius: 8px;
-        background-color: var(--dark-color);
+        border-radius: 3px;
+        background-color: #6d4816;
         text-align: center;
-        color: white;
+        color: #fdfde9;
         font-size: 0.8em;
         max-width: 170px;
         height: auto;
-        border: 2px solid #fff;
+        border-left: 5px solid #c2990c;
     }
 
     .kpi-header {
@@ -493,30 +485,34 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
 
     .linha-graficos {
         display: flex;
-        gap: 20px;
+        gap: 30px;
         width: 100%;
-        justify-content: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
     }
 
 
     /*  Conteiner dos gráficos */
     .chart-container {
-        flex: 1;
+        flex-basis: calc(44.44% - 20px);
         max-width: 450px;
-        height: 400px;
-        background-color: var(--dark-color);
+        height: 300px;
+        background-color:#3a260b;
         border-radius: 8px;
-        border: 2px solid white;
+        border: 5px solid #351f07;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box
     }
 
+   
+
     canvas {
-        width: 100% !important;
-        height: 100% !important;
+        width: 90% !important;
+        height: 90% !important;
     }
 
 
