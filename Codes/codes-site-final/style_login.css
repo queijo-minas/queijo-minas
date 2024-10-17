@@ -262,7 +262,11 @@ h2::after {
     border-radius: 8px; /* Define bordas arredondadas */
   }
   
-  
+.bloco {
+    width: 100%; /* Ocupa toda a largura */
+    height: 100%; /* Ocupa toda a altura */
+    background-color: var(--backgroud-transparent); /* Aplica uma cor de fundo transparente */
+}
 
 
 
@@ -434,3 +438,32 @@ height: 100%;
     color: #fff;
     margin: 0 5px;
   }
+
+.formulario .botaozinho {
+
+
+
+
+    margin-top: 10px; /* Margem superior de 30px */
+    margin-left: 15px;
+    display: inline-block; /* Exibe o botão como um elemento inline-block */
+    padding: 10px 20px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
+    font-size: 15px; /* Tamanho da fonte */
+    color: #fff; /* Cor branca */
+    background-color: var(--amber-orange); /* Fundo laranja */
+    border: none; /* Remove a borda */
+    border-radius: 35px; /* Bordas arredondadas */
+    cursor: pointer; /* Mostra o cursor de clique */
+    text-decoration: none; /* Remove a sublinha de links */
+    transition: 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+
+  /* Muda a cor e o fundo do botão ao passar o mouse sobre ele */
+.formulario .botao:hover {
+
+  /* Ao passar o mouse sobre o botão, a cor do fundo muda para amarelo e
+     a sombra se intensifica */
+     
+      background-color: var(--golden-yellow); /* Muda a cor de fundo para amarelo */
+}

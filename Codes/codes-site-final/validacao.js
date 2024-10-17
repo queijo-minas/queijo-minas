@@ -2,9 +2,9 @@ function validarSenha(){
     const senha = senha_input.value 
 
     if( senha.length >= 7 ){
-        validacaoSenha.innerHTML = `Senha Válida`
+        validacaoSenha.innerHTML = `<div style="color: green;">Senha Válida</div><br>`
     }else {
-        validacaoSenha.innerHTML = `Sua senha está inválida`
+        validacaoSenha.innerHTML = `<div style="color: red;">Sua senha está fraca</div><br>`
     }
 
 
@@ -15,7 +15,9 @@ function confirmacaoSenha(){
     const confirmacaoSenha = confirmacao_senha_input.value
     
     if(senha == confirmacaoSenha){
-
+        validacaoConfirmacao.innerHTML = `<div style="color: green;">Senha Válida</div><br>`
+    }else{
+        validacaoConfirmacao.innerHTML = `<div style="color: red;">As senhas devem ser a mesma</div><br>`
     }
 }
 
@@ -29,16 +31,21 @@ for(i=0; i<7; i++){
 }
 
 senha_input.value = senhaAutoGerada
+senha_input.type = "text"
+confirmacao_senha_input.value = senhaAutoGerada
+confirmacao_senha_input.type = "text"
 
 validarSenha()
+confirmacaoSenha()
 
 }
 
 
 
-    function Validacao() {
+function Validacao() {
+
         alert("Bem Vindo a Queijo no Ponto, obrigado pela confiança!")
-    }
+}
 
 // Estrutura do CNPJ 99.999.999/9999-99
 
@@ -63,11 +70,12 @@ var fraseCorrigida = ``
         
         fraseCorrigida += CNPJ[i]
         cnpj_input.value = fraseCorrigida
-        validacaoCNPJ.innerHTML = `CNPJ válido, ${fraseCorrigida}`
+        validacaoCNPJ.innerHTML =
+        `<div style="color: green;">CNPJ válido, ${fraseCorrigida}</div><br>`
 
     }
     } else {
-        validacaoCNPJ.innerHTML = `CNPJ inválido, insira apenas os números necessários (14 digitos)` 
+        validacaoCNPJ.innerHTML = `<div style="color: red;">CNPJ inválido, insira apenas os números necessários (14 digitos)</div><br>`
     }
 
 
@@ -78,9 +86,9 @@ function validarEmail(){
     const email = email_input.value 
 
     if( email.indexOf('@') > -1 && email.indexOf('.com') > -1){
-        validacaoEmail.innerHTML = `E-mail Válido`
+        validacaoEmail.innerHTML = `<div style="color: green;">E-mail Válido</div><br>`
     }else {
-        validacaoEmail.innerHTML = `Sua e-mail está inválido`
+        validacaoEmail.innerHTML = `<div style="color: red;">Sua e-mail está inválido</div><br>`
     }
 
 }
@@ -100,13 +108,13 @@ function validarCPF(){
 
             cpfSemantico += cpf[posição]
 
-            validacaoCPF.innerHTML = `Seu CPF está válido ${cpfSemantico}`
+            validacaoCPF.innerHTML = `<div style="color: green;">Seu CPF está válido ${cpfSemantico}</div><br>`
 
             cpf_input.value = cpfSemantico
 
         }
     }else {
-        validacaoCPF.innerHTML = `CPF inválido, insira apenas a quantidade correta de números (11)`
+        validacaoCPF.innerHTML = `<div style="color: red;">CPF inválido, insira apenas a quantidade correta de números (11)</div><br>`
     }
 
 
