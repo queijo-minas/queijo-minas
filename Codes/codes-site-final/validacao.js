@@ -119,3 +119,29 @@ function validarCPF(){
 
 
 }
+
+function validarTelefone(){
+    const telefone = telefone_input.value 
+    var telefoneSemantico = ``
+
+    if(telefone.length == 11){
+        for( posição = 0; posição < 11; posição ++) {
+            if(posição == 3 || posição == 6){
+                cpfSemantico += `.`
+            }if (posição == 9){
+                cpfSemantico += `-`
+            }
+
+            cpfSemantico += cpf[posição]
+
+            validacaoCPF.innerHTML = `<div style="color: green;">Seu CPF está válido ${cpfSemantico}</div><br>`
+
+            telefone_input.value = cpfSemantico
+
+        }
+    }else {
+        validacaoCPF.innerHTML = `<div style="color: red;">CPF inválido, insira apenas a quantidade correta de números (11)</div><br>`
+    }
+
+
+}
