@@ -13,14 +13,20 @@ const HABILITAR_OPERACAO_INSERIR = true;
 // simular um arduino de LM35
 const SIMULACAO_ARDUINO_TEMPERATURA = true;
 
-const serial = async (valoresTemperatura, valoresUmidade) => {
+// função para comunicação serial
+const serial = async (
+    valoresTemperatura,
+    valoresUmidade,
+) => {
+
     // conexão com o banco de dados MySQL
-    let poolBancoDados = mysql.createPool({
-        host: '192.168.56.1', // ip da máquina da Eduarda
-        user: 'root',
-        password: 'dudadias',
-        database: 'queijoNoPontoDB',
-        port: 3306 // porta que faz conexão com a máquina virtual
+    let poolBancoDados = mysql.createPool(
+        {
+            host: '192.168.56.1', /* ip da maquina da eduarda */
+            user: 'aluno',
+            password: 'Sptech#2024',
+            database: 'queijoNoPontoDB',
+            port: 3307  /* porta que faz conexão com a maquina vitual*/
     }).promise();
 
     if (SIMULACAO_ARDUINO_TEMPERATURA) {
@@ -119,15 +125,21 @@ const servidor = (valoresTemperatura, valoresUmidade) => {
     });
 };
 
-// Função principal assíncrona para iniciar a comunicação serial e o servidor web
+
+// função principal assíncrona para iniciar a comunicação serial e o servidor web
 (async () => {
-    // Arrays para armazenar os valores dos sensores
+    // arrays para armazenar os valores dos sensores
     const valoresTemperatura = [];
     const valoresUmidade = [];
 
-    // Inicia a comunicação serial
-    await serial(valoresTemperatura, valoresUmidade);
-
-    // Inicia o servidor web
-    servidor(valoresTemperatura, valoresUmidade);
+    // inicia a comunicação serial
+    await serial(
+        valoresTemperatura,
+        valoresUmidade
+    );
+    // inicia o servidor web
+    servidor(
+        valoresTemperatura,
+        valoresUmidade
+    );
 })();

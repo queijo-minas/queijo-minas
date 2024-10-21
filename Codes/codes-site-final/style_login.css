@@ -1,9 +1,12 @@
-/* Adicionar aqui toda a estilização criada para sua aplicação. */
-/* Importando fontes do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
-
-
+/* bloco para personalizar a página toda */
+* {
+  padding: 0; /* Remove espaçamento interno */
+  margin: 0; /* Remove espaçamento externo */
+  box-sizing: border-box; /* Define a box model para incluir borda e padding no tamanho do elemento */
+  font-family: "Poppins", sans-serif; /* Define a fonte padrão para o site */
+}
 /* bloco de criação de variavéis para padronização */
 :root {
   /* Cores */
@@ -225,11 +228,10 @@ body {
 
 
 .login .container .card-login  {
-    
     height: 480px;
-    width: 750px;
+    width: 450px;
     border-radius:20px;
-    background-color: #faf4f5;
+    background-color: #faf4f5d7;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -274,7 +276,7 @@ h2::after {
 .formulario {
     display:flex;
     align-items: center;
-    width: 80%;
+    width: 90%;
     flex-direction: column;
     justify-content: center
     
@@ -291,25 +293,19 @@ h2::after {
 }
 
 .campo input {
-    margin:15px;
+    margin:5px;
     border: 0.1px solid #897954;
     border-radius:15px;
-
     width: 65%;
-    height: 30px;
-  
+    height: 40px;
     text-align: left;
 
 }
 
 .formulario .botao {
-
-
-
-
     margin-top: 30px; /* Margem superior de 30px */
     display: inline-block; /* Exibe o botão como um elemento inline-block */
-    padding: 15px 30px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
+    padding: 10px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
     font-size: 18px; /* Tamanho da fonte */
     color: #fff; /* Cor branca */
     background-color: var(--amber-orange); /* Fundo laranja */
@@ -318,8 +314,14 @@ h2::after {
     cursor: pointer; /* Mostra o cursor de clique */
     text-decoration: none; /* Remove a sublinha de links */
     transition: 0.3s ease; /* Transição suave ao passar o mouse */
+  
   }
 
+  .botao{
+    width: 220px;
+    text-align: center;
+    font-weight: var(--font-weight-bold);
+  }
 
   /* Muda a cor e o fundo do botão ao passar o mouse sobre ele */
   .formulario .botao:hover {
@@ -336,17 +338,22 @@ h2::after {
   
      
 
-.campo span {
-    color: var(--secondary-color);
+.campo span, a {
+    padding-top: 20px;
+    color: var(--black-color);
     font-weight: bold;
     align-self: center;
+    text-decoration: none;
     
 }
 
 
+a:hover{
+  color: var(--secondary-color-variacao);
 
+}
 .cadastro {
-   
+  
     width: 100%;
     background-image: url("imgs/background_cadastro.jpg");
     background-color: #00000088;
@@ -362,12 +369,11 @@ h2::after {
 
 
 .cadastro .container .card-cadastro {
-
-height: 100%;
-
-    width: 700px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 500px;
     border-radius:20px;
-    background-color: #faf4f5;
+    background-color: #faf4f5e0;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -440,14 +446,11 @@ height: 100%;
   }
 
 .formulario .botaozinho {
-
-
-
-
     margin-top: 10px; /* Margem superior de 30px */
     margin-left: 15px;
     display: inline-block; /* Exibe o botão como um elemento inline-block */
-    padding: 10px 20px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
+    padding: 10px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
+    
     font-size: 15px; /* Tamanho da fonte */
     color: #fff; /* Cor branca */
     background-color: var(--amber-orange); /* Fundo laranja */
