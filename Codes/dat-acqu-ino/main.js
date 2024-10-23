@@ -19,11 +19,11 @@ const serial = async (
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: '127.0.0.1',
-            user: 'user_insert',
+            host: '192.168.56.1', /* ip da maquina da eduarda */
+            user: 'aluno',
             password: 'Sptech#2024',
-            database: 'queijoNoPontoDB',
-            port: 3307
+            database: 'queijonopontodb',
+            port: 3307  /* porta que faz conexão com a maquina vitual*/
         }
     ).promise();
 
@@ -33,7 +33,6 @@ const serial = async (
     if (!portaArduino) {
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }
-
     // configura a porta serial com o baud rate especificado
     const arduino = new serialport.SerialPort(
         {
@@ -41,38 +40,31 @@ const serial = async (
             baudRate: SERIAL_BAUD_RATE
         }
     );
-
     // evento quando a porta serial é aberta
     arduino.on('open', () => {
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });
-
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
         const sensorTemperatura = parseInt(valores[0]);
         const sensorUmidade = parseFloat(valores[1]);
-
         // armazena os valores dos sensores nos arrays correspondentes
         valoresTemperatura.push(sensorUmidade);
         valoresUmidade.push(sensorTemperatura);
-
-        // Insere os dados no banco de dados (se habilitado)
-            if (HABILITAR_OPERACAO_INSERIR) {
-                await poolBancoDados.execute(
-                    'INSERT INTO DadosSensores (FkSensorPrateleira, umidade) VALUES (2, ?)',
-                    [sensorUmidade]
-                );
-                await poolBancoDados.execute(
-                    'INSERT INTO DadosSensores (FkSensorPrateleira, temperatura) VALUES (1, ?)',
-                    [sensorTemperatura]
-                );
-                console.log("Valores inseridos no banco: ", sensorUmidade + ", " + sensorTemperatura);
-            }
-
+        // insere os dados no banco de dados (se habilitado)
+        if (HABILITAR_OPERACAO_INSERIR) {
+            // este insert irá inserir os dados na tabela "medida"
+            await poolBancoDados.execute(
+                'INSERT INTO dadossensores (fksensorprateleira, temperatura, umidade) VALUES (101,?, ?)',
+                [sensorTemperatura, sensorUmidade]
+                // `INSERT INTO dadossensores (fksensorprateleira, temperatura) VALUES (101, ?)`,
+                // [sensorTemperatura]
+            );
+            console.log("valores inseridos no banco: ", sensorUmidade + ", " + sensorTemperatura);
+        }
     });
-
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
         console.error(`Erro no arduino (Mensagem: ${mensagem}`)
@@ -99,10 +91,10 @@ const servidor = (
     });
 
     // define os endpoints da API para cada tipo de sensor
-    app.get('/sensores/analogico', (_, response) => {
+    app.get('/dadossensores/temperatura', (_, response) => {
         return response.json(valoresTemperatura);
     });
-    app.get('/sensores/digital', (_, response) => {
+    app.get('/dadossensores/umidade', (_, response) => {
         return response.json(valoresUmidade);
     });
 }
@@ -118,7 +110,6 @@ const servidor = (
         valoresTemperatura,
         valoresUmidade
     );
-
     // inicia o servidor web
     servidor(
         valoresTemperatura,
