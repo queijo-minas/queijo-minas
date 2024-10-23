@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Dashboards | Queijo No Ponto</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <center>
+        <h1>QUEIJO NO PONTO</h1>
+        <!doctype html>
+        <html lang="pt-BR">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dashboard de Monitoramento - Queijo no Ponto</title>
+            <link rel="icon" href="imgs/logo.svg" type="image/svg+xml">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--biblioteca chart.js-->
+        </head>
+
+        <body>
+
+            <!-- <aside class="navbar">      
+            <img src="imgs/profile.webp" alt="Imagem profile">
+            <h2>Bem-vindo, Usuário!</h2>
+            <nav>
+                <a href="index.html">Página Inicial</a>
+                <a href="">Relatórios</a>
+                <a href="index.html#about">Sobre</a>
+                
+                <div class="opcoes">
+                    <span>Selecione a Prateleira:</span>
+                    <select class="custom-select">
+                        <option value="2">Prateleira 3</option>
+                        <option value="2">Prateleira 1</option>
+                        <option value="2">Prateleira 2</option>
+                        <option value="3" style="background-color: #920a0a;">Prateleira 3</option>
+                        <option value="4" style="background-color: #920a0a;">Prateleira 4</option>
+                        <option value="5">Prateleira 5</option>
+                    </select>
+                </div>
+                <a href="#">Sair</a>
+            </nav>
+    
+            <div class="logo">
+                <img clas="logo" src="imgs/logo.svg" alt="">
+            </div>
+        </aside> -->
+
+            <!--Aqui abaixo são as divs da dashboard no html
+         terminando tem a tag <canvas> que é utilizada pra ajudar a criar os gráficos-->
+
+            <div id="dashboard">
+                <div class="kpi-bar">
+                    <!-- KPI de Temperatura Média -->
+                    <div class="kpi">
+                        <div class="kpi-header">
+                            <img src="imgs/alta-temperatura-em-um-termometro.png" alt="Ícone de Temperatura">
+                            <h3>Temperatura Média</h3>
+                        </div>
+                        <p>18°C</p>
+                    </div>
+
+                    <!-- KPI de Umidade Média -->
+                    <div class="kpi">
+                        <div class="kpi-header">
+                            <img src="imgs/umidade.png" alt="Ícone de Umidade">
+                            <h3>Umidade Média</h3>
+                        </div>
+                        <p><b>90%</b></p>
+                    </div>
+
+                    <!-- KPI de Último Alerta -->
+                    <div class="kpi">
+                        <div class="kpi-header">
+                            <img src="imgs/sinal-de-aviso.png" alt="Ícone de Alerta">
+                            <h3>Último Alerta</h3>
+                        </div>
+                        <p><b>11/10/2024 17:00</b></p>
+                    </div>
+
+                    <!-- KPI de Prateleiras em Alerta -->
+                    <div class="kpi">
+                        <div class="kpi-header">
+                            <img src="imgs/sino.png" alt="Ícone de Salas em Alerta">
+                            <h3>Prateleiras em Alerta</h3>
+                        </div>
+                        <p><b>2</b></p>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- Gráficos -->
+                <div class="linha-graficos">
+                    <div class="chart-container">
+                        <canvas id="sensorTemperatura"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sensorUmidade"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+
+        // Gráfico de Temperatura
+        var sensorTemperatura = new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'], // Horários fixos
+                datasets: [
+                    {
+                        label: 'Temperatura Atual (°C)',
+                        borderColor: '#c59506',
+                        fill: true,
+                        data: [] // Dados dinâmicos de temperatura
+                    },
+                    {
+                        label: 'Média Ideal (°C)',
+                        borderColor: 'white',
+                        backgroundColor: 'white',
+                        data: [10, 10, 10, 10, 10, 10], // Linha de referência para a média
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Mínima (°C)',
+                        borderColor: '#096b21',
+                        backgroundColor: '#096b21',
+                        data: [7, 7, 7, 7, 7, 7], // Linha de referência para a mínima
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Máxima (°C)',
+                        borderColor: '#920a0a',
+                        backgroundColor: '#920a0a',
+                        data: [14, 14, 14, 14, 14, 14], // Linha de referência para a máxima
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            boxWidth: 40,
+                            color: 'white',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white' // Cor dos rótulos do eixo X
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Temperatura (°C)',
+                            color: 'white',
+                            font: { size: 12 }
+                        },
+                        ticks: {
+                            color: 'white' // Cor dos rótulos do eixo Y
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Umidade
+        var sensorUmidade = new Chart(document.getElementById('sensorUmidade').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'], // Horários fixos
+                datasets: [
+                    {
+                        label: 'Umidade Atual (%)',
+                        borderColor: '#1f78b4',
+                        fill: true,
+                        data: [] // Dados dinâmicos de umidade
+                    },
+                    {
+                        label: 'Média Ideal (%)',
+                        borderColor: 'white',
+                        backgroundColor: 'white',
+                        data: [55, 55, 55, 55, 55, 55], // Linha de referência para a média
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Mínima (%)',
+                        borderColor: '#096b21',
+                        backgroundColor: '#096b21',
+                        data: [50, 50, 50, 50, 50, 50], // Linha de referência para a mínima
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Máxima (%)',
+                        borderColor: '#920a0a',
+                        backgroundColor: '#920a0a',
+                        data: [70, 70, 70, 70, 70, 70], // Linha de referência para a máxima
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            boxWidth: 40,
+                            color: 'white',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white' // Cor dos rótulos do eixo X
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Umidade (%)',
+                            color: 'white',
+                            font: { size: 12 }
+                        },
+                        ticks: {
+                            color: 'white' // Cor dos rótulos do eixo Y
+                        }
+                    }
+                }
+            }
+        });
+                // Função para obter dados dinamicamente e atualizar os gráficos
+                var paginacao = {};
+                var tempo = {};
+
+                function obterDados(grafico, endpoint) {
+                    fetch('http://localhost:3300/dadossensores/' + endpoint)
+                        .then(response => response.json())
+                        .then(valores => {
+                            if (!paginacao[endpoint]) {
+                                paginacao[endpoint] = 0;
+                            }
+                            if (!tempo[endpoint]) {
+                                tempo[endpoint] = 0;
+                            }
+
+                            var ultimaPaginacao = paginacao[endpoint];
+                            paginacao[endpoint] = valores.length;
+                            valores = valores.slice(ultimaPaginacao);
+
+                            valores.forEach((valor) => {
+                                // Limite de 10 pontos no gráfico para manter a visualização organizada
+                                if (grafico.data.labels.length === 10 && grafico.data.datasets[0].data.length === 10) {
+                                    grafico.data.labels.shift();
+                                    grafico.data.datasets[0].data.shift();
+                                }
+
+                                // Atualizando labels e dados dinamicamente
+                                grafico.data.labels.push(tempo[endpoint]++);
+                                grafico.data.datasets[0].data.push(parseFloat(valor));
+                                grafico.update();
+                            });
+                        })
+                        .catch(error => console.error('Erro ao obter dados:', error));
+                }
+
+                // Atualizando os gráficos a cada 1 segundo
+                setInterval(() => {
+                    obterDados(sensorTemperatura, 'temperatura');
+                    obterDados(sensorUmidade, 'umidade');
+                }, 1000);
+
+
+
+                //GRÁFICO DE BARRAS DAS MÉDIAS DAS SALAS
+
+                new Chart(document.getElementById('barChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Prateleira 1', 'Prateleira 2', 'Prateleira 3', 'Prateleira 4', 'Prateleira 5'],
+                        datasets: [{
+                            label: 'Temperatura Media (°C)',
+                            backgroundColor: ['orange', 'orange', '#920a0a', '#920a0a', 'orange'],
+                            data: [10, 7, 18, 20, 13]
+                        }]
+                    },
+
+
+
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    boxWidth: 40, // altera o tamanho dos quadradinhos
+
+                                    color: 'white', // Altera a cor do texto da legenda do graf
+                                    font: {
+                                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: 'white' // Altera a cor dos rótulos do eixo X(sala1, sala2, sala3..)
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Temp Média das Prateleiras(°C)',
+                                    color: 'white'
+                                },
+                                ticks: {
+                                    color: 'white' // Altera a cor dos rótulos do eixo Y (5 graus, 10, 15,20)
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+            </script>
+        </body>
+
+        </html>

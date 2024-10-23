@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* bloco para personalizar a página toda */
+* {
+  padding: 0; /* Remove espaçamento interno */
+  margin: 0; /* Remove espaçamento externo */
+  box-sizing: border-box; /* Define a box model para incluir borda e padding no tamanho do elemento */
+  font-family: "Poppins", sans-serif; /* Define a fonte padrão para o site */
+}
+    :root {
+       /* Cores */
+  --white-color: #f5f5f5; /* Cor branca */
+  --dark-color: #030320; /* Cor escura */
+  --primary-color: #251605; /* Cor primária */
+  --secondary-color: #c59506; /* Cor secundária */
+  --secondary-color-variacao: #dfa805;
+  --light-pink-color: #faf4f5; /* Cor rosa claro */ 
+  --medium-gray-color: #ccc; /* Cinza médio */
+  --black-color: #000000;
+  --golden-yellow: #FFD700;
+  --warm-beige: #F5DEB3;
+  --soft-brown: #A0522D;
+  --dark-charcoal: #2F2F2F;
+  --cream-white: #f3f2db;
+  --amber-orange: #FFBF00;
+  --midnight-blue: #191970;
+  --dark-slate-blue: #483D8B;
+  --navy-blue: #000080;
+  --prussian-blue: #003153;
+  --indigo-dye: #00416A;
+  --oxford-blue: #002147;
+  --space-cadet: #1d2951ee;
+  --complementar: #005e96;
+  --backgroud-transparent: #00000088;
+  --bg-gradient: linear-gradient(to left,  rgb(0, 0, 69), #030320, #1a1a40, #1b1b37, #252537);
+  
+
+  /* Tamanhos de fonte */
+  --font-size-s: 0.9rem; /* Fonte pequena */
+  --font-size-n: 1rem; /* Fonte normal */
+  --font-size-m: 1.12rem; /* Fonte média */
+  --font-size-l: 1.5rem; /* Fonte grande */
+  --font-size-xl: 2rem; /* Fonte extra grande */
+  --font-size-xxl: 2.3rem; /* Fonte extra extra grande */
+
+  /* Espessuras da fonte */
+  --font-weight-normal: 400; /* Peso normal */
+  --font-weight-medium: 500; /* Peso médio */
+  --font-weight-semibold: 600; /* Peso semi-negrito */
+  --font-weight-bold: 700; /* Peso negrito */
+
+  /* Raio da borda */
+  --border-radius-s: 8px; /* Raio pequeno */
+  --border-radius-m: 30px; /* Raio médio */
+  --border-radius-circle: 50%; /* Bordas circulares */
+
+  /* Largura máxima do site */
+  --site-max-width: 1300px; /* Largura máxima do conteúdo */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #1d1103;
+        color: var(--dark-color);
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+  
+    .navbar {
+        width: 350px;
+        /* height: 900px; */
+        background-color: #351f07;
+        color:#fdfde9;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .navbar img {
+        width: 250px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .navbar .logo{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: none;
+        margin-top: 360px;
+    }
+
+    .navbar h2 {
+        font-size: 1em;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .navbar nav a {
+        color: #fdfde9;
+        text-decoration: none;
+        margin: 8px 0;
+        font-size: 0.9em;
+        display: block;
+        text-align: center;
+        padding: 6px;
+        border-radius: 5px;
+        width: 100%;
+        background-color: #4e3412;
+        cursor: pointer;
+    }
+
+    .navbar select {
+        background-color: transparent;
+        color: #ffffff;  
+        cursor: pointer;
+        background-color: #6d4816;
+        outline: none;
+        border: none;
+        padding: 4px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    .navbar nav a:hover {
+        background-color: var(--secondary-color-variacao)   ; 
+    }
+    
+    .opcoes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px; 
+        margin-top: 15px; 
+    }
+
+   
+    #dashboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        gap: 15px; 
+    }
+
+
+ 
+
+    .kpi-bar {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .kpi {
+        flex: 1;
+        padding: 5px;
+        width: 8    0px;
+        border-radius: 3px;
+        background-color: #6d4816;
+        text-align: center;
+        color: #fdfde9;
+        font-size: 0.8em;
+        max-width: 170px;
+        height: auto;
+        border-left: 5px solid #c2990c;
+    }
+
+    .kpi-header {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .kpi img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /*  Conteiner dos gráficos */
+    
+    #container-graficos{
+        width: 100%;
+        display: flex;
+        
+    }
+    
+    .linha-graficos {
+        justify-content: space-between;
+        width: 100%;
+        justify-items: center;
+       
+    }
+    #container-graficos h3{
+        color: white;
+        margin-bottom: 0;
+    }
+    .chart-container {
+        display: flex;
+        
+    }
+    .sessao-2{
+        display: flex ;
+        flex-basis: calc(50% - 5px);
+    }
+   .box{
+        max-width: 650px;
+        height: 500px;
+        margin-top: 20px;
+        background-color:#3a260b;
+        border-radius: 8px;
+        border: 5px solid #351f07;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box  
+   }
+
+    canvas {
+        width: 90% !important;
+        height: 90% !important;
+    }
+
