@@ -43,7 +43,7 @@
                 <div class="taxaPerda">
                     <p>Escolha a taxa de perda ou informe a sua:</p>
                     <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
-                        <option value="default">Usar perda padrão de 20%</option>
+                        <option value="default">Usar perda padrão de 12%</option>
                         <option value="manual">Inserir minha própria perda</option>
                     </select>
             
@@ -101,17 +101,16 @@
             // Valores padrão de taxa de perda
             let taxaPerdaMaturacao = 0.12; // 12%  na maturação
             let taxaPerdaOutros = 0.08;     // 8% perda por outros motivos
-            let taxaPerdaTotal = 0.20;      // 20% taxa de perda total
-            let porcentagemEconomia = 0.80; // 80% de economia sobre a perda na maturação
+            let porcentagemEconomia = 0.88; // 80% de economia sobre a perda na maturação
 
             // Se o usuário escolheu inserir manualmente as taxas de perda
+            
             if (document.getElementById('input_perda_opcao').value === 'manual') {
-                taxaPerdaMaturacao = Number(document.getElementById('input_perda_maturacao').value) / 100;
-                taxaPerdaOutros = Number(document.getElementById('input_perda_outros').value) / 100;
-                taxaPerdaTotal = taxaPerdaMaturacao + taxaPerdaOutros;
+                taxaPerdaMaturacao = producao * Number(input_perda_maturacao.value) / 100 ;
+                  
 
                 // A porcentagem de economia será baseada na taxa de perda na maturação
-                porcentagemEconomia = taxaPerdaMaturacao / taxaPerdaTotal;
+                porcentagemEconomia = taxaPerdaMaturacao;
             }
 
             // Calculando o lucro por Kg (valor de venda - custo de produção)
@@ -122,13 +121,13 @@
 
             if (medidaTempo === 'mensal') {
                 // Cálculos para mensal
-                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao + taxaPerdaOutros) * lucro; // Calcula a perda total mensal
-                EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia com o sistema mensal
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao) * lucro; // Calcula a perda total mensal
+                EconomiaComSistema = PerdaSemMonitoramento ; // Economia com o sistema mensal
                 periodoTexto = "mês";
             } else {
                 // Cálculos para anual (multiplicando por 12)
-                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao + taxaPerdaOutros) * lucro * 12; // Calcula a perda total anual
-                EconomiaComSistema = PerdaSemMonitoramento * porcentagemEconomia; // Economia anual
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao * lucro) * 12; // Calcula a perda total anual
+                EconomiaComSistema = PerdaSemMonitoramento ; // Economia anual
                 periodoTexto = "ano";
             }
 
@@ -141,22 +140,39 @@
         <hr>    
         <p><b>Lucro por quilo:</b> <br> <b>R$${lucro.toFixed(2)}</b></p>
         <hr>
-        <p><b>Perda total por ${periodoTexto}:</b> <br> <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b></p>
+        <p style="color: red;"><b>Perda na Fase de Maturação por ${periodoTexto}:</b> <br> <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR")}</b></p>
         
-    `;
+    `;          
 
-            const resultadoComMonitoramento = `
+    var resultadoComMonitoramento = ``
+            if(medidaTempo === 'mensal'){
+                var resultadoComMonitoramento = `
         
         <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> na maturação.</p>
         <hr>
-        <p><b>Produção ${medidaTempo}:</b><br> <b>${1.15 * (producao.toFixed(2))} kg</b> de queijo.</p>
+        <p><b>Produção ${medidaTempo}:</b><br> <b>${(1.12 * producao).toFixed(2)} kg</b> de queijo.</p>
         <hr>
         <p><b>Lucro por quilo:<b> <br><b>R$${lucro.toFixed(2)}</b></p>
         <hr>
-        <p><b>Lucro e Economia mensal:<b> <br><b>R$${((((1.15 * producao) - producao)*lucro) + EconomiaComSistema).toLocaleString("pt-BR")}</b></p>
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${((((1.12 * producao) - producao)*lucro) + EconomiaComSistema).toLocaleString("pt-BR")}</b></p>
         <hr class="bottom">
         <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
                          `;
+            }else{
+                var resultadoComMonitoramento = `
+        
+        <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2)}%</b> na maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b><br> <b>${(1.12 * producao).toFixed(2)} kg</b> de queijo.</p>
+        <hr>
+        <p><b>Lucro por quilo:<b> <br><b>R$${lucro.toFixed(2)}</b></p>
+        <hr>
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${((((1.12 * producao) - producao)*lucro ) + EconomiaComSistema).toLocaleString("pt-BR")}</b></p>
+        <hr class="bottom">
+        <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
+                         `;
+            }
+            
             
 
             // Exibindo os resultados na tela
