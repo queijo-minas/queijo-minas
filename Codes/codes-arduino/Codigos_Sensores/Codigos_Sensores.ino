@@ -44,19 +44,19 @@
       } else {
           
           //SE TUDO ESTIVE CORRETO, PRINTARÁ OS DADOS DE UMIDADE DO SENSOR DE DHT11 E DADOS DE TEMPERATURA DO SENSOR LM35 
-           Serial.print("UmidadeMin:");
-           Serial.print(80); // METRICAS DE UMIDADE MINIMA
-          Serial.print(" ");
-           Serial.print("Umidade:");
+          //  Serial.print("UmidadeMin:");
+          //  Serial.print(80); // METRICAS DE UMIDADE MINIMA
+          // Serial.print(" ");
+          //  Serial.print("Umidade:");
           Serial.print(umidade); //DADOS DO SENSOR DE UMIDADE
           Serial.print(";");
-           Serial.print("TemperaturaMáx:");
-           Serial.print(18); // METRICAS DE TEMPERATURA MAXIMA
-          Serial.print(" ");
-           Serial.print("TemperaturaMin:");
-           Serial.print(15); // METRICAS DE TEMPERATURA MINIMA 
-           Serial.print(" ");
-           Serial.print("Temperatura:");
+          //  Serial.print("TemperaturaMáx:");
+          //  Serial.print(18); // METRICAS DE TEMPERATURA MAXIMA
+          // Serial.print(" ");
+          //  Serial.print("TemperaturaMin:");
+          //  Serial.print(15); // METRICAS DE TEMPERATURA MINIMA 
+          //  Serial.print(" ");
+          //  Serial.print("Temperatura:");
           Serial.println(temperaturaCelsius); // DADOS DO SENSOR DE TEMPERATURA
       }
 
