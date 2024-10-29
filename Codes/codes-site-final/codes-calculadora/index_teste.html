@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="taxaPerda">
-                    <p>Escolha a taxa de perda ou informe a sua:</p>
+                    <p>Usar a taxa de perda padrão:</p>
                     <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
                         <option value="default">Usar perda padrão de 12%</option>
                     </select>
@@ -117,6 +117,7 @@
 
             // Calculando o lucro total
             let lucrototal = (valorKg * producao) - (GastoKg*producao)
+            let lucrototalano = lucrototal * 12
 
             // Cálculos de perda e economia com base na escolha (mensal ou anual)
             let PerdaSemMonitoramento, EconomiaComSistema, periodoTexto;
@@ -165,7 +166,7 @@
             <p><b>Lucro Total:</p> <b> <b> R$${lucrototal.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2} )}</b></p><br>
             <hr>
 
-        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${((((1.12 * producao) - GastoKg)*lucro ) + lucrototal).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${(PerdaSemMonitoramento + lucrototal).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
         <hr class="bottom">
         <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
                          `;
@@ -180,12 +181,12 @@
 
         <hr>
 
-            <p><b>Lucro Total:</p> <b> <b> R$${lucrototal.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2} )}</b></p>
+            <p><b>Lucro Total:</p> <b> <b> R$${lucrototalano.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
             <hr>
 
 
 
-        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${((((1.12 * producao) - GastoKg)*lucro ) + lucrototal).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${(PerdaSemMonitoramento + lucrototalano).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
         <hr class="bottom">
         <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
                          `;
