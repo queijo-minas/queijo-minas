@@ -115,22 +115,27 @@
             // Calculando o lucro por Kg (valor de venda - custo de produção)
             const lucro = valorKg - GastoKg;
 
-            // Calculando o lucro total
-            let lucrototal = (valorKg * producao) - (GastoKg*producao)
-
+            
             // Cálculos de perda e economia com base na escolha (mensal ou anual)
             let PerdaSemMonitoramento, EconomiaComSistema, periodoTexto;
+
+            
+            let lucrototal = (valorKg * producao) - (GastoKg*producao) // Calculando o lucro total
+
 
             if (medidaTempo === 'mensal') {
                 // Cálculos para mensal
                 PerdaSemMonitoramento = producao * (taxaPerdaMaturacao) * lucro; // Calcula a perda total mensal
                 EconomiaComSistema = PerdaSemMonitoramento ; // Economia com o sistema mensal
+                  
+            // Calculando o lucro total
+
                 periodoTexto = "mês";
             } else {
-                // Cálculos para anual (multiplicando por 12)
+                // Cálculos para anual 
                 PerdaSemMonitoramento = producao * (taxaPerdaMaturacao * lucro) ; // Calcula a perda total anual
                 EconomiaComSistema = PerdaSemMonitoramento ; // Economia anual
-                periodoTexto = "ano";
+                 periodoTexto = "ano";
             }
 
             // Atualização para exibir resultados
@@ -170,6 +175,11 @@
         <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
                          `;
             }else{
+
+                 lucrototal = (valorKg * producao * 1.12) - (GastoKg*producao*1.12) // Calculando o lucro total
+
+                
+
                 var resultadoComMonitoramento = `
         
         <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2).replace('.',',')}%</b> na maturação.</p>
