@@ -196,7 +196,7 @@ header .navbar {
 /* Define a imagem de fundo para a seção */
 #section-image {
   width: 100%; /* A largura é 100% */
-  background-image: url('imgs/salaMaturacao.png'); /* Imagem de fundo */
+  background-image: url('../imgs/salaMaturacao.png'); /* Imagem de fundo */
 }
 /* Estiliza o conteúdo textual da seção */
 .hero-section .hero-details {

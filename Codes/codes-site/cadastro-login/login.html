@@ -5,52 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title> Queijo no ponto | Login </title>
- 
-    <link rel="shortcut icon" href="imgs/logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="css/style_login.css">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="imgs/" type="image/x-icon">
+    <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <!-- Header / Navbar -->
-    <header id="scroll-element">
-        <nav class="navbar">
-            <a href="#" class="nav-logo">
-                <div>
-                    <!-- <h1>Queijo no Ponto</h1> -->
-                    <img src="imgs/logo.svg" style="height: 100px; margin-top: 10px;">
-                </div>
-            </a>
-            <ul class="nav-menu">
-                <button id="menu-close-button" class="fas fa-times"></button>
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#menu" class="nav-link">Serviços</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">Sobre</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#menu" class="nav-link">Equipe</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contato</a>
-                </li>
-                <li class="nav-item">
-                    <a href="login.html" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="cadastro-empresa.html" class="nav-link">Cadastro</a>
-                </li>
-            </ul>
-            <button id="menu-open-button" class="fas fa-bars"></button>
-        </nav>
-    </header>
     <div class="container">
         <input type="checkbox" id="flip">
         <div class="cover">
@@ -103,7 +65,7 @@
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
                                 <input id="cpf_input" type="number" placeholder="Digite seu Cpf"
-                                    onkeyup="validarCPF()" />
+                                onkeyup="validarCPF()" />
                                 <div id="validacaoCPF"></div><br>
                             </div>
                             <div class="input-box">
@@ -111,7 +73,7 @@
                                 <input type="text" placeholder="Digite seu email" required>
                             </div>
                             <div class="input-box">
-                                <img src="imgs/phone-solid.svg" style="height: 18px; width: 20px; margin-top: 2px;">
+                               <img src="imgs/phone-solid.svg" style="height: 18px; width: 20px; margin-top: 2px;">
                                 <input id="telefone_input" type="text" placeholder=" Digite seu Telefone"
                                     onkeyup="validarTelefone()" />
                                 <div id="validacaoTelefone"></div><br>
@@ -128,11 +90,6 @@
                                 <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha"
                                     onkeyup="confirmacaoSenha()" />
                                 <div id="validacaoConfirmacao"></div><br>
-                            </div>
-                            <div class="input-box">
-                                <img src="imgs/office-building_8655809.png" style="width: 32px;">
-                                <input id="telefone_input" type="text" placeholder="Código de Vínculo Empresarial" />
-
                             </div>
 
                             <!-- <div class="input-box">
@@ -165,7 +122,3 @@
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="script/script.js"></script>
-<script src="script/validacao.js"></script>
-

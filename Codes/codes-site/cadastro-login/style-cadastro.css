@@ -1,0 +1,195 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* Bloco de criação de variáveis para padronização */
+:root {
+    /* Cores */
+    --white-color: #f5f5f5;
+    --dark-color: #030320;
+    --primary-color: #251605;
+    --secondary-color: #c59506;
+    --secondary-color-variacao: #dfa805;
+    --light-pink-color: #ecebeb;
+    --medium-gray-color: #eceaea;
+    --black-color: #000000;
+    --golden-yellow: #FFD700;
+    --dark-charcoal: #2F2F2F;
+    --amber-orange: #FFBF00;
+
+    /* Tamanhos de fonte */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+  
+    /* Espessuras da fonte */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  
+    /* Raio da borda */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+}
+
+/* Reseta e configuração padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--primary-color);
+}
+
+/* Estilos do container */
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: var(--medium-gray-color);
+  padding: 25px;
+  border-radius: var(--border-radius-s);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+  font-size: var(--font-size-xl);
+  color: var(--black-color);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  position: relative;
+}
+
+.container header::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  height: 4px;
+  width: 180px;
+  background: var(--amber-orange);
+}
+
+.container .form {
+  margin-top: 30px;
+}
+
+/* Estilos dos campos de entrada */
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.input-box label {
+  color: var(--black-color);
+}
+
+.form .input-box input, .select-box {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: var(--font-size-n);
+  color: var(--dark-charcoal);
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius-s);
+  padding: 0 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos da coluna */
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+/* Estilos da seleção de gênero */
+.form .gender-box {
+  margin-top: 20px;
+}
+
+.gender-box h3 {
+  color: var(--black-color);
+  font-size: var(--font-size-n);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: 8px;
+}
+
+.form .gender-option, .gender {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+
+.form .gender {
+  column-gap: 5px;
+}
+
+.gender input {
+  accent-color: var(--secondary-color-variacao);
+}
+
+.gender label {
+  color: var(--dark-charcoal);
+  cursor: pointer;
+}
+
+/* Estilos do endereço */
+.address input, .select-box {
+  margin-top: 15px;
+}
+
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: var(--dark-charcoal);
+  font-size: var(--font-size-n);
+}
+
+/* Estilos do botão */
+.form button {
+  height: 55px;
+  width: 100%;
+  color: var(--medium-gray-color);
+  font-size: var(--font-size-n);
+  font-weight: var(--font-weight-normal);
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--secondary-color-variacao);
+  border-radius: var(--border-radius-s);
+}
+
+.form button:hover {
+  background: var(--amber-orange);
+}
+
+/* Responsividade */
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+
+  .gender-option, .gender {
+    row-gap: 15px;
+  }
+}
