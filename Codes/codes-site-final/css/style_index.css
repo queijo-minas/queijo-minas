@@ -615,7 +615,7 @@ header .navbar {
   }
   .navbar :is(#menu-open-button, #menu-close-button) {
     font-size: var(--font-size-l);
-
+    padding-right: 15px;
     display: block;
   }
   .navbar :is(#menu-open-button, #menu-close-button):hover {
