@@ -57,13 +57,13 @@ create table usuario(
 
 create table localmaturacao (
     idlocalmaturacao int auto_increment primary key,
-    nomelocal varchar(100), -- nome do local de maturação (ex: "sala de maturação 1")
-    descricaolocal varchar(255), -- descrição do local
-    temperaturaideal decimal(5,2), -- temperatura ideal para maturação
-    umidadeideal decimal(5,2), -- umidade ideal para maturação
-    capacidadeprateleiras int, -- número de prateleiras na sala
+    nomelocal varchar(100), 
+    descricaolocal varchar(255), 
+    temperaturaideal decimal(5,2), 
+    umidadeideal decimal(5,2), 
+    capacidadeprateleiras int, 
     fkempresa int unique,
-    foreign key (fkempresa) references empresa(idempresa) -- relaciona com a empresa que possui o local
+    foreign key (fkempresa) references empresa(idempresa) 
 )auto_increment=101;
 
 create table localmaturacaousuario (
@@ -78,20 +78,20 @@ create table localmaturacaousuario (
 
 create table prateleira (
     idprateleira int auto_increment primary key,
-    identificacaoprateleira varchar(50), -- identificação única da prateleira (ex: "prateleira a1", "prateleira b3")
-    capacidademaxima int, -- capacidade máxima de queijos na prateleira
-    altura decimal(5,2), -- altura da prateleira na sala (em metros)
-    largura decimal(5,2), -- largura da prateleira (em metros)
-    profundidade decimal(5,2), -- profundidade da prateleira (em metros)
-    quantidadetotal int, -- quantidade total desse tipo de sensor
-	fklocalmaturacao int, -- relaciona a prateleira com o local de maturação
+    identificacaoprateleira varchar(50),
+    capacidademaxima int,
+    altura decimal(5,2), 
+    largura decimal(5,2), 
+    profundidade decimal(5,2), 
+    quantidadetotal int, 
+	fklocalmaturacao int, 
     foreign key (fklocalmaturacao) references localmaturacao(idlocalmaturacao)
 )auto_increment=101;
 
 create table sensorprateleira (
     idsensorprateleira int primary key auto_increment,
     nivelprateleira int,
-    datainstalacao date, -- data de instalação do sensor
+    datainstalacao date, 
     quantidadetotal int,
 	fkprateleira int,
     foreign key (fkprateleira) references prateleira(idprateleira)
@@ -99,10 +99,10 @@ create table sensorprateleira (
 
 create table tiposensor (
     idsensor int auto_increment,
-    nome varchar(45) not null, -- nome do sensor (lm35, dht11)
+    nome varchar(45) not null, 
     constraint chknome check (nome in('lm35', 'dht11')),
-    tipo varchar(45) not null, -- tipo de grandeza medida (temperatura, umidade)
-    unidademedida varchar(5) not null, -- unidade de medida (°c, %)
+    tipo varchar(45) not null, 
+    unidademedida varchar(5) not null, 
     fksensorprateleira int,
     primary key (idsensor, fksensorprateleira),
 	foreign key (fksensorprateleira) references sensorprateleira (idsensorprateleira)
@@ -111,20 +111,20 @@ create table tiposensor (
 create table dadossensores (
     iddadossensor int auto_increment,
 	fksensorprateleira int, 
-    datahora timestamp default current_timestamp, -- armazena o momento da leitura
-    temperatura decimal(5,2), -- armazena a temperatura coletada
-    umidade decimal(5,2), -- armazena a umidade coletada
+    datahora timestamp default current_timestamp, 
+    temperatura decimal(5,2), 
+    umidade decimal(5,2), 
     primary key (iddadossensor, fksensorprateleira),
-    foreign key (fksensorprateleira) references sensorprateleira(idsensorprateleira) -- relaciona com o sensor de temperatura
+    foreign key (fksensorprateleira) references sensorprateleira(idsensorprateleira) 
 )auto_increment=101;
 
 create table alertasensor (
     idalertasensor int auto_increment,
-    datahora timestamp default current_timestamp, -- data e hora do alerta
-    tipoalerta varchar(50), -- ex: "temperatura alta", "umidade baixa"
+    datahora timestamp default current_timestamp,
+    tipoalerta varchar(50), 
     descricaoalerta varchar(255),
-	valorminimo decimal(5,2), -- faixa mínima de operação
-    valormaximo decimal(5,2), -- faixa máxima de operação
+	valorminimo decimal(5,2), 
+    valormaximo decimal(5,2), 
 	fksensorprateleira int,
     primary key (idalertasensor, fksensorprateleira),
     foreign key (fksensorprateleira) references sensorprateleira(idsensorprateleira)
