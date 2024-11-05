@@ -1,0 +1,7 @@
+Sugestões da professora Vivian para Banco de Dados:
+
+- Adicionar campo "Prateleira" na tabela "Estante" sem ser uma fk, mas sim um campo comum. Fazer um check limitando à 'a, b, c...'
+
+- Não tirar a tabela "alerta sensor"
+
+- Faremos um join importante com as tabelas 'usuário', 'local maturação' e 'sensor'.
