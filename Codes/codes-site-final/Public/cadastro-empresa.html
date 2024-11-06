@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <!-- Header / Navbar -->
+   
     <header id="scroll-element">
         <nav class="navbar">
             <a href="#" class="nav-logo">
@@ -50,11 +50,16 @@
             <div class="column">
                 <div class="input-box">
                     <label>Número de Telefone</label>
-                    <input type="tel" placeholder="Digite o número de telefone" required />
+                    <input type="tel"  id="telefone_input" placeholder="Digite o número de telefone" required />
                 </div>
                 <div class="input-box">
                     <label>CNPJ:</label>
                     <input id="cnpj_input" type="text" placeholder="Digite seu CNPJ" onkeyup="validarCNPJ()" />
+                    <div id="validacaoCNPJ"></div>
+                </div>
+                <div class="input-box">
+                    <label>CPF:</label>
+                    <input id="cpf_input" type="text" placeholder="Digite seu cpf" />
                     <div id="validacaoCNPJ"></div>
                 </div>
             </div>
@@ -105,15 +110,20 @@
                     <div id="validacaoSenha"></div>
                 </div>
                 <div class="input-box">
+                    <label>Email:</label>
+                    <input id="email_input" type="email" placeholder="Digite o email da empresa" required />
+                </div>
+                
+                <div class="input-box">
                     <button class="botaozinho" type="button" onclick="gerarSenha()">Gerar Senha</button>
                 </div>
                 <div id="validacaoConfirmacao"></div>
             </div>
-            <button type="submit">Enviar</button>
+            <button type="button" onclick="cadastrarEmpresa()">Enviar</button>
         </form>
     </section>
 
-    <!-- Scripts -->
+ 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script/validacao.js"></script>
     <script src="script/script.js"></script>

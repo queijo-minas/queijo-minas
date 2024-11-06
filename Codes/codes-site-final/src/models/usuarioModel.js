@@ -30,51 +30,51 @@ module.exports = {
 };
 */
 
-var usuarioModel = require("../models/usuarioModel");
+const database = require("../database/config");
 
-function autenticar(req, res) {
-    var email = req.body.emailServer;  
-    var senha = req.body.senhaServer;
+function autenticar(email, senha) {
+    console.log("ACESSEI O USUARIO MODEL para autenticação.");
 
-    if (!email) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (!senha) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else {
-        usuarioModel.autenticar(email, senha)
-            .then(function (resultadoAutenticar) {
-                if (resultadoAutenticar.length == 1) {
-                    res.json({
-                        id: resultadoAutenticar[0].id,
-                        email: resultadoAutenticar[0].email,
-                        nome: resultadoAutenticar[0].nome
-                    });
-                } else if (resultadoAutenticar.length == 0) {
-                    res.status(403).send("Email e/ou senha inválido(s)");
-                } else {
-                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                }
-            }).catch(function (erro) {
-                console.log("Erro na autenticação:", erro);
-                res.status(500).json(erro.sqlMessage);
-            });
-    }
+    const instrucaoSql = `
+        SELECT idUsuario AS id, nome, login.email, fkEmpresa AS empresaId 
+        FROM usuario 
+        INNER JOIN login ON usuario.fkLogin = login.idLogin
+        WHERE login.email = '${email}' AND login.senhaUsuario = '${senha}';
+    `;
+
+    console.log("Executando a instrução SQL de autenticação: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
-function cadastrar(req, res) {
-    var { razaoSocialServer: razaoSocial, nomeFantasiaServer: nomeFantasia, emailServer: email, senhaServer: senha, representanteServer: representante, cnpjServer: cnpj } = req.body;
+function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa) {
+    console.log("Iniciando cadastro do usuário e login.");
 
-    if (!razaoSocial || !nomeFantasia || !email || !senha || !representante || !cnpj) {
-        res.status(400).send("Todos os campos obrigatórios devem ser preenchidos!");
-    } else {
-        usuarioModel.cadastrar(razaoSocial, nomeFantasia, email, senha, representante, cnpj)
-            .then(function (resultado) {
-                res.json(resultado);
-            }).catch(function (erro) {
-                console.log("Erro no cadastro:", erro);
-                res.status(500).json(erro.sqlMessage);
-            });
-    }
+    
+    const instrucaoLogin = `
+        INSERT INTO login (email, senhaUsuario) VALUES ('${email}', '${senha}');
+    `;
+
+    console.log("Executando a inserção no login: \n" + instrucaoLogin);
+
+    return database.executar(instrucaoLogin)
+        .then(result => {
+            const fkLogin = result.insertId; 
+
+            
+            const instrucaoUsuario = `
+                INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkLogin) 
+                VALUES ('${nome}', '${cpf}', '${telefone}', '${fkEmpresa}', '${fkLogin}');
+            `;
+
+            console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
+            console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, fkLogin });
+
+            return database.executar(instrucaoUsuario);
+        })
+        .catch(erro => {
+            console.error("Erro ao cadastrar usuário:", erro);
+            throw erro;
+        });
 }
 
 module.exports = {

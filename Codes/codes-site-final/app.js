@@ -1,3 +1,4 @@
+// Definindo ambiente e caminho do arquivo .env
 var ambiente_processo = 'desenvolvimento'; 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
@@ -14,29 +15,34 @@ var HOST_APP = process.env.APP_HOST || 'localhost';
 
 var app = express();
 
-// Importa as rotas
+
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-//var avisosRouter = require("./src/routes/avisos");
-//var medidasRouter = require("./src/routes/medidas");
-//var aquariosRouter = require("./src/routes/aquarios");
+// var avisosRouter = require("./src/routes/avisos");
+// var medidasRouter = require("./src/routes/medidas");
+// var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+
+
 app.use(cors());
 
-// Config das rotas
 app.use("/", indexRouter);
-app.use("/usuario", usuarioRouter);
+app.use("/usuarios", usuarioRouter);
+app.use("/empresas", empresasRouter);
+
+
+
 //app.use("/avisos", avisosRouter);
 //app.use("/medidas", medidasRouter);
 //app.use("/aquarios", aquariosRouter);
-app.use("/empresas", empresasRouter);
 
-// Inicialização do servidor
+
+
 
 
 app.listen(PORTA_APP, function () {
