@@ -22,16 +22,61 @@
 
 <script>
 
-    function validarSenha(){
-            const senha = input_senha.value 
+function validarSenha() {
+    const senha = input_senha.value;
 
-            if( senha.length >= 7 ){
-                validacaoSenha.innerHTML = `Senha Válida`
-            }else {
-                validacaoSenha.innerHTML = `Sua senha está inválida`
+    const caracterEspecial = ["!", "@", "#", "$", "%", "&", "*"];
+    const numeros = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const letraMinuscula = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"];
+    const letraMaiuscula = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+
+    const tamanhoSenha = senha.length >= 8;
+
+    let haLetrasMinusculas = false;
+    let haLetrasMaiusculas = false;
+    let haNumeros = false;
+    let haCaracteres = false;
+
+    if (tamanhoSenha) {
+        for (let caracterAtual = 0; caracterAtual < senha.length; caracterAtual++) {
+            let caracterAtual = senha[caracterAtual];
+
+            
+            if (letraMinuscula.indexOf(caracterAtual) !== -1) {
+                haLetrasMinusculas = true;
+            }
+        
+            if (letraMaiuscula.indexOf(caracterAtual) !== -1) {
+                haLetrasMaiusculas = true;
+            }
+           
+            if (numeros.indexOf(caracterAtual) !== -1) {
+                haNumeros = true;
             }
 
+           
+            if (caracterEspecial.indexOf(caracterAtual) !== -1) {
+                haCaracteres = true;
+            }
         }
+
+        
+        if (temNumero && temLetraLower && temLetraUpper && temCaracteres) {
+            validacaoSenha.innerHTML = `Sua senha é válida`;
+        } else {
+            validacaoSenha.innerHTML = `Sua senha está inválida`;
+        }
+    } else {
+        validacaoSenha.innerHTML = `Sua senha está inválida`;
+    }
+}
+
+
+          //  if( senha.length >= 7 ){
+            //    validacaoSenha.innerHTML = `Senha Válida`
+            //}else {
+             //   validacaoSenha.innerHTML = `Sua senha está inválida`
+           // }
 
     function gerarSenha(){
         var senhaAutoGerada = ``
