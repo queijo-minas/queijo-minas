@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Monitoramento - Queijo no Ponto</title>
+    <link rel="icon" href="imgs/logo.svg" type="image/svg+xml">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--biblioteca chart.js-->
+</head>
+
+<body>
+   
+    <aside class="navbar">      
+        <img src="imgs/profile.webp" alt="Imagem profile">
+        <h2>Bem-vindo, Usuário!</h2>
+        <nav>
+            <a href="index.html">Página Inicial</a>
+            <a href="">Relatórios</a>
+            <a href="index.html#about">Sobre</a>
+            
+            <a href="#">Sair</a>
+        </nav>
+
+        <div class="logo">
+            <img clas="logo" src="imgs/logo.svg" alt="">
+        </div>
+    </aside>
+
+    <!--Aqui abaixo são as divs da dashboard no html
+     terminando tem a tag <canvas> que é utilizada pra ajudar a criar os gráficos-->
+ 
+    <div id="dashboard">
+        <div class="kpi-bar">
+            
+            <div class="kpi">
+                <div class="kpi-header">
+                    
+                    <h3>Selecione a Sala de Maturação</h3>
+                </div>
+               
+            </div>
+            </div>
+
+        <div class="linha-graficos">
+            <div class="chart-container">
+             <a href="Dashboard.html">   <center><h2>Sala 1</h2></center>
+                <img src="imgs/prateleiramaturacao.jpg" style="width: 300px"></a>
+            </div>
+            <div class="chart-container">
+                <a href="Dashboard.html"> <h2>Adicionar Nova Sala</h2>
+                <div class="img-container">
+                <center><img src="imgs/add.png" style="width: 100px;"></div></center>
+            </a></div>
+            
+        </div>
+    </div>
+
+    <script>
+
+
+// CONFIGURAÇÃO DOS GRAFICOS, O PRIMEIRO É DE TEMPERATURA,
+// AQUI TÁ DEFININDO O TAMANHO, COR, OS DATASET, TEXTO, AS BORDAS, OS CONTEUDOS
+new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+        datasets: [
+            {
+                label: 'Temp Atual (°C)', 
+                borderColor: '#c59506',
+                data: [18, 16, 17, 18, 19, 17],
+                fill: true
+            },
+            {
+                label: 'Média ideal (°C)',
+                borderColor: 'white',
+                backgroundColor: 'white',
+                data: [10, 10, 10, 10, 10, 10],
+                borderDash: [10, 5],
+                fill: false,
+                borderWidth: 2  //tamanho da borda das
+            },
+            {
+                label: 'Mínima (°C)', 
+                borderColor: '#096b21',
+                backgroundColor: '#096b21',
+                data: [7, 7, 7, 7, 7, 7],
+                borderDash: [10, 5],
+                fill: false,
+                borderWidth: 2
+            },
+            {
+                label: 'Máxima (°C)', 
+                borderColor: '#920a0a',
+                backgroundColor: '#920a0a',
+                data: [14, 14, 14, 14, 14, 14],
+                borderDash: [10, 5],
+                fill: false,
+                borderWidth: 2
+            }
+
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    boxWidth: 40, // Ddiminui o tamanho dos quadradinhos
+                    color: 'white', // Altera a cor do texto da legenda do graf
+                    font: {
+                        size: 12// Ajusta o tamanho do texto da legenda do frafico
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo X
+                }
+            },
+            y: { 
+                beginAtZero: false, 
+                title: { 
+                    display: true, 
+                    text: 'Temperatura (°C)', 
+                    color: 'white',
+                    font: {
+                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
+                    } 
+                },
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo Y
+                }
+            }
+        }
+    }
+});
+   
+
+
+//GRAFICO DE UMIDADE DE LINHA:
+
+        new Chart(document.getElementById('sensorUmidade').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+                datasets: [
+                    {
+                        label: 'Umidade (%)',
+                        borderColor: '#030320',
+                        data: [90, 95, 89, 92, 100, 98],
+                        fill: true
+                    },
+                    {
+                        label: 'Média Ideal (%)',
+                        borderColor: 'white',
+                        backgroundColor: 'white',
+                        data: [80, 80, 80, 80, 80, 80],
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2 
+                    },
+                    {
+                        label: 'Mínima (%)',
+                        borderColor: '#096b21',
+                        backgroundColor: '#096b21',
+                        data: [75, 75, 75, 75, 75, 75],
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth: 2 
+                    },
+                    {
+                        label: 'Máxima (%)',
+                        borderColor: '#920a0a',
+                        backgroundColor: '#920a0a',
+                        data: [95, 95, 95, 95, 95, 95],
+                        borderDash: [10, 5],
+                        fill: false,
+                        borderWidth : 2 //  
+                    }
+                ]
+            },
+            options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    boxWidth: 40, // Ddiminui o tamanho dos quadradinhos
+                    color: 'white', // Altera a cor do texto da legenda do graf
+                    font: {
+                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo X
+                }
+            },
+            y: { 
+                beginAtZero: false,   //aqui é pra definir se começa em zero, coloquei false no graf de umidade
+                title: { 
+                    display: true, 
+                    text: 'Umidade (%)', 
+                    color: 'white' 
+                },
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo Y
+                }
+            }
+        }
+    }
+});
+   
+
+
+
+
+ //GRÁFICO DE BARRAS DAS MÉDIAS DAS SALAS
+
+        new Chart(document.getElementById('barChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Prateleira 1', 'Prateleira 2', 'Prateleira 3', 'Prateleira 4', 'Prateleira 5'],
+                datasets: [{
+                    label: 'Temperatura Media (°C)',
+                    backgroundColor: ['orange', 'orange', '#920a0a', '#920a0a', 'orange'],
+                    data: [10, 7, 18, 20, 13]
+                }]
+            },
+
+
+
+            options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    boxWidth: 40, // altera o tamanho dos quadradinhos
+                   
+                    color: 'white', // Altera a cor do texto da legenda do graf
+                    font: {
+                        size: 12 // Ajusta o tamanho do texto da legenda do frafico
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo X(sala1, sala2, sala3..)
+                }
+            },
+            y: { 
+                beginAtZero: true, 
+                title: { 
+                    display: true, 
+                    text: 'Temp Média das Prateleiras(°C)', 
+                    color: 'white' 
+                },
+                ticks: {
+                    color: 'white' // Altera a cor dos rótulos do eixo Y (5 graus, 10, 15,20)
+                }
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+        /*          function obterDados(grafico, endpoint) {
+            fetch('http://localhost:3300/sensores/' + endpoint)
+                .then(response => response.json())
+                .then(valores => {
+                    if (paginacao[endpoint] == null) {
+                        paginacao[endpoint] = 0;
+                    }
+                    if (tempo[endpoint] == null) {
+                        tempo[endpoint] = 0;
+                    }
+
+                    var ultimaPaginacao = paginacao[endpoint];
+                    paginacao[endpoint] = valores.length;
+                    valores = valores.slice(ultimaPaginacao);
+
+                    valores.forEach((valor) => {
+                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                            grafico.data.labels.shift();
+                            grafico.data.datasets[0].data.shift();
+                        }
+
+                        grafico.data.labels.push(tempo[endpoint]++);
+                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        grafico.update();
+                    });
+                })
+                .catch(error => console.error('Erro ao obter dados:', error));
+        }
+
+        setInterval(() => {
+            obterDados(sensorTemperatura, 'temperatura');
+            obterDados(sensorUmidade, 'umidade');
+        }, 1000); */
+    </script>
+</body>
+</html>
+
+<style>
+    :root {
+        --white-color: #c59506;
+        --dark-color: #030320;
+        --primary-color: #bda859;
+        --secondary-color: #1b03a2;
+        --light-pink-color: #faf4f5;
+        --medium-gray-color: #ccc;
+        --navy-blue: #030320;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #1d1103;
+        color: var(--dark-color);
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color:#c2990c;
+    }
+  
+    .navbar {
+        width: 240px;
+        height: 130vh;
+        background-color: #351f07;
+        color:#fdfde9;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .navbar img {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .navbar .logo{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: none;
+        margin-top: 360px;
+    }
+
+    .navbar h2 {
+        font-size: 1em;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .navbar nav a {
+        color: #fdfde9;
+        text-decoration: none;
+        margin: 8px 0;
+        font-size: 0.9em;
+        display: block;
+        text-align: center;
+        padding: 6px;
+        border-radius: 5px;
+        width: 100%;
+        background-color: #4e3412;
+        cursor: pointer;
+    }
+
+    .navbar select {
+        background-color: transparent;
+        color: #ffffff;  
+        cursor: pointer;
+        background-color: #6d4816;
+        outline: none;
+        border: none;
+        padding: 4px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    .navbar nav a:hover {
+        background-color: #6d4816; 
+    }
+    
+    .opcoes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px; 
+        margin-top: 15px; 
+    }
+
+   
+    #dashboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        gap: 25px; 
+    }
+
+
+ 
+
+    .kpi-bar {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .kpi {
+        flex: 1;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #6d4816;
+        text-align: center;
+        color: #fdfde9;
+        font-size: 0.8em;
+        max-width: 170px;
+        height: auto;
+        border-left: 5px solid #c2990c;
+    }
+
+    .kpi-header {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .kpi img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .linha-graficos {
+        display: flex;
+        gap: 30px;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+
+    /*  Conteiner dos gráficos */
+    .chart-container {
+    flex-basis: calc(45% - 20px);
+    max-width: 480px;
+    background-color: #3a260b;
+    border-radius: 10px;
+    border: 5px solid #351f07;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out; /* Efeito de zoom */
+}
+
+.chart-container:hover {
+    transform: scale(1.05); /* Aumenta o tamanho da caixa ao passar o mouse */
+}
+
+    canvas {
+        width: 90% !important;
+        height: 90% !important;
+    }
+
+
+
+
+</style>
