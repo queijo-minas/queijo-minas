@@ -519,3 +519,18 @@ new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
 
 
 </style>
+<script>
+
+    const nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+    const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
+    
+    
+    const mensagemBemVindo = nomeFantasia
+      ? `Bem-vindo, ${nomeUsuario} da empresa ${nomeFantasia}!`
+      : `Bem-vindo, ${nomeUsuario}!`;
+    
+    
+    document.querySelector(".navbar h2").textContent = mensagemBemVindo;
+    
+    </script>
+    

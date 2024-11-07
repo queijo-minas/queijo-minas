@@ -171,182 +171,205 @@ function validarTelefone(){
 
   // login e cadastro do usu fetch e validçpoes:
 
+
 function cadastrarUsuario() {
-  const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value;
-  const cpfVar = cpf_input.value;
-  const emailVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu email']").value;
-  const telefoneVar = telefone_input.value;
-  const senhaVar = document.querySelector(".signup-form .input-box input[placeholder='Digite sua senha']").value;
-  const confirmacaoSenhaVar = confirmacao_senha_input.value;
-  const codigoVinculoVar = codigo_input.value;
+    const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value;
+    const cpfVar = cpf_input.value;
+    const emailVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu email']").value;
+    const telefoneVar = telefone_input.value;
+    const senhaVar = document.querySelector(".signup-form .input-box input[placeholder='Digite sua senha']").value;
+    const confirmacaoSenhaVar = confirmacao_senha_input.value;
+    const codigoVinculoVar = codigo_input.value;
 
   
-  if (!nomeVar || !cpfVar || !emailVar || !telefoneVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar) {
-      alert("Por favor, preencha todos os campos obrigatórios.");
-      return false;
-  }
+    if (!nomeVar || !cpfVar || !emailVar || !telefoneVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return false;
+    }
 
+    if (cpfVar.length !== 11) {
+        alert("CPF inválido. O CPF precisa ter exatamente 11 dígitos.");
+        validacaoCPF.innerHTML = "CPF inválido";
+        return false;
+    } else {
+        validacaoCPF.innerHTML = "CPF válido";
+    }
+
+
+    if (senhaVar.length < 6) {
+        alert("A senha deve ter no mínimo 6 caracteres.");
+        validacaoSenha.innerHTML = "Senha fraca";
+        return false;
+    } else {
+        validacaoSenha.innerHTML = "Senha forte";
+    }
+
+  
+    if (senhaVar !== confirmacaoSenhaVar) {
+        alert("As senhas não coincidem.");
+        return false;
+    }
+
+
+    console.log({
+        nomeServer: nomeVar,
+        cpfServer: cpfVar,
+        emailServer: emailVar,
+        telefoneServer: telefoneVar,
+        senhaServer: senhaVar,
+        codigoVinculoServer: codigoVinculoVar,
+    });
+    
+
+    // Envia os dados usando fetch
+    fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeServer: nomeVar,
+            cpfServer: cpfVar,
+            emailServer: emailVar,
+            telefoneServer: telefoneVar,
+            senhaServer: senhaVar,
+            codigoVinculoServer: codigoVinculoVar,
+        }),
+    })
+    .then((resposta) => {
+        if (resposta.ok) {
+            alert("Cadastro realizado com sucesso! Redirecionando para o login...");
+            setTimeout(() => window.location = "login.html", 2000);
+        } else {
+            alert("Houve um erro ao tentar realizar o cadastro.");
+        }
+    })
  
-  if (cpfVar.length !== 11) {
-      alert("CPF inválido. O CPF precisa ter exatamente 11 dígitos.");
-      validacaoCPF.innerHTML = "CPF inválido";
-      return false;
-  } else {
-      validacaoCPF.innerHTML = "CPF válido";
-  }
 
- 
-  if (senhaVar.length < 6) {
-      alert("A senha deve ter no mínimo 6 caracteres.");
-      validacaoSenha.innerHTML = "Senha fraca";
-      return false;
-  } else {
-      validacaoSenha.innerHTML = "Senha forte";
-  }
+    .catch((erro) => {
+        console.error("Erro ao cadastrar usuário:", erro);
+        res.status(500).json({ erro: erro.message });
+    });
+    
 
-  
-  if (senhaVar !== confirmacaoSenhaVar) {
-      alert("As senhas não coincidem.");
-      return false;
-  }
-
-
-  console.log({
-      nomeServer: nomeVar,
-      cpfServer: cpfVar,
-      emailServer: emailVar,
-      telefoneServer: telefoneVar,
-      senhaServer: senhaVar,
-      codigoVinculoServer: codigoVinculoVar,
-  });
-  
-
-  // Envia os dados usando fetch
-  fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-          nomeServer: nomeVar,
-          cpfServer: cpfVar,
-          emailServer: emailVar,
-          telefoneServer: telefoneVar,
-          senhaServer: senhaVar,
-          codigoVinculoServer: codigoVinculoVar,
-      }),
-  })
-  .then((resposta) => {
-      if (resposta.ok) {
-          alert("Cadastro realizado com sucesso! Redirecionando para o login...");
-          setTimeout(() => window.location = "login.html", 2000);
-      } else {
-          alert("Houve um erro ao tentar realizar o cadastro.");
-      }
-  })
-
-
-  .catch((erro) => {
-      console.error("Erro ao cadastrar usuário:", erro);
-      res.status(500).json({ erro: erro.message });
-  });
-  
-
-  return false;
+    return false;
 
 
 
-  
+    
 }
 
 
 function cadastrarEmpresa() {
-  const razaoSocial = razao_input.value;
-  const nomeFantasia = nome_input.value;
-  const cnpj = cnpj_input.value;
-  const telefone = telefone_input.value;
-  const representanteLegal = representante_input.value;
-  const email = email_input.value;
-  const cpf = cpf_input.value;
-  const senhaEmpresa = senha_input.value;
+    const razaoSocial = razao_input.value;
+    const nomeFantasia = nomeFantasia_input.value;
+    const cnpj = cnpj_input.value;
+    const telefone = telefone_input.value;
+    const representanteLegal = representante_input.value;
+    const email = email_input.value;
+    const cpf = cpf_input.value;
+    const senhaEmpresa = senha_input.value;
 
-  if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
-      alert("Por favor, preencha todos os campos obrigatórios.");
-      return false;
-  }
+    if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return false;
+    }
 
-  fetch("http://localhost:3333/empresas/cadastrar", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-          razaoSocial,
-          nomeFantasia,
-          cnpj,
-          telefone,
-          representanteLegal,
-          email,
-          cpfRepresentante: cpf,
-          senhaEmpresa
-      }),
-  })
-  .then((resposta) => {
-      if (resposta.ok) {
-          alert("Cadastro de empresa realizado com sucesso!");
-      } else {
-          alert("Houve um erro ao tentar realizar o cadastro.");
-      }
-  })
-  .catch((erro) => {
-      console.error("Erro:", erro);
-      alert("Erro ao realizar o cadastro da empresa.");
-  });
 
-  return false; 
+
+    
+    fetch("http://localhost:3333/empresas/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            razaoSocial,
+            nomeFantasia,
+            cnpj,
+            telefone,
+            representanteLegal,
+            email,
+            cpfRepresentante: cpf,
+            senhaEmpresa
+        }),
+    })
+    .then((resposta) => {
+        if (resposta.ok) {
+            
+
+            resposta.json().then(json => {
+              
+                sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia)
+                alert("Cadastro de empresa realizado com sucesso!")  
+                window.location = "/login.html";
+               
+            });
+            
+          
+        } else {
+            alert("Houve um erro ao tentar realizar o cadastro.");
+        }
+    })
+    .catch((erro) => {
+        console.error("Erro:", erro);
+        alert("Erro ao realizar o cadastro da empresa.");
+    });
+
+    return false; 
 }
 
 
 function entrar() {
-  var emailVar = login_email.value;
-  var senhaVar = login_senha.value;
+    var emailVar = login_email.value;
+    var senhaVar = login_senha.value;
 
-  if (emailVar === "" || senhaVar === "") {
-      alert("Preencha todos os campos.");
-      return false;
-  }
+    if (emailVar === "" || senhaVar === "") {
+        alert("Preencha todos os campos.");
+        return false;
+    }
 
-  fetch("/usuarios/autenticar", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          emailServer: emailVar,
-          senhaServer: senhaVar
-      })
-  }).then(function (resposta) {
-      if (resposta.ok) {
-          resposta.json().then(json => {
-             
-              sessionStorage.setItem("EMAIL_USUARIO", json.email);
-              sessionStorage.setItem("NOME_USUARIO", json.nome);
-              sessionStorage.setItem("ID_USUARIO", json.id);
 
-             
-              window.location.href = "/Dashboard.html"; 
-          });
-      } else {
-          resposta.text().then(texto => {
-              console.error(texto);
-              alert("Erro ao tentar realizar o login: " + texto);
-          });
-      }
-  }).catch(function (erro) {
-      console.error(erro);
-      alert("Erro ao realizar o login.");
-  });
 
-  return false;
+
+
+
+
+    fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
+        })
+    })
+    .then(resposta => {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                console.log("Dados recebidos na autenticação:", json);
+                sessionStorage.setItem("NOME_USUARIO", json.nome);
+
+                if (json.nomeFantasia) {
+                    sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                } else {
+                    sessionStorage.removeItem("NOME_EMPRESA"); 
+                }
+
+                window.location = "/Dashboard.html";
+            });
+        } else {
+            resposta.text().then(texto => {
+                alert("Erro ao tentar realizar o login: " + texto);
+            });
+        }
+    })
+    .catch(erro => {
+        console.error("Erro ao realizar o login:", erro);
+        alert("Erro ao realizar o login.");
+    });
+
+    return false;
 }
 

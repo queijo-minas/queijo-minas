@@ -26,7 +26,6 @@ function cadastrar(razaoSocial, cnpj) {
 
 module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };  */
 
-
 var database = require("../database/config");
 
 function buscarPorId(id) {
