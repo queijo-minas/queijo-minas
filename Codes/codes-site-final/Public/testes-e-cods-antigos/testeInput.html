@@ -132,51 +132,39 @@ function validarSenha() {
         
     
     }
+    //fazer diferente de vazio, o arroba ser menor que o ponto e o final
+            // se há um ponto antes da última palavra (último ponto antes do final)
 
     function validarEmail() {
-    const email = input_email.value;
+    const email = input_email.value.trim();
 
-    if (email.length !== 0) {
-        var haArroba = false;
-        var haPontoAntesDoFinal = false;
-        var haPalavraFinal = false;
-
-        for (var caracterAtual = 0; caracterAtual < email.length; caracterAtual++) {
-            const caracterAtual = email[caracterAtual];
-
-
-            if (caracterAtual === '@') {
-                temArroba = true;
-            }
-//fazer diferente de vazio, o arroba ser menor que o ponto e o final
-            // se há um ponto antes da última palavra (último ponto antes do final)
-            if (caracterAtual === '.' && caracterAtual < email.length - 2 && caracterAtual > email.indexOf('@')) {
-                haPontoAntesDoFinal = true;
-
-                // ta vendo se tem letra depoos do último ponto
-                var contadorLetras = 0;
-                letrasEmail = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
-                for (var letraAtual = letraAtual + 1; letraAtual < email.length; letraAtual++) {
-                    if (letrasEmail.indexOf(email[letraAtual])) {
-                        contadorLetras++;
-                    }
-                    if (contadorLetras >= 2) {
-                        haPalavraFinal = true;
-                        if (haArroba && haPontoAntesDoFinal && haPalavraFinal) {
-                            validacaoEmail.innerHTML = `E-mail válido`;
-                            return; 
-                        }
-                    }
-                }
-            }
-        }
-
-        
+    if (email.length === 0) {
         validacaoEmail.innerHTML = `E-mail inválido`;
+        return;
+    }
+
+    const temArroba = email.includes('@');
+    const indexArroba = email.indexOf('@');
+
+    const indexPontoDepoisArroba = email.indexOf('.', indexArroba);
+    const temPontoDepoisArroba = indexPontoDepoisArroba > indexArroba;
+
+   
+    const temSufixoValido =
+        indexPontoDepoisArroba !== -1 &&
+        email.length - indexPontoDepoisArroba > 2;
+
+    if (temArroba && temPontoDepoisArroba && temSufixoValido) {
+        validacaoEmail.innerHTML = `E-mail válido`;
     } else {
         validacaoEmail.innerHTML = `E-mail inválido`;
     }
 }
+
+
+  
+
+
 
 
 /*
