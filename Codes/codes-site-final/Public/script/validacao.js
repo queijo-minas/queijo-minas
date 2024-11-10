@@ -172,39 +172,73 @@ function validarTelefone(){
   // login e cadastro do usu fetch e validçpoes:
 
 
-function cadastrarUsuario() {
-    const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value;
-    const cpfVar = cpf_input.value;
-    const emailVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu email']").value;
-    const telefoneVar = telefone_input.value;
-    const senhaVar = document.querySelector(".signup-form .input-box input[placeholder='Digite sua senha']").value;
-    const confirmacaoSenhaVar = confirmacao_senha_input.value;
-    const codigoVinculoVar = codigo_input.value;
-
+  function cadastrarUsuario() {
+    const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
+    const cpfVar = cpf_input.value.trim();
+    const emailVar = email_input.value.trim();
+    const telefoneVar = telefone_input.value.trim();
+    const senhaVar = senha_input.value.trim();
+    const confirmacaoSenhaVar = confirmacao_senha_input.value.trim();
+    const codigoVinculoVar = codigo_input.value.trim();
   
+
+    // trim remobe espaço em branco
+   
     if (!nomeVar || !cpfVar || !emailVar || !telefoneVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return false;
     }
 
-    if (cpfVar.length !== 11) {
-        alert("CPF inválido. O CPF precisa ter exatamente 11 dígitos.");
-        validacaoCPF.innerHTML = "CPF inválido";
+   
+    if (cpfVar.length !== 11 || isNaN(cpfVar)) {
+        alert("CPF inválido. O CPF precisa ter exatamente 11 números.");
         return false;
-    } else {
-        validacaoCPF.innerHTML = "CPF válido";
     }
 
-
-    if (senhaVar.length < 6) {
-        alert("A senha deve ter no mínimo 6 caracteres.");
-        validacaoSenha.innerHTML = "Senha fraca";
-        return false;
-    } else {
-        validacaoSenha.innerHTML = "Senha forte";
+    let cpfFormatado = "";
+    for (let i = 0; i < cpfVar.length; i++) {
+        if (i === 3 || i === 6) cpfFormatado += ".";
+        if (i === 9) cpfFormatado += "-";
+        cpfFormatado += cpfVar[i];
     }
+    console.log(`CPF formatado: ${cpfFormatado}`);
 
   
+    const temArroba = emailVar.indexOf("@") > 0;
+    const indexArroba = emailVar.indexOf("@");
+    const temPontoDepoisArroba = emailVar.indexOf(".", indexArroba) > indexArroba + 1;
+    const sufixoValido = emailVar.length - emailVar.lastIndexOf(".") > 2;
+
+    if (!temArroba || !temPontoDepoisArroba || !sufixoValido) {
+        alert("E-mail inválido. Certifique-se de que está no formato correto (ex: nome@dominio.com).");
+        return false;
+    }
+
+
+    const caracteresEspeciais = ["!", "@", "#", "$", "%", "&", "*"];
+    const numeros = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const letrasMinusculas = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    const letrasMaiusculas = letrasMinusculas.map((letra) => letra.toUpperCase());
+
+    let temMinuscula = false;
+    let temMaiuscula = false;
+    let temNumero = false;
+    let temEspecial = false;
+
+    for (let contador = 0; contador < senhaVar.length; contador++) {
+        const char = senhaVar[contador];
+        if (letrasMinusculas.includes(char)) temMinuscula = true;
+        if (letrasMaiusculas.includes(char)) temMaiuscula = true;
+        if (numeros.includes(char)) temNumero = true;
+        if (caracteresEspeciais.includes(char)) temEspecial = true;
+    }
+
+    if (!temMinuscula || !temMaiuscula || !temNumero || !temEspecial || senhaVar.length < 8) {
+        alert("Senha inválida. Ela deve ter no mínimo 8 caracteres, incluindo letra maiúscula, letra minúscula, número e caractere especial.");
+        return false;
+    }
+
+   
     if (senhaVar !== confirmacaoSenhaVar) {
         alert("As senhas não coincidem.");
         return false;
@@ -219,7 +253,6 @@ function cadastrarUsuario() {
         senhaServer: senhaVar,
         codigoVinculoServer: codigoVinculoVar,
     });
-    
 
     // Envia os dados usando fetch
     fetch("/usuarios/cadastrar", {
@@ -236,28 +269,141 @@ function cadastrarUsuario() {
             codigoVinculoServer: codigoVinculoVar,
         }),
     })
-    .then((resposta) => {
-        if (resposta.ok) {
-            alert("Cadastro realizado com sucesso! Redirecionando para o login...");
-            setTimeout(() => window.location = "login.html", 2000);
-        } else {
-            alert("Houve um erro ao tentar realizar o cadastro.");
-        }
-    })
- 
-
-    .catch((erro) => {
-        console.error("Erro ao cadastrar usuário:", erro);
-        res.status(500).json({ erro: erro.message });
-    });
-    
+        .then((resposta) => {
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso! Redirecionando para o login...");
+                setTimeout(() => (window.location = "login.html"), 2000);
+            } else {
+                alert("Houve um erro ao tentar realizar o cadastro.");
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao cadastrar usuário:", erro);
+            alert("Erro ao realizar o cadastro.");
+        });
 
     return false;
-
-
-
-    
 }
+
+
+
+
+
+
+function cadastrarEmpresa() {
+const razaoSocial = razao_input.value;
+const nomeFantasia = nomeFantasia_input.value;
+const cnpj = cnpj_input.value;
+const telefone = telefone_input.value;
+const representanteLegal = representante_input.value;
+const email = email_input.value;
+const cpf = cpf_input.value;
+const senhaEmpresa = senha_input.value;
+
+if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
+    alert("Por favor, preencha todos os campos obrigatórios.");
+    return false;
+}
+
+
+
+
+fetch("http://localhost:3333/empresas/cadastrar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        razaoSocial,
+        nomeFantasia,
+        cnpj,
+        telefone,
+        representanteLegal,
+        email,
+        cpfRepresentante: cpf,
+        senhaEmpresa
+    }),
+})
+.then((resposta) => {
+    if (resposta.ok) {
+        
+
+        resposta.json().then(json => {
+          
+            sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia)
+            alert("Cadastro de empresa realizado com sucesso!")  
+            window.location = "/login.html";
+           
+        });
+        
+      
+    } else {
+        alert("Houve um erro ao tentar realizar o cadastro.");
+    }
+})
+.catch((erro) => {
+    console.error("Erro:", erro);
+    alert("Erro ao realizar o cadastro da empresa.");
+});
+
+return false; 
+}
+
+function entrar() {
+var emailVar = login_email.value;
+var senhaVar =  login_senha.value;
+
+if (emailVar === "" || senhaVar === "") {
+    alert("Preencha todos os campos.");
+    return false;
+}
+
+
+
+
+
+
+
+fetch("/usuarios/autenticar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+    })
+})
+.then(resposta => {
+    if (resposta.ok) {
+        resposta.json().then(json => {
+            console.log("Dados recebidos na autenticação:", json);
+            sessionStorage.setItem("NOME_USUARIO", json.nome);
+
+           
+            if (json.nomeFantasia) {
+                sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+            } else {
+                sessionStorage.removeItem("NOME_EMPRESA"); 
+            }
+
+            window.location = "/Dashboard.html";
+        });
+    } else {
+        resposta.text().then(texto => {
+            alert("Erro ao tentar realizar o login: " + texto);
+        });
+    }
+})
+.catch(erro => {
+    console.error("Erro ao realizar o login:", erro);
+    alert("Erro ao realizar o login.");
+});
+
+return false;
+}
+
+
 
 
 function cadastrarEmpresa() {
@@ -328,10 +474,6 @@ function entrar() {
         alert("Preencha todos os campos.");
         return false;
     }
-
-
-
-
 
 
 
