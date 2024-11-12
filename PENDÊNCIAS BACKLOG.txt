@@ -3,7 +3,7 @@ PENDÊNCIAS BACKLOG
 - Criptografia de dados
 - Customização de relatório
 - Documento de mudança
-- Ferramenta de Help Desk
+- Ferramenta de Help Desk - Feito
 - Fluxograma do suporte
 - Personalização da interface
 - Recuperação de senha
