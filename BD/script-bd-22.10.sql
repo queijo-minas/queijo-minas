@@ -1,17 +1,22 @@
 create database queijonopontodb;
 use queijonopontodb;
 
-create table empresa(
-    idEmpresa int primary key auto_increment,
-    razaoSocial varchar(45),
-    nomeFantasia varchar(45),
-    cnpj char(14),
-    representanteLegal varchar(45),
-    cpf char(11),
-    email varchar(60),
-    telefone varchar(15),
-    data_cadastro timestamp default current_timestamp
-)auto_increment=101;
+
+
+
+-- Favor não alterar os campos dessa tabela empresa
+CREATE TABLE empresa (
+    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(45) NOT NULL,
+    nomeFantasia VARCHAR(45) NOT NULL,
+    cnpj CHAR(14) NOT NULL UNIQUE,
+    representanteLegal VARCHAR(45) NOT NULL,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    email VARCHAR(60) NOT NULL,
+    telefone VARCHAR(15),
+    senhaEmpresa VARCHAR(45) NOT NULL, 
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) AUTO_INCREMENT=101;
 
 create table endereco(
 	idEndereco int primary key auto_increment,
@@ -19,38 +24,50 @@ create table endereco(
 	numero char(6),
 	cidade varchar(45),
 	cep char(9),
-	fkEmpresa int unique,
+	fkEmpresa int,
 	foreign key (fkEmpresa)  references empresa(idEmpresa)
 )auto_increment=101;
 
+-- Favor não alterar os campos dessa tabela login 
 create table login(
 	idLogin int primary key auto_increment,
 	email varchar(45),
-	senha varchar(45)
+	senhaUsuario varchar(45)
 )auto_increment=101;
 
-create table usuario(
-    idUsuario int primary key auto_increment,
-    nome varchar(45),
-    cpf varchar(11) not null unique,
-    telefone varchar(15),
-    fkEmpresa int unique,
-    fkEndereco int unique,
-    fkLogin int not null,
-    foreign key (fkEmpresa) references empresa(idEmpresa),
-	foreign key (fkEndereco) references endereco(idEndereco),
-    foreign key (fkLogin) references login(idLogin)
-)auto_increment=101;
+-- ALTER TABLE login rename column senha to senhaUsuario;
+ 
+INSERT INTO login (email, senhaUsuario) VALUES ('email@example.com', 'senha123');
+
+
+DESCRIBE login;
+-- Favor não alterar os campos dessa tabela usuario 
+CREATE TABLE usuario (
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45),
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    telefone VARCHAR(15),
+    fkEmpresa INT, 
+    fkEndereco INT UNIQUE,
+    fkLogin INT NOT NULL,
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
+    FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+    FOREIGN KEY (fkLogin) REFERENCES login(idLogin)
+) AUTO_INCREMENT=101;
+
+
+
+
 
 create table localMaturacao (
     idLocalMaturacao int auto_increment primary key,
-    nomeLocal varchar(100), -- nome do local de maturação (ex: "sala de maturação 1")
-    descricaoLocal varchar(255), -- descrição do local
-    temperaturaIdeal decimal(5,2), -- temperatura ideal para maturação
-    umidadeIdeal decimal(5,2), -- umidade ideal para maturação
-    capacidadePrateleiras int, -- número de prateleiras na sala
+    nomeLocal varchar(100), 
+    descricaoLocal varchar(255), 
+    temperaturaIdeal decimal(5,2), 
+    umidadeIdeal decimal(5,2), 
+    capacidadePrateleiras int,
     fkEmpresa int unique,
-    foreign key (fkEmpresa) references empresa(idEmpresa) -- relaciona com a empresa que possui o local
+    foreign key (fkEmpresa) references empresa(idEmpresa) 
 )auto_increment=101;
 
 create table localMaturacaoUsuario (
@@ -102,7 +119,7 @@ create table dadosSensor (
     umidade decimal(5,2), -- armazena a umidade coletada
     fkSensor int, 
     primary key (idDadosSensor, fkSensor),
-    foreign key (fkSensor) references sensor (idSensor) -- relaciona com o sensor de temperatura
+    foreign key (fkSensor) references sensor (idSensor) 
 )auto_increment=101;
 
 create table alertaSensor (
@@ -118,37 +135,42 @@ create table alertaSensor (
 )auto_increment=101;
 
 -- INSERT
-insert into empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, email, telefone, data_cadastro) values
-('Queijaria do Ponto ltda.', 'Queijaria do Ponto', '12345678000101', 'Cesar Augusto', '12345678909', 'contato@queijariadoponto.com', '11988887777', '2023-11-17'),
-('Queijos da Serra ltda.', 'Queijos da Serra', '98765432000102', 'Fernando Pessoa', '98765432100', 'vendas@queijosdaserra.com', '11999996666', '2022-08-05'),
-('Laticínios Boa Vista ltda.', 'Laticínios Boa Vista', '11122233000103', 'Vivian Marques', '15975348612', 'fabrica@boavista.com', '1133221100', '2021-04-23'),
-('Delícias do Campo ltda.', 'Delícias do Campo', '44455566000104', 'Juliano Bela Vista', '74185296385', 'contato@deliciasdocampo.com', '11988776655', '2020-10-12'),
-('Queijos Artesanais ltda.', 'Queijos Artesanais', '55566677000105', 'Frizzarini Cluadio', '36925814736', 'artesanal@queijosartesanais.com', '11999885555', '2019-01-30');
+insert into empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, email, telefone, senhaEmpresa, data_cadastro) values
+('Queijos da Serra ltda.', 'Queijos da Serra', '08765432000102', 'Fernando Pessoa', '98765432100', 'vendas@queijosdaserra.com', '11999996666','senha321', '2022-08-05'),
+('Laticínios Boa Vista ltda.', 'Laticínios Boa Vista', '31122233000103', 'Vivian Marques', '15975348612', 'fabrica@boavista.com', '1133221100','senha321', '2021-04-23'),
+('Queijos Artesanais ltda.', 'Queijos Artesanais', '25566677000105', 'Frizzarini Cluadio', '36925814736', 'artesanal@queijosartesanais.com', '11999885555','senha321', '2019-01-30');
+
 
 insert into endereco (logradouro, numero, cidade, cep, fkempresa) values
 ('rua do queijo', '123', 'centro', '01001000', 101),
 ('av. da maturação', '321', 'rio', '22041010', 102),
-('estrada do leite', '55', 'campinas', '13040000', 103),
+('estrada do leite', '55', 'campinas', '13040000', 103);
+
+insert into endereco (logradouro, numero, cidade, cep, fkempresa) values
 ('rua dos fazendeiros', '88', 'sorocaba', '18035000', 104),
 ('rua do vale', '123', 'centro', '01001000', null),
 ('travessa do sabor', '22', 'belo horizonte', '30140000', 105);
 
-insert into login (email, senha) values
+insert into login (email, senhaUsuario) values
+('arthus@queijosdaserra.com', 'egitos536$55qj'),
 ('contato@queijariadoponto.com', 'contato536qj'),
-('vendas@queijosdaserra.com', 'venda246qj' ),
-('recursoshumanos@queijosdaserra.com', 'recursos536$55qj');
+('vendas@queijosdaserra.com', 'venda246qj' );
+
+
+
+
 
 insert into usuario (nome, cpf, telefone, fkEmpresa, fkEndereco, fkLogin) values
-('joão silva', '12345678901', '11987654321', 101, 103, 103),
-('maria souza', '23456789012', '11991234567', 102, 101, 101), 
-('josé ferreira', '34567890123', '11999887766', 103, 102, 102);
+('Arthur Farias', '30567890123', '02999887766', 101, 101, 101),
+('joão silva', '12345678901', '11987654321', 102, 102, 102),
+('maria souza', '23456789012', '11991234567', 103, 103, 103);
+
+
 
 insert into localmaturacao (nomeLocal, descricaoLocal, temperaturaIdeal, umidadeIdeal, capacidadePrateleiras, fkEmpresa) values
 ('sala de maturação 1', 'sala principal com 10 prateleiras para maturação de queijos', 12.5, 80.0, 10, 101),
 ('sala de maturação 2', 'sala com temperatura controlada para queijos finos', 14.0, 85.0, 8, 102),
-('sala de prateleiras externas', 'sala auxiliar para queijos de longa maturação', 10.0, 70.0, 15, 103),
-('câmara de maturação 3', 'área de controle climático avançado para produção artesanal', 13.0, 82.0, 12, 104),
-('câmara externa de maturação', 'área adicional para maturação em temperatura ambiente', 15.0, 75.0, 4, 105);
+('sala de prateleiras externas', 'sala auxiliar para queijos de longa maturação', 10.0, 70.0, 15, 103);
 
 insert into localMaturacaoUsuario (idLocalMaturacaoUsuario, dataAssociacao, fkUsuario, fkLocalMaturacao) values
 (101, '2024-09-20', 107, 101),
@@ -182,6 +204,15 @@ insert into alertaSensor (dataHora, tipoAlerta, descricaoAlerta, valorMinimo, va
 ('2023-02-25 12:05:18', 'temperatura baixa', 'a temperatura está abaixo do ideal na prateleira a2', 8, 12, 101),
 ('2024-09-14 19:22:49', 'temperatura alta', 'a temperatura está acima do ideal na prateleira b2', 11, 15, 102),
 ('2020-04-08 07:31:02', 'temperatura alta', 'a temperatura está acima do ideal na prateleira c1', 9, 13, 104);
+
+
+
+
+    SELECT usuario.idUsuario AS id, usuario.nome, login.email, empresa.nome AS empresaNome
+    FROM usuario
+    INNER JOIN login ON usuario.fkLogin = login.idLogin
+    LEFT JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
+    WHERE login.email = 'beatest2e@gmail.com' AND login.senhaUsuario = '@zzz';
 
 -- SELECT SIMPLES
 show tables;

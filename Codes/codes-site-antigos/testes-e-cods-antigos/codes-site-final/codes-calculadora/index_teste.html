@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Queijo no Ponto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.svg">
+</head>
+
+<body >
+
+    <div class="container">
+        <div id="conteudo" class="conteudo">
+            <div class="caixa">
+                <img src="logo.svg" alt="">
+
+                <div class="title">
+                    <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
+                </div>
+
+                <div class="quadro">
+                    <p>Selecione a medida de tempo da produção:</p>
+                    <select id="input_tempo_producao">
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                    <p>Produção de queijo (Kg):</p>
+                    <input type="number" id="input_producao_Kilos" placeholder="Ex: 500Kg de queijo produzido">
+                </div>
+
+                <div class="vendaKilo">
+                    <p>Valor de venda por Kg (R$):</p>
+                    <input type="number" id="input_venda_Kilo" placeholder="Ex: R$ 25,00 reais o Kg do queijo">
+                </div>
+
+                <div class="gastoKilo">
+                    <p>Gasto por Kg (R$):</p>
+                    <input type="number" id="input_gasto_por_KG" placeholder="Ex: R$ 10,00 para produzir um Kg">
+                </div>
+
+                <div class="taxaPerda">
+                    <p>Usar a taxa de perda padrão:</p>
+                    <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
+                        <option value="default">Usar perda padrão de 12%</option>
+                    </select>
+            
+                    <div class="document" id="div_perda_manual"></div>
+                    <a class="font" href="https://www.epamig.br/ilct/wp-content/uploads/2020/07/QUEIJO-MINAS-ARTESANAL-PRINCIPAIS-PROBLEMAS.pdf">Link | Queijo Minas Artesanal | Principais Problemas</a>
+                    
+                                    </div>
+                <button onclick="Calcular()">Calcular</button>
+            </div>
+        </div>
+
+        <div class="resultadosCard" id="resultadosCard" style="display:none;">
+            <div class="contentFilho">
+                <div class="contentPerda">
+                    <div class="teste">
+                        <p>Sem monitoramento</p>
+                    </div>
+                    <div id="resultadoPerda"></div>
+                </div>
+                <div class="contentEconomia">
+                    <div class="teste2">
+                        <p>Com o nosso monitoramento | Queijo no Ponto </p>
+                    </div>
+                    <div id="resultadoEconomia"></div>
+                    <div id="impactoFinal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarCamposPerda() {
+            const opcaoPerda = document.getElementById('input_perda_opcao').value;
+            const divPerdaManual = document.getElementById('div_perda_manual');
+
+            if (opcaoPerda === 'manual') {
+                divPerdaManual.innerHTML = `
+                    <p>Perda na produção (Kg):</p>
+                    <input type="number" id="input_perda_maturacao">
+                `;
+            } else {
+                divPerdaManual.innerHTML = '';
+            }
+        }
+
+        function Calcular() {
+            // Pegando a escolha de mensal ou anual
+            const medidaTempo = document.getElementById('input_tempo_producao').value;
+
+            // Pegando os valores de entrada
+            const producao = Number(document.getElementById('input_producao_Kilos').value); // Produção de queijo (em Kg)
+            const valorKg = Number(document.getElementById('input_venda_Kilo').value); // Valor de venda por Kg
+            const GastoKg = Number(document.getElementById('input_gasto_por_KG').value); // Gasto por Kg de produção
+
+            // Valores padrão de taxa de perda
+            let taxaPerdaMaturacao = 0.12; // 12%  na maturação
+            let taxaPerdaOutros = 0.08;     // 8% perda por outros motivos
+            let porcentagemEconomia = 0.88; // 80% de economia sobre a perda na maturação
+
+            // Se o usuário escolheu inserir manualmente as taxas de perda
+            
+            if (document.getElementById('input_perda_opcao').value === 'manual') {
+                taxaPerdaMaturacao = producao * Number(input_perda_maturacao.value) / 100 ;
+                  
+
+                // A porcentagem de economia será baseada na taxa de perda na maturação
+                porcentagemEconomia = taxaPerdaMaturacao;
+            }
+
+            // Calculando o lucro por Kg (valor de venda - custo de produção)
+            const lucro = valorKg - GastoKg;
+
+            
+            // Cálculos de perda e economia com base na escolha (mensal ou anual)
+            let PerdaSemMonitoramento, EconomiaComSistema, periodoTexto;
+
+            
+            let lucrototal = (valorKg * producao) - (GastoKg*producao) // Calculando o lucro total
+
+
+            if (medidaTempo === 'mensal') {
+                // Cálculos para mensal
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao) * lucro; // Calcula a perda total mensal
+                EconomiaComSistema = PerdaSemMonitoramento ; // Economia com o sistema mensal
+                  
+            // Calculando o lucro total
+
+                periodoTexto = "mês";
+            } else {
+                // Cálculos para anual 
+                PerdaSemMonitoramento = producao * (taxaPerdaMaturacao * lucro) ; // Calcula a perda total anual
+                EconomiaComSistema = PerdaSemMonitoramento ; // Economia anual
+                 periodoTexto = "ano";
+            }
+
+            // Atualização para exibir resultados
+            const resultadoSemMonitoramento = `
+       
+        <p><b>Perda estimada: </b><br> <b>${(taxaPerdaMaturacao * 100).toFixed(2).replace('.',',')}%</b> na fase de maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b> <br> <b> ${producao.toFixed(2).replace('.',',')} kg</b> de queijo.</p>
+        <hr>    
+        <p><b>Lucro por quilo:</b> <br> <b>R$${lucro.toFixed(2).replace('.',',')}</b></p>
+        <hr>
+
+            <p><b>Lucro Total:</p> <b> <b> R$${lucrototal.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2} )}</b></p><br>
+            <hr>
+
+        <p style="color: red;"><b>Perda na Fase de Maturação por ${periodoTexto}:</b> <br> <b>R$${PerdaSemMonitoramento.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2} )}</b></p>
+        
+    `;          
+
+    var resultadoComMonitoramento = ``
+            if(medidaTempo === 'mensal'){
+                var resultadoComMonitoramento = `
+        
+        <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2).replace('.',',')}%</b> na maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b><br> <b>${(1.12 * producao).toFixed(2).replace('.',',')} kg</b> de queijo.</p>
+        <hr>
+        <p><b>Lucro por quilo:<b> <br><b>R$${lucro.toFixed(2).replace('.',',')}</b></p>
+        <hr>
+          <hr>
+
+            <p><b>Lucro Total:</p> <b> <b> R$${lucrototal.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2} )}</b></p><br>
+            <hr>
+
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${(PerdaSemMonitoramento + lucrototal).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
+        <hr class="bottom">
+        <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
+                         `;
+            }else{
+
+                 lucrototal = (valorKg * producao * 1.12) - (GastoKg*producao*1.12) // Calculando o lucro total
+
+                
+
+                var resultadoComMonitoramento = `
+        
+        <p><b>Redução das perdas:</b><br><b> ${(taxaPerdaMaturacao * 100).toFixed(2).replace('.',',')}%</b> na maturação.</p>
+        <hr>
+        <p><b>Produção ${medidaTempo}:</b><br> <b>${(1.12 * producao).toFixed(2).replace('.',',')} kg</b> de queijo.</p>
+        <hr>
+        <p><b>Lucro por quilo:</b> <br><b>R$${lucro.toFixed(2).replace('.',',')}</b></p>
+
+        <hr>
+
+            <p><b>Lucro Total:</p> <b> <b> R$${lucrototal.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
+            <hr>
+
+
+
+        <p style="color: green;"><b>Lucro e Economia:<b> <br><b>R$${(PerdaSemMonitoramento + lucrototal).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2})}</b></p>
+        <hr class="bottom">
+        <a class="font" href="https://www.rmqa.com.br/wp-content/uploads/2023/12/tese_efeito_de_diferentes_condicoes_de_maturacao_nas_caracteristicas_do_queijo_minas_artesanal.pdf">Link | Mal monitoramento | Cuidados durante a cura</a>
+                         `;
+            }
+            
+            
+
+            // Exibindo os resultados na tela
+            document.getElementById('resultadosCard').style.display = 'block';
+            document.getElementById('resultadoPerda').innerHTML = resultadoSemMonitoramento;
+            document.getElementById('resultadoEconomia').innerHTML = resultadoComMonitoramento;
+        }
+
+    </script>
+</body>
+
+</html>

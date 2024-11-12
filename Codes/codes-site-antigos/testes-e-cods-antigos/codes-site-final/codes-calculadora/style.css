@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #161101;;
+}
+
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    width: 50%;
+    background-image: url('image/queijos\ na\ prateleira.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.caixa {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+.conteudo img {
+    width: 20%;
+    height: 20%;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    line-height: 35px;
+    letter-spacing: -1px;
+    font-size: 35px;
+    color: #030320;
+}
+
+.title span {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    color: rgb(117, 117, 158);
+}
+
+.quadro p {
+    font-size: 18px;
+    color: #030320;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.vendaKilo p {
+    font-size: 18px;
+    color:#030320;
+    font-weight: 500;
+    margin-top: 15px;
+    
+}
+
+.gastoKilo p {
+    font-size: 18px;
+    color: #030320;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.taxaPerda {
+    font-size: 18px;
+    color: #030320;
+    font-weight: 500;
+    margin-top: 15px;
+
+}
+
+.taxaPerda select {
+    margin-bottom: 20px;
+}
+
+.quadro input {
+    width: 100%;
+    height: 60px;
+    border: 0;
+    background-color: #ffffff07;
+    border-bottom: 2px solid rgb(117, 117, 158);
+    font-size: 20px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.vendaKilo input {
+    width: 100%;
+    height: 60px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid rgb(117, 117, 158);
+    font-size: 20px;
+    outline: none;
+    color: black;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.gastoKilo input {
+    width: 100%;
+    height: 60px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid rgb(117, 117, 158);
+    font-size: 20px;
+    outline: none;
+    color: black;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+
+.quadro input::placeholder {
+    color: #333;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+
+.vendaKilo input::placeholder {
+    color: #333;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.gastoKilo input::placeholder {
+    color:#333;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.quadro select {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    outline: none;
+    border-bottom: 2px solid rgb(117, 117, 158);
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+
+.quadro option {
+    font-size: 20px;
+    background-color: #030320;
+    color: white;
+}
+
+
+.taxaPerda select {
+    width: 100%;
+    height: 60px;
+    border: 0;
+    outline: none;
+    border-bottom: 2px solid rgb(117, 117, 158);
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.taxaPerda option {
+    font-size: 20px;
+    background-color: #030320;
+    color: white;
+}
+
+.conteudo button {
+    height: 60px;
+    height: 50px;
+    margin-top: 40px;
+    border: none;
+    outline: none;
+    background: linear-gradient(#030320, #0a0a46);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.3s;
+    border-radius: 3px;
+}
+
+button:hover {
+    color: rgb(118, 114, 182);
+}
+
+.document {
+    display: flex;
+    flex-direction: column;
+}
+
+.document input {
+    width: 100%;
+    height: 60px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid rgb(117, 117, 158);
+    font-size: 20px;
+    outline: none;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.resultadosCard {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: center;
+}
+
+.contentFilho {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 50px;
+}
+
+.contentPerda {
+    width: 100%;
+    height: 470px;
+    background-color: #ffffff;
+    padding: 20px;
+    color: #161101;
+    border-radius: 20px;
+}
+
+.contentEconomia {
+    width: 100%;
+    height: 500px;
+    background-color:#ffffff;
+    padding: 20px;
+    color: #161101;
+    border-radius: 20px;
+}
+
+.contentFilho h2 {
+    color:#ffffff;
+    font-weight: 600;
+    line-height: 35px;
+    letter-spacing: -1px;
+    font-size: 25px;
+}
+
+.teste {
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    color: #ffffff;
+    background-color: #630404;
+    border-radius: 10px;
+}
+
+#resultadoPerda  {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#resultadoPerda p {
+    line-height: 32px;
+}
+
+.teste2 {
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    color: #ffffff;
+    background-color: #030320;
+    border-radius: 10px;
+}
+
+#resultadoEconomia {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#resultadoEconomia p {
+    line-height: 32px;
+}
+
+.fonte {
+    width: 5px;
+    height: 5px;
+    color: #030320;
+}
+
+.bottom{
+    margin-bottom: 12px;
+}
+
+#resultadoEconomia .font{
+    color: #551A8B;
+    font-size: 15px;
+} 
+
+.font{
+    color: #551A8B;
+    font-size: 15px;
+    font-weight: 600;
+}
