@@ -66,55 +66,55 @@
 
 
 
-/* Comportamento do scroll suave */
-html {
-  scroll-behavior: smooth; /* Faz o scroll da página ser suave */
-}
+  /* Comportamento do scroll suave */
+  html {
+    scroll-behavior: smooth; /* Faz o scroll da página ser suave */
+  }
 
-ul {
-  list-style: none; /* Remove marcadores das listas */
-}
-a {
-  text-decoration: none; /* Remove sublinhado de links */
-}
-button {
-  cursor: pointer; /* Altera o cursor ao passar sobre o botão */
-  background: none; /* Remove cor de fundo */
-  border: none; /* Remove borda */
-}
-img {
-  width: 100%; /* Define as imagens para ocupar 100% da largura do elemento pai */
-}
-
-
+  ul {
+    list-style: none; /* Remove marcadores das listas */
+  }
+  a {
+    text-decoration: none; /* Remove sublinhado de links */
+  }
+  button {
+    cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+    background: none; /* Remove cor de fundo */
+    border: none; /* Remove borda */
+  }
+  img {
+    width: 100%; /* Define as imagens para ocupar 100% da largura do elemento pai */
+  }
 
 
 
 
 
-/* Bloco de estilização para seções e rodapé */
-:where(section, footer) .section-content {
-  margin: 0 auto; /* Centraliza o conteúdo */
-  padding: 0 20px; /* Adiciona espaçamento nas laterais */
-  max-width: var(--site-max-width); /* Define largura máxima */
-}
-/* Bloco de título das seções */
-section .section-title {
-  text-align: center; /* Centraliza o texto */
-  padding: 60px 0 100px; /* Adiciona espaçamento acima e abaixo */
-  text-transform: uppercase; /* Transforma o texto em maiúsculas */
-  font-size: var(--font-size-xl); /* Define o tamanho da fonte */
-  
-}
-section .section-title::after {
-  content: ""; /* Adiciona conteúdo vazio após o título */
-  width: 80px; /* Define largura da linha */
-  height: 5px; /* Define altura da linha */
-  display: block; /* Exibe o elemento como bloco */
-  margin: 10px auto 0; /* Adiciona margens */
-  background: var(--golden-yellow); /* Define cor da linha */
-  border-radius: var(--border-radius-s); /* Define bordas arredondadas */
-}
+
+
+  /* Bloco de estilização para seções e rodapé */
+  :where(section, footer) .section-content {
+    margin: 0 auto; /* Centraliza o conteúdo */
+    padding: 0 20px; /* Adiciona espaçamento nas laterais */
+    max-width: var(--site-max-width); /* Define largura máxima */
+  }
+  /* Bloco de título das seções */
+  section .section-title {
+    text-align: center; /* Centraliza o texto */
+    padding: 60px 0 100px; /* Adiciona espaçamento acima e abaixo */
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+    font-size: var(--font-size-xl); /* Define o tamanho da fonte */
+    
+  }
+  section .section-title::after {
+    content: ""; /* Adiciona conteúdo vazio após o título */
+    width: 80px; /* Define largura da linha */
+    height: 5px; /* Define altura da linha */
+    display: block; /* Exibe o elemento como bloco */
+    margin: 10px auto 0; /* Adiciona margens */
+    background: var(--golden-yellow); /* Define cor da linha */
+    border-radius: var(--border-radius-s); /* Define bordas arredondadas */
+  }
 
 
 
