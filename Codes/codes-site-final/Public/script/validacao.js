@@ -236,6 +236,8 @@ function tirarPontuacao(texto=''){
     }
     return textoFinal
 }
+
+var cpfFinal = null
 function validarCPF() {
     var cpf = cpf_input.value;
     var cpfSemantico = ``;
@@ -250,7 +252,7 @@ function validarCPF() {
     if (cpf.length == 11) {
         validacaoCPF.innerHTML = `<div style="color: green;">Seu CPF está válido ${cpfSemantico}</div><br>`;
         cpf_input.value = cpfSemantico;
-        var cpfFinal = cpf
+        cpfFinal = cpf
     } else {
         validacaoCPF.innerHTML = `<div style="color: red;">CPF inválido, insira apenas a quantidade correta de números (11)</div><br>`;
         cpf_input.value = cpfSemantico;
@@ -286,7 +288,7 @@ function validarCNPJ() {
 // o trim tira os espaços em branco
 function cadastrarUsuario() {
     const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
-    const cpfVar = cpfFinal.trim();
+    const cpfVar = cpfFinal;
     const emailVar = email_input.value.trim();
     const telefoneVar = telefone_input.value.trim();
     const senhaVar = senha_input.value.trim();
