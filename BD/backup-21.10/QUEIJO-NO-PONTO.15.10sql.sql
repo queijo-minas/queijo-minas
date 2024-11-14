@@ -1,4 +1,4 @@
-
+CREATE DATABASE queijoNoPontoDB;
 USE queijoNoPontoDB;
 
 CREATE TABLE empresa(
