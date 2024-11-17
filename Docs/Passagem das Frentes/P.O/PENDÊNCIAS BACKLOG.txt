@@ -1,0 +1,11 @@
+PENDÊNCIAS BACKLOG
+
+- Criptografia de dados
+- Customização de relatório
+- Documento de mudança
+- Ferramenta de Help Desk
+- Fluxograma do suporte
+- Personalização da interface
+- Recuperação de senha
+- Relatório técnico
+- Manual de instalação
