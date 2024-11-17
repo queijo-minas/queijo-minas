@@ -34,7 +34,7 @@ function cadastrar(req, res) {
   var representanteLegal = req.body.representanteLegal;
   var email = req.body.email;
   var cpf = req.body.cpfRepresentante;
-  var senhaEmpresa = req.body.senhaEmpresa;  
+  var senhaEmpresa = req.body.senhaEmpresa; 
 
   if (!cnpj || !razaoSocial || !nomeFantasia || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
       return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios para a empresa!" });

@@ -36,15 +36,18 @@ function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL para autenticação.");
 
     const instrucaoSql = `
-        SELECT idUsuario AS id, nome, login.email, fkEmpresa AS empresaId 
-        FROM usuario 
-        INNER JOIN login ON usuario.fkLogin = login.idLogin
-        WHERE login.email = '${email}' AND login.senhaUsuario = '${senha}';
-    `;
+    SELECT usuario.idUsuario AS id, usuario.nome, login.email, empresa.nomeFantasia AS nomeFantasia
+    FROM usuario
+    INNER JOIN login ON usuario.fkLogin = login.idLogin
+    LEFT JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
+    WHERE login.email = '${email}' AND login.senhaUsuario = '${senha}';
+`;
+
 
     console.log("Executando a instrução SQL de autenticação: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
 
 function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa) {
     console.log("Iniciando cadastro do usuário e login.");

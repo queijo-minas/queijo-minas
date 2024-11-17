@@ -1,9 +1,9 @@
 USE queijonopontodb;
 
--- indicar onde inicia o bloco completo.
+-- Início do bloco de comandos
 DELIMITER $$
 
--- dados simulados para os sensores LM35 e DHT11 ao longo de um dia, gerando valores a cada 30 minutos.
+-- Procedure para gerar dados simulados
 CREATE PROCEDURE GerarDadosDiarios()
 BEGIN
     DECLARE startTime DATETIME DEFAULT CURDATE();
@@ -12,7 +12,7 @@ BEGIN
     DECLARE fkSensorDHT11 INT DEFAULT 102;
 
     WHILE startTime < endTime DO
-        -- Insere dados simulados para o sensor LM35
+        -- Dados para sensor LM35
         INSERT INTO dadosSensor (datahora, temperatura, umidade, fkSensor)
         VALUES (
             startTime, 
@@ -21,7 +21,7 @@ BEGIN
             fkSensorLM35
         );
 
-        -- Insere dados simulados para o sensor DHT11
+        -- Dados para sensor DHT11
         INSERT INTO dadosSensor (datahora, temperatura, umidade, fkSensor)
         VALUES (
             startTime, 
@@ -36,29 +36,25 @@ END$$
 
 DELIMITER ;
 
--- indicar onde inicia o bloco completo.
+-- Evento para mover dados para o histórico à meia-noite
 DELIMITER $$
-
--- Trigger para Mover Dados para o Histórico à Meia-Noite
 CREATE EVENT IF NOT EXISTS MoverParaHistorico
 ON SCHEDULE EVERY 1 DAY
 STARTS '2024-11-08 00:00:00'
 DO
 BEGIN
-    -- Insere os dados do dia anterior na tabela de histórico
-    INSERT INTO historico_sensor (datahora, temperatura, umidade, fkSensor)
+    INSERT INTO historicoSensor (datahora, temperatura, umidade, fkSensor)
     SELECT datahora, temperatura, umidade, fkSensor
     FROM dadosSensor
     WHERE DATE(datahora) = CURDATE() - INTERVAL 1 DAY;
 
-    -- Apaga os dados do dia anterior da tabela dadosSensor
     DELETE FROM dadosSensor
     WHERE DATE(datahora) = CURDATE() - INTERVAL 1 DAY;
 END$$
 
 DELIMITER ;
 
--- Views para Obter as Médias dos dias anteriores
+-- Views para médias diárias
 CREATE VIEW historico_media_diaria AS
 SELECT
     fkSensor,
@@ -66,11 +62,10 @@ SELECT
     ROUND(AVG(temperatura), 2) AS media_temperatura,
     ROUND(AVG(umidade), 2) AS media_umidade
 FROM
-    historico_sensor
+    historicoSensor
 GROUP BY
     fkSensor, DATE(datahora);
 
--- View para Obter as Médias do dia atual
 CREATE VIEW media_do_dia_atual AS
 SELECT
     fkSensor,
@@ -83,7 +78,7 @@ WHERE DATE(datahora) = CURDATE()
 GROUP BY
     fkSensor, DATE(datahora);
 
--- Dados Detalhados de Temperatura e Umidade do Dia Atual
+-- Dados detalhados diários
 CREATE VIEW dados_detalhados_diarios AS
 SELECT
     datahora,
@@ -94,17 +89,103 @@ FROM
     dadosSensor
 WHERE DATE(datahora) = CURDATE();
 
--- Gera dados simulados para o dia atual
+-- Gerar dados simulados para o dia atual
 CALL GerarDadosDiarios();
 
--- Exibe todos os dados gerados no dia atual
+-- Exibe dados gerados no dia atual
 SELECT * FROM dadosSensor;
 
--- Exibe a média do dia atual
+-- Exibe média do dia atual
 SELECT * FROM media_do_dia_atual;
 
--- Exibe as médias dos dias anteriores
+-- Exibe médias dos dias anteriores
 SELECT * FROM historico_media_diaria;
 
 -- Ativação do Agendador de Eventos
 SET GLOBAL event_scheduler = ON;
+
+
+-- consulta que calcula o total de tempo fora do intervalo ideal para um determinado período, como o dia atual.
+SELECT 
+    DATE(datahora) AS data,
+    SUM(TIMESTAMPDIFF(MINUTE, datahora, datafim)) AS minutos_fora_da_faixa
+FROM 
+    alertaSensor
+WHERE 
+    temperatura < 10 OR temperatura > 12
+    AND DATE(datahora) = CURDATE()
+GROUP BY 
+    DATE(datahora);
+    
+    
+    
+-- calcula em porcentagem 
+SELECT 
+    DATE(datahora) AS data,
+    SUM(TIMESTAMPDIFF(MINUTE, datahora, datafim)) / (24 * 60) * 100 AS porcentagem_fora_da_faixa
+FROM 
+    alertaSensor
+WHERE 
+    temperatura < 10 OR temperatura > 12
+    AND DATE(datahora) = CURDATE()
+GROUP BY 
+    DATE(datahora);
+
+-- o tempo total que a umidade esteve fora do intervalo ideal durante o dia atual
+SELECT 
+    DATE(datahora) AS data,
+    SUM(TIMESTAMPDIFF(MINUTE, datahora, datafim)) AS minutos_fora_da_faixa
+FROM 
+    alertaSensor
+WHERE 
+    (umidade < 60 OR umidade > 70)
+    AND DATE(datahora) = CURDATE()
+GROUP BY 
+    DATE(datahora);
+    
+    
+-- a porcentagem do tempo que a umidade esteve fora da faixa ideal em relação ao dia
+    SELECT 
+    DATE(datahora) AS data,
+    (SUM(TIMESTAMPDIFF(MINUTE, datahora, datafim)) / (24 * 60)) * 100 AS porcentagem_fora_da_faixa
+FROM 
+    alertaSensor
+WHERE 
+    (umidade < 60 OR umidade > 70)
+    AND DATE(datahora) = CURDATE()
+GROUP BY 
+    DATE(datahora);
+    
+    
+-- trigger para monitorar a inserção de dados e gerar um alerta sempre que a temperatura ou umidade ultrapassar os limites.
+DELIMITER $$
+
+CREATE TRIGGER verifica_alerta AFTER INSERT ON DadosSensor
+FOR EACH ROW
+BEGIN
+    DECLARE limite_min DECIMAL(5,2);
+    DECLARE limite_max DECIMAL(5,2);
+
+    -- Verificar se o valor de temperatura está fora dos limites
+    SELECT valor_min, valor_max INTO limite_min, limite_max 
+    FROM LimitesIdeais WHERE tipo = 'temperatura';
+
+    IF NEW.temperatura < limite_min OR NEW.temperatura > limite_max THEN
+        INSERT INTO AlertaSensor (sensor_id, tipo_alarme, valor, data_alarme)
+        VALUES (NEW.id, 'Temperatura fora dos limites', NEW.temperatura, NOW());
+    END IF;
+
+    -- Verificar se o valor de umidade está fora dos limites
+    SELECT valor_min, valor_max INTO limite_min, limite_max 
+    FROM LimitesIdeais WHERE tipo = 'umidade';
+
+    IF NEW.umidade < limite_min OR NEW.umidade > limite_max THEN
+        INSERT INTO AlertaSensor (sensor_id, tipo_alarme, valor, data_alarme)
+        VALUES (NEW.id, 'Umidade fora dos limites', NEW.umidade, NOW());
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+

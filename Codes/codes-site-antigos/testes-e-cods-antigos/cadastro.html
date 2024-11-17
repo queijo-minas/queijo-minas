@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Queijo no Ponto | Cadastro</title>
+
+  
+
+  <link rel="stylesheet" href="style_login.css" />
+
+  <link rel="shortcut icon" href="imgs/logo.svg" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body>
+  <!-- Header / Navbar -->
+  <header id="scroll-element">
+     <nav class="navbar">
+         <a href="#" class="nav-logo">
+          <div>
+            <!-- <h1>Queijo no Ponto</h1> -->
+            <img src="imgs/logo.svg" style="height: 100px; margin-top: 10px;">
+        </div>
+         </a>
+         <ul class="nav-menu">
+             <button id="menu-close-button" class="fas fa-times"></button>
+             <li class="nav-item">
+                 <a href="index.html" class="nav-link">Início</a>
+             </li>
+             <li class="nav-item">
+                 <a href="index.html#menu" class="nav-link">Serviços</a>
+             </li>
+             <li class="nav-item">
+                 <a href="index.html#about" class="nav-link">Sobre</a>
+             </li>
+             <li class="nav-item">
+                 <a href="index.html#menu" class="nav-link">Equipe</a>
+             </li>
+             <li class="nav-item">
+                 <a href="index.html#contact" class="nav-link">Contato</a>
+             </li>
+             <li class="nav-item">
+                 <a href="login.html" class="nav-link">Login</a>
+             </li>
+             <li class="nav-item">
+                 <a href="cadastro.html" class="nav-link">Cadastro</a>
+             </li>
+         </ul>
+         <button id="menu-open-button" class="fas fa-bars"></button>
+     </nav>
+ </header>
+ 
+ <div class="bloco">
+    <div class="cadastro">
+
+      <div class="container">
+        <div class="card card-cadastro">
+          <h2>Bem-vindo!</h2>
+          <div class="formulario">
+            <div class="campo">
+              <span>Razão Social:</span>
+              <input id="razao_input" type="text" placeholder="  Razão Social" /><br>
+            </div>
+    
+            <div class="campo">
+              <span>Nome fantasia:</span>
+              <input id="nome_input" type="text" placeholder="  Nome da Empresa" /><br>
+            </div>
+
+            <div class="campo">
+              <span>CNPJ:</span>
+              <input id="cnpj_input" type="text" placeholder="  12345678900000" onkeyup="validarCNPJ()" />
+              <div id="validacaoCNPJ" ></div><br>
+            </div>
+          
+            <div class="campo">
+              <span>Representante legal:</span>
+              <input id="representante_input" type="text" placeholder="  Nome do Representante" />
+            </div><br>
+            <div class="campo">
+              <span>CPF:</span>
+              <input id="cpf_input" type="text" placeholder="  12345678900" onkeyup="validarCPF()"/>
+              <div id="validacaoCPF" ></div><br>
+            </div>
+            
+            <div class="campo">
+              <span>E-mail:</span>
+              <input id="email_input" type="text" placeholder="  meuemail@provedor.com" onkeyup="validarEmail()" />
+              <div id="validacaoEmail" ></div><br>
+            </div>
+            <div class="campo">
+              <span>Telefone:</span>
+              <input id="telefone_input" type="text" placeholder="  (12) 12345-6789 " onkeyup="validarTelefone()" /> <div id="validacaoTelefone" ></div><br>
+            </div>
+            <div class="campo">
+              <span>Endereço:</span>
+              <input id="endereco_input" type="text" placeholder="  Rua xxxx, número 123" /><div id="validacaoEndereco"></div><br>
+            </div>
+            <div class="campo">
+              <span>Cidade:</span>
+              <input id="cidade_input" type="text" placeholder="  Sua Cidade" /><div id="validacaoCidade" ></div><br>
+            </div>
+            <div class="campo">
+              <span>CEP:</span>
+              <input id="cep_input" type="text" placeholder="  01234-567" /> <div id="validacaoCEP"></div><br>
+            </div>
+            
+            <div class="campo">
+              <span>Senha:<button class="botaozinho" onclick="gerarSenha()">Gerar Senha</button></span>
+              <input id="senha_input" type="password" placeholder="  ******" onkeyup="validarSenha()" />
+              <br><div id="validacaoSenha" ></div><br>
+            </div>
+            <div class="campo">
+              <span>Confirmação da Senha:</span>
+              <input id="confirmacao_senha_input" type="password" placeholder="  ******" onkeyup="confirmacaoSenha()" />
+            </div><div id="validacaoConfirmacao" ></div><br>
+            <button class="botao" onclick="Validacao()">Cadastrar</button><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+<!-- Footer section -->
+<footer class="footer-section">
+    <div class="section-content">
+        <p class="copyright-text">© 2024 Queijo no Ponto</p>
+
+        <div class="social-link-list">
+            <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+
+        <p class="policy-text">
+            <a href="#" class="policy-link">Política de Privacidade</a>
+            <span class="separator">•</span>
+            <a href="#" class="policy-link">Política de Reembolso</a>
+        </p>
+    </div>
+</footer>
+
+
+
+</body>
+
+</html>
+
+<script src="../script/validacao.js"></script>

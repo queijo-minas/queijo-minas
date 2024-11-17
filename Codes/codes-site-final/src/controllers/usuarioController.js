@@ -1,13 +1,15 @@
 var usuarioModel = require("../models/usuarioModel");
-// var aquarioModel = require("../models/aquarioModel"); // Removido se não for necessário
+// var aquarioModel = require("../models/aquarioModel"); 
 
+// Em usuarioController.js
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    var nomeFantasia = req.body.empresaServer;
 
-    if (email === undefined) {
+    if (!email) {
         res.status(400).send("Seu email está undefined!");
-    } else if (senha === undefined) {
+    }else if (!senha) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
         usuarioModel.autenticar(email, senha)
@@ -16,7 +18,8 @@ function autenticar(req, res) {
                     res.json({
                         id: resultadoAutenticar[0].id,
                         email: resultadoAutenticar[0].email,
-                        nome: resultadoAutenticar[0].nome
+                        nome: resultadoAutenticar[0].nome,
+                        nomeFantasia: resultadoAutenticar[0].nomeFantasia  || null
                     });
                 } else if (resultadoAutenticar.length === 0) {
                     res.status(403).send("Email e/ou senha inválido(s)");
@@ -30,6 +33,8 @@ function autenticar(req, res) {
             });
     }
 }
+
+
 
 function cadastrar(req, res) {
     var nome = req.body.nomeServer;

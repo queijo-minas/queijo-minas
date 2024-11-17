@@ -12,7 +12,7 @@
 </head>
 
 <body>
-   
+    <!-- Header / Navbar -->
     <header id="scroll-element">
         <nav class="navbar">
             <a href="#" class="nav-logo">
@@ -53,7 +53,7 @@
         
         <div class="forms">
             <div class="form-content">
-               
+                <!-- Login Form -->
                 <div class="login-form">
                     <div class="title">Entrar</div>
                     <form id="login-form" onsubmit="entrar(); return false;">
@@ -75,7 +75,7 @@
                     </form>
                 </div>
 
-                
+                <!-- Cadastro Form -->
                 <div class="signup-form">
                     <div class="title">Cadastrar</div>
                     <form id="form-cadastro">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
-                                <input id="cpf_input" type="text" placeholder="Digite seu CPF" required>
+                                <input id="cpf_input" type="text" placeholder="Digite seu CPF"  maxlength="14" onkeyup="validarCPF()" required>
                                 <div id="validacaoCPF"></div>
                             </div>
                             <div class="input-box">
@@ -112,6 +112,7 @@
                                 <input id="codigo_input" type="text" placeholder="Código de Vínculo Empresarial" required>
                             </div>
 
+                            
                                <!-- <div class="input-box">
                                 <i class="fas fa-user"></i>
                                 <input id="endereco_input" type="text" placeholder="Digite sua Rua xxxx, número 123" />
@@ -144,23 +145,74 @@
     <script src="script/validacao.js"></script>
 </body>
 </html>
+<script>
+    
+    function entrar() {
+        aguardar();
 
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
 
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
 
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
 
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
 
+            if (resposta.ok) {
+                console.log(resposta);
 
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
 
+                });
 
+            } else {
 
+                console.log("Houve um erro ao tentar realizar o login!");
 
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
 
+        }).catch(function (erro) {
+            console.log(erro);
+        })
 
+        return false;
+    }
 
-
-
-
-
-
-                       
-
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+</script>

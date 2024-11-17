@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Teste Inputs</h1>
+    <p><input type="text" name="" id="input_senha" onkeyup="validarSenha()">  <button onclick="gerarSenha()"> Gerar Senha</button>  </p>
+    <div id="validacaoSenha"></div>
+    <p><input type="" id="input_CNPJ" placeholder="__.___.___/____-__"  maxlength="14"  onkeyup="validarCNPJ()"></p>
+    <div id="validacaoCNPJ"></div>
+    <p> <input type="text" name="" id="input_email" placeholder="seuemail@endereço.com" onkeyup="validarEmail()"> </p>
+    <div id="validacaoEmail" ></div>
+    <p> <input type="text" name="" id="input_CPF" onkeyup="validarCPF()" > </p>
+    <div id="validacaoCPF" > </div>
+
+</body>
+</html>
+
+<script>
+
+    function validarSenha(){
+            const senha = input_senha.value 
+
+            if( senha.length >= 7 ){
+                validacaoSenha.innerHTML = `Senha Válida`
+            }else {
+                validacaoSenha.innerHTML = `Sua senha está inválida`
+            }
+
+        }
+
+    function gerarSenha(){
+        var senhaAutoGerada = ``
+        var Catalogo = `aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPrRsStTuUvVwWxXyYzZ0123456789!@#$%&*_-+=`
+        
+
+        for(i=0; i<7; i++){
+            senhaAutoGerada += Catalogo[parseInt(Math.random() * 71)]
+        }
+
+        input_senha.value = senhaAutoGerada
+
+        validarSenha()
+        
+    }
+
+    
+
+// Estrutura do CNPJ 99.999.999/9999-99
+    
+    function validarCNPJ(){
+        const CNPJ = input_CNPJ.value
+        var fraseCorrigida = ``
+        
+        //if( colocar condição de validar o campo se tem os '.', '/', '-' )
+            if( CNPJ.length == 14){
+            for ( i = 0 ; i < CNPJ.length ; i++){
+
+                
+                if(i == 2 || i == 5){
+                    fraseCorrigida += `.`
+                }
+                if (i == 8){
+                    fraseCorrigida += `/`
+                }
+                if (i == 12){
+                    fraseCorrigida += `-`
+                }
+                
+                fraseCorrigida += CNPJ[i]
+                input_CNPJ.value = fraseCorrigida
+                validacaoCNPJ.innerHTML = `CNPJ válido, ${fraseCorrigida}`
+
+            }
+
+            
+
+        } else {
+            validacaoCNPJ.innerHTML = `CNPJ inválido, insira apenas os números necessários (14 digitos)` 
+        }
+        
+
+        
+    
+    }
+
+
+        function validarEmail(){
+            const email = input_email.value 
+
+            if( email.indexOf('@') > -1 && email.indexOf('.com') > -1){
+                validacaoEmail.innerHTML = `E-mail Válido`
+            }else {
+                validacaoEmail.innerHTML = `Sua e-mail está inválido`
+            }
+
+        }
+
+
+        function validarCPF(){
+            const cpf = input_CPF.value 
+            var cpfSemantico = ``
+
+            if(cpf.length == 11){
+                for( posição = 0; posição < 11; posição ++) {
+                    if(posição == 3 || posição == 6){
+                        cpfSemantico += `.`
+                    }if (posição == 9){
+                        cpfSemantico += `-`
+                    }
+
+                    cpfSemantico += cpf[posição]
+
+                    validacaoCPF.innerHTML = `Seu CPF está válido ${cpfSemantico}`
+
+                    input_CPF.value = cpfSemantico
+
+                }
+            }else {
+                validacaoCPF.innerHTML = `CPF inválido, insira apenas a quantidade correta de números (11)`
+            }
+
+
+        }
+
+</script>
