@@ -33,7 +33,7 @@ function cadastrar(req, res) {
   var telefone = req.body.telefone;
   var representanteLegal = req.body.representanteLegal;
   var email = req.body.email;
-  var cpf = req.body.cpfRepresentante;
+  var cpf = req.body.cpf;
   var senhaEmpresa = req.body.senhaEmpresa; 
 
   if (!cnpj || !razaoSocial || !nomeFantasia || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {

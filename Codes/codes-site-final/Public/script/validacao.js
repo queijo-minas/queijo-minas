@@ -171,7 +171,7 @@ function validarTelefone(){
 
   // login e cadastro do usu fetch e validçpoes:
 
-
+let cpfFinal;
 
 function validarSenha() {
     const senha = senha_input.value;
@@ -237,7 +237,7 @@ function tirarPontuacao(texto=''){
     return textoFinal
 }
 
-var cpfFinal = null
+
 function validarCPF() {
     var cpf = cpf_input.value;
     var cpfSemantico = ``;
@@ -259,8 +259,10 @@ function validarCPF() {
         cpfFinal = null
     }
 }
+    
 
 // Estrutura do CNPJ 99.999.999/9999-99
+
 function validarCNPJ() {
     var cnpj = cnpj_input.value;
     var cnpjSemantico = ``;
@@ -288,7 +290,7 @@ function validarCNPJ() {
 // o trim tira os espaços em branco
 function cadastrarUsuario() {
     const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
-    const cpfVar = cpfFinal;
+    const cpfVar = cpf_input.value;
     const emailVar = email_input.value.trim();
     const telefoneVar = telefone_input.value.trim();
     const senhaVar = senha_input.value.trim();
@@ -300,7 +302,7 @@ function cadastrarUsuario() {
         return false;
     }
 
-    validarCPF(); 
+    //validarCPF(); 
 
    
     if (senhaVar !== confirmacaoSenhaVar) {
@@ -376,7 +378,7 @@ function cadastrarEmpresa() {
             telefone,
             representanteLegal,
             email,
-            cpfRepresentante: cpf,
+            cpf,
             senhaEmpresa,
         }),
     })
@@ -385,7 +387,7 @@ function cadastrarEmpresa() {
                 resposta.json().then((json) => {
                     sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
                     alert("Cadastro de empresa realizado com sucesso!");
-                    window.location = "/login.html";
+                    window.location = "http://localhost:3333/login.html";
                 });
             } else {
                 alert("Houve um erro ao tentar realizar o cadastro.");

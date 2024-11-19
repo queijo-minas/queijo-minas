@@ -21,6 +21,8 @@ var usuarioRouter = require("./src/routes/usuarios");
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var aquariosRouter = require("./src/routes/aquarios");
+var salasRouter = require("./src/routes/salas");
+
 var empresasRouter = require("./src/routes/empresas");
 
 
@@ -34,6 +36,8 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
+app.use("/salas", salasRouter);
+
 
 
 

@@ -41,22 +41,21 @@
         <input type="text" id="nomeLocal" name="nomeLocal" required>
       </div>
 
-      <div class="input-box">
-        <label for="descricaoLocal">Descrição:</label>
-        <textarea id="descricaoLocal" name="descricaoLocal" required></textarea>
-      </div>
+     
 
-      <div class="column">
+     
+
+    <!--
+     <div class="column">
         <div class="input-box">
           <label for="temperaturaIdeal">Temperatura Ideal (°C):</label>
           <input type="number" step="0.01" id="temperaturaIdeal" name="temperaturaIdeal" required>
-        </div>
-
-        <div class="input-box">
+        </div>  
+    <div class="input-box">
           <label for="umidadeIdeal">Umidade Ideal (%):</label>
           <input type="number" step="0.01" id="umidadeIdeal" name="umidadeIdeal" required>
         </div>
-      </div>
+      </div>-->    
 
       <div class="column">
         <div class="input-box">
@@ -65,47 +64,78 @@
         </div>
 
         <div class="input-box">
+          <label for="area">Área (m²)</label>
+          <input type="number" id="area" name="area" required>
+        </div>
+      </div>
+
+        <div class="input-box">
           <label for="fkEmpresa">ID da Empresa:</label>
           <input type="number" id="fkEmpresa" name="fkEmpresa" required>
         </div>
       </div>
 
       <div class="input-box">
-        <label for="area">Área (m²)</label>
-        <input type="number" id="area" name="area" required>
+        <label for="descricaoLocal">Descrição:</label>
+        <textarea id="descricaoLocal" name="descricaoLocal" required></textarea>
       </div>
-    </div>
+   
 
       <button type="submit">Cadastrar</button>
     </form>
   </section>
 
   <script>
-    const form = document.getElementById("formCadastro");
+const form = document.getElementById("formCadastro");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const data = {
-        nomeLocal: form.nomeLocal.value,
-        descricaoLocal: form.descricaoLocal.value,
-        temperaturaIdeal: parseFloat(form.temperaturaIdeal.value),
-        umidadeIdeal: parseFloat(form.umidadeIdeal.value),
-        capacidadePrateleiras: parseInt(form.capacidadePrateleiras.value),
-        fkEmpresa: parseInt(form.fkEmpresa.value),
-      };
+    const nomeLocal = form.nomeLocal.value;
+    const descricaoLocal = form.descricaoLocal.value;
+    const quantidadeEstantes = parseInt(form.quantidadeEstantes.value);
+    const area = parseFloat(form.area.value);
+    const fkEmpresa = parseInt(form.fkEmpresa.value);
 
-      const response = await fetch("http://localhost:3333/salas/cadastrar", {
+    if (!nomeLocal || !descricaoLocal || !quantidadeEstantes || !area || !fkEmpresa) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return false;
+    }
+
+    fetch("http://localhost:3333/salas/cadastrar", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
-      });
+        body: JSON.stringify({
+            nomeLocal,
+            descricaoLocal,
+            quantidadeEstantes,
+            area,
+            fkEmpresa,
+        }),
+    })
+        .then((resposta) => {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                return resposta.text().then((texto) => {
+                    throw new Error(texto);
+                });
+            }
+        })
+        .then((json) => {
+            alert("Sala cadastrada com sucesso!");
+            window.location = "http://localhost:3333/saladematuracao.html"; // Página após o cadastro
+        })
+        .catch((erro) => {
+            console.error("Erro ao cadastrar sala:", erro);
+            alert("Erro ao cadastrar sala. Tente novamente.");
+        });
 
-      const result = await response.json();
-      alert(result.message);
-    });
+    return false;
+});
+
   </script>
 </body>
 
