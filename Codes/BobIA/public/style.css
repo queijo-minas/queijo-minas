@@ -21,7 +21,7 @@ body {
     background-color: white;
 }
 h1 {
-    color: #c59506;
+    color: #1F2A44;
 }
 
 .sidebar {
@@ -231,7 +231,7 @@ h1 {
     -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
-    background: linear-gradient(to top right, #f8f9fa, #ffffff); /* Gradiente sutil */ color: #333;
+    background-color: #63B1BC;
    
 }
 
@@ -243,13 +243,41 @@ textarea[type="text"] {
     cursor: pointer;
 }
 
-button {
-    background-color: #FFD700; color: black; border: none; font-size: 14px; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s
+
+.content { display: flex; align-items: center; justify-content: center; height: 100%; }
+.content img { width: 50px; height: 50px; margin-right: 10px; border-radius: 50%; }
+#resposta {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #D0D3D4;
+    border: 1px solid #63666A;
+    text-align: left;
+    display: none;
 }
 
-button:hover {
-   background-color: #EFB661;
 
+
+
+
+
+
+
+/* novo codigo */
+
+#containerr {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+
+
+textarea[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 400px;
 }
 
 select,
@@ -260,8 +288,16 @@ button {
     cursor: pointer;
 }
 
-.content { display: flex; align-items: center; justify-content: center; height: 100%; }
-.content img { width: 50px; height: 50px; margin-right: 10px; border-radius: 50%; }
+button {
+    background-color: #ED145B;
+    color: #FFFFFF;
+    border: none;
+}
+
+button:hover {
+    background-color: #EFB661;
+}
+
 #resposta {
     margin-top: 20px;
     padding: 10px;
