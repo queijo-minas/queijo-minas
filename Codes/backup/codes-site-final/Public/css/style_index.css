@@ -1,0 +1,725 @@
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* bloco para personalizar a página toda */
+* {
+  padding: 0; /* Remove espaçamento interno */
+  margin: 0; /* Remove espaçamento externo */
+  box-sizing: border-box; /* Define a box model para incluir borda e padding no tamanho do elemento */
+  font-family: "Poppins", sans-serif; /* Define a fonte padrão para o site */
+}
+
+
+/* bloco de criação de variavéis para padronização */
+:root {
+  /* Cores */
+  --white-color: #f5f5f5; /* Cor branca */
+  --dark-color: #030320; /* Cor escura */
+  --primary-color: #251605; /* Cor primária */
+  --secondary-color: #c59506; /* Cor secundária */
+  --secondary-color-variacao: #dfa805;
+  --light-pink-color: #faf4f5; /* Cor rosa claro */ 
+  --medium-gray-color: #ccc; /* Cinza médio */
+  --black-color: #000000;
+  --golden-yellow: #FFD700;
+  --warm-beige: #F5DEB3;
+  --soft-brown: #A0522D;
+  --dark-charcoal: #2F2F2F;
+  --cream-white: #f3f2db;
+  --amber-orange: #FFBF00;
+  --midnight-blue: #191970;
+  --dark-slate-blue: #483D8B;
+  --navy-blue: #000080;
+  --prussian-blue: #003153;
+  --indigo-dye: #00416A;
+  --oxford-blue: #002147;
+  --space-cadet: #1d2951ee;
+  --complementar: #005e96;
+  --backgroud-transparent: #00000088;
+  --bg-gradient: linear-gradient(to left,  rgb(0, 0, 69), #030320, #1a1a40, #1b1b37, #252537);
+  
+
+  /* Tamanhos de fonte */
+  --font-size-s: 0.9rem; /* Fonte pequena */
+  --font-size-n: 1rem; /* Fonte normal */
+  --font-size-m: 1.12rem; /* Fonte média */
+  --font-size-l: 1.5rem; /* Fonte grande */
+  --font-size-xl: 2rem; /* Fonte extra grande */
+  --font-size-xxl: 2.3rem; /* Fonte extra extra grande */
+
+  /* Espessuras da fonte */
+  --font-weight-normal: 400; /* Peso normal */
+  --font-weight-medium: 500; /* Peso médio */
+  --font-weight-semibold: 600; /* Peso semi-negrito */
+  --font-weight-bold: 700; /* Peso negrito */
+
+  /* Raio da borda */
+  --border-radius-s: 8px; /* Raio pequeno */
+  --border-radius-m: 30px; /* Raio médio */
+  --border-radius-circle: 50%; /* Bordas circulares */
+
+  /* Largura máxima do site */
+  --site-max-width: 1300px; /* Largura máxima do conteúdo */
+}
+
+
+
+
+
+
+  /* Comportamento do scroll suave */
+  html {
+    scroll-behavior: smooth; /* Faz o scroll da página ser suave */
+  }
+
+  ul {
+    list-style: none; /* Remove marcadores das listas */
+  }
+  a {
+    text-decoration: none; /* Remove sublinhado de links */
+  }
+  button {
+    cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+    background: none; /* Remove cor de fundo */
+    border: none; /* Remove borda */
+  }
+  img {
+    width: 100%; /* Define as imagens para ocupar 100% da largura do elemento pai */
+  }
+
+
+
+
+
+
+
+  /* Bloco de estilização para seções e rodapé */
+  :where(section, footer) .section-content {
+    margin: 0 auto; /* Centraliza o conteúdo */
+    padding: 0 20px; /* Adiciona espaçamento nas laterais */
+    max-width: var(--site-max-width); /* Define largura máxima */
+  }
+  /* Bloco de título das seções */
+  section .section-title {
+    text-align: center; /* Centraliza o texto */
+    padding: 60px 0 100px; /* Adiciona espaçamento acima e abaixo */
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+    font-size: var(--font-size-xl); /* Define o tamanho da fonte */
+    
+  }
+  section .section-title::after {
+    content: ""; /* Adiciona conteúdo vazio após o título */
+    width: 80px; /* Define largura da linha */
+    height: 5px; /* Define altura da linha */
+    display: block; /* Exibe o elemento como bloco */
+    margin: 10px auto 0; /* Adiciona margens */
+    background: var(--golden-yellow); /* Define cor da linha */
+    border-radius: var(--border-radius-s); /* Define bordas arredondadas */
+  }
+
+
+
+
+
+
+/* Bloco Estilização da barra de navegação (navbar) */
+header {
+  z-index: 5; /* Coloca o header acima de outros elementos */
+  width: 100%; /* O header ocupa 100% da largura da tela */
+  position: absolute; /* Fixa o header no topo durante o scroll */
+  top: 0; /* Garante que o header fique fixo no topo */
+  left: 0; /* Garante que o header ocupe toda a largura */
+ 
+  padding: 8px 0; /* Adiciona espaçamento no topo e na parte inferior */
+}
+header .navbar {
+  display: flex; /* Utiliza flexbox para alinhar itens */
+  padding-right: 0px; /* Ajusta o espaçamento à esquerda */
+  align-items: center; /* Alinha os itens verticalmente */
+  justify-content: space-between;
+  gap: 50px;
+  max-width: 100%; /* Define a largura máxima da navbar */
+  justify-content: space-between;
+
+}
+.navbar .nav-logo {
+ margin-left: 40px;
+}
+.navbar .nav-menu {
+  display: flex; /* Utiliza flexbox para os itens do menu */
+  width: 15%;
+  width: fit-content;
+  gap: 5px; /* Define o espaço entre os itens do menu */
+}
+.navbar .nav-menu .nav-link {
+  padding: 10px 18px; /* Adiciona espaçamento interno */
+  color: var(--cream-white); /* Define a cor do link */
+  font-size: var(--font-size-m); /* Define o tamanho da fonte */
+  border-radius: var(--border-radius-m); /* Define bordas arredondadas */
+  transition: 0.3s ease; /* Adiciona transição suave */
+}
+.navbar .nav-menu .nav-link:hover {
+  color: var(--white-color); /* Altera a cor do texto ao passar o mouse */
+  background: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
+}
+/* bloco para esconder os botões do menu para telas grandes */
+.navbar :where(#menu-open-button, #menu-close-button) {
+  display: none; /* Não exibe os botões de abrir e fechar o menu */
+}
+.hero-details .subtitle span{
+  font-weight:var(--font-weight-bold);
+ }
+
+ 
+
+
+
+/* Bloco de recepção do site */
+/* Define a altura mínima da seção como 70% da altura da tela */
+.hero-section {
+  min-height: 70vh; 
+}
+/* Configura a área de conteúdo da seção */
+.hero-section .section-content {
+  display: flex; /* Usa flexbox para organizar o layout */
+  padding-top: 90px; /* Adiciona espaço no topo */
+  padding-left: 40px; /* Adiciona espaço à esquerda */
+  align-items: center; /* Alinha verticalmente os itens ao centro */
+  min-height: 96vh; /* Define a altura mínima da seção como 96% da tela */
+  justify-content: space-between; /* Coloca o máximo de espaço entre os itens */
+}
+/* Define uma camada de transparência sobre o banner da seção */
+.bloco {
+  width: 100%; /* Ocupa toda a largura */
+  height: 100%; /* Ocupa toda a altura */
+  background-color: var(--backgroud-transparent); /* Aplica uma cor de fundo transparente */
+}
+/* Define a imagem de fundo para a seção */
+#section-image {
+  width: 100%; /* A largura é 100% */
+  background-image: url('../imgs/salaMaturacao.png'); /* Imagem de fundo */
+}
+/* Estiliza o conteúdo textual da seção */
+.hero-section .hero-details {
+  color: var(--white-color); /* Define a cor do texto como branco */
+}
+/* Estiliza o título da seção */
+.hero-section .hero-details .title {
+  font-size: var(--font-size-xxl); /* Tamanho grande para o título */
+  color: var(--secondary-color); /* Cor secundária */
+  font-family: "Miniver", sans-serif; /* Fonte personalizada */
+}
+/* Estiliza o subtítulo logo abaixo do título */
+.hero-section .hero-details .subtitle {
+  margin-top: 8px; /* Adiciona um pequeno espaço acima */
+  max-width: 45%; /* Limita a largura do subtítulo a 45% */
+  font-size: var(--font-size-xxl); /* Define o tamanho do subtítulo */
+  font-weight: var(--font-weight-semibold); /* Define o subtítulo como semi-negrito */
+}
+/* Estiliza a descrição da seção */
+.hero-section .hero-details .description {
+  max-width: 70%; /* A descrição ocupa no máximo 70% da largura */
+  margin: 24px 0 40px; /* Define espaçamentos superior e inferior */
+  font-size: var(--font-size-m); /* Tamanho médio da fonte para o texto */
+}
+/* Configura os botões da seção */
+.hero-section .hero-details .buttons {
+  display: flex; /* Usa flexbox para organizar os botões em linha */
+  gap: 23px; /* Espaçamento entre os botões */
+}
+/* Estiliza cada botão individualmente */
+.hero-section .hero-details .button {
+  padding: 10px 26px; /* Espaçamento interno para os botões */
+  display: block; /* Exibe o botão como um bloco */
+  border: 2px solid transparent; /* Borda transparente por padrão */
+  border-radius: var(--border-radius-m); /* Bordas arredondadas médias */
+  background: var(--secondary-color); /* Fundo do botão com a cor secundária */
+  color: var(--primary-color); /* Cor do texto do botão */
+  font-size: var(--font-size-m); /* Tamanho médio da fonte */
+  font-weight: var(--font-weight-medium); /* Define o peso da fonte como médio */
+  transition: 0.3s ease; /* Transição suave para efeitos ao passar o mouse */
+}
+
+
+
+
+
+
+
+/* Bloco de estilo dos botões ao passar o mouse */
+
+/* Quando o botão recebe o hover, a cor do texto e da borda muda para branco,
+   e o fundo se torna transparente */
+   .hero-section .hero-details .button:hover,
+   .hero-section .hero-details .button.contact-us {
+     color: var(--white-color); /* Muda a cor do texto para branco */
+     border-color: var(--white-color); /* Muda a cor da borda para branco */
+     background: transparent; /* Torna o fundo transparente */
+   }
+   /* Específico para o botão "contact-us" quando o hover é aplicado:
+      a cor do texto permanece branca, mas o fundo e a borda mudam para a cor secundária */
+   .hero-section .hero-details .button.contact-us:hover {
+     color: var(--white-color); /* Cor do texto continua branca */
+     background: var(--secondary-color); /* Cor de fundo muda para a cor secundária */
+     border-color: var(--secondary-color); /* Cor da borda muda para a cor secundária */
+   }
+   /* Define o tamanho máximo da imagem da seção hero como 500px e adiciona
+      uma margem à direita para espaçar a imagem dos outros elementos */
+   .hero-section .hero-image-wrapper {
+     max-width: 500px; /* Define a largura máxima da imagem */
+     margin-right: 80px; /* Adiciona um espaçamento à direita da imagem */
+   }
+   /* Centraliza o conteúdo da seção */
+   .section-content .container {
+     text-align: center; /* Alinha o texto ao centro */
+   }
+   
+
+
+
+
+/* Bloco da seção "Simulação Financeira" */
+
+/* Define o espaçamento superior e inferior da seção (120px) e
+   o fundo com a cor primária definida no projeto */
+   .about-section {
+    padding: 140px 0; /* Espaçamento superior e inferior de 120px */
+    background: var(--primary-color); /* Cor de fundo primária */
+    height: 700px;
+  }
+  /* Estiliza o conteúdo da seção com layout flex para alinhar os itens,
+     adiciona um espaçamento entre os itens de 50px e alinha-os ao centro verticalmente */
+  .about-section .section-content {
+    display: flex; /* Layout flexbox para distribuir os elementos horizontalmente */
+    gap: 50px; /* Espaçamento de 50px entre os itens */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    justify-content: space-between; /* Distribui os itens de forma igualitária */
+  }
+  /* Estiliza a imagem na seção, com altura e largura fixas, ajustando a imagem para caber 
+     proporcionalmente dentro da área e aplicando bordas circulares */
+  .about-section .about-image-wrapper .about-image {
+    height: 400px; /* Altura da imagem */
+    width: 500px; /* Largura da imagem */
+    object-fit: cover; /* Garante que a imagem seja redimensionada para caber no contêiner, sem distorção */
+    border-radius: var(--border-radius-circle); /* Borda circular para um visual mais suave */
+  }
+  /* Limita a largura do bloco de detalhes da seção a 50% da largura total */
+  .about-section .about-details {
+    max-width: 50%; /* Limita a largura do conteúdo a 50% */
+  }
+  /* Estiliza o título da seção e os parágrafos, removendo o padding e aplicando cor branca */
+  .about-section .about-details .section-title, p {
+    padding: 0; /* Remove o espaçamento interno */
+    color: var(--white-color); /* Aplica a cor branca */
+  }
+  /* Estiliza o texto dentro da seção com uma altura de linha de 30px, espaçamento
+     entre as seções de 50px acima e 30px abaixo, e centraliza o texto */
+  .about-section .about-details .text {
+    line-height: 30px; /* Altura da linha para melhorar a legibilidade */
+    margin: 20px 0 30px; /* Margem superior de 20px, inferior de 30px */
+    text-align: center; /* Centraliza o texto */
+    font-size: var(--font-size-l); /* Tamanho de fonte médio */
+  }
+  /* Estiliza a lista de links sociais, aplicando layout flex e centralizando
+     os itens com espaçamento entre eles */
+  .about-section .social-link-list {
+    display: flex; /* Layout flexbox para distribuir os links */
+    gap: 25px; /* Espaçamento de 25px entre os links */
+    justify-content: center; /* Centraliza os links na horizontal */
+  }
+  /* Estiliza os links sociais, aplicando cor branca e tamanho de fonte grande,
+     além de transições suaves ao passar o mouse */
+  .about-section .social-link-list .social-link {
+    color: var(--white-color); /* Cor branca */
+    font-size: var(--font-size-l); /* Tamanho de fonte grande */
+    transition: 0.2s ease; /* Transição suave ao passar o mouse */
+  }
+  /* Ao passar o mouse sobre os links sociais, a cor muda para a cor secundária */
+  .about-section .social-link-list .social-link:hover {
+    color: var(--secondary-color); /* Muda a cor para a cor secundária */
+  }
+  /* Estiliza o botão, aplicando margens, tamanho da fonte, cor branca,
+     fundo laranja, bordas arredondadas e sombra para dar profundidade */
+  .btn {
+    margin-top: 30px; /* Margem superior de 30px */
+    display: inline-block; /* Exibe o botão como um elemento inline-block */
+    padding: 15px 30px; /* Padding interno de 15px verticalmente e 30px horizontalmente */
+    font-size: 18px; /* Tamanho da fonte */
+    color: var(--white-color); /* Cor branca */
+    font-weight: var(--font-weight-bold);
+    background-color: var(--amber-orange); /* Fundo laranja */
+    border: none; /* Remove a borda */
+    border-radius: 35px; /* Bordas arredondadas */
+    cursor: pointer; /* Mostra o cursor de clique */
+    text-decoration: none; /* Remove a sublinha de links */
+    transition: 0.3s ease; /* Transição suave ao passar o mouse */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra leve para profundidade */
+  }
+  /* Ao passar o mouse sobre o botão, a cor do fundo muda para amarelo e
+     a sombra se intensifica */
+  .btn:hover {
+    background-color: var(--golden-yellow); /* Muda a cor de fundo para amarelo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+  }
+  /* Remove o contorno padrão do botão ao focar nele */
+  .btn:focus {
+    outline: none; /* Remove o outline padrão */
+  }
+  /* Animação "pulse", que aumenta e diminui o tamanho de um elemento
+     suavemente para criar um efeito de "pulsação" */
+  @keyframes pulse {
+    0% {
+        transform: scale(1); /* Estado inicial, tamanho normal */
+    }
+    50% {
+        transform: scale(1.1); /* Aumenta 10% no meio da animação */
+    }
+    100% {
+        transform: scale(1); /* Retorna ao tamanho normal */
+    }
+  }
+  /* Classe "pulse" que aplica a animação de pulsação de forma contínua (infinita) */
+  .pulse {
+    animation: pulse 1.5s infinite; /* Aplica a animação continuamente com duração de 1.5s */
+  }
+
+  
+
+
+
+
+/* Bloco da seção de "Nossos Serviços" */
+
+/* Define o texto da seção como preto, define a cor de fundo rosa claro e adiciona espaçamento
+   superior de 50px e inferior de 100px */
+   .menu-section {
+    color: var(--black-color); /* Cor do texto preto */
+    background: var(--light-pink-color); /* Cor de fundo rosa claro */
+    padding: 50px 0 100px; /* Espaçamento superior de 50px e inferior de 100px */
+  } 
+  /* Estiliza a lista de serviços com layout flex, espaçamento de 30px entre os itens,
+     permite que os itens quebrem linha (flex-wrap) e centraliza-os horizontalmente */
+  .menu-section .menu-list {
+    display: flex; /* Layout flexbox para alinhar os itens horizontalmente */
+    gap: 30px; /* Espaçamento de 30px entre os itens */
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se necessário */
+    justify-content: center; /* Centraliza os itens no contêiner */
+  }
+  /* Estiliza cada item individual da lista de serviços (os "cards"), alinhando o conteúdo 
+     de forma centralizada, com bordas arredondadas, espaçamento interno e uma sombra para 
+     criar um efeito de profundidade */
+  .menu-section .menu-list .menu-item {
+    display: flex; /* Layout flexbox para fácil alinhamento do conteúdo */
+    text-align: center; /* Centraliza o texto */
+    flex-direction: column; /* Alinha o conteúdo em coluna (verticalmente) */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: space-between; /* Distribui o conteúdo verticalmente */
+    width: calc(33.33% - 20px); /* Define a largura de cada card como 1/3 da tela, com margem */
+    border-radius: 10px; /* Bordas arredondadas de 10px */
+    padding: 50px; /* Espaçamento interno de 50px */
+    background: var(--secondary-color-variacao); /* Fundo azul para destacar os cards */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra leve para profundidade */
+    transition: transform 0.3s ease; /* Transição suave na transformação ao passar o mouse */
+  }
+  /* Aplica animação e transformação ao passar o mouse sobre o item (card),
+     fazendo-o "saltar" levemente */
+  .menu-item:hover {
+    animation: bounce 0.5s ease; /* Animação de "pulo" com duração de 0.5s */
+    transform: translateY(-10px); /* Move o card para cima 10px ao passar o mouse */
+  }
+  /* Define a animação bounce para simular um pulo. O card sobe 15px na metade
+     da animação e retorna à posição original */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0); /* Posição inicial e final do card */
+    }
+    50% {
+      transform: translateY(-15px); /* O card sobe 15px no meio da animação */
+    }
+  } 
+  /* Estiliza as imagens dentro dos cards, definindo largura e altura de 100px,
+     mantendo a proporção da imagem com "object-fit", e adiciona margem inferior */
+  .menu-item img {
+    width: 100px; /* Largura da imagem */
+    height: 100px; /* Altura da imagem */
+    object-fit: contain; /* Mantém a proporção da imagem dentro dos limites */
+    margin-bottom: 15px; /* Espaçamento inferior de 15px abaixo da imagem */
+  }
+  /* Estiliza o título do serviço, definindo espaçamento, tamanho da fonte maior e cor branca */
+  .menu-section .menu-item .name {
+    margin: 12px 0; /* Espaçamento superior e inferior de 12px */
+    font-size: var(--font-size-l); /* Tamanho da fonte grande */
+    font-weight: var(--font-weight-semibold); /* Peso da fonte semibold */
+    color: var(--white-color); /* Cor branca para destacar o título */
+  }
+
+  
+
+
+
+/* Bloco de contate-nos */
+
+/* Define o padding superior de 50px e inferior de 100px para a seção de contato,
+   e o fundo com a cor primária do tema */
+   .contact-section {
+    padding: 50px 0 100px; /* Espaçamento superior de 50px e inferior de 100px, sem espaçamento lateral */
+    background: var(--primary-color); /* Cor de fundo usando a variável CSS da cor primária */
+  }
+  /* Configura o layout da seção de contato com display flex,
+     alinhando verticalmente os itens e espaçando-os horizontalmente */
+  .contact-section .section-content {
+    display: flex; /* Layout flexbox para organizar os itens horizontalmente */
+    gap: 48px; /* Espaçamento de 48px entre os itens */
+    align-items: center; /* Alinha os itens ao centro verticalmente */
+    justify-content: space-between; /* Espaça os itens de forma que ocupem toda a largura disponível */
+  }
+  /* Define a cor branca para o título da seção de contato */
+  .contact-section .section-title {
+    color: var(--white-color); /* Cor do título em branco, usando a variável CSS */
+  }
+  /* Estiliza a lista de informações de contato, utilizando flexbox e definindo 
+     espaçamento entre os itens e alinhamento vertical */
+  .contact-section .contact-info-list .contact-info {
+    display: flex; /* Layout flexbox para alinhar os itens horizontalmente */
+    gap: 20px; /* Espaçamento de 20px entre os ícones e o texto */
+    margin: 20px 0; /* Margem superior e inferior de 20px */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    color: var(--white-color); /* Define a cor branca para o texto da informação de contato */
+  }
+  /* Define o tamanho da fonte dos ícones de informações de contato */
+  .contact-section .contact-info-list .contact-info i {
+    font-size: var(--font-size-m); /* Tamanho médio da fonte para os ícones de contato */
+  }
+  /* Estiliza a lista de informações de contato com cor preta, 
+     aplicável a textos que não estejam dentro da classe .contact-info */
+  .contact-section .contact-info-list {
+    color: var(--black-color); /* Cor preta para a lista de informações de contato */
+  }
+  /* Estiliza os campos do formulário de contato (input), definindo seu tamanho, padding,
+     e outras propriedades visuais como borda e borda arredondada */
+  .contact-section .contact-form .form-input {
+    width: 100%; /* Largura total do campo de formulário */
+    height: 50px; /* Altura de 50px */
+    padding: 0 12px; /* Espaçamento interno de 12px apenas nas laterais */
+    outline: none; /* Remove o contorno padrão ao focar no campo */
+    margin-bottom: 16px; /* Espaçamento inferior de 16px entre os campos */
+    font-size: var(--font-size-s); /* Tamanho pequeno da fonte */
+    border-radius: var(--border-radius-s); /* Borda arredondada pequena */
+    border: 1px solid var(--medium-gray-color); /* Borda cinza média ao redor do campo */
+  }
+  /* Define a largura máxima do formulário para 50% da seção */
+  .contact-section .contact-form {
+    max-width: 50%; /* Limita a largura do formulário a 50% da área da seção */
+  }
+  /* Estiliza o campo de texto (textarea) do formulário de contato, 
+     aumentando sua altura e permitindo redimensionamento vertical */
+  .contact-section .contact-form textarea.form-input {
+    height: 100px; /* Altura de 100px para o campo de texto */
+    padding: 12px; /* Espaçamento interno de 12px ao redor do conteúdo */
+    resize: vertical; /* Permite que o usuário redimensione verticalmente o campo */
+  }
+  /* Ao focar em um campo do formulário, a borda muda para a cor secundária */
+  .contact-section .contact-form .form-input:focus {
+    border-color: var(--secondary-color); /* Muda a cor da borda ao focar no campo */
+  }
+  /* Estiliza o botão de envio do formulário, definindo padding, bordas, fundo,
+     e adicionando uma transição suave para o efeito hover */
+  .contact-section .contact-form .submit-button {
+    padding: 10px 28px; /* Espaçamento interno de 10px em cima/baixo e 28px nas laterais */
+    outline: none; /* Remove o contorno padrão do botão */
+    margin-top: 10px; /* Margem superior de 10px */
+    border: 1px solid var(--secondary-color); /* Borda de 1px com a cor secundária */
+    border-radius: var(--border-radius-m); /* Borda arredondada média */
+    background: var(--secondary-color); /* Fundo com a cor secundária */
+    color: var(--white-color); /* Cor branca para o texto do botão */
+    font-size: var(--font-size-m); /* Tamanho médio da fonte */
+    font-weight: var(--font-weight-medium); /* Peso médio da fonte */
+    transition: 0.3s ease; /* Transição suave de 0.3 segundos para efeitos de estilo */
+  }
+  /* Muda a cor e o fundo do botão ao passar o mouse sobre ele */
+  .contact-section .contact-form .submit-button:hover {
+    color: var(--amber-orange); /* Cor do texto muda para laranja âmbar ao passar o mouse */
+    background: transparent; /* Fundo transparente ao passar o mouse */
+  }
+  
+
+
+
+
+
+/* Bloco de Rodapé */
+
+/* Define o padding (espaçamento interno) para o rodapé e a cor de fundo baseada na cor primária do tema */
+.footer-section {
+  padding: 20px 0; /* Espaçamento superior e inferior de 20px, sem espaçamento lateral */
+  background: var(--primary-color); /* Cor de fundo usando uma variável CSS para a cor primária */
+}
+/* Define o layout interno da seção do rodapé, organizando os elementos como flexbox 
+   e centralizando-os verticalmente, além de distribuir o espaço entre os itens */
+.footer-section .section-content {
+  display: flex;
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+  justify-content: space-between; /* Distribui os itens uniformemente, com espaço entre eles */
+}
+/* Aplica cor branca e uma transição suave ao passar o mouse sobre elementos como
+   textos de direitos autorais, links sociais e links de política */
+.footer-section :where(.copyright-text, .social-link, .policy-link) {
+  color: var(--white-color); /* Cor do texto branca, usando uma variável CSS */
+  transition: 0.2s ease; /* Define uma transição suave de 0.2 segundos para mudanças de estilo */
+}
+/* Define a disposição dos links sociais como flexbox com um espaçamento de 25px entre cada ícone */
+.footer-section .social-link-list {
+  display: flex; /* Exibe os ícones sociais horizontalmente */
+  gap: 25px; /* Espaçamento de 25px entre cada ícone */
+}
+/* Ajusta o tamanho da fonte dos ícones de links sociais, usando uma variável CSS */
+.footer-section .social-link-list .social-link {
+  font-size: var(--font-size-l); /* Define o tamanho da fonte dos ícones sociais */
+}
+/* Ao passar o mouse sobre um link social ou link de política, muda a cor para a cor secundária */
+.footer-section .social-link-list .social-link:hover,
+.footer-section .policy-text .policy-link:hover {
+  color: var(--secondary-color); /* Muda a cor dos links ao passar o mouse */
+}
+/* Define a aparência do separador (geralmente um pequeno traço ou ponto) entre textos de política */
+.footer-section .policy-text .separator {
+  color: #fff; /* Cor branca para o separador */
+  margin: 0 5px; /* Adiciona espaçamento de 5px à esquerda e à direita do separador */
+}
+
+
+
+
+
+
+/* bloco de respansividade se max width 900px */
+@media screen and (max-width: 900px) {
+  :root {
+    --font-size-m: 1rem;
+    --font-size-l: 1.3rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+  }
+  body.show-mobile-menu {
+    overflow: hidden;
+  }
+  body.show-mobile-menu header::before {
+    content: "";
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .navbar :is(#menu-open-button, #menu-close-button) {
+    font-size: var(--font-size-l);
+    padding-right: 15px;
+    display: block;
+  }
+  .navbar :is(#menu-open-button, #menu-close-button):hover {
+    color: var(--secondary-color) !important;
+  }
+  .navbar #menu-open-button {
+    color: #fff;
+  }
+  .navbar .nav-menu #menu-close-button {
+    position: absolute;
+    right: 0px;
+    top: 30px;
+  }
+  .navbar .nav-menu {
+    display: block;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    transition: left 0.2s ease;
+  }
+  body.show-mobile-menu .nav-menu {
+    left: 0;
+  }
+  .navbar .nav-menu .nav-link {
+    display: block;
+    margin-top: 17px;
+    padding: 10px 22px;
+    color: var(--dark-color);
+    font-size: var(--font-size-l);
+  }
+  .hero-section .section-content {
+    text-align: center;
+    gap: 50px;
+    padding: 30px 20px 20px;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .hero-section .hero-details :is(.subtitle, .description),
+  .about-section .about-details,
+  .contact-section .contact-form {
+    max-width: 100%;
+  }
+  .hero-section .hero-details .buttons {
+    justify-content: center;
+  }
+  .hero-section .hero-image-wrapper {
+    max-width: 270px;
+    margin-right: 0;
+  }
+  .about-section .section-content {
+    gap: 70px;
+    flex-direction: column-reverse;
+  }
+  .about-section .about-image-wrapper .about-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    max-width: 250px;
+  }
+  .menu-section .menu-list {
+    gap: 30px;
+  }
+  .menu-section .menu-list .menu-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .menu-section .menu-list .menu-item .menu-image {
+    max-width: 200px;
+  }
+  .gallery-section .gallery-list {
+    gap: 30px;
+  }
+  .gallery-section .gallery-list .gallery-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .contact-section .section-content {
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+
+/* Segundo bloco de respansividade se max width 640px */
+/* @media screen and (max-width: 640px) {
+  .menu-section .menu-list .menu-item,
+  .gallery-section .gallery-list .gallery-item {
+    width: 100%;
+  }
+  .menu-section .menu-list {
+    gap: 60px;
+  }
+  .testimonials-section .slider-wrapper {
+    margin: 0 0 30px;
+  }
+  .testimonials-section .swiper-slide-button {
+    display:none;
+  }
+  .footer-section .section-content {
+    flex-direction: column;
+    gap:20px;
+  }
+} */

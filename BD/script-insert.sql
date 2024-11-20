@@ -2,17 +2,11 @@
 CREATE DATABASE queijonopontodb;
 USE queijonopontodb;
 
--- Inserindo dados na tabela login
-INSERT INTO login (email, senhaUsuario) VALUES
-('vendas@queijosdaserra.com', 'senha321'),
-('fabrica@boavista.com', 'senha321'),
-('artesanal@queijosartesanais.com', 'senha321');
-
 -- Inserindo dados na tabela empresa
-INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, data_cadastro, fkLogin) VALUES
-('Queijos da Serra Ltda.', 'Queijos da Serra', '08765432000102', 'Fernando Pessoa', '98765432100', '11999996666', '2022-08-05', 101),
-('Laticínios Boa Vista Ltda.', 'Laticínios Boa Vista', '31122233000103', 'Vivian Marques', '15975348612', '1133221100', '2021-04-23', 102),
-('Queijos Artesanais Ltda.', 'Queijos Artesanais', '25566677000105', 'Frizzarini Cláudio', '36925814736', '11999885555', '2019-01-30', 103);
+INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, data_cadastro) VALUES
+('Queijos da Serra Ltda.', 'Queijos da Serra', '08765432000102', 'Fernando Pessoa', '98765432100', '11999996666', '2022-08-05'),
+('Laticínios Boa Vista Ltda.', 'Laticínios Boa Vista', '31122233000103', 'Vivian Marques', '15975348612', '1133221100', '2021-04-23'),
+('Queijos Artesanais Ltda.', 'Queijos Artesanais', '25566677000105', 'Frizzarini Cláudio', '36925814736', '11999885555', '2019-01-30');
 
 -- Inserindo dados na tabela endereco
 INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) VALUES
@@ -21,10 +15,10 @@ INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) VALUES
 ('Estrada do Leite', '55', 'Campinas', '13040000', 103);
 
 -- Inserindo dados na tabela usuario
-INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkEndereco, fkLogin) VALUES
-('Arthur Farias', '30567890123', '02999887766', 101, 101, 101),
-('João Silva', '12345678901', '11987654321', 102, 102, 102),
-('Maria Souza', '23456789012', '11991234567', 103, 103, 103);
+INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkEndereco) VALUES
+('Arthur Farias', '30567890123', '02999887766', 101, 101),
+('João Silva', '12345678901', '11987654321', 102, 102),
+('Maria Souza', '23456789012', '11991234567', 103, 103);
 
 -- Inserindo dados na tabela localMaturacao
 INSERT INTO localMaturacao (nomeLocal, descricaoLocal, capacidadeEstantes, areaSala, fkEmpresa) VALUES

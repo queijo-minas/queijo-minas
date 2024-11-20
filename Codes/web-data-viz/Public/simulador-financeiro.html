@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Queijo no Ponto</title>
+    <link rel="stylesheet" href="css/style_calculadora.css">
+    <link rel="icon" href="logo.svg">
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="conteudo" class="conteudo">
+            <div class="caixa">
+                <img src="imgs/logo.svg" alt="">
+
+                <div class="title">
+                    <h1>Simulador de perdas e lucros <br><span>Otimize sua produção de queijo.</span></h1>
+                </div>
+
+                <div class="quadro">
+                    <p>Selecione a medida de tempo da produção:</p>
+                    <select id="input_tempo_producao">
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                    <p>Produção de queijo (Kg):</p>
+                    <input type="number" id="input_producao_Kilos" placeholder="Ex: 500Kg de queijo produzido">
+                </div>
+
+                <div class="vendaKilo">
+                    <p>Valor de venda por Kg (R$):</p>
+                    <input type="number" id="input_venda_Kilo" placeholder="Ex: R$ 25,00 reais o Kg do queijo">
+                </div>
+
+                <div class="gastoKilo">
+                    <p>Gasto por Kg (R$):</p>
+                    <input type="number" id="input_gasto_por_KG" placeholder="Ex: R$ 10,00 para produzir um Kg">
+                </div>
+
+                <div class="taxaPerda">
+                    <p>Escolha a taxa de perda ou informe a sua:</p>
+                    <select id="input_perda_opcao" onchange="mostrarCamposPerda()">
+                        <option value="default">Usar perda padrão de 20%</option>
+                        <option value="manual">Inserir minha própria taxa de perda</option>
+                    </select>
+
+                    <div class="document" id="div_perda_manual"></div>
+                    <a class="font"
+                        href="https://www.epamig.br/ilct/wp-content/uploads/2020/07/QUEIJO-MINAS-ARTESANAL-PRINCIPAIS-PROBLEMAS.pdf">Link
+                        | Queijo Minas Artesanal | Principais Problemas</a>
+
+                </div>
+                <button onclick="Calcular()">Calcular</button>
+            </div>
+        </div>
+
+        <div class="resultadosCard" id="resultadosCard" style="display:none;">
+            <div class="contentFilho">
+                <div class="contentPerda">
+                    <div class="teste">
+                        <p>Sem monitoramento</p>
+                    </div>
+                    <div id="resultadoPerda"></div>
+                </div>
+                <div class="contentEconomia">
+                    <div class="teste2">
+                        <p>Com o nosso monitoramento | Queijo no Ponto </p>
+                    </div>
+                    <div id="resultadoEconomia"></div>
+                    <div id="impactoFinal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/script-simulador-financeiro.js"></script>
+</body>
+
+</html>

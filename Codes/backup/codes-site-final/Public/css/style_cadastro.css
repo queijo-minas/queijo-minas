@@ -1,0 +1,381 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* Bloco de criação de variáveis para padronização */
+:root {
+    /* Cores */
+    --white-color: #f5f5f5;
+    --dark-color: #030320;
+    --primary-color: #251605;
+    --secondary-color: #c59506;
+    --secondary-color-variacao: #dfa805;
+    --light-pink-color: #ecebeb;
+    --medium-gray-color: #eceaea;
+    --black-color: #000000;
+    --golden-yellow: #FFD700;
+    --dark-charcoal: #2F2F2F;
+    --amber-orange: #FFBF00;
+    --cream-white: #f3f2db;
+    --marrom-sépia: #36251A;
+    --marrom-amadeirado: #2F1F16;
+    --marrom-claro: #3D2B1E;
+    /* Tamanhos de fonte */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+  
+    /* Espessuras da fonte */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  
+    /* Raio da borda */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+}
+
+/* Reseta e configuração padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--primary-color);
+}
+
+
+/* Comportamento do scroll suave */
+html {
+  scroll-behavior: smooth; /* Faz o scroll da página ser suave */
+}
+
+ul {
+  list-style: none; /* Remove marcadores das listas */
+}
+a {
+  text-decoration: none; /* Remove sublinhado de links */
+}
+button {
+  cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+  background: none; /* Remove cor de fundo */
+  border: none; /* Remove borda */
+}
+
+  
+
+/* Bloco Estilização da barra de navegação (navbar) */
+header {
+  z-index: 5; /* Coloca o header acima de outros elementos */
+  width: 100%; /* O header ocupa 100% da largura da tela */
+  position: absolute; /* Fixa o header no topo durante o scroll */
+  top: 0; /* Garante que o header fique fixo no topo */
+  left: 0; /* Garante que o header ocupe toda a largura */
+  background-color: var(--black-color);
+  padding: 5px 0; /* Adiciona espaçamento no topo e na parte inferior */
+}
+header .navbar {
+  display: flex; /* Utiliza flexbox para alinhar itens */
+  padding-right: 0px; /* Ajusta o espaçamento à esquerda */
+  align-items: center; /* Alinha os itens verticalmente */
+  justify-content: space-between; 
+  width: 100%;
+  height: 80px;
+}
+.navbar .nav-logo {
+  margin-left: 10px;
+}
+.navbar .nav-logo img {
+  width: 100px;
+}
+.navbar .nav-menu {
+  display: flex; /* Utiliza flexbox para os itens do menu */
+  justify-content: flex-end;
+  width: 90%;
+  gap: 5px; /* Define o espaço entre os itens do menu */
+  color: var(--cream-white);
+}
+.navbar .nav-menu .nav-link {
+  padding: 10px 18px; /* Adiciona espaçamento interno */
+  color: var(--cream-white); /* Define a cor do link */
+  font-size: var(--font-size-m); /* Define o tamanho da fonte */
+  border-radius: var(--border-radius-m); /* Define bordas arredondadas */
+  transition: 0.3s ease; /* Adiciona transição suave */
+}
+.navbar .nav-menu .nav-link:hover {
+  color: var(--white-color); /* Altera a cor do texto ao passar o mouse */
+  background: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
+}
+/* bloco para esconder os botões do menu para telas grandes */
+.navbar :where(#menu-open-button, #menu-close-button) {
+  display: none; /* Não exibe os botões de abrir e fechar o menu */
+}
+
+
+/* Estilos do container */
+.container {
+  position: relative;
+  margin-top: 100px;
+  max-width: 700px;
+  width: 100%;
+  background: var(--medium-gray-color);
+  padding: 25px;
+  border-radius: var(--border-radius-s);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container #header {
+  font-size: var(--font-size-xl);
+  color: var(--black-color);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  position: relative;
+}
+
+.container #header::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  height: 4px;
+  width: 180px;
+  background: var(--amber-orange);
+}
+
+.container .form {
+  margin-top: 30px;
+}
+
+/* Estilos dos campos de entrada */
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.input-box label {
+  color: var(--black-color);
+}
+
+.form .input-box input, .select-box {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: var(--font-size-n);
+  color: var(--dark-charcoal);
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius-s);
+  padding: 0 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos da coluna */
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+/* Estilos da seleção de gênero */
+.form .gender-box {
+  margin-top: 20px;
+}
+
+.gender-box h3 {
+  color: var(--black-color);
+  font-size: var(--font-size-n);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: 8px;
+}
+
+.form .gender-option, .gender {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+
+.form .gender {
+  column-gap: 5px;
+}
+
+.gender input {
+  accent-color: var(--secondary-color-variacao);
+}
+
+.gender label {
+  color: var(--dark-charcoal);
+  cursor: pointer;
+}
+
+/* Estilos do endereço */
+.address input, .select-box {
+  margin-top: 15px;
+}
+
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: var(--dark-charcoal);
+  font-size: var(--font-size-n);
+}
+
+/* Estilos do botão */
+.form button {
+  height: 55px;
+  width: 100%;
+  color: var(--medium-gray-color);
+  font-size: var(--font-size-n);
+  font-weight: var(--font-weight-normal);
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--secondary-color-variacao);
+  border-radius: var(--border-radius-s);
+}
+
+.form button:hover {
+  background: var(--amber-orange);
+}
+
+/* Responsividade */
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+
+  .gender-option, .gender {
+    row-gap: 15px;
+  }
+} 
+
+
+
+/* bloco de respansividade se max width 900px */
+@media screen and (max-width: 900px) {
+  :root {
+    --font-size-m: 1rem;
+    --font-size-l: 1.3rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+  }
+  body.show-mobile-menu {
+    overflow: hidden;
+  }
+  body.show-mobile-menu header::before {
+    content: "";
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .navbar :is(#menu-open-button, #menu-close-button) {
+    font-size: var(--font-size-l);
+    padding-right: 15px;
+    display: block;
+  }
+  .navbar :is(#menu-open-button, #menu-close-button):hover {
+    color: var(--secondary-color) !important;
+  }
+  .navbar #menu-open-button {
+    color: #fff;
+  }
+  .navbar .nav-menu #menu-close-button {
+    position: absolute;
+    right: 0px;
+    top: 30px;
+  }
+  .navbar .nav-menu {
+    display: block;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    transition: left 0.2s ease;
+  }
+  body.show-mobile-menu .nav-menu {
+    left: 0;
+  }
+  .navbar .nav-menu .nav-link {
+    display: block;
+    margin-top: 17px;
+    padding: 10px 22px;
+    color: var(--dark-color);
+    font-size: var(--font-size-l);
+  }
+  .hero-section .section-content {
+    text-align: center;
+    gap: 50px;
+    padding: 30px 20px 20px;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .hero-section .hero-details :is(.subtitle, .description),
+  .about-section .about-details,
+  .contact-section .contact-form {
+    max-width: 100%;
+  }
+  .hero-section .hero-details .buttons {
+    justify-content: center;
+  }
+  .hero-section .hero-image-wrapper {
+    max-width: 270px;
+    margin-right: 0;
+  }
+  .about-section .section-content {
+    gap: 70px;
+    flex-direction: column-reverse;
+  }
+  .about-section .about-image-wrapper .about-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    max-width: 250px;
+  }
+  .menu-section .menu-list {
+    gap: 30px;
+  }
+  .menu-section .menu-list .menu-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .menu-section .menu-list .menu-item .menu-image {
+    max-width: 200px;
+  }
+  .gallery-section .gallery-list {
+    gap: 30px;
+  }
+  .gallery-section .gallery-list .gallery-item {
+    width: calc(100% / 2 - 30px);
+  }
+  .contact-section .section-content {
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}

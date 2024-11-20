@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Queijo no ponto | Cadastro Sala de Maturação</title>
+  <link rel="stylesheet" href="css/style_cadastro.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+ 
+  <header id="scroll-element">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <div>
+          <img src="imgs/logo.svg" style="height: 100px; margin-top: 10px;">
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <button id="menu-close-button" class="fas fa-times"></button>
+        <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+        <li class="nav-item"><a href="#menu" class="nav-link">Serviços</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
+        <li class="nav-item"><a href="#menu" class="nav-link">Equipe</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="cadastro-empresa.html" class="nav-link">Cadastro</a></li>
+      </ul>
+      <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+  </header>
+
+  <section class="container">
+    <div id="header">Cadastro Sala de Maturação</div>
+    <form action="#" class="form" id="formCadastro">
+      <div class="input-box">
+        <label for="nomeLocal">Nome da Sala:</label>
+        <input type="text" id="nomeLocal" name="nomeLocal" required>
+      </div>
+
+      <div class="column">
+        <div class="input-box">
+          <label for="quantidadeEstantes">Quantidade de estantes:</label>
+          <input type="number" id="quantidadeEstantes" name="quantidadeEstantes" required>
+        </div>
+
+        <div class="input-box">
+          <label for="area">Área (m²)</label>
+          <input type="number" id="area" name="area" required>
+        </div>
+      </div>
+
+        <div class="input-box">
+          <label for="fkEmpresa">ID da Empresa:</label>
+          <input type="number" id="fkEmpresa" name="fkEmpresa" required>
+        </div>
+      </div>
+
+      <div class="input-box">
+        <label for="descricaoLocal">Descrição:</label>
+        <textarea id="descricaoLocal" name="descricaoLocal" required></textarea>
+      </div>
+   
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+
+<script src="script/script-sala-de-maturacao.js"></script>
+</body>
+</html>
+<script>
+  
+
+function cadastrarEmpresa() {
+    const razaoSocial = razao_input.value;
+    const nomeFantasia = nomeFantasia_input.value;
+    const cnpj = cnpj_input.value;
+    const telefone = telefone_input.value;
+    const representanteLegal = representante_input.value;
+    const email = email_input.value;
+    const cpf = cpf_input.value;
+    const senhaEmpresa = senha_input.value;
+
+    if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return false;
+    }
+
+    fetch("http://localhost:3333/empresas/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            razaoSocial,
+            nomeFantasia,
+            cnpj,
+            telefone,
+            representanteLegal,
+            email,
+            cpf,
+            senhaEmpresa,
+        }),
+    })
+        .then((resposta) => {
+            if (resposta.ok) {
+                resposta.json().then((json) => {
+                    sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                    alert("Cadastro de empresa realizado com sucesso!");
+                    window.location = "http://localhost:3333/login.html";
+                });
+            } else {
+                alert("Houve um erro ao tentar realizar o cadastro.");
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro:", erro);
+            alert("Erro ao realizar o cadastro da empresa.");
+        });
+
+    return false;
+}
+
+
+</script>
