@@ -58,26 +58,26 @@ function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa) {
     `;
 
     console.log("Executando a inserção no login: \n" + instrucaoLogin);
-
+    
     return database.executar(instrucaoLogin)
-        .then(result => {
-            const fkLogin = result.insertId; 
-
-            
-            const instrucaoUsuario = `
-                INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkLogin) 
-                VALUES ('${nome}', '${cpf}', '${telefone}', '${fkEmpresa}', '${fkLogin}');
-            `;
-
-            console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
-            console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, fkLogin });
-
-            return database.executar(instrucaoUsuario);
-        })
-        .catch(erro => {
-            console.error("Erro ao cadastrar usuário:", erro);
-            throw erro;
-        });
+    .then(result => {
+        const fkLogin = result.insertId; 
+        
+        
+        const instrucaoUsuario = `
+        INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkLogin) 
+        VALUES ('${nome}', '${cpf}', '${telefone}', '${fkEmpresa}', '${fkLogin}');
+        `;
+        
+        console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
+        console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, fkLogin });
+        
+        return database.executar(instrucaoUsuario);
+    })
+    .catch(erro => {
+        console.error("Erro ao cadastrar usuário:", erro);
+        throw erro;
+    });
 }
 
 module.exports = {

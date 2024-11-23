@@ -186,7 +186,7 @@ function validarSenha() {
 
 function confirmacaoSenha() {
     const senha = senha_input.value;
-    const confirmacaoSenha = confirmacao_senha_input.value;
+    const confirmacaoSenha = senha_confirmacao_input.value;
 
     if (senha == confirmacaoSenha) {
         validacaoConfirmacao.innerHTML = `<div style="color: green;">Senha Válida</div><br>`;
@@ -220,8 +220,8 @@ function gerarSenha() {
 
     senha_input.value = novaSenha;
     senha_input.type = "text";
-    confirmacao_senha_input.value = novaSenha;
-    confirmacao_senha_input.type = "text";
+    senha_confirmacao_input.value = novaSenha;
+    senha_confirmacao_input.type = "text";
 
     validarSenha();
     confirmacaoSenha();
@@ -279,10 +279,12 @@ function validarCNPJ() {
       
 
         validacaoCNPJ.innerHTML = `<div style="color: green;">Seu CNPJ está válido ${cnpjSemantico}</div><br>`;
+        cnpjFinal = cnpj
         cnpj_input.value = cnpjSemantico;
     } else {
         validacaoCNPJ.innerHTML = `<div style="color: red;">CNPJ inválido, insira apenas a quantidade correta de números (14)</div><br>`;
         cnpj_input.value = cnpjSemantico;
+        cnpjFinal = null
 
     }
 }
@@ -290,7 +292,7 @@ function validarCNPJ() {
 // o trim tira os espaços em branco
 function cadastrarUsuario() {
     const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
-    const cpfVar = cpf_input.value;
+    const cpfVar = cpfFinal;
     const emailVar = email_input.value.trim();
     const telefoneVar = telefone_input.value.trim();
     const senhaVar = senha_input.value.trim();
@@ -354,11 +356,11 @@ function cadastrarUsuario() {
 function cadastrarEmpresa() {
     const razaoSocial = razao_input.value;
     const nomeFantasia = nomeFantasia_input.value;
-    const cnpj = cnpj_input.value;
+    const cnpj = cnpjFinal;
     const telefone = telefone_input.value;
     const representanteLegal = representante_input.value;
     const email = email_input.value;
-    const cpf = cpf_input.value;
+    const cpf = cpfFinal;
     const senhaEmpresa = senha_input.value;
 
     if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
