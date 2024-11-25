@@ -38,6 +38,7 @@ CREATE TABLE usuario (
     senha VARCHAR(10),
     fkEmpresa INT,
     fkEndereco INT UNIQUE,
+    tipo varchar(45),
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
@@ -130,6 +131,14 @@ SELECT * FROM dadosSensor;
 SELECT * FROM historicoSensor;
 SELECT * FROM alertaSensor;
 SELECT * FROM limitesideais;
+
+insert into usuario values
+(default, 'pedro leão', '173.163.153-80', '12121212121', 'pedroleao@gmail.com', 'abc123', 102, null, 'funcionario');
+ALTER TABLE usuario MODIFY COLUMN cpf VARCHAR(14);	
+
+ SELECT usuario.idUsuario AS id, usuario.nome, usuario.tipo as tipo, usuario.email, empresa.nomeFantasia AS nomeFantasia
+    FROM usuario
+    LEFT JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa;
 
 -- Select com join para dados básicos do usuário
 SELECT 
