@@ -21,7 +21,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    background-color: rgb(98, 52, 0);
+    background-color: #251605;
     padding: 25px 20px;
     transition: all 0.4s ease;
     z-index: 1;
@@ -80,7 +80,7 @@ body {
     height: 1px;
     transform: scaleX(1);
     transform: translateY(-50%);
-    background-color: #b07600;
+    background-color: #dfa805;
     transform-origin: right;
     transition-duration: 0.2s;
 }
@@ -102,7 +102,7 @@ body {
 }
 
 .sidebar-links li a:hover {
-    background-color: #7a4a09;
+    background-color: #dfa805;
     color: white;
     border-radius: 4px;
 }
@@ -142,7 +142,7 @@ body {
 }
 
 .sidebar:hover .user-account {
-    background-color: #7a4a09;
+    background-color: #dfa805;
     border-radius: 4px;
 }
 
@@ -181,60 +181,16 @@ body {
     transition: all 0.4s ease;
 }
 
-.containerKpi .kpi
- {               /* kpis certas */
-    display: flex;
-    justify-content: space-between;
+.containerKpi .kpi1,
+.kpi2,
+.kpi3,
+.kpi4 {
     margin-bottom: 15px;
-    align-items: center;
-    
+    background-color:#b02900;
     border-radius: 5px;
+    width: 400spx;
     height: 115px;
     -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
-    padding: 15px;
-
-    transition: transform 0.3s ease-in-out; /* Efeito de zoom */
 }
-
-
-
-.kpi:hover {
-    transform: scale(1.05); /* Aumenta o tamanho da caixa ao passar o mouse */
-}
-
-
-
-.verde{
-    background-color:#00b046;
-}
-
-.vermelho {                 /* kpi fora do limite */
-   
-    background-color:#b02900;
-    color: white;
-   
-    
-}
-
-.vermelho h1 {
-    color:white;
-}
-
-h1 { color: black;
-
-}
-
-
-
-.kpi img {
-    
-  margin-right: 0px;
-    
-    width: 50px;
-    
-    
-}
-
-  
