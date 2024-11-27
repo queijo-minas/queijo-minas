@@ -20,6 +20,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var salasRouter = require("./src/routes/salas");
 var empresasRouter = require("./src/routes/empresas");
+const historicoRouter = require("./src/routes/historico");
+
 
 
 app.use(express.json());
@@ -33,6 +35,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 app.use("/salas", salasRouter);
+app.use("/historico", historicoRouter);
 
 
 

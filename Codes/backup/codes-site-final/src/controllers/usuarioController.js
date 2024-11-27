@@ -19,7 +19,7 @@ function autenticar(req, res) {
                         id: resultadoAutenticar[0].id,
                         email: resultadoAutenticar[0].email,
                         nome: resultadoAutenticar[0].nome,
-                        nomeFantasia: resultadoAutenticar[0].nomeFantasia  || null
+                        nomeFantasia: resultadoAutenticar[0].nomeFantasia,
                     });
                 } else if (resultadoAutenticar.length === 0) {
                     res.status(403).send("Email e/ou senha inválido(s)");

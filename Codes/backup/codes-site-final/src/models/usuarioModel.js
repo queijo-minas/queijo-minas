@@ -52,7 +52,7 @@ function autenticar(email, senha) {
 function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, TipoUsuario) {
     console.log("Iniciando cadastro do usuário.");
 
-<<<<<<< HEAD:Codes/codes-site-final/src/models/usuarioModel.js
+
     
     const instrucaoLogin = `
         INSERT INTO login (email, senhaUsuario) VALUES ('${email}', '${senha}');
@@ -66,37 +66,27 @@ function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, TipoUsuario) {
         
         
         const instrucaoUsuario = `
-        INSERT INTO usuario (nome, cpf, telefone, fkEmpresa, fkLogin) 
-        VALUES ('${nome}', '${cpf}', '${telefone}', '${fkEmpresa}', '${fkLogin}');
-        `;
-        
-        console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
-        console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, fkLogin });
-        
-        return database.executar(instrucaoUsuario);
-    })
-    .catch(erro => {
-        console.error("Erro ao cadastrar usuário:", erro);
-        throw erro;
-    });
-=======
-    const instrucaoUsuario = `
-                INSERT INTO usuario (nome, cpf, email, senha, telefone, fkEmpresa, tipo) 
+         INSERT INTO usuario (nome, cpf, email, senha, telefone, fkEmpresa, tipo) 
                 VALUES ('${nome}', '${cpf}', '${email}', '${senha}','${telefone}', '${fkEmpresa}','${TipoUsuario}');
             `;
 
-    console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
-    console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, TipoUsuario });
 
-    
-        // .catch (erro => {
+            console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
+            console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, TipoUsuario });
+        
+        return database.executar(instrucaoUsuario);
+    })
+    // .catch (erro => {
         //     console.error("Erro ao cadastrar usuário:", erro);
         //     throw erro;
         // });
-        return database.executar(instrucaoUsuario);
+    }
+    module.exports = {
+        autenticar,
+        cadastrar
+    };
 
->>>>>>> a5fe5c6994739ecc644aff362d6d23c3ca272e0a:Codes/backup/codes-site-final/src/models/usuarioModel.js
-}
+
 module.exports = {
     autenticar,
     cadastrar
