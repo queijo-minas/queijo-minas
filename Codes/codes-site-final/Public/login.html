@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Queijo no ponto | Login</title>
+    <link rel="shortcut icon" href="imgs/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <header id="scroll-element">
+        <nav class="navbar">
+            <a href="#" class="nav-logo">
+                <div>
+                    <img src="imgs/logo.svg" style="height: 100px; margin-top: 10px;">
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Serviços</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Equipe</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
+                <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="cadastro-empresa.html" class="nav-link">Cadastro</a></li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <input type="checkbox" id="flip">
+        <div class="cover">
+            <div class="front">
+                <img src="imgs/salaMaturacao.png" alt="">
+                <div class="text">
+                    <span class="text-1"> GARANTA A QUALIDADE DO SEU QUEIJO! <span>FAÇA LOGIN E DESCUBRA COMO!</span>
+                </div>
+            </div>
+            <div class="back">
+                <img class="backImg" src="imgs/background_cadastro.jpg" alt="">
+                <div class="text">
+                    <span class="text-1">NÃO ARRISQUE SEU QUEIJO! <span>CADASTRE-SE E PROTEJA SUA PRODUÇÃO!</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="forms">
+            <div class="form-content">
+                <!-- Login Form -->
+                <div class="login-form">
+                    <div class="title">Entrar</div>
+                    <form id="login-form" onsubmit="entrar(); return false;">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input id="login_email" type="text" placeholder="Digite seu email" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input id="login_senha" type="password" placeholder="Digite sua senha" required>
+                            </div>
+                            <div class="text"><a href="#">Esqueceu a senha?</a></div>
+                            <div class="button input-box">
+                                <input type="submit" value="Entrar">
+                            </div>
+                            <div class="text sign-up-text">Não tem uma conta? <label for="flip">Cadastre-se agora</label></div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Cadastro Form -->
+                <div class="signup-form">
+                    <div class="title">Cadastrar</div>
+                    <form id="form-cadastro">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="nome_input" type="text" placeholder="Digite seu nome" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="cpf_input" type="text" placeholder="Digite seu CPF"  maxlength="14" onkeyup="validarCPF()" required>
+                                <div id="validacaoCPF"></div>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input id="email_input" type="text" placeholder="Digite seu email" required>
+                            </div>
+                            <div class="input-box">
+                                <img src="imgs/phone-solid.svg" style="height: 18px; width: 20px; margin-top: 2px;">
+                                <input id="telefone_input" type="text" placeholder="Digite seu Telefone" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input id="senha_input" type="password" placeholder="Digite sua senha" required>
+                                <div id="validacaoSenha"></div>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha" required>
+                                <div id="validacaoConfirmacao"></div>
+                            </div>
+                            <div class="input-box">
+                                <img src="imgs/office-building_8655809.png" style="width: 32px;">
+                                <input id="codigo_input" type="text" placeholder="Código de Vínculo Empresarial" required>
+                            </div>
+                            <div class="input-box" style="display: none;">
+                                <img src="imgs/office-building_8655809.png" style="width: 32px;">
+                               <input id="input_tipo" type="text" value="cliente">
+                            </div>
+                            
+                               <!-- <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="endereco_input" type="text" placeholder="Digite sua Rua xxxx, número 123" />
+                                <div id="validacaoEndereco"></div><br>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="cidade_input" type="text" placeholder="Digite Sua Cidade" />
+                                <div id="validacaoCidade"></div><br>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="cep_input" type="text" placeholder="Digite seu Cep" />
+                                <div id="validacaoCEP"></div><br>
+                            </div> -->
+                        </div>
+                        <div class="button input-box">
+                            <input type="button" onclick="cadastrarUsuario()" value="Enviar">
+                        </div>
+                        <div class="text sign-up-text">Já tem uma conta? <label for="flip">Entrar agora</label></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script/script.js"></script>
+    <script src="script/scriptUsuario.js"></script>
+</body>
+</html>
+<script>
+    
+    function entrar() {
+    const emailVar = login_email.value;
+    const senhaVar = login_senha.value;
+
+    if (emailVar === "" || senhaVar === "") {
+        alert("Preencha todos os campos.");
+        return false;
+    }
+
+    fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+        }),
+    })
+        .then((resposta) => {
+            if (resposta.ok) {
+                resposta.json().then((json) => {
+                    sessionStorage.setItem("NOME_USUARIO", json.nome);
+
+                    if (json.nomeFantasia) {
+                        sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                    } else {
+                        sessionStorage.removeItem("NOME_EMPRESA");
+                    }
+
+                    window.location = "/saladematuracao.html";
+                });
+            } else {
+                resposta.text().then((texto) => {
+                    alert("Erro ao tentar realizar o login: " + texto);
+                });
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao realizar o login:", erro);
+            alert("Erro ao realizar o login.");
+        });
+
+    return false;
+}
+</script>
