@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  
+
     <header id="scroll-element">
         <nav class="navbar">
             <a href="#" class="nav-logo">
@@ -50,16 +50,18 @@
             <div class="column">
                 <div class="input-box">
                     <label>Número de Telefone:</label>
-                    <input type="tel"  id="telefone_input" placeholder="Digite o número de telefone" required />
+                    <input type="tel" id="telefone_input" placeholder="Digite o número de telefone" required />
                 </div>
                 <div class="input-box">
                     <label>CNPJ:</label>
-                    <input id="cnpj_input" type="" maxlength="18" placeholder="Digite seu CNPJ" onkeyup="validarCNPJ()" />
+                    <input id="cnpj_input" type="" maxlength="18" placeholder="Digite seu CNPJ"
+                        onkeyup="validarCNPJ()" />
                     <div id="validacaoCNPJ"></div>
                 </div>
                 <div class="input-box">
                     <label>CPF:</label>
-                    <input id="cpf_input" type="text" maxlength="14" placeholder="Digite seu CPF" onkeyup="validarCPF()" />
+                    <input id="cpf_input" type="text" maxlength="14" placeholder="Digite seu CPF"
+                        onkeyup="validarCPF()" />
                     <div id="validacaoCPF"></div>
                 </div>
             </div>
@@ -111,10 +113,11 @@
                 </div>
                 <div class="input-box">
                     <label>Confirme a Senha:</label>
-                    <input id="senha_confirmacao_input" type="password" placeholder="******" onkeyup="confirmacaoSenha()" />
+                    <input id="senha_confirmacao_input" type="password" placeholder="******"
+                        onkeyup="confirmacaoSenha()" />
                     <div id="validacaoSenha"></div>
                 </div>
-                
+
                 <div class="input-box">
                     <button class="botaozinho" type="button" onclick="gerarSenha()">Gerar Senha</button>
                 </div>
@@ -134,5 +137,5 @@
     <script src="script/scriptEmpresa.js"></script>
     <script src="script/script.js"></script>
 </body>
-</html>
 
+</html>

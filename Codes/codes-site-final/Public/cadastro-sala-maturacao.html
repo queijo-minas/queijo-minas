@@ -11,7 +11,7 @@
 </head>
 
 <body>
- 
+
   <header id="scroll-element">
     <nav class="navbar">
       <a href="#" class="nav-logo">
@@ -41,21 +41,8 @@
         <input type="text" id="nomeLocal" name="nomeLocal" required>
       </div>
 
-     
 
-     
 
-    <!--
-     <div class="column">
-        <div class="input-box">
-          <label for="temperaturaIdeal">Temperatura Ideal (°C):</label>
-          <input type="number" step="0.01" id="temperaturaIdeal" name="temperaturaIdeal" required>
-        </div>  
-    <div class="input-box">
-          <label for="umidadeIdeal">Umidade Ideal (%):</label>
-          <input type="number" step="0.01" id="umidadeIdeal" name="umidadeIdeal" required>
-        </div>
-      </div>-->    
 
       <div class="column">
         <div class="input-box">
@@ -69,72 +56,72 @@
         </div>
       </div>
 
-        <div class="input-box">
-          <label for="fkEmpresa">ID da Empresa:</label>
-          <input type="number" id="fkEmpresa" name="fkEmpresa" required>
-        </div>
+      <div class="input-box">
+        <label for="fkEmpresa">ID da Empresa:</label>
+        <input type="number" id="fkEmpresa" name="fkEmpresa" required>
+      </div>
       </div>
 
       <div class="input-box">
         <label for="descricaoLocal">Descrição:</label>
         <textarea id="descricaoLocal" name="descricaoLocal" required></textarea>
       </div>
-   
+
 
       <button type="submit">Cadastrar</button>
     </form>
   </section>
 
   <script>
-const form = document.getElementById("formCadastro");
+    const form = document.getElementById("formCadastro");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const nomeLocal = form.nomeLocal.value;
-    const descricaoLocal = form.descricaoLocal.value;
-    const quantidadeEstantes = parseInt(form.quantidadeEstantes.value);
-    const area = parseFloat(form.area.value);
-    const fkEmpresa = parseInt(form.fkEmpresa.value);
+      const nomeLocal = form.nomeLocal.value;
+      const descricaoLocal = form.descricaoLocal.value;
+      const quantidadeEstantes = parseInt(form.quantidadeEstantes.value);
+      const area = parseFloat(form.area.value);
+      const fkEmpresa = parseInt(form.fkEmpresa.value);
 
-    if (!nomeLocal || !descricaoLocal || !quantidadeEstantes || !area || !fkEmpresa) {
+      if (!nomeLocal || !descricaoLocal || !quantidadeEstantes || !area || !fkEmpresa) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return false;
-    }
+      }
 
-    fetch("http://localhost:3333/salas/cadastrar", {
+      fetch("http://localhost:3333/salas/cadastrar", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            nomeLocal,
-            descricaoLocal,
-            quantidadeEstantes,
-            area,
-            fkEmpresa,
+          nomeLocal,
+          descricaoLocal,
+          quantidadeEstantes,
+          area,
+          fkEmpresa,
         }),
-    })
+      })
         .then((resposta) => {
-            if (resposta.ok) {
-                return resposta.json();
-            } else {
-                return resposta.text().then((texto) => {
-                    throw new Error(texto);
-                });
-            }
+          if (resposta.ok) {
+            return resposta.json();
+          } else {
+            return resposta.text().then((texto) => {
+              throw new Error(texto);
+            });
+          }
         })
         .then((json) => {
-            alert("Sala cadastrada com sucesso!");
-            window.location = "http://localhost:3333/saladematuracao.html"; // Página após o cadastro
+          alert("Sala cadastrada com sucesso!");
+          window.location = "http://localhost:3333/sala-de-maturacao.html"; // Página após o cadastroOOO
         })
         .catch((erro) => {
-            console.error("Erro ao cadastrar sala:", erro);
-            alert("Erro ao cadastrar sala. Tente novamente.");
+          console.error("Erro ao cadastrar sala:", erro);
+          alert("Erro ao cadastrar sala. Tente novamente.");
         });
 
-    return false;
-});
+      return false;
+    });
 
   </script>
 </body>

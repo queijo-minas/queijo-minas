@@ -1,3 +1,7 @@
+// ESSE SCRIPT É GERAL DE FUNÇÕES DINÂMICAS DO SITE, NÃO TEM NADA DE VALIDAÇÕES AQUI,
+// SE FOR FAZER VALIDAÇÕES, FAÇA NOS RESPECTIVOS SCRIPTS DA EMPRESA OU DO USUÁRIO!!!
+
+
 // Seleciona todos os links do menu de navegação
 const navbarLinks = document.querySelectorAll(".nav-menu .nav-link");
 // Seleciona o botão de abrir o menu (versão mobile)
