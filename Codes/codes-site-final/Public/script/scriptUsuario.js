@@ -64,7 +64,9 @@ function cadastrarUsuario() {
         .then((resposta) => {
             if (resposta.ok) {
                 alert("Cadastro realizado com sucesso! Redirecionando para o login...");
-                setTimeout(() => (window.location = "login.html"), 2000);
+                setTimeout(() => (
+                    sessionStorage.setItem("NOME_USUARIO", json.nome),
+                    window.location = "login.html"), 2000);
             } else {
                 alert("Houve um erro ao tentar realizar o cadastro.");
             }

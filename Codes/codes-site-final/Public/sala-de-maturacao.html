@@ -32,13 +32,13 @@
       </li>
 
       <li>
-        <a href="./Hist.html"><span class="material-symbols-outlined">
+        <a href="./historico.html"><span class="material-symbols-outlined">
             overview
           </span>Histórico</a>
       </li>
 
       <li>
-        <a href="./dash.html"><span class="material-symbols-outlined">
+        <a href="./dashboard.html"><span class="material-symbols-outlined">
             monitoring
           </span>Gráficos</a>
       </li>
@@ -63,8 +63,10 @@
       <div class="user-profile">
         <img src="imgs/Ellipse 1.png" alt="usuario" />
         <div class="user-details">
-          <h3>Usúario</h3>
+          <h3><span id="nome">Usuário</span></h3>
           <span>Produtor</span>
+          <span id="nomeFantasia">Nome da Empresa</span>
+          <span>Empresa</span>
         </div>
       </div>
     </div>
@@ -93,7 +95,7 @@
 </html>
 <script>
   const container = document.getElementById('sala-container');
-  const idEmpresa = 101; // Substitua pelo ID dinâmico da empresa (sessão, etc.) ainda a configurar isso
+  const idEmpresa = 101; // Substituir pelo ID dinâmico da empresa (sessão, etc.) ainda a configurar isso
 
   // Função para carregar salas
   async function carregarSalas() {
@@ -160,5 +162,25 @@
 
   // Inicializar
   carregarSalas();
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Recupera os dados do sessionStorage
+    const nome = sessionStorage.getItem("NOME_USUARIO");
+    const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
+
+
+    if (!nome) {
+      alert("Usuário não autenticado. Redirecionando para o login.");
+      window.location = "/login.html";
+      return;
+    }
+
+
+    document.getElementById("nome").textContent = nome;
+    document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
+  });
+
+
 
 </script>

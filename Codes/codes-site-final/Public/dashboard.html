@@ -26,19 +26,19 @@
             <div class="menu_separator"></div>
 
             <li>
-                <a href="./saladematuracao.html"><span class="material-symbols-outlined">
+                <a href="./sala-de-maturacao.html"><span class="material-symbols-outlined">
                         dashboard
                     </span>Salas de maturação</a>
             </li>
 
             <li>
-                <a href="./Hist.html"><span class="material-symbols-outlined">
+                <a href="./historico.html"><span class="material-symbols-outlined">
                         overview
                     </span>Histórico</a>
             </li>
 
             <li>
-                <a href="./dash.html"><span class="material-symbols-outlined">
+                <a href="./dashboard.html"><span class="material-symbols-outlined">
                         monitoring
                     </span>Gráficos</a>
             </li>
@@ -62,9 +62,10 @@
             <div class="user-profile">
                 <img src="imgs/Ellipse 1.png" alt="usuario" />
                 <div class="user-details">
-                    <h3><span id="nomeUsuario">Usuário</span></h3>
+                    <h3><span id="nome">Usuário</span></h3>
                     <span>Produtor</span>
-                    <p>Empresa: <span id="nomeFantasia">Nome da Empresa</span></p>
+                    <span id="nomeFantasia">Nome da Empresa</span>
+                    <span>Empresa</span>
                 </div>
             </div>
         </div>
@@ -271,7 +272,7 @@
     });
 
 
-    /*  
+    /*
     // ESSE CÓDIGO ABAIXO QUE ESTÁ COMENTADO, ESTÁ FUNCIONANDO A DASHBOARD, OS GRÁFICOS ESTÃO 
     // DINÂMICOS E O SCRIPT ABAIXO DELE ESTÁ FUNCIONANDO, APENAS É PRECISO IMPLEMENTAR PEQUENOS DETALHES DE CSS DO CÓDIGO ACIMA, 
     // O METÓDO FETCH ESTÁ FUNCIONANDO TAMBÉM - ASSINADO BEATRIZ, DIA 30/11; TESTAR E AJUSTAR NA SEGUNDA-FEIRA 
@@ -477,17 +478,25 @@
       */
 
 
+</script>
 
-    const nome = sessionStorage.getItem("NOME_USUARIO");
-    const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
+<script>
+    // aqui recupera o nome do usuario e da empresa que estão no session
+    document.addEventListener("DOMContentLoaded", () => {
+        // Recupera os dados do sessionStorage
+        const nome = sessionStorage.getItem("NOME_USUARIO");
+        const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
 
 
-    const mensagemBemVindo = nomeFantasia
-        ? `${nome}<br>Produtor<br> ${nomeFantasia}!`
-        : `${nome}<br> Produtor`;
+        if (!nome) {
+            alert("Usuário não autenticado. Redirecionando para o login.");
+            window.location = "/login.html";
+            return;
+        }
 
 
-    document.querySelector(".navbar h2").textContent = mensagemBemVindo;
-
+        document.getElementById("nome").textContent = nome;
+        document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
+    });
 
 </script>
