@@ -118,9 +118,9 @@
                     <div id="validacaoSenha"></div>
                 </div>
 
-                <div class="input-box">
+               <!--<div class="input-box">
                     <button class="botaozinho" type="button" onclick="gerarSenha()">Gerar Senha</button>
-                </div>
+                </div>--> 
                 <div id="validacaoConfirmacao"></div>
             </div>
             <div class="column">
@@ -140,23 +140,3 @@
 
 </html>
 
-<script>
-    // aqui recupera o nome do usuario e da empresa que estão no session
-    document.addEventListener("DOMContentLoaded", () => {
-        // Recupera os dados do sessionStorage
-        const nome = sessionStorage.getItem("NOME_USUARIO");
-        const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
-
-
-        if (!nome) {
-            alert("Usuário não autenticado. Redirecionando para o login.");
-            window.location = "/login.html";
-            return;
-        }
-
-
-        document.getElementById("nome").textContent = nome;
-        document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
-    });
-
-</script>

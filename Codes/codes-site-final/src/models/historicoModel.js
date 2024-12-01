@@ -1,27 +1,36 @@
-const database = require("../database/config");
+var database = require("../database/config");
 
-async function obterHistorico(fkLocalMaturacao) {
+// Função para buscar o histórico de um local de maturação
+exports.buscarHistorico = async (fkLocalMaturacao) => {
     const query = `
         SELECT 
-            hs.dataHora,
-            hs.umidade,
-            hs.temperatura,
-            CASE
-                WHEN hs.temperatura > 15 THEN 1
-                ELSE 0
-            END AS alerta,
-            COUNT(a.idAlertaSensor) AS totalAlertas,
-            SEC_TO_TIME(SUM(TIMESTAMPDIFF(SECOND, a.dataHora, NOW()))) AS tempoEmAlerta
-        FROM historicoSensor hs
-        LEFT JOIN alertaSensor a ON hs.fkSensor = a.fkSensor AND hs.dataHora = a.dataHora
-        WHERE hs.fkSensor IN (SELECT idSensor FROM sensor WHERE fkLocalMaturacao = ?)
-        GROUP BY hs.idHistoricoSensor
-        ORDER BY hs.dataHora DESC
-        LIMIT 20;
+            dataHora, 
+            umidade, 
+            temperatura,
+            CASE 
+                WHEN umidade < 70 OR umidade > 95 OR temperatura < 7 OR temperatura > 15 THEN 1 
+                ELSE 0 
+            END AS alerta
+        FROM dadosSensor
+        WHERE fkLocalMaturacao = ?
+        ORDER BY dataHora DESC
     `;
-    return database.executar(query, [fkLocalMaturacao]);
-}
 
-module.exports = {
-    obterHistorico,
+    const [rows] = await db.execute(query, [fkLocalMaturacao]);
+    return rows;
+};
+
+// Função para buscar alertas de um local de maturação
+exports.buscarAlertas = async (fkLocalMaturacao) => {
+    const query = `
+        SELECT 
+            COUNT(*) AS totalAlertas,
+            SUM(TIMESTAMPDIFF(MINUTE, dataHora, NOW())) AS tempoEmAlerta
+        FROM dadosSensor
+        WHERE fkLocalMaturacao = ? 
+          AND (umidade < 70 OR umidade > 95 OR temperatura < 7 OR temperatura > 15)
+    `;
+
+    const [rows] = await db.execute(query, [fkLocalMaturacao]);
+    return rows[0]; // Retorna o primeiro resultado
 };
