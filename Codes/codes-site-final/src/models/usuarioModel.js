@@ -33,12 +33,15 @@ function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL para autenticação.");
 
     const instrucaoSql = `
-    SELECT usuario.idUsuario AS id, usuario.nome, usuario.email, empresa.nomeFantasia AS nomeFantasia
+    SELECT usuario.idUsuario AS id, 
+           usuario.nome, 
+           usuario.email, 
+           usuario.tipoUsuario, 
+           empresa.nomeFantasia AS nomeFantasia
     FROM usuario
     LEFT JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
     WHERE usuario.email = '${email}' AND usuario.senha = '${senha}';
-`;
-
+    `;
 
     console.log("Executando a instrução SQL de autenticação: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

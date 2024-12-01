@@ -20,7 +20,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var salasRouter = require("./src/routes/salas");
 var empresasRouter = require("./src/routes/empresas");
-const historicoRouter = require("./src/routes/historico");
+var historicoRouter = require("./src/routes/historico");
+var bobiaRouter = require('./src/routes/bobia');
 
 
 
@@ -36,6 +37,18 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 app.use("/salas", salasRouter);
 app.use("/historico", historicoRouter);
+app.use('/bobia', bobiaRouter);
+
+
+
+
+
+app.get('/bobia', (req, res) => {
+    res.sendFile(__dirname + '/public/bobia.html');
+});
+
+// Outras rotas...
+
 
 
 

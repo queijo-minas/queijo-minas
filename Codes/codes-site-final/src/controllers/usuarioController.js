@@ -5,6 +5,41 @@ var usuarioModel = require("../models/usuarioModel");
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    var nomeFantasia = req.body.empresaServer; // Não parece ser necessário aqui
+
+    if (!email) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (!senha) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else {
+        usuarioModel.autenticar(email, senha, nomeFantasia)
+            .then(resultadoAutenticar => {
+                if (resultadoAutenticar.length === 1) {
+                    res.json({
+                        id: resultadoAutenticar[0].id,
+                        email: resultadoAutenticar[0].email,
+                        fkEndereco: resultadoAutenticar[0].fkEndereco || null,
+                        nome: resultadoAutenticar[0].nome,
+                        nomeFantasia: resultadoAutenticar[0].nomeFantasia || null,
+                        tipoUsuario: resultadoAutenticar[0].tipoUsuario || "cliente", // Incluído tipo do usuário
+                    });
+                } else if (resultadoAutenticar.length === 0) {
+                    res.status(403).send("Email e/ou senha inválido(s)");
+                } else {
+                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                }
+            })
+            .catch(erro => {
+                console.error("Erro ao autenticar:", erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+
+/*function autenticar(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
     var nomeFantasia = req.body.empresaServer;
 
     if (!email) {
@@ -34,7 +69,7 @@ function autenticar(req, res) {
     }
 }
 
-
+*/
 
 function cadastrar(req, res) {
     var nome = req.body.nomeServer;
@@ -44,7 +79,7 @@ function cadastrar(req, res) {
     var senha = req.body.senhaServer;
     var fkEmpresa = req.body.codigoVinculoServer;
     var fkEndereco = req.body.enderecoServer;
-    var tipoUsuario = req.body.tipoUsuarioServer;
+    var tipoUsuario = req.body.tipoUsuarioServer || "cliente";  // Padrão: cliente
 
     console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario});
 

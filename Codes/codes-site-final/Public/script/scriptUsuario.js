@@ -14,6 +14,7 @@
 function cadastrarUsuario() {
     const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
     const cpfVar = cpfFinal;
+    const enderecoVar = endereco_input.value.trim();
     const emailVar = email_input.value.trim();
     const telefoneVar = telefone_input.value.trim();
     const senhaVar = senha_input.value.trim();
@@ -36,6 +37,7 @@ function cadastrarUsuario() {
     console.log({
         nomeServer: nomeVar,
         cpfServer: cpfVar,
+        enderecoServer: enderecoVar,
         emailServer: emailVar,
         telefoneServer: telefoneVar,
         senhaServer: senhaVar,
@@ -54,6 +56,7 @@ function cadastrarUsuario() {
         body: JSON.stringify({
             nomeServer: nomeVar,
             cpfServer: cpfVar,
+            enderecoServer: enderecoVar,
             emailServer: emailVar,
             telefoneServer: telefoneVar,
             senhaServer: senhaVar,
@@ -84,7 +87,63 @@ function cadastrarUsuario() {
 // USUÁRIO AUTENTICAR, NÃO ALTERE, ESTÁ FUNCIONAL!!!
 //SE ADICIONAR/DELETAR/ALTERAR ALGUM CAMPO FAÇA ISSO NO USUÁRIO CONTROLLER, USUÁRIO MODEL, TABELA USUÁRIO DO BD
 
+
+
 function entrar() {
+    const emailVar = login_email.value;
+    const senhaVar = login_senha.value;
+
+    if (emailVar === "" || senhaVar === "") {
+        alert("Preencha todos os campos.");
+        return false;
+    }
+
+    fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+        }),
+    })
+        .then((resposta) => {
+            if (resposta.ok) {
+                resposta.json().then((json) => {
+                    // Salvar os dados do usuário na sessão
+                    sessionStorage.setItem("NOME_USUARIO", json.nome);
+                    sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
+
+                    if (json.nomeFantasia) {
+                        sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                    } else {
+                        sessionStorage.removeItem("NOME_EMPRESA");
+                    }
+
+                    // Redirecionar com base no tipo do usuário
+                    if (json.tipoUsuario === "administrador") {
+                        window.location = "/bobia.html"; // Redirecionar para a tela BobIA
+                    } else {
+                        window.location = "/sala-de-maturacao.html"; // Redirecionar para a tela padrão
+                    }
+                });
+            } else {
+                resposta.text().then((texto) => {
+                    alert("Erro ao tentar realizar o login: " + texto);
+                });
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao realizar o login:", erro);
+            alert("Erro ao realizar o login.");
+        });
+
+    return false;
+}
+
+
+/*function entrar() {
     const emailVar = login_email.value;
     const senhaVar = login_senha.value;
 
@@ -129,6 +188,8 @@ function entrar() {
 
     return false;
 }
+*/
+
 
 
 
