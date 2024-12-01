@@ -8,57 +8,44 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <title>Dashboard</title>
+  <title>Salas de Maturação</title>
 </head>
 
 <body>
   <aside class="sidebar">
     <div class="sidebar-header">
       <img src="imgs/logo.svg" alt="logo">
-      <!-- <h2>Queijo no Ponto</h2> -->
     </div>
     <ul class="sidebar-links">
       <h4>
         <span> Menu</span>
         <div class="menu-separator"></div>
       </h4>
-
-      <div class="menu_separator"></div>
-
       <li>
         <a href="./sala-de-maturacao.html"><span class="material-symbols-outlined">
             dashboard
           </span>Salas de maturação</a>
       </li>
-
       <li>
         <a href="./historico.html"><span class="material-symbols-outlined">
             overview
           </span>Histórico</a>
       </li>
-
       <li>
         <a href="./dashboard.html"><span class="material-symbols-outlined">
             monitoring
           </span>Gráficos</a>
       </li>
-
       <h4>
         <span>General</span>
         <div class="menu-separator"></div>
       </h4>
-
-      <div class="menu_separator"></div>
-
       <li>
         <a href="./index.html"><span class="material-symbols-outlined">
             home
           </span>Home</a>
       </li>
-
-
     </ul>
-
     <div class="user-account">
       <div class="user-profile">
         <img src="imgs/Ellipse 1.png" alt="usuario" />
@@ -66,7 +53,6 @@
           <h3><span id="nome">Usuário</span></h3>
           <span>Produtor</span>
           <span id="nomeFantasia">Nome da Empresa</span>
-          <span>Empresa</span>
         </div>
       </div>
     </div>
@@ -79,108 +65,53 @@
   </section>
 
   <section class="containerKpi">
-    <div class="kpi1">
+    <div class="kpi1" onclick="redirecionarParaDashboard()">
       <h1>Sala de Maturação 1</h1>
-      <img src="./imgs/salaMaturacao.png">
+      <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
     </div>
-    <div class="kpi2">
+    <div class="kpi2" onclick="redirecionarParaCadastroSala()">
       <h1>Adicionar Sala</h1>
-      <img src="./imgs/adicionar (2).png">
+      <img src="./imgs/adicionar (2).png" alt="Adicionar Sala">
     </div>
   </section>
 
+  <script>
+    // Função para redirecionar para a dashboard (Sala 1)
+    function redirecionarParaDashboard() {
+      sessionStorage.setItem("ID_SALA_ATUAL", "101"); // Sala 1 como única funcional
+      window.location.href = "dashboard.html";
+    }
+
+    // Função para redirecionar para o cadastro de nova sala
+    function redirecionarParaCadastroSala() {
+      window.location.href = "cadastro-sala-maturacao.html";
+    }
+
+    // Inicializar informações do usuário
+    document.addEventListener("DOMContentLoaded", () => {
+      const nome = sessionStorage.getItem("NOME_USUARIO");
+      const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
+
+      if (!nome) {
+        alert("Usuário não autenticado. Redirecionando para o login.");
+        window.location = "login.html";
+        return;
+      }
+
+      document.getElementById("nome").textContent = nome;
+      document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
+    });
+  </script>
 
 </body>
 
 </html>
-<script>
-  const container = document.getElementById('sala-container');
-  const idEmpresa = 101; // Substituir pelo ID dinâmico da empresa (sessão, etc.) ainda a configurar isso
+<style>
+  .kpi1, .kpi2 {
+    transition: transform 0.3s;
+}
+.kpi1:hover, .kpi2:hover {
+    transform: scale(1.1);
+}
 
-  // Função para carregar salas
-  async function carregarSalas() {
-    try {
-      const response = await fetch(`/salas/empresa/${idEmpresa}`);
-      const salas = await response.json();
-
-      container.innerHTML = '';
-
-      if (salas.length === 0) {
-        container.innerHTML = '<p>Nenhuma sala cadastrada.</p>';
-      } else {
-        salas.forEach(sala => {
-          const divSala = document.createElement('div');
-          divSala.classList.add('kpi');
-          divSala.innerHTML = `
-          <h1>${sala.nomeLocal}</h1>
-          <p>${sala.descricaoLocal || 'Sem descrição'}</p>
-          <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
-        `;
-          container.appendChild(divSala);
-        });
-      }
-
-      // Adicionar botão para cadastrar nova sala
-      const adicionarDiv = document.createElement('div');
-      adicionarDiv.classList.add('kpi2');
-      adicionarDiv.innerHTML = `
-      <h1>Adicionar Sala</h1>
-      <img src="./imgs/adicionar (2).png">
-    `;
-      adicionarDiv.onclick = abrirFormularioCadastro;
-      container.appendChild(adicionarDiv);
-    } catch (error) {
-      console.error('Erro ao carregar salas:', error);
-    }
-  }
-
-  // Função para abrir o formulário de cadastro
-  function abrirFormularioCadastro() {
-    const nome = prompt('Digite o nome da sala:');
-    const descricao = prompt('Digite uma descrição para a sala:');
-    const capacidade = prompt('Digite a capacidade das estantes:');
-    const area = prompt('Digite a área da sala:');
-
-    fetch('/salas/cadastrar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nomeLocal: nome,
-        descricaoLocal: descricao,
-        capacidadeEstantes: capacidade,
-        areaSala: area,
-        fkEmpresa: idEmpresa
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message);
-        carregarSalas(); // Recarregar salas
-      })
-      .catch(error => console.error('Erro ao cadastrar sala:', error));
-  }
-
-  // Inicializar
-  carregarSalas();
-
-
-  document.addEventListener("DOMContentLoaded", () => {
-    // Recupera os dados do sessionStorage
-    const nome = sessionStorage.getItem("NOME_USUARIO");
-    const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
-
-
-    if (!nome) {
-      alert("Usuário não autenticado. Redirecionando para o login.");
-      window.location = "/login.html";
-      return;
-    }
-
-
-    document.getElementById("nome").textContent = nome;
-    document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
-  });
-
-
-
-</script>
+</style>

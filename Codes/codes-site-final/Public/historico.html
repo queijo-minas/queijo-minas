@@ -4,108 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/hist.css">
+    <link rel="stylesheet" href="./css/hist.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Histórico</title>
 </head>
 
 <body>
+    
     <aside class="sidebar">
         <div class="sidebar-header">
-            <img src="imgs/logo_1-removebg-preview 1.svg" alt="logo">
+            <img src="imgs/logo.svg" alt="logo">
         </div>
         <ul class="sidebar-links">
-            <h4><span>Menu</span></h4>
-            <li><a href="sala-de-maturacao.html"><span class="material-symbols-outlined">dashboard</span>Salas de maturação</a></li>
-            <li><a href="#"><span class="material-symbols-outlined">overview</span>Histórico</a></li>
-            <li><a href="./dashboard.html"><span class="material-symbols-outlined">monitoring</span>Gráficos</a></li>
-            <li><a href="./index.html"><span class="material-symbols-outlined">home</span>Home</a></li>
+            <h4>
+                <span> Menu</span>
+                <div class="menu-separator"></div>
+            </h4>
+            <li>
+                <a href="./sala-de-maturacao.html"><span class="material-symbols-outlined">
+                        dashboard
+                    </span>Salas de Maturação</a>
+            </li>
+            <li>
+                <a href="./historico.html"><span class="material-symbols-outlined">
+                        overview
+                    </span>Histórico</a>
+            </li>
+            <li>
+                <a href="./dashboard.html"><span class="material-symbols-outlined">
+                        monitoring
+                    </span>Gráficos</a>
+            </li>
         </ul>
+
+      
         <div class="user-account">
             <div class="user-profile">
                 <img src="imgs/Ellipse 1.png" alt="usuario" />
                 <div class="user-details">
-                    <h3>Usuário</h3>
+                    <h3><span id="nome">Usuário</span></h3>
                     <span>Produtor</span>
+                    <span id="nomeFantasia">Nome da Empresa</span>
+                    <span>Empresa</span>
                 </div>
             </div>
         </div>
     </aside>
 
+    <!-- Seção de descrição do histórico -->
     <section class="containerDescription">
         <header class="description">
             <h1>Histórico - Sala de Maturação</h1>
         </header>
     </section>
 
+    <!-- Seção onde os registros do histórico serão inseridos dinamicamente -->
     <section class="containerKpi">
-        <!-- Os dados serão inseridos dinamicamente aqui -->
+        <!-- Histórico será inserido aqui dinamicamente -->
     </section>
 
     <script>
-        const apiUrl = "http://localhost:3333";
-        const historicoContainer = document.querySelector(".containerKpi");
+        const apiUrl = "http://localhost:3333"; // URL base da API
+        const historicoContainer = document.querySelector(".containerKpi"); // Seleciona o elemento onde os registros serão exibidos
 
-        // Obtém o ID da sala de maturação armazenado no sessionStorage
-        function getSalaSelecionada() {
-            return sessionStorage.getItem("ID_SALA_MATURACAO");
-        }
-
-        async function carregarHistorico(fkLocalMaturacao) {
+        // Função para carregar os dados do histórico
+        async function carregarHistorico() {
             try {
-                const response = await fetch(`${apiUrl}/historico/${fkLocalMaturacao}`);
+                // Faz uma requisição GET para buscar o histórico da sala de ID 101
+                const response = await fetch(`${apiUrl}/historico/101`);
                 if (response.ok) {
-                    const historico = await response.json();
-                    historicoContainer.innerHTML = "";
-                    
+                    const historico = await response.json(); // Converte a resposta para JSON
+                    historicoContainer.innerHTML = ""; // Limpa o conteúdo da seção antes de adicionar novos registros
+
+                    // Se não houver dados, exibe uma mensagem
                     if (historico.length === 0) {
                         historicoContainer.innerHTML = "<p>Nenhum dado encontrado para esta sala.</p>";
                         return;
                     }
 
+                    // Itera sobre os registros do histórico
                     historico.forEach((registro) => {
+                        // Define a classe da div com base no alerta (valores fora dos limites)
                         const kpiClass = registro.alerta ? "kpi vermelho" : "kpi verde";
-                        const alertaInfo = registro.alerta
-                            ? `
-                            <div class="img">
-                                <center><img src="imgs/alerta-removebg-preview.png"></center>
-                                <br>Total de alertas: ${registro.totalAlertas || 0}
-                                <br>Tempo em alerta: ${registro.tempoEmAlerta || "0h"}
-                            </div>`
-                            : "";
 
+                        // Adiciona um novo registro ao HTML
                         historicoContainer.innerHTML += `
-                        <div class="${kpiClass}">
-                            <div class="texto">
-                                <h1>${registro.dataHora}</h1>
-                                Umidade: ${registro.umidade}% <img src="imgs/umidade.png" style="width: 20px;"><br>
-                                Temperatura: ${registro.temperatura}ºC 
-                                <img src="imgs/${registro.temperatura > 15
-                                    ? "temperatura-alta.png"
-                                    : "temperatura-baixa.png"
-                                }" style="width: 20px;">
-                            </div>
-                            ${alertaInfo}
-                        </div>`;
+                            <div class="${kpiClass}">
+                                <div class="texto">
+                                    <h1>${registro.dataHora}</h1> <!-- Data e hora do registro -->
+                                    Umidade: ${registro.umidade}% <img src="imgs/umidade.png" style="width: 20px;"><br>
+                                    Temperatura: ${registro.temperatura}ºC 
+                                    <img src="imgs/${
+                                        registro.temperatura > 15 || registro.temperatura < 7
+                                            ? "temperatura-alta.png" // Imagem para temperatura fora do limite
+                                            : "temperatura-baixa.png" // Imagem para temperatura dentro do limite
+                                    }" style="width: 20px;">
+                                </div>
+                            </div>`;
                     });
                 } else {
+                    // Caso a API retorne erro, exibe no console e na página
                     console.error("Erro ao carregar histórico:", await response.text());
                     historicoContainer.innerHTML = "<p>Erro ao carregar histórico.</p>";
                 }
             } catch (error) {
+                // Trata erros gerais de conexão ou execução
                 console.error("Erro ao buscar histórico:", error);
                 historicoContainer.innerHTML = "<p>Erro ao tentar carregar o histórico.</p>";
             }
         }
 
+        // Carrega o histórico assim que a página é carregada
         document.addEventListener("DOMContentLoaded", () => {
-            const fkLocalMaturacao = getSalaSelecionada();
-            if (fkLocalMaturacao) {
-                carregarHistorico(fkLocalMaturacao);
-            } else {
-                historicoContainer.innerHTML = "<p>Selecione uma sala para ver o histórico.</p>";
-            }
+            carregarHistorico();
         });
     </script>
 </body>
