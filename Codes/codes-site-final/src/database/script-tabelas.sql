@@ -121,8 +121,18 @@ CREATE TABLE limitesIdeais (
     FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
--- INSERTS PARA TESTE:
-
+-- SELECT SIMPLES
+SHOW TABLES;
+SELECT * FROM empresa;
+SELECT * FROM endereco;
+SELECT * FROM usuario;
+SELECT * FROM localMaturacao;
+SELECT * FROM localMaturacaoUsuario;
+SELECT * FROM sensor;
+SELECT * FROM dadosSensor;
+SELECT * FROM historicoSensor;
+SELECT * FROM alertaSensor;
+SELECT * FROM limitesideais;
 
 -- Inserções na tabela Empresa
 INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senhaEmpresa) 
@@ -133,7 +143,7 @@ VALUES
 
 
 -- Inserções na tabela Usuário
-INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, 
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa)
 VALUES 
 ('Ana Souza', '12312312312', '35911111111', 'ana.souza@empresa.com', 'senha321', 101),
 ('Carlos Lima', '32132132132', '31922222222', 'carlos.lima@empresa.com', 'senha654', 102),
@@ -142,7 +152,7 @@ VALUES
 -- ADICIONANDO UM ADIMINISTRADOR::: SE USAR ESSE LOGIN DE ADM REDIRECIONA PRA BOBIA!!!!!
 INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) 
 VALUES 
-('Duda Ramos', '13123123123', '21933333333', 'duda.ramos@empresa.com', 'senha888', 106, 'administrador');
+('Duda Ramos', '13123123123', '21933333333', 'duda.ramos@empresa.com', 'senha888', 101, 'administrador');
 
 
 -- Inserções na tabela Local Maturação
