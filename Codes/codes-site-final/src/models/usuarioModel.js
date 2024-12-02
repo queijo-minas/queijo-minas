@@ -2,16 +2,16 @@ var database = require("../database/config");
 
 // "CADASTRAR USUÁRIO"
 // NÃO ALTERE! ESTÁ FUNCIONAL!!!! A MENOS QUE ALTERE ALGUM CAMPO NO SCRIPT USUARIO, MODEL USUÁRIO, TABELA USUÁRIO NO BD!!
-function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario) {
+function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) {
     console.log("Iniciando cadastro do usuário.");
 
     const instrucaoUsuario = `
-         INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario) 
-         VALUES ('${nome}', '${cpf}', '${telefone}', '${email}', '${senha}', '${fkEmpresa}', '${fkEndereco}', '${tipoUsuario}');
+         INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) 
+         VALUES ('${nome}', '${cpf}', '${telefone}', '${email}', '${senha}', '${fkEmpresa}', '${tipoUsuario}');
     `;
 
     console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
-    console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario });
+    console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario });
 
     return database.executar(instrucaoUsuario).then((result) => {
         var idUsuario = result.insertId;

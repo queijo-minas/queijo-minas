@@ -16,7 +16,6 @@ function autenticar(req, res) {
                     res.json({
                         id: resultadoAutenticar[0].id,
                         email: resultadoAutenticar[0].email,
-                        fkEndereco: resultadoAutenticar[0].fkEndereco || null,
                         nome: resultadoAutenticar[0].nome,
                         nomeFantasia: resultadoAutenticar[0].nomeFantasia || null,
                         tipoUsuario: resultadoAutenticar[0].tipoUsuario || "cliente", // Incluído tipo do usuário
@@ -42,10 +41,9 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var fkEmpresa = req.body.codigoVinculoServer;
-    var fkEndereco = req.body.enderecoServer;
     var tipoUsuario = req.body.tipoUsuarioServer || "cliente";  // Padrão: cliente
 
-    console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario });
+    console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario });
 
     if (!nome) {
         res.status(400).send("Seu nome está undefined!");
@@ -60,8 +58,7 @@ function cadastrar(req, res) {
     } else if (!fkEmpresa) {
         res.status(400).send("Código de vínculo da empresa está undefined!");
     } else {
-        usuarioModel.cadastrar(nome, cpf, telefone, email, senha, fkEmpresa,
-            fkEndereco, tipoUsuario)
+        usuarioModel.cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario)
             .then(resultado => res.json(resultado))
             .catch(erro => {
                 console.error("Erro ao cadastrar:", erro);
