@@ -1,136 +1,125 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+-- Criação do banco de dados
+DROP DATABASE IF EXISTS queijonopontodb;
+CREATE DATABASE queijonopontodb;
+USE queijonopontodb;
 
-/*
-comandos para mysql server
-*/
-
-create database queijonopontodb;
-use queijonopontodb;
-
-create table empresa(
-    idempresa int primary key auto_increment,
-    razaosocial varchar(45),
-    nomefantasia varchar(45),
-    cnpj char(14),
-    nome varchar(45),
-    cpf char(11),
-    email varchar(60),
-	senha varchar(45),
-    telefone varchar(15),
-    data_cadastro timestamp default current_timestamp
-)auto_increment=101;
-
-create table endereco(
-	idendereco int primary key auto_increment,
-	logradouro varchar(45),
-	numero char(6),
-	cidade varchar(45),
-	cep char(9),
-	fkempresa int unique,
-	foreign key (fkempresa)  references empresa(idempresa)
-)auto_increment=101;
-
-create table login(
-	idlogin int primary key auto_increment,
-	email varchar(45),
-	senha varchar(45)
-)auto_increment=101;
-
-create table usuario(
-    idusuario int auto_increment,
-    nome varchar(45),
-    cpf varchar(11) not null unique,
-    telefone varchar(15),
-    nomenivelacesso varchar(45),
-    fkempresa int unique,
-    fknivelacesso int not null,
-    fkendereco int unique,
-    fklogin int not null,
-	foreign key (fkendereco) references endereco(idendereco),
-    foreign key (fkempresa) references empresa(idempresa),
-    foreign key (fknivelacesso) references usuario(idusuario),
-    foreign key (fklogin) references login(idlogin),
-    primary key (idusuario, fknivelacesso, fklogin)
-)auto_increment=101; 
-
-create table localmaturacao (
-    idlocalmaturacao int auto_increment primary key,
-    nomelocal varchar(100), 
-    descricaolocal varchar(255), 
-    temperaturaideal decimal(5,2), 
-    umidadeideal decimal(5,2), 
-    capacidadeprateleiras int, 
-    fkempresa int unique,
-    foreign key (fkempresa) references empresa(idempresa) 
-)auto_increment=101;
-
-create table localmaturacaousuario (
-	idlocalmaturacaousuario int primary key auto_increment,
-	fklocalmaturacao int,
-    fkusuario int,  
-    dataassociacao date,
-    foreign key (fklocalmaturacao) references localmaturacao(idlocalmaturacao),
-    foreign key (fkusuario) references usuario(idusuario)
+-- Tabela Endereço
+CREATE TABLE endereco (
+    idEndereco INT AUTO_INCREMENT PRIMARY KEY,
+    cep VARCHAR(9) NOT NULL,
+    logradouro VARCHAR(255),
+    bairro VARCHAR(255),
+    localidade VARCHAR(255),
+    uf CHAR(2),
+    ddd CHAR(2)
 );
 
+-- Tabela Empresa
+CREATE TABLE empresa (
+    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(45) NOT NULL,
+    nomeFantasia VARCHAR(45) NOT NULL,
+    cnpj CHAR(14) NOT NULL UNIQUE,
+    representanteLegal VARCHAR(45) NOT NULL,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    telefone VARCHAR(15),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    email VARCHAR(45),
+    senhaEmpresa VARCHAR(10),
+	fkEndereco INT UNIQUE,
+    FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
+) AUTO_INCREMENT = 101;
 
-create table prateleira (
-    idprateleira int auto_increment primary key,
-    identificacaoprateleira varchar(50),
-    capacidademaxima int,
-    altura decimal(5,2), 
-    largura decimal(5,2), 
-    profundidade decimal(5,2), 
-    quantidadetotal int, 
-	fklocalmaturacao int, 
-    foreign key (fklocalmaturacao) references localmaturacao(idlocalmaturacao)
-)auto_increment=101;
+-- Tabela Usuário
+CREATE TABLE usuario (
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45),
+    cpf CHAR(11) NOT NULL UNIQUE,
+    telefone VARCHAR(15),
+    email VARCHAR(45),
+    senha VARCHAR(10),
+    fkEmpresa INT,
+    fkEndereco INT UNIQUE,
+    tipo VARCHAR(45),
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
+    FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
+) AUTO_INCREMENT = 101;
 
-create table sensorprateleira (
-    idsensorprateleira int primary key auto_increment,
-    nivelprateleira int,
-    datainstalacao date, 
-    quantidadetotal int,
-	fkprateleira int,
-    foreign key (fkprateleira) references prateleira(idprateleira)
-)auto_increment=101;
+-- Tabela Local Maturação
+CREATE TABLE localMaturacao (
+    idLocalMaturacao INT PRIMARY KEY AUTO_INCREMENT,
+    nomeLocal VARCHAR(100),
+    descricaoLocal VARCHAR(255),
+    capacidadeEstantes INT,
+    areaSala VARCHAR(45),
+    fkEmpresa INT,
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+) AUTO_INCREMENT = 101;
 
-create table tiposensor (
-    idsensor int auto_increment,
-    nome varchar(45) not null, 
-    constraint chknome check (nome in('lm35', 'dht11')),
-    tipo varchar(45) not null, 
-    unidademedida varchar(5) not null, 
-    fksensorprateleira int,
-    primary key (idsensor, fksensorprateleira),
-	foreign key (fksensorprateleira) references sensorprateleira (idsensorprateleira)
-)auto_increment=101;
+-- Tabela Local Maturação e Usuário (associação)
+CREATE TABLE localMaturacaoUsuario (
+    idLocalMaturacaoUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    dataAssociacao DATE,
+    fkUsuario INT,
+    fkLocalMaturacao INT,
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+    FOREIGN KEY (fkLocalMaturacao) REFERENCES localMaturacao(idLocalMaturacao)
+) AUTO_INCREMENT = 101;
 
-create table dadossensores (
-    iddadossensor int auto_increment,
-	fksensorprateleira int, 
-    datahora timestamp default current_timestamp, 
-    temperatura decimal(5,2), 
-    umidade decimal(5,2), 
-    primary key (iddadossensor, fksensorprateleira),
-    foreign key (fksensorprateleira) references sensorprateleira(idsensorprateleira) 
-)auto_increment=101;
+-- Tabela Sensor
+CREATE TABLE sensor (
+    idSensor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45),
+    unidadeMedida VARCHAR(45),
+    modeloSensor VARCHAR(50),
+    dataInstalacao DATE,
+    quantidadeTotal INT,
+    fkLocalMaturacao INT,
+    FOREIGN KEY (fkLocalMaturacao) REFERENCES localMaturacao(idLocalMaturacao)
+) AUTO_INCREMENT = 101;
 
-create table alertasensor (
-    idalertasensor int auto_increment,
-    datahora timestamp default current_timestamp,
-    tipoalerta varchar(50), 
-    descricaoalerta varchar(255),
-	valorminimo decimal(5,2), 
-    valormaximo decimal(5,2), 
-	fksensorprateleira int,
-    primary key (idalertasensor, fksensorprateleira),
-    foreign key (fksensorprateleira) references sensorprateleira(idsensorprateleira)
-)auto_increment=101;
+-- Tabela Dados do Sensor
+CREATE TABLE dadosSensor (
+    idDadosSensor INT AUTO_INCREMENT,
+    dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    temperatura DECIMAL(5,2),
+    umidade DECIMAL(5,2),
+    fkSensor INT,
+    PRIMARY KEY (idDadosSensor, fkSensor),
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+) AUTO_INCREMENT = 101;
 
+-- Tabela Alerta do Sensor
+CREATE TABLE alertaSensor (
+    idAlertaSensor INT AUTO_INCREMENT,
+    dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipoAlerta VARCHAR(50),
+    descricaoAlerta VARCHAR(255),
+    valorMinimo DECIMAL(5,2),
+    valorMaximo DECIMAL(5,2),
+    fkSensor INT,
+    PRIMARY KEY (idAlertaSensor, fkSensor),
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+) AUTO_INCREMENT = 101;
 
+-- Tabela Histórico do Sensor
+CREATE TABLE historicoSensor (
+    idHistoricoSensor INT PRIMARY KEY AUTO_INCREMENT,
+    dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    umidade DECIMAL(5,2),
+    temperatura DECIMAL(5,2),
+    fkSensor INT,
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+) AUTO_INCREMENT = 101;
+
+CREATE TABLE limitesIdeais (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(25),
+    valor_min DECIMAL(5,2),
+    valor_max DECIMAL(5,2),
+    fkSensor INT, 
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+);
 
 -- INSERTS PARA TESTE:
 
@@ -142,31 +131,18 @@ VALUES
 ('Delícias do Queijo ME', 'Delícias do Queijo', '98765432000189', 'Maria Oliveira', '98765432101', '31988888888', 'maria@deliciasdoqueijo.com', 'senha456'),
 ('Maturação Gourmet SA', 'Gourmet Queijos', '45678912000145', 'Pedro Almeida', '45678912345', '31977777777', 'pedro@gourmetqueijos.com', 'senha789');
 
--- Inserções na tabela Endereço
-INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) 
-VALUES 
-('Rua das Flores', '101', 'Belo Horizonte', '30110001', 101),
-('Avenida Central', '202', 'São Paulo', '01020030', 102),
-('Rua do Campo', '303', 'Curitiba', '80030040', 103);
-
-
-INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) 
-VALUES 
-('seila', '305', 'Capão', '10030040', null);
-
-
 
 -- Inserções na tabela Usuário
-INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco) 
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, 
 VALUES 
-('Ana Souza', '12312312312', '35911111111', 'ana.souza@empresa.com', 'senha321', 101, 101),
-('Carlos Lima', '32132132132', '31922222222', 'carlos.lima@empresa.com', 'senha654', 102, 102),
-('Beatriz Ramos', '23123123123', '31933333333', 'beatriz.ramos@empresa.com', 'senha987', 103, 103);
+('Ana Souza', '12312312312', '35911111111', 'ana.souza@empresa.com', 'senha321', 101),
+('Carlos Lima', '32132132132', '31922222222', 'carlos.lima@empresa.com', 'senha654', 102),
+('Beatriz Ramos', '23123123123', '31933333333', 'beatriz.ramos@empresa.com', 'senha987',  103);
 
 -- ADICIONANDO UM ADIMINISTRADOR::: SE USAR ESSE LOGIN DE ADM REDIRECIONA PRA BOBIA!!!!!
-INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario) 
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) 
 VALUES 
-('Duda Ramos', '13123123123', '21933333333', 'duda.ramos@empresa.com', 'senha888', 102, 106, 'administrador');
+('Duda Ramos', '13123123123', '21933333333', 'duda.ramos@empresa.com', 'senha888', 106, 'administrador');
 
 
 -- Inserções na tabela Local Maturação
