@@ -1,0 +1,10 @@
+- métrica dashboard: plano A e plano B ate terça
+- pppt: 100% alteração de responsabilidade
+- manual de instalação: 100%
+- gmud: Rafael 100%
+- api histórico: 100% 
+- api kpi: 0% até 20h
+- bando de dados criptografar a senha: 100%
+
+- cep cadastrar api fora
+- inner html card sala maturação
