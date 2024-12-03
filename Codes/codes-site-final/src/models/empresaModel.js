@@ -4,18 +4,40 @@ var database = require("../database/config");
 
 //NÃO ALTERE! ESTÁ FUNCIONAL!!!! A MENOS QUE ALTERE ALGUM CAMPO NO SCRIPT EMPRESA, MODEL EMPRESA, TABELA EMPRESA NO BD!!
 
-function cadastrar(razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa) {
-  var instrucaoSql = `
-      INSERT INTO empresa 
-      (razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa) 
-      VALUES 
-      ('${razaoSocial}', '${nomeFantasia}', '${cnpj}', '${telefone}', '${representanteLegal}', '${email}',
-       '${cpf}', '${senhaEmpresa}')
-  `;
+function cadastrar(razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa, cep, logradouro, bairro, localidade, uf) {
+  console.log("Iniciando cadastro da empresa com endereço.");
 
-  console.log("SQL gerado:", instrucaoSql); 
-  return database.executar(instrucaoSql);
+  // Primeiro INSERT: Tabela endereco
+  const instrucaoEndereco = `
+      INSERT INTO endereco (cep, logradouro, bairro, localidade, uf) 
+      VALUES ('${cep}', '${logradouro}', '${bairro}', '${localidade}', '${uf}');
+  `;
+  console.log("Executando a inserção do endereço: \n" + instrucaoEndereco);
+
+  return database.executar(instrucaoEndereco).then((resultadoEndereco) => {
+      var idEndereco = resultadoEndereco.insertId;
+      console.log("Endereço cadastrado com ID:", idEndereco);
+
+      // Segundo INSERT: Tabela empresa
+      const instrucaoEmpresa = `
+          INSERT INTO empresa 
+          (razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa, fkEndereco) 
+          VALUES ('${razaoSocial}', '${nomeFantasia}', '${cnpj}', '${telefone}', '${representanteLegal}', '${email}', 
+                  '${cpf}', '${senhaEmpresa}', '${idEndereco}');
+      `;
+      console.log("Executando a inserção da empresa: \n" + instrucaoEmpresa);
+
+      return database.executar(instrucaoEmpresa).then((resultadoEmpresa) => {
+          var idEmpresa = resultadoEmpresa.insertId;
+          console.log("Empresa cadastrada com ID:", idEmpresa);
+          return { idEmpresa, idEndereco };
+      });
+  }).catch((erro) => {
+      console.error("Erro ao cadastrar empresa:", erro);
+      throw erro;
+  });
 }
+
 
 
 // AUTENTICAR EMPRESA, MAS NÃO ACHO QUE ESTÁ FUNCIONAL AINDA, MAS O AUTENTICAR USUÁRIO ESTÁ!!!!
