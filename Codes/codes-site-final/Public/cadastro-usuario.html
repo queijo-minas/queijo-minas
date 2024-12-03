@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Queijo no ponto | Cadastro</title>
+    <link rel="stylesheet" href="css/style_cadastro.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header id="scroll-element">
+        <nav class="navbar">
+            <a href="#" class="nav-logo">
+                <div>
+                    <img src="imgs/logo.svg" style="height: 100px; margin-top: 10px;">
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Serviços</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Equipe</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
+                <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="cadastro-empresa.html" class="nav-link">Cadastro</a></li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <section class="container">
+        <div id="header">Cadastro</div>
+        <form action="#" class="form">
+            <div class="input-box">
+                <label>Nome:</label>
+                <input id="nome_input" type="text" placeholder="Nome" required />
+            </div>
+
+            <div class="input-box">
+                <label>CPF:</label>
+                <input id="cpf_input" type="text" placeholder="CPF" maxlength="14" required />
+            </div>
+            <div class="input-box">
+                <label>Número de Telefone:</label>
+                <input type="tel" id="telefone_input" placeholder="Digite o número de telefone" required />
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>CEP:</label>
+                    <input id="cep_input" type="text" placeholder="Digite seu CEP" onblur="buscarEnderecoPorCEP()" required />
+                </div>
+                <div class="input-box">
+                    <label>Bairro:</label>
+                    <input id="bairro_input" type="text" placeholder="Bairro" disabled />
+                </div>
+                <div class="input-box">
+                    <label>Cidade:</label>
+                    <input id="cidade_input" type="text" placeholder="Cidade" disabled />
+                </div>
+                <div class="input-box">
+                    <label>Estado:</label>
+                    <input id="uf_input" type="text" placeholder="Estado" disabled />
+                </div>
+            </div>
+            <div class="input-box">
+                <label>Logradouro:</label>
+                <input id="logradouro_input" type="text" placeholder="Logradouro" disabled />
+            </div>
+            <div class="input-box">
+                <label>Email:</label>
+                <input id="email_input" type="email" placeholder="Digite seu email" required />
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label>Senha:</label>
+                    <input id="senha_input" type="password" placeholder="******" required />
+                </div>
+                <div class="input-box">
+                    <label>Confirme sua Senha:</label>
+                    <input id="senha_confirmacao_input" type="password" placeholder="******" required />
+                </div>
+            </div>
+            <div class="input-box">
+                <label>Código de Vínculo Empresarial:</label>
+                <input id="codigo_vinculo_input" type="text" placeholder="Código de Vínculo" required />
+            </div>
+            <button type="button" onclick="cadastrarUsuario()">Enviar</button>
+        </form>
+    </section>
+</body>
+
+<script src="script/main-cadastro.js"></script>
+<script src="script/script-validacao.js"></script>
+<script>
+    function buscarEnderecoPorCEP() {
+        const cep = document.getElementById("cep_input").value.replace("-", "").trim();
+        if (!cep) {
+            alert("Por favor, insira um CEP válido.");
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data.erro) {
+                    document.getElementById("logradouro_input").value = data.logradouro;
+                    document.getElementById("bairro_input").value = data.bairro;
+                    document.getElementById("cidade_input").value = data.localidade;
+                    document.getElementById("uf_input").value = data.uf;
+                } else {
+                    alert("CEP não encontrado!");
+                }
+            })
+            .catch(() => alert("Erro ao buscar o CEP. Verifique sua conexão ou tente novamente."));
+    }
+
+    function cadastrarUsuario() {
+        const nome = document.getElementById("nome_input").value.trim();
+        const cpf = document.getElementById("cpf_input").value.trim();
+        const telefone = document.getElementById("telefone_input").value.trim();
+        const email = document.getElementById("email_input").value.trim();
+        const senha = document.getElementById("senha_input").value.trim();
+        const confirmacaoSenha = document.getElementById("senha_confirmacao_input").value.trim();
+        const codigoVinculo = document.getElementById("codigo_vinculo_input").value.trim();
+
+        const logradouro = document.getElementById("logradouro_input").value;
+        const bairro = document.getElementById("bairro_input").value;
+        const cidade = document.getElementById("cidade_input").value;
+        const uf = document.getElementById("uf_input").value;
+
+        if (!nome || !cpf || !telefone || !email || !senha || !confirmacaoSenha || !codigoVinculo || !logradouro || !bairro || !cidade || !uf) {
+            alert("Por favor, preencha todos os campos obrigatórios.");
+            return;
+        }
+
+        if (senha !== confirmacaoSenha) {
+            alert("As senhas não coincidem.");
+            return;
+        }
+
+        const enderecoCompleto = `${logradouro}, ${bairro}, ${cidade} - ${uf}`;
+
+        // Envio dos dados para o servidor
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nome,
+                cpf,
+                telefone,
+                email,
+                senha,
+                endereco: enderecoCompleto,
+                codigoVinculo,
+            }),
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    return resposta.json().then((json) => {
+                        alert("Cadastro realizado com sucesso! Redirecionando para o login...");
+                        sessionStorage.setItem("NOME_USUARIO", json.nome || nome);
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, 2000);
+                    });
+                } else {
+                    return resposta.text().then((mensagem) => {
+                        throw new Error(mensagem || "Erro ao tentar realizar o cadastro.");
+                    });
+                }
+            })
+            .catch((erro) => {
+                console.error("Erro ao cadastrar usuário:", erro);
+                alert("Erro ao realizar o cadastro: " + erro.message);
+            });
+    }
+</script>
+

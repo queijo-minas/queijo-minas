@@ -5,17 +5,14 @@
 // NÃO ALTERE POIS ESTÁ FUNCIONAL!!!
 //SE ADICIONAR/DELETAR/ALTERAR ALGUM CAMPO FAÇA ISSO NO USUÁRIO CONTROLLER, USUÁRIO MODEL, TABELA USUÁRIO DO BD
 
-
-
 // "CADASTRAR EMPRESA" DO SCRIPT, ESTÁ FUNCIONAL!
 //SE ADICIONAR/DELETAR/ALTERAR ALGUM CAMPO FAÇA ISSO NO USUÁRIO CONTROLLER, USUÁRIO MODEL, TABELA USUÁRIO DO BD
 
 // o trim tira os espaços em branco
-
 function cadastrarUsuario() {
     const nomeVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu nome']").value.trim();
     const cpfVar = cpfFinal;
-    const enderecoVar = endereco_input.value.trim();
+    const cepVar = document.querySelector(".signup-form .input-box input[placeholder='Digite seu CEP']").value.trim();
     const emailVar = email_input.value.trim();
     const telefoneVar = telefone_input.value.trim();
     const senhaVar = senha_input.value.trim();
@@ -23,7 +20,7 @@ function cadastrarUsuario() {
     const codigoVinculoVar = codigo_input.value.trim();
     const tipoUsuarioVar = input_tipo.value;
 
-    if (!nomeVar || !cpfVar || !emailVar || !telefoneVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar || !tipoUsuarioVar) {
+    if (!nomeVar || !cpfVar || !cepVar || !emailVar || !telefoneVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar || !tipoUsuarioVar) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return false;
     }
@@ -33,52 +30,73 @@ function cadastrarUsuario() {
         return false;
     }
 
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            nomeServer: nomeVar,
-            cpfServer: cpfVar,
-            enderecoServer: enderecoVar,
-            emailServer: emailVar,
-            telefoneServer: telefoneVar,
-            senhaServer: senhaVar,
-            codigoVinculoServer: codigoVinculoVar,
-            tipoUsuarioServer: tipoUsuarioVar,
-        }),
-    })
-        .then((resposta) => {
-            if (resposta.ok) {
-                return resposta.json()
-                    .then((json) => {
-                        alert("Cadastro realizado com sucesso! Redirecionando para o login...");
-                        sessionStorage.setItem("NOME_USUARIO", json.nome || nomeVar);
-                        setTimeout(() => {
-                            window.location = "login.html";
-                        }, 2000);
-                    })
-                    .catch(() => {
-                        alert("Cadastro realizado com sucesso! Redirecionando para o login...");
-                        setTimeout(() => {
-                            window.location = "login.html";
-                        }, 2000);
-                    });
-            } else {
-                return resposta.text().then((mensagem) => {
-                    throw new Error(mensagem || "Erro ao tentar realizar o cadastro.");
-                });
+    // Busca do endereço com base no CEP
+    fetch(`https://viacep.com.br/ws/${cepVar.replace("-", "")}/json/`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro ao consultar o CEP.");
             }
+            return response.json();
         })
-        .catch((erro) => {
-            console.error("Erro ao cadastrar usuário:", erro);
-            alert("Erro ao realizar o cadastro: " + erro.message);
+        .then((data) => {
+            if (data.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
+
+            
+            const logradouroCompleto = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+            document.querySelector(".signup-form .input-box input[placeholder='Digite seu endereço']").value = logradouroCompleto;
+
+
+             // Log no console para verificar o logradouro
+             console.log("Logradouro recebido da API ViaCEP:", logradouroCompleto);
+             
+            // Após obter o endereço, realiza o cadastro
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    cpfServer: cpfVar,
+                    enderecoServer: logradouroCompleto,
+                    emailServer: emailVar,
+                    telefoneServer: telefoneVar,
+                    senhaServer: senhaVar,
+                    codigoVinculoServer: codigoVinculoVar,
+                    tipoUsuarioServer: tipoUsuarioVar,
+                }),
+            })
+                .then((resposta) => {
+                    if (resposta.ok) {
+                        return resposta.json()
+                            .then((json) => {
+                                alert("Cadastro realizado com sucesso! Redirecionando para o login...");
+                                sessionStorage.setItem("NOME_USUARIO", json.nome || nomeVar);
+                                setTimeout(() => {
+                                    window.location = "login.html";
+                                }, 2000);
+                            });
+                    } else {
+                        return resposta.text().then((mensagem) => {
+                            throw new Error(mensagem || "Erro ao tentar realizar o cadastro.");
+                        });
+                    }
+                })
+                .catch((erro) => {
+                    console.error("Erro ao cadastrar usuário:", erro);
+                    alert("Erro ao realizar o cadastro: " + erro.message);
+                });
+        })
+        .catch((error) => {
+            console.error("Erro ao buscar CEP:", error);
+            alert("Erro ao buscar o CEP. Tente novamente.");
         });
 
     return false;
 }
-
 // Função para validar CPF
 function validarCPF() {
     const cpf = cpf_input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
@@ -110,37 +128,6 @@ function confirmacaoSenha() {
     } else {
         validacaoConfirmacao.innerHTML = `<span style="color: red;">As senhas não coincidem</span>`;
     }
-}
-
-function buscarCEP() {
-    const cep = document.getElementById("cep_input").value.trim().replace("-", "");
-
-    if (!cep || cep.length !== 8 || isNaN(cep)) {
-        alert("Por favor, insira um CEP válido com 8 dígitos.");
-        return;
-    }
-
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Erro ao consultar o CEP.");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            if (data.erro) {
-                alert("CEP não encontrado.");
-                return;
-            }
-
-            // Preencha os campos de endereço automaticamente
-            document.querySelector(".signup-form .input-box input[placeholder='Digite seu endereço']").value =
-                `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
-        })
-        .catch((error) => {
-            console.error("Erro ao buscar CEP:", error);
-            alert("Erro ao buscar o CEP. Tente novamente.");
-        });
 }
 
 // Ajustar atributos de autocomplete

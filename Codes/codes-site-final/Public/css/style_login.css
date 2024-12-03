@@ -54,7 +54,8 @@
     /* Largura máxima do site */
     --site-max-width: 1300px; /* Largura máxima do conteúdo */
   }
-  
+  /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -68,426 +69,154 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-color);
-  padding: 30px;
+  background: #000000ee;
+  background-image: url("../imgs/salaMaturacao.png");
+  background-repeat: no-repeat;
+  background-size: cover; /* Faz com que a imagem ocupe toda a tela */
+  background-position: center; /* Centraliza a imagem */
 }
-
-
-
-/* Comportamento do scroll suave */
-html {
-  scroll-behavior: smooth; /* Faz o scroll da página ser suave */
-}
-
-ul {
-  list-style: none; /* Remove marcadores das listas */
-}
-a {
-  text-decoration: none; /* Remove sublinhado de links */
-}
-button {
-  cursor: pointer; /* Altera o cursor ao passar sobre o botão */
-  background: none; /* Remove cor de fundo */
-  border: none; /* Remove borda */
-}
-
-  
-
-/* Bloco Estilização da barra de navegação (navbar) */
-header {
-  z-index: 5; /* Coloca o header acima de outros elementos */
-  width: 100%; /* O header ocupa 100% da largura da tela */
-  position: absolute; /* Fixa o header no topo durante o scroll */
-  top: 0; /* Garante que o header fique fixo no topo */
-  left: 0; /* Garante que o header ocupe toda a largura */
-  background-color: var(--black-color);
-  padding: 5px 0; /* Adiciona espaçamento no topo e na parte inferior */
-}
-header .navbar {
-  display: flex; /* Utiliza flexbox para alinhar itens */
-  padding-right: 0px; /* Ajusta o espaçamento à esquerda */
-  align-items: center; /* Alinha os itens verticalmente */
-  justify-content: space-between; 
-  width: 100%;
-  height: 80px;
-}
-.navbar .nav-logo {
-  margin-left: 10px;
-}
-.navbar .nav-logo img {
-  width: 100px;
-}
-.navbar .nav-menu {
-  display: flex; /* Utiliza flexbox para os itens do menu */
-  justify-content: flex-end;
-  width: 90%;
-  gap: 5px; /* Define o espaço entre os itens do menu */
-}
-.navbar .nav-menu .nav-link {
-  padding: 10px 18px; /* Adiciona espaçamento interno */
-  color: var(--cream-white); /* Define a cor do link */
-  font-size: var(--font-size-m); /* Define o tamanho da fonte */
-  border-radius: var(--border-radius-m); /* Define bordas arredondadas */
-  transition: 0.3s ease; /* Adiciona transição suave */
-}
-.navbar .nav-menu .nav-link:hover {
-  color: var(--white-color); /* Altera a cor do texto ao passar o mouse */
-  background: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
-}
-/* bloco para esconder os botões do menu para telas grandes */
-.navbar :where(#menu-open-button, #menu-close-button) {
-  display: none; /* Não exibe os botões de abrir e fechar o menu */
-}
- 
-
 .container {
-  margin-top: 100px;
-  position: relative;
-  width: 950px;
-  background: var(--light-pink-color);
-  padding: 40px 30px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  perspective: 2700px;
-}
-
-.container .cover {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100%;
-  width: 50%;
-  z-index: 98;
-  transition: all 1s ease;
-  transform-origin: left;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.container #flip:checked ~ .cover {
-  transform: rotateY(-180deg);
-}
-
-.container #flip:checked ~ .forms .login-form {
-  pointer-events: none;
-}
-
-.container .cover .front,
-.container .cover .back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.cover .back {
-  transform: rotateY(180deg);
-}
-
-.container .cover img {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  z-index: 10;
-}
-
-.container .cover .text {
-  position: absolute;
-  z-index: 10;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.container .cover .text::before {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  opacity: 0.5;
-  background: var(--backgroud-transparent);
-}
-
-.cover .text .text-1,
-.cover .text .text-2 {
-  z-index: 20;
-  font-size: 26px;
-  font-weight: 600;
-  color: var(--light-pink-color);
-  text-align: center;
-}
-
-.cover .text .text-2 {
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.container .forms {
-  height: 100%;
-  width: 100%;
-  background:  var(--light-pink-color);
-}
-
-.container .form-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form-content .login-form,
-.form-content .signup-form {
-  width: calc(100% / 2 - 25px);
-}
-
-.forms .form-content .title {
-  position: relative;
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--black-color);
-}
-
-.forms .form-content .title:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 25px;
-  background: var(--amber-orange);
-}
-
-.forms .signup-form .title:before {
-  width: 20px;
-}
-
-.forms .form-content .input-boxes {
-  margin-top: 30px;
-}
-
-.forms .form-content .input-box {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  margin: 10px 0;
-  position: relative;
-}
-
-.form-content .input-box input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  padding: 0 30px;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.form-content .input-box input:focus,
-.form-content .input-box input:valid {
-  border-color: var(--amber-orange);
-}
-
-.form-content .input-box i {
-  position: absolute;
-  color: var(--primary-color);
-  font-size: 17px;
-}
-
-.forms .form-content .text {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--dark-charcoal);
-}
-
-.forms .form-content .text a {
-  text-decoration: none;
-  color: var(--secondary-color-variacao);
-  font-weight: var(--font-weight-bold);
-}
-
-.forms .form-content .text a:hover {
-  text-decoration: underline;
-  color: var(--amber-orange);
-}
-
-.forms .form-content .button {
-  color: var(--light-pink-color);
-  margin-top: 40px;
-}
-
-.forms .form-content .button input {
-  color:  var(--light-pink-color);
-  background: var(--secondary-color-variacao);
-  border-radius: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-.forms .form-content .button input:hover {
-  background: var(--golden-yellow);
-}
-
-.forms .form-content label {
-  color: var(--secondary-color-variacao);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-}
-
-.forms .form-content label:hover {
-  text-decoration: underline;
-}
-
-.forms .form-content .login-text,
-.forms .form-content .sign-up-text {
-  text-align: center;
-  margin-top: 25px;
-}
-
-.container #flip {
-  display: none;
-}
-
-@media (max-width: 730px) {
-  .container .cover {
-    display: none;
-  }
-
-  .form-content .login-form,
-  .form-content .signup-form {
+    position: relative;
+    max-width: 430px;
     width: 100%;
-  }
-
-  .form-content .signup-form {
-    display: none;
-  }
-
-  .container #flip:checked ~ .forms .signup-form {
-    display: block;
-  }
-
-  .container #flip:checked ~ .forms .login-form {
-    display: none;
-  }
-}
-
-
-
-/* bloco de respansividade se max width 900px */
-@media screen and (max-width: 900px) {
-  :root {
-    --font-size-m: 1rem;
-    --font-size-l: 1.3rem;
-    --font-size-xl: 1.5rem;
-    --font-size-xxl: 1.8rem;
-  }
-  body.show-mobile-menu {
+    background: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-  }
-  body.show-mobile-menu header::before {
-    content: "";
+    margin: 0 20px;
+}
+
+.container .form {
+    padding: 30px;
+    background-color: var(--white-color);
+}
+
+.container .form .title {
+    position: relative;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.form .title::before {
     content: '';
-    position: fixed;
-    top: 0;
+    position: absolute;
     left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background-color: var(--amber-orange);
+    border-radius: 25px;
+}
+
+.form .input-field {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.input-field input {
+    position: absolute;
     height: 100%;
     width: 100%;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.2);
-  }
-  .navbar :is(#menu-open-button, #menu-close-button) {
-    font-size: var(--font-size-l);
-    padding-right: 15px;
-    display: block;
-  }
-  .navbar :is(#menu-open-button, #menu-close-button):hover {
-    color: var(--secondary-color) !important;
-  }
-  .navbar #menu-open-button {
-    color: #fff;
-  }
-  .navbar .nav-menu #menu-close-button {
+    padding: 0 35px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-bottom: 2px solid #ccc;
+    border-top: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.input-field input:is(:focus, :valid) {
+    border-bottom-color: var(--amber-orange);
+}
+
+.input-field i {
     position: absolute;
-    right: 0px;
-    top: 30px;
-  }
-  .navbar .nav-menu {
-    display: block;
-    background: #fff;
-    position: fixed;
-    top: 0;
-    left: -300px;
-    height: 100%;
-    width: 300px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 23px;
+    transition: all 0.2s ease;
+}
+
+.input-field input:is(:focus, :valid)~i {
+    color: var(--amber-orange);
+}
+
+.input-field i.icon {
+    left: 0;
+}
+
+.input-field i.showHidePw {
+    right: 0;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.form .checkbox-text {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    padding-top: 100px;
-    transition: left 0.2s ease;
-  }
-  body.show-mobile-menu .nav-menu {
-    left: 0;
-  }
-  .navbar .nav-menu .nav-link {
-    display: block;
-    margin-top: 17px;
-    padding: 10px 22px;
-    color: var(--dark-color);
-    font-size: var(--font-size-l);
-  }
-  .hero-section .section-content {
-    text-align: center;
-    gap: 50px;
-    padding: 30px 20px 20px;
-    justify-content: center;
-    flex-direction: column-reverse;
-  }
-  .hero-section .hero-details :is(.subtitle, .description),
-  .about-section .about-details,
-  .contact-section .contact-form {
-    max-width: 100%;
-  }
-  .hero-section .hero-details .buttons {
-    justify-content: center;
-  }
-  .hero-section .hero-image-wrapper {
-    max-width: 270px;
-    margin-right: 0;
-  }
-  .about-section .section-content {
-    gap: 70px;
-    flex-direction: column-reverse;
-  }
-  .about-section .about-image-wrapper .about-image {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1;
-    max-width: 250px;
-  }
-  .menu-section .menu-list {
-    gap: 30px;
-  }
-  .menu-section .menu-list .menu-item {
-    width: calc(100% / 2 - 30px);
-  }
-  .menu-section .menu-list .menu-item .menu-image {
-    max-width: 200px;
-  }
-  .gallery-section .gallery-list {
-    gap: 30px;
-  }
-  .gallery-section .gallery-list .gallery-item {
-    width: calc(100% / 2 - 30px);
-  }
-  .contact-section .section-content {
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.checkbox-text .checkbox-content {
+    display: flex;
     align-items: center;
-    flex-direction: column-reverse;
-  }
+}
+
+.checkbox-content input {
+    margin-right: 10px;
+    accent-color: var(--amber-orange);
+}
+
+.form .text {
+    color: #333;
+    font-size: 14px;
+}
+
+.form a.text {
+    color: var(--amber-orange);
+    text-decoration: none;
+}
+
+.form a:hover {
+    text-decoration: underline;
+}
+
+.input-field.button {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-field.button .botao {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 17px;
+    font-weight: var(--font-weight-medium); /* Usa a variável para consistência */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    color: var(--white-color); /* Texto branco */
+    background-color: var(--amber-orange); /* Fundo verde escuro */
+    border: none; /* Remove bordas padrão */
+    border-radius: var(--border-radius-s); /* Borda arredondada */
+    cursor: pointer; /* Indica que o elemento é interativo */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Suaviza mudanças */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Adiciona leve sombra */
+}
+
+.input-field.button .botao:hover {
+    background-color: var(--secondary-color); /* Cor mais clara no hover */
+    transform: scale(1.03); /* Leve aumento ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra mais destacada */
+}
+
+.input-field.button .botao:active {
+    background-color: var(--amber-orange); /* Volta à cor original ao clicar */
+    transform: scale(0.97); /* Reduz o tamanho para simular o clique */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida */
 }
