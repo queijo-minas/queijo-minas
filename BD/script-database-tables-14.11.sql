@@ -13,7 +13,7 @@ CREATE TABLE empresa (
     telefone VARCHAR(15),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(45),
-    senha VARCHAR(255)
+    senhaEmpresa VARCHAR(255)
 ) AUTO_INCREMENT = 101;
 
 -- Tabela Endereço
