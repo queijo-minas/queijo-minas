@@ -2,7 +2,6 @@
 CREATE DATABASE queijonopontodb;
 USE queijonopontodb;
 
-
 -- Tabela Empresa
 CREATE TABLE empresa (
     idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -14,7 +13,7 @@ CREATE TABLE empresa (
     telefone VARCHAR(15),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(45),
-    senha VARCHAR(10)
+    senha VARCHAR(255)
 ) AUTO_INCREMENT = 101;
 
 -- Tabela Endereço
@@ -35,13 +34,14 @@ CREATE TABLE usuario (
     cpf CHAR(11) NOT NULL UNIQUE,
     telefone VARCHAR(15),
     email VARCHAR(45),
-    senha VARCHAR(10),
+    senha VARCHAR(255),
     fkEmpresa INT,
     fkEndereco INT UNIQUE,
     tipo varchar(45),
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
+
 
 -- Tabela Local Maturação
 CREATE TABLE localMaturacao (
@@ -132,8 +132,30 @@ SELECT * FROM historicoSensor;
 SELECT * FROM alertaSensor;
 SELECT * FROM limitesideais;
 
+DELIMITER $$
+
+CREATE TRIGGER before_usuario_insert
+BEFORE INSERT ON usuario
+FOR EACH ROW
+BEGIN
+    -- Criptografar a senha usando SHA-256 antes de inserir
+    SET NEW.senha = SHA2(NEW.senha, 256);
+END$$
+
+DELIMITER ;
+
+INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senha) VALUES
+('Tech Solutions Ltda', 'TechSol', '12345678000195', 'João Silva', '12345678901', '21999999999', 'contato@techsol.com', 'abcd1234');
+
+INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) VALUES
+('Rua das Flores', '123', 'Rio de Janeiro', '20040001', 101);
+
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipo) VALUES
+('Carlos Lima', '12312312300', '21988887777', 'carlos@techsol.com', 'mnop3456', 101, 101, 'Administrador');
+
 insert into usuario values
-(default, 'pedro leão', '173.163.153-80', '12121212121', 'pedroleao@gmail.com', 'abc123', 102, null, 'funcionario');
+(default, 'pedro leão', '17316315380', '12121212121', 'pedroleao@gmail.com', 'abc123', 102, null, 'funcionario');
+
 ALTER TABLE usuario MODIFY COLUMN cpf VARCHAR(14);	
 
  SELECT usuario.idUsuario AS id, usuario.nome, usuario.tipo as tipo, usuario.email, empresa.nomeFantasia AS nomeFantasia
@@ -167,3 +189,5 @@ FROM
 LEFT JOIN 
     alertaSensor asensor ON ds.fkSensor = asensor.fkSensor
     AND asensor.valorMinimo <= ds.umidade AND asensor.valorMaximo >= ds.temperatura;
+    
+    
