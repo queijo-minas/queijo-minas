@@ -1,21 +1,34 @@
 var database = require("../database/config");
 
-// "CADASTRAR USUÁRIO"
-// NÃO ALTERE! ESTÁ FUNCIONAL!!!! A MENOS QUE ALTERE ALGUM CAMPO NO SCRIPT USUARIO, MODEL USUÁRIO, TABELA USUÁRIO NO BD!!
-function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) {
-    console.log("Iniciando cadastro do usuário.");
+function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, cep, logradouro, bairro, localidade, uf) {
+    console.log("Iniciando cadastro do usuário com endereço.");
 
-    const instrucaoUsuario = `
-         INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) 
-         VALUES ('${nome}', '${cpf}', '${telefone}', '${email}', '${senha}', '${fkEmpresa}', '${tipoUsuario}');
+    // Primeiro INSERT: Tabela endereco
+    const instrucaoEndereco = `
+        INSERT INTO endereco (cep, logradouro, bairro, localidade, uf) 
+        VALUES ('${cep}', '${logradouro}', '${bairro}', '${localidade}', '${uf}');
     `;
 
-    console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
-    console.log("Valores para cadastro:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario });
+    console.log("Executando a inserção do endereço: \n" + instrucaoEndereco);
 
-    return database.executar(instrucaoUsuario).then((result) => {
-        var idUsuario = result.insertId;
-        return { idUsuario }; // Retorna o ID do usuário inserido
+    return database.executar(instrucaoEndereco).then((resultadoEndereco) => {
+        var idEndereco = resultadoEndereco.insertId;
+
+        console.log("Endereço cadastrado com ID:", idEndereco);
+
+        // Segundo INSERT: Tabela usuario
+        const instrucaoUsuario = `
+            INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipoUsuario) 
+            VALUES ('${nome}', '${cpf}', '${telefone}', '${email}', '${senha}', '${fkEmpresa}', '${idEndereco}', '${tipoUsuario}');
+        `;
+
+        console.log("Executando a inserção do usuário: \n" + instrucaoUsuario);
+
+        return database.executar(instrucaoUsuario).then((resultadoUsuario) => {
+            var idUsuario = resultadoUsuario.insertId;
+            console.log("Usuário cadastrado com ID:", idUsuario);
+            return { idUsuario, idEndereco };
+        });
     });
 }
 

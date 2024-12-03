@@ -42,8 +42,13 @@ function cadastrar(req, res) {
     var senha = req.body.senhaServer;
     var fkEmpresa = req.body.codigoVinculoServer;
     var tipoUsuario = req.body.tipoUsuarioServer || "cliente";  // Padrão: cliente
+    var logradouro = req.body.logradouroServer;
+    var bairro = req.body.bairroServer;
+    var cidade = req.body.cidadeServer;
+    var uf = req.body.ufServer;
+    var cep = req.body.cepServer;
 
-    console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario });
+    console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, logradouro, bairro, cidade, uf, cep });
 
     if (!nome) {
         res.status(400).send("Seu nome está undefined!");
@@ -58,7 +63,7 @@ function cadastrar(req, res) {
     } else if (!fkEmpresa) {
         res.status(400).send("Código de vínculo da empresa está undefined!");
     } else {
-        usuarioModel.cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario)
+        usuarioModel.cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, logradouro, bairro, cidade, uf, cep)
             .then(resultado => res.json(resultado))
             .catch(erro => {
                 console.error("Erro ao cadastrar:", erro);
@@ -66,6 +71,7 @@ function cadastrar(req, res) {
             });
     }
 }
+
 
 module.exports = {
     autenticar,

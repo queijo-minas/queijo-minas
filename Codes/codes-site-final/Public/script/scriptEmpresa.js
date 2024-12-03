@@ -25,13 +25,19 @@ function cadastrarEmpresa() {
     const email = email_input.value.trim();
     const senhaEmpresa = senha_input.value.trim();
 
+    const CepVar = cep_input.value;
+    const logradouroVar = logradouro_input.value;
+    const bairroVar = bairro_input.value;
+    const cidadeVar = cidade_input.value;
+    const ufVar = uf_input.value;
+
     // Validações adicionais de campos obrigatórios
-    if (!razaoSocial || !nomeFantasia || !cnpjFinal || !telefone || !representanteLegal || !email || !cpfFinal || !senhaEmpresa) {
+    if (!razaoSocial || !nomeFantasia || !cnpjFinal || !telefone || !representanteLegal || !email  || !senhaEmpresa  || !CepVar  || !logradouroVar || !bairroVar || !cidadeVar || !ufVar) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return false;
     }
 
-    fetch("http://localhost:3333/empresas/cadastrar", {
+    fetch("/empresas/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -52,7 +58,7 @@ function cadastrarEmpresa() {
                 resposta.json().then((json) => {
                     sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
                     alert("Cadastro de empresa realizado com sucesso!");
-                    window.location = "http://localhost:3333/login.html";
+                    window.location = "entrar.html";
                 });
             } else {
                 alert("Houve um erro ao tentar realizar o cadastro.");
@@ -127,74 +133,3 @@ function tirarPontuacao(texto = "") {
     document.getElementById("nome").textContent = nome;
     document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
 });
-/*
-
-    if (!nome) {
-        alert("Usuário não autenticado. Redirecionando para o login.");
-        window.location = "/login.html";
-        return;
-    }
-
-
-
-*/
-
-
-
-
-/*
-
-
-antigo: 
-[
-function cadastrarEmpresa() {
-    const razaoSocial = razao_input.value;
-    const nomeFantasia = nomeFantasia_input.value;
-    const cnpj = cnpjFinal;
-    const telefone = telefone_input.value;
-    const representanteLegal = representante_input.value;
-    const email = email_input.value;
-    const cpf = cpfFinal;
-    const senhaEmpresa = senha_input.value;
-
-    if (!razaoSocial || !nomeFantasia || !cnpj || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
-        alert("Por favor, preencha todos os campos obrigatórios.");
-        return false;
-    }
-
-    fetch("http://localhost:3333/empresas/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            razaoSocial,
-            nomeFantasia,
-            cnpj,
-            telefone,
-            representanteLegal,
-            email,
-            cpf,
-            senhaEmpresa,
-        }),
-    })
-        .then((resposta) => {
-            if (resposta.ok) {
-                resposta.json().then((json) => {
-                    sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
-                    alert("Cadastro de empresa realizado com sucesso!");
-                    window.location = "http://localhost:3333/login.html";
-                });
-            } else {
-                alert("Houve um erro ao tentar realizar o cadastro.");
-            }
-        })
-        .catch((erro) => {
-            console.error("Erro:", erro);
-            alert("Erro ao realizar o cadastro da empresa.");
-        });
-
-    return false;
-}
-*/
-

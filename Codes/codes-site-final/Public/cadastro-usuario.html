@@ -26,7 +26,7 @@
                 <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
                 <li class="nav-item"><a href="#menu" class="nav-link">Equipe</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
-                <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="entrar.html" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="cadastro-empresa.html" class="nav-link">Cadastro</a></li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
@@ -57,20 +57,20 @@
                 </div>
                 <div class="input-box">
                     <label>Bairro:</label>
-                    <input id="bairro_input" type="text" placeholder="Bairro" disabled />
+                    <input id="bairro_input" type="text" placeholder="Bairro" readonly  />
                 </div>
                 <div class="input-box">
                     <label>Cidade:</label>
-                    <input id="cidade_input" type="text" placeholder="Cidade" disabled />
+                    <input id="cidade_input" type="text" placeholder="Cidade" readonly  />
                 </div>
                 <div class="input-box">
                     <label>Estado:</label>
-                    <input id="uf_input" type="text" placeholder="Estado" disabled />
+                    <input id="uf_input" type="text" placeholder="Estado" readonly  />
                 </div>
             </div>
             <div class="input-box">
                 <label>Logradouro:</label>
-                <input id="logradouro_input" type="text" placeholder="Logradouro" disabled />
+                <input id="logradouro_input" type="text" placeholder="Logradouro" readonly  />
             </div>
             <div class="input-box">
                 <label>Email:</label>
@@ -121,30 +121,43 @@
     }
 
     function cadastrarUsuario() {
-        const nome = document.getElementById("nome_input").value.trim();
-        const cpf = document.getElementById("cpf_input").value.trim();
-        const telefone = document.getElementById("telefone_input").value.trim();
-        const email = document.getElementById("email_input").value.trim();
-        const senha = document.getElementById("senha_input").value.trim();
-        const confirmacaoSenha = document.getElementById("senha_confirmacao_input").value.trim();
-        const codigoVinculo = document.getElementById("codigo_vinculo_input").value.trim();
+        const nomeVar = nome_input.value.trim();
+        const cpfVar = cpf_input.value.trim();
+        const telefoneVar = telefone_input.value.trim();
+        const emailVar = email_input.value.trim();
+        const senhaVar = senha_input.value.trim();
+        const codigoVinculoVar = codigo_vinculo_input.value.trim();
+        const confirmacaoSenhaVar = senha_confirmacao_input.value
 
-        const logradouro = document.getElementById("logradouro_input").value;
-        const bairro = document.getElementById("bairro_input").value;
-        const cidade = document.getElementById("cidade_input").value;
-        const uf = document.getElementById("uf_input").value;
+        const CepVar = cep_input.value;
+        const logradouroVar = logradouro_input.value;
+        const bairroVar = bairro_input.value;
+        const cidadeVar = cidade_input.value;
+        const ufVar = uf_input.value;
 
-        if (!nome || !cpf || !telefone || !email || !senha || !confirmacaoSenha || !codigoVinculo || !logradouro || !bairro || !cidade || !uf) {
+        if (!nomeVar || !cpfVar || !telefoneVar || !emailVar || !senhaVar || !confirmacaoSenhaVar || !codigoVinculoVar || !logradouroVar || !bairroVar || !cidadeVar || !ufVar) {
             alert("Por favor, preencha todos os campos obrigatórios.");
             return;
         }
 
-        if (senha !== confirmacaoSenha) {
+        if (senhaVar !== confirmacaoSenhaVar) {
             alert("As senhas não coincidem.");
             return;
         }
 
-        const enderecoCompleto = `${logradouro}, ${bairro}, ${cidade} - ${uf}`;
+        console.log({
+            nomeServer: nomeVar,
+            cpfServer: cpfVar,
+            telefoneServer: telefoneVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            logradouroServer: logradouroVar,
+            bairroServer: bairroVar,
+            cidadeServer: cidadeVar,
+            ufServer: ufVar,
+            cepServer: CepVar,
+            codigoVinculoServer: codigoVinculoVar,
+        });
 
         // Envio dos dados para o servidor
         fetch("/usuarios/cadastrar", {
@@ -153,13 +166,17 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                nome,
-                cpf,
-                telefone,
-                email,
-                senha,
-                endereco: enderecoCompleto,
-                codigoVinculo,
+                nomeServer: nomeVar,
+                cpfServer: cpfVar,
+                telefoneServer: telefoneVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                logradouroServer: logradouroVar,
+                bairroServer: bairroVar,
+                cidadeServer: cidadeVar,
+                ufServer: ufVar,
+                cepServer: CepVar,
+                codigoVinculoServer: codigoVinculoVar, 
             }),
         })
             .then((resposta) => {
@@ -168,7 +185,7 @@
                         alert("Cadastro realizado com sucesso! Redirecionando para o login...");
                         sessionStorage.setItem("NOME_USUARIO", json.nome || nome);
                         setTimeout(() => {
-                            window.location = "login.html";
+                            window.location = "entrar.html";
                         }, 2000);
                     });
                 } else {

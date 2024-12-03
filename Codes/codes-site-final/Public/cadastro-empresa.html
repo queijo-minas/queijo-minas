@@ -27,7 +27,7 @@
                 <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
                 <li class="nav-item"><a href="#menu" class="nav-link">Equipe</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
-                <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="entrar.html" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="cadastro-empresa.html" class="nav-link">Cadastro</a></li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
@@ -69,41 +69,27 @@
                 <label>Representante legal:</label>
                 <input id="representante_input" type="text" placeholder="Nome do Representante" />
             </div>
-            <div class="input-box address">
-                <label>Endereço</label>
-                <input type="text" placeholder="Digite o endereço" required />
-                <input type="text" placeholder="Digite o complemento do endereço" required />
-                <div class="column">
-                    <div class="select-box">
-                        <select>
-                            <option hidden value="">País</option>
-                            <option value="africa-do-sul">África do Sul</option>
-                            <option value="alemanha">Alemanha</option>
-                            <option value="argentina">Argentina</option>
-                            <option value="australia">Austrália</option>
-                            <option value="brasil">Brasil</option>
-                            <option value="canada">Canadá</option>
-                            <option value="china">China</option>
-                            <option value="coreia-do-sul">Coreia do Sul</option>
-                            <option value="espanha">Espanha</option>
-                            <option value="estados-unidos">Estados Unidos</option>
-                            <option value="franca">França</option>
-                            <option value="india">Índia</option>
-                            <option value="italia">Itália</option>
-                            <option value="japao">Japão</option>
-                            <option value="mexico">México</option>
-                            <option value="portugal">Portugal</option>
-                            <option value="reino-unido">Reino Unido</option>
-                            <option value="russia">Rússia</option>
-                            <option value="turquia">Turquia</option>
-                        </select>
-                    </div>
-                    <input type="text" placeholder="Digite sua cidade" required />
+            <div class="column">
+                <div class="input-box">
+                    <label>CEP:</label>
+                    <input id="cep_input" type="text" placeholder="Digite seu CEP" onblur="buscarEnderecoPorCEP()" required />
                 </div>
-                <div class="column">
-                    <input type="text" placeholder="Digite sua região" required />
-                    <input type="text" placeholder="Digite o código postal" required />
+                <div class="input-box">
+                    <label>Bairro:</label>
+                    <input id="bairro_input" type="text" placeholder="Bairro" readonly  />
                 </div>
+                <div class="input-box">
+                    <label>Cidade:</label>
+                    <input id="cidade_input" type="text" placeholder="Cidade" readonly  />
+                </div>
+                <div class="input-box">
+                    <label>Estado:</label>
+                    <input id="uf_input" type="text" placeholder="Estado" readonly  />
+                </div>
+            </div>
+            <div class="input-box">
+                <label>Logradouro:</label>
+                <input id="logradouro_input" type="text" placeholder="Logradouro" readonly  />
             </div>
             <div class="column">
                 <div class="input-box">
@@ -133,6 +119,29 @@
     <script src="script/scriptEmpresa.js"></script>
     <script src="script/script.js"></script>
 </body>
-
 </html>
+<script>
+     function buscarEnderecoPorCEP() {
+        const cep = document.getElementById("cep_input").value.replace("-", "").trim();
+        if (!cep) {
+            alert("Por favor, insira um CEP válido.");
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data.erro) {
+                    document.getElementById("logradouro_input").value = data.logradouro;
+                    document.getElementById("bairro_input").value = data.bairro;
+                    document.getElementById("cidade_input").value = data.localidade;
+                    document.getElementById("uf_input").value = data.uf;
+                } else {
+                    alert("CEP não encontrado!");
+                }
+            })
+            .catch(() => alert("Erro ao buscar o CEP. Verifique sua conexão ou tente novamente."));
+    }
+
+</script>
 
