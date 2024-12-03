@@ -35,43 +35,46 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    var nome = req.body.nomeServer;
-    var cpf = req.body.cpfServer;
-    var telefone = req.body.telefoneServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-    var fkEmpresa = req.body.codigoVinculoServer;
-    var tipoUsuario = req.body.tipoUsuarioServer || "cliente";  // Padrão: cliente
-    var logradouro = req.body.logradouroServer;
-    var bairro = req.body.bairroServer;
-    var cidade = req.body.cidadeServer;
-    var uf = req.body.ufServer;
-    var cep = req.body.cepServer;
-
-    console.log("Dados recebidos no backend:", { nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, logradouro, bairro, cidade, uf, cep });
-
-    if (!nome) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (!cpf) {
-        res.status(400).send("Seu CPF está undefined!");
-    } else if (!telefone) {
-        res.status(400).send("Seu telefone está undefined!");
-    } else if (!email) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (!senha) {
-        res.status(400).send("Sua senha está undefined!");
-    } else if (!fkEmpresa) {
-        res.status(400).send("Código de vínculo da empresa está undefined!");
-    } else {
-        usuarioModel.cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, logradouro, bairro, cidade, uf, cep)
-            .then(resultado => res.json(resultado))
-            .catch(erro => {
-                console.error("Erro ao cadastrar:", erro);
-                res.status(500).json(erro.sqlMessage);
-            });
+    var cnpj = req.body.cnpj;
+    var razaoSocial = req.body.razaoSocial;
+    var nomeFantasia = req.body.nomeFantasia;
+    var telefone = req.body.telefone;
+    var representanteLegal = req.body.representanteLegal;
+    var email = req.body.email;
+    var cpf = req.body.cpf;
+    var senhaEmpresa = req.body.senhaEmpresa;
+  
+    // Validações dos campos obrigatórios
+    if (!cnpj || !razaoSocial || !nomeFantasia || !telefone || !representanteLegal || !email || !cpf || !senhaEmpresa) {
+        return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios para a empresa!" });
     }
-}
-
+  
+    // Dados do endereço
+    var cep = req.body.cep;
+    var logradouro = req.body.logradouro;
+    var bairro = req.body.bairro;
+    var localidade = req.body.localidade;
+    var uf = req.body.uf;
+  
+    // Validações do endereço
+    if (!cep || !logradouro || !bairro || !localidade || !uf) {
+        return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios do endereço!" });
+    }
+  
+    console.log("Dados recebidos no backend:", { cnpj, razaoSocial, nomeFantasia, telefone, representanteLegal, email, cpf, senhaEmpresa, cep, logradouro, bairro, localidade, uf });
+  
+    // Chama o modelo para cadastrar a empresa com o endereço
+    empresaModel.cadastrar(razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa, cep, logradouro, bairro, localidade, uf)
+        .then((resultado) => {
+            res.status(201).json(resultado);
+        })
+        .catch((erro) => {
+            console.error("Erro ao cadastrar empresa:", erro);
+            res.status(500).json({ mensagem: "Erro ao cadastrar empresa", erro: erro.sqlMessage });
+        });
+  }
+  
+  
 
 module.exports = {
     autenticar,

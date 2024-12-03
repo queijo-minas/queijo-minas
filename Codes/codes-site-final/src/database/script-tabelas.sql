@@ -6,12 +6,11 @@ USE queijonopontodb;
 -- Tabela Endereço
 CREATE TABLE endereco (
     idEndereco INT AUTO_INCREMENT PRIMARY KEY,
-    cep VARCHAR(9) NOT NULL,
+    uf VARCHAR(50) NOT NULL,
     logradouro VARCHAR(255),
     bairro VARCHAR(255),
     localidade VARCHAR(255),
-    uf CHAR(2),
-    ddd CHAR(2)
+    cep VARCHAR(25)
 );
 
 -- Tabela Empresa
@@ -40,7 +39,7 @@ CREATE TABLE usuario (
     senha VARCHAR(10),
     fkEmpresa INT,
     fkEndereco INT UNIQUE,
-    tipo VARCHAR(45),
+    tipoUsuario VARCHAR(45),
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
