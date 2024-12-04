@@ -1,4 +1,3 @@
--- Criação do banco de dados
 DROP DATABASE IF EXISTS queijonopontodb;
 CREATE DATABASE queijonopontodb;
 USE queijonopontodb;
@@ -6,10 +5,10 @@ USE queijonopontodb;
 -- Tabela Endereço
 CREATE TABLE endereco (
     idEndereco INT AUTO_INCREMENT PRIMARY KEY,
-    uf VARCHAR(50) NOT NULL,
-    logradouro VARCHAR(255),
+    logradouro VARCHAR(50) NOT NULL,
     bairro VARCHAR(255),
-    localidade VARCHAR(255),
+    cidade VARCHAR(255),
+    uf VARCHAR(255),
     cep VARCHAR(25)
 );
 
@@ -25,7 +24,7 @@ CREATE TABLE empresa (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(45),
     senhaEmpresa VARCHAR(10),
-	fkEndereco INT UNIQUE,
+	fkEndereco INT,
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
 
@@ -121,6 +120,7 @@ CREATE TABLE limitesIdeais (
 );
 
 -- SELECT SIMPLES
+
 SHOW TABLES;
 SELECT * FROM empresa;
 SELECT * FROM endereco;
@@ -132,6 +132,7 @@ SELECT * FROM dadosSensor;
 SELECT * FROM historicoSensor;
 SELECT * FROM alertaSensor;
 SELECT * FROM limitesideais;
+insert into endereco VALUES (default, 'Rua Margarida Galvão', 'Jardim Silveira', 'Barueri', 'SP', '06434-110');
 
 -- Inserções na tabela Empresa
 INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senhaEmpresa) 

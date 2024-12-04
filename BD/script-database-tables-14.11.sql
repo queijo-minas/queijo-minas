@@ -1,6 +1,16 @@
--- Criação do banco de dados
+DROP DATABASE IF EXISTS queijonopontodb;
 CREATE DATABASE queijonopontodb;
 USE queijonopontodb;
+
+-- Tabela Endereço
+CREATE TABLE endereco (
+    idEndereco INT AUTO_INCREMENT PRIMARY KEY,
+    logradouro VARCHAR(50) NOT NULL,
+    bairro VARCHAR(255),
+    cidade VARCHAR(255),
+    uf VARCHAR(255),
+    cep VARCHAR(25)
+);
 
 -- Tabela Empresa
 CREATE TABLE empresa (
@@ -13,18 +23,9 @@ CREATE TABLE empresa (
     telefone VARCHAR(15),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(45),
-    senhaEmpresa VARCHAR(255)
-) AUTO_INCREMENT = 101;
-
--- Tabela Endereço
-CREATE TABLE endereco (
-    idEndereco INT PRIMARY KEY AUTO_INCREMENT,
-    rua VARCHAR(45),
-    numero CHAR(6),
-    cidade VARCHAR(45),
-    cep CHAR(9),
-    fkEmpresa INT,
-    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+    senhaEmpresa VARCHAR(10),
+	fkEndereco INT,
+    FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
 
 -- Tabela Usuário
@@ -34,14 +35,13 @@ CREATE TABLE usuario (
     cpf CHAR(11) NOT NULL UNIQUE,
     telefone VARCHAR(15),
     email VARCHAR(45),
-    senha VARCHAR(255),
+    senha VARCHAR(10),
     fkEmpresa INT,
     fkEndereco INT UNIQUE,
-    tipo varchar(45),
+    tipoUsuario VARCHAR(45),
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa), 
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
-
 
 -- Tabela Local Maturação
 CREATE TABLE localMaturacao (
@@ -120,6 +120,7 @@ CREATE TABLE limitesIdeais (
 );
 
 -- SELECT SIMPLES
+
 SHOW TABLES;
 SELECT * FROM empresa;
 SELECT * FROM endereco;
@@ -131,63 +132,74 @@ SELECT * FROM dadosSensor;
 SELECT * FROM historicoSensor;
 SELECT * FROM alertaSensor;
 SELECT * FROM limitesideais;
+insert into endereco VALUES (default, 'Rua Margarida Galvão', 'Jardim Silveira', 'Barueri', 'SP', '06434-110');
 
-DELIMITER $$
+-- Inserções na tabela Empresa
+INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senhaEmpresa) 
+VALUES 
+('Queijo Artesanal Ltda', 'Queijos da Serra', '12345678000123', 'João Silva', '12345678901', '35999999999', 'joao@queijodaserra.com', 'senha123'),
+('Delícias do Queijo ME', 'Delícias do Queijo', '98765432000189', 'Maria Oliveira', '98765432101', '31988888888', 'maria@deliciasdoqueijo.com', 'senha456'),
+('Maturação Gourmet SA', 'Gourmet Queijos', '45678912000145', 'Pedro Almeida', '45678912345', '31977777777', 'pedro@gourmetqueijos.com', 'senha789');
 
-CREATE TRIGGER before_usuario_insert
-BEFORE INSERT ON usuario
-FOR EACH ROW
-BEGIN
-    -- Criptografar a senha usando SHA-256 antes de inserir
-    SET NEW.senha = SHA2(NEW.senha, 256);
-END$$
 
-DELIMITER ;
+-- Inserções na tabela Usuário
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa)
+VALUES 
+('Ana Souza', '12312312312', '35911111111', 'ana.souza@empresa.com', 'senha321', 101),
+('Carlos Lima', '32132132132', '31922222222', 'carlos.lima@empresa.com', 'senha654', 102),
+('Beatriz Ramos', '23123123123', '31933333333', 'beatriz.ramos@empresa.com', 'senha987',  103);
 
-INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senha) VALUES
-('Tech Solutions Ltda', 'TechSol', '12345678000195', 'João Silva', '12345678901', '21999999999', 'contato@techsol.com', 'abcd1234');
+-- ADICIONANDO UM ADIMINISTRADOR::: SE USAR ESSE LOGIN DE ADM REDIRECIONA PRA BOBIA!!!!!
+INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario) 
+VALUES 
+('Duda Ramos', '13123123123', '21933333333', 'duda.ramos@empresa.com', 'senha888', 101, 'administrador');
 
-INSERT INTO endereco (rua, numero, cidade, cep, fkEmpresa) VALUES
-('Rua das Flores', '123', 'Rio de Janeiro', '20040001', 101);
 
-INSERT INTO usuario (nome, cpf, telefone, email, senha, fkEmpresa, fkEndereco, tipo) VALUES
-('Carlos Lima', '12312312300', '21988887777', 'carlos@techsol.com', 'mnop3456', 101, 101, 'Administrador');
+-- Inserções na tabela Local Maturação
+INSERT INTO localMaturacao (nomeLocal, descricaoLocal, capacidadeEstantes, areaSala, fkEmpresa) 
+VALUES 
+('Sala 1', 'Sala climatizada para maturação de queijos finos.', 10, '20m²', 101),
+('Sala 2', 'Espaço dedicado à maturação de queijos frescos.', 15, '30m²', 102),
+('Sala 3', 'Área para armazenamento e controle de queijos artesanais.', 20, '40m²', 103);
 
-insert into usuario values
-(default, 'pedro leão', '17316315380', '12121212121', 'pedroleao@gmail.com', 'abc123', 102, null, 'funcionario');
+-- Inserções na tabela Local Maturação e Usuário
+INSERT INTO localMaturacaoUsuario (dataAssociacao, fkUsuario, fkLocalMaturacao) 
+VALUES 
+('2024-11-01', 101, 101),
+('2024-11-02', 102, 102),
+('2024-11-03', 103, 103);
 
-ALTER TABLE usuario MODIFY COLUMN cpf VARCHAR(14);	
+-- Inserções na tabela Sensor
+INSERT INTO sensor (nome, unidadeMedida, modeloSensor, dataInstalacao, quantidadeTotal, fkLocalMaturacao) 
+VALUES 
+('Sensor Temp. 1', 'Celsius', 'DHT11', '2024-11-01', 5, 101),
+('Sensor Umid. 2', 'Percentual', 'DHT22', '2024-11-02', 3, 102),
+('Sensor Temp/Umid 3', 'Celsius/Percentual', 'BME280', '2024-11-03', 4, 103);
 
- SELECT usuario.idUsuario AS id, usuario.nome, usuario.tipo as tipo, usuario.email, empresa.nomeFantasia AS nomeFantasia
-    FROM usuario
-    LEFT JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa;
+-- Inserções na tabela Dados do Sensor
+INSERT INTO dadosSensor (temperatura, umidade, fkSensor) 
+VALUES 
+(22.5, 60.3, 101),
+(21.0, 58.7, 102),
+(23.8, 62.1, 103);
 
--- Select com join para dados básicos do usuário
-SELECT 
-    usuario.idUsuario AS 'id usuário',
-    usuario.nome AS 'nome do usuário',
-    usuario.cpf AS 'cpf',
-    usuario.email AS 'login email',
-    usuario.senha AS 'senha'
-FROM 
-    usuario;
+-- Inserções na tabela Alerta do Sensor
+INSERT INTO alertaSensor (tipoAlerta, descricaoAlerta, valorMinimo, valorMaximo, fkSensor) 
+VALUES 
+('Temperatura Alta', 'Temperatura acima do limite permitido.', 20.0, 25.0, 101),
+('Umidade Baixa', 'Umidade abaixo do ideal.', 50.0, 70.0, 102),
+('Temperatura/Umidade Fora do Padrão', 'Valores fora do padrão aceitável.', 18.0, 30.0, 103);
 
--- Select com join e case para verificação de alerta
-SELECT 
-    ds.idDadosSensor,
-    ds.temperatura,
-    ds.umidade,
-    asensor.tipoAlerta,
-    asensor.descricaoAlerta,
-    asensor.dataHora AS 'data do alerta',
-    CASE 
-        WHEN ds.temperatura > asensor.valorMaximo OR ds.umidade < asensor.valorMinimo THEN 'alerta ativo'
-        ELSE 'normal'
-    END AS 'status alerta'
-FROM 
-    dadosSensor ds
-LEFT JOIN 
-    alertaSensor asensor ON ds.fkSensor = asensor.fkSensor
-    AND asensor.valorMinimo <= ds.umidade AND asensor.valorMaximo >= ds.temperatura;
-    
-    
+-- Inserções na tabela Histórico do Sensor
+INSERT INTO historicoSensor (umidade, temperatura, fkSensor) 
+VALUES 
+(61.0, 22.8, 101),
+(59.0, 21.2, 102),
+(63.5, 24.0, 103);
+
+-- Inserções na tabela Limites Ideais
+INSERT INTO limitesIdeais (tipo, valor_min, valor_max, fkSensor) 
+VALUES 
+('Temperatura', 18.0, 25.0, 101),
+('Umidade', 50.0, 70.0, 102),
+('Temperatura e Umidade', 18.0, 30.0, 103);
