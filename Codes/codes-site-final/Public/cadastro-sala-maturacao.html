@@ -75,11 +75,11 @@
 
       const nomeLocal = form.nomeLocal.value;
       const descricaoLocal = form.descricaoLocal.value;
-      const quantidadeEstantes = parseInt(form.quantidadeEstantes.value);
-      const area = parseFloat(form.area.value);
+      const capacidadeEstantes = parseInt(form.quantidadeEstantes.value);
+      const areaSala = parseFloat(form.area.value);
       const fkEmpresa = parseInt(form.fkEmpresa.value);
 
-      if (!nomeLocal || !descricaoLocal || !quantidadeEstantes || !area || !fkEmpresa) {
+      if (!nomeLocal || !descricaoLocal || !capacidadeEstantes || !areaSala || !fkEmpresa) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return false;
       }
@@ -92,12 +92,15 @@
         body: JSON.stringify({
           nomeLocal,
           descricaoLocal,
-          quantidadeEstantes,
-          area,
+          capacidadeEstantes,
+          areaSala,
           fkEmpresa,
         }),
+
       })
         .then((resposta) => {
+        console.log(resposta,body)
+
           if (resposta.ok) {
             return resposta.json();
           } else {

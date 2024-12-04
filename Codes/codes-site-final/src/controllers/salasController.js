@@ -1,24 +1,22 @@
 var salasModel = require("../models/salasModel");
 
-async function buscarSalasPorEmpresa(req, res) {
-  try {
-    const idEmpresa = req.params.idEmpresa;
-
+function buscarSalasPorEmpresa(req, res) {
+  const idEmpresa = req.params.empresaId
+  console.log(idEmpresa)
+  
     if (!idEmpresa) {
       return res.status(400).send("O ID da empresa é obrigatório!");
     }
 
-    const resultado = await salasModel.buscarSalasPorEmpresa(idEmpresa);
+     salasModel.buscarSalasPorEmpresa(idEmpresa).then(function (resultado) {
+       if (resultado.length > 0) {
+        console.log("foi aqui",resultado)
+         res.status(200).json(resultado);
+       } else {
+         res.status(204).send("Nenhuma sala encontrada para a empresa especificada.");
+       }
+     })
 
-    if (resultado.length > 0) {
-      res.status(200).json(resultado);
-    } else {
-      res.status(204).send("Nenhuma sala encontrada para a empresa especificada.");
-    }
-  } catch (erro) {
-    console.error("Erro ao buscar salas: ", erro);
-    res.status(500).json({ error: erro.sqlMessage || "Erro no servidor." });
-  }
 }
 
 

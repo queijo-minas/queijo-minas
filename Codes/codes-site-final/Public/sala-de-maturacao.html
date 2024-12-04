@@ -64,7 +64,7 @@
     </header>
   </section>
 
-  <section class="containerKpi">
+  <!-- <section class="containerKpi">
     <div class="kpi1" onclick="redirecionarParaDashboard()">
       <h1>Sala de Maturação 1</h1>
       <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
@@ -73,7 +73,7 @@
       <h1>Adicionar Sala</h1>
       <img src="./imgs/adicionar (2).png" alt="Adicionar Sala">
     </div>
-  </section>
+  </section> -->
 
   <section class="containerKpi" id="salas-container">
     <!-- Salas serão carregadas aqui dinamicamente -->
@@ -104,7 +104,7 @@
             card.className = 'kpi1';
             card.onclick = () => redirecionarParaDashboard(sala.id);
             card.innerHTML = `
-              <h1>${sala.nomeSala}</h1>
+              <h1>${sala.nomeLocal}</h1>
               <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
             `;
             container.appendChild(card);

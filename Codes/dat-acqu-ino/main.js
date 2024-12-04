@@ -21,7 +21,7 @@ const serial = async (
         {
             host: 'localhost', // aqui coloca ip
             user: 'aluno',  
-            password: 'SENHADOUSER',
+            password: 'Sptech#2024',
             database: 'queijonopontodb',
             port: 3307  /* porta que faz conexão com a maquina vitual*/
         }
