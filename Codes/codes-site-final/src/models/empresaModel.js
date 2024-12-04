@@ -4,13 +4,13 @@ var database = require("../database/config");
 
 //NÃO ALTERE! ESTÁ FUNCIONAL!!!! A MENOS QUE ALTERE ALGUM CAMPO NO SCRIPT EMPRESA, MODEL EMPRESA, TABELA EMPRESA NO BD!!
 
-function cadastrar(razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa, cep, logradouro, bairro, localidade, uf) {
+function cadastrar(razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email, cpf, senhaEmpresa, cep, logradouro, bairro, cidade, uf) {
   console.log("Iniciando cadastro da empresa com endereço.");
 
   // Primeiro INSERT: Tabela endereco
   const instrucaoEndereco = `
-      INSERT INTO endereco (cep, logradouro, bairro, localidade, uf) 
-      VALUES ('${cep}', '${logradouro}', '${bairro}', '${localidade}', '${uf}');
+      INSERT INTO endereco 
+      VALUES (default, '${cep}', '${logradouro}', '${bairro}', '${cidade}', '${uf}');
   `;
   console.log("Executando a inserção do endereço: \n" + instrucaoEndereco);
 

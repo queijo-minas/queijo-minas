@@ -1,12 +1,12 @@
 var database = require("../database/config");
 
-function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, cep, logradouro, bairro, localidade, uf) {
+function cadastrar(nome, cpf, telefone, email, senha, fkEmpresa, tipoUsuario, cep, logradouro, bairro, cidade, uf) {
     console.log("Iniciando cadastro do usuário com endereço.");
 
     // Primeiro INSERT: Tabela endereco
     const instrucaoEndereco = `
-        INSERT INTO endereco (cep, logradouro, bairro, localidade, uf) 
-        VALUES ('${cep}', '${logradouro}', '${bairro}', '${localidade}', '${uf}');
+        INSERT INTO endereco 
+        VALUES (default, '${cep}', '${logradouro}', '${bairro}', '${cidade}', '${uf}');
     `;
 
     console.log("Executando a inserção do endereço: \n" + instrucaoEndereco);
