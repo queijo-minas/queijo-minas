@@ -135,6 +135,8 @@
         const bairroVar = bairro_input.value.trim();
         const cidadeVar = cidade_input.value.trim();
         const ufVar = uf_input.value.trim();
+        const CpfVar =  cpf_input.value.trim();
+        const CnpjVar = cnpj_input.value.trim();
 
         // Validação de campos obrigatórios
         if (!razaoSocialVar || !nomeFantasiaVar || !telefoneVar || !representanteLegalVar ||
@@ -152,12 +154,14 @@
         }
 
         // Envio de dados via fetch
-        fetch("http://localhost:3333/empresas/cadastrar", {
+        fetch("/empresas/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                cpf: CpfVar,
+                cnpj: CnpjVar,
                 razaoSocial: razaoSocialVar,
                 nomeFantasia: nomeFantasiaVar,
                 telefone: telefoneVar,
