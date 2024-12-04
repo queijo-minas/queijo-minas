@@ -41,61 +41,71 @@
 
 <script src="script/main-cadastro.js"></script>
 <script>
-    function entrar() {
-      const emailVar = document.getElementById("email_login_input").value;
-      const senhaVar = document.getElementById("senha_login_input").value;
+  
+// Função para autenticar usuário
+function entrar() {
+    const emailVar = email_login_input.value.trim();
+    const senhaVar = senha_login_input.value.trim();
 
-      // Verifica se os campos estão preenchidos
-      if (!emailVar || !senhaVar) {
-        exibirMensagemErro("Preencha todos os campos antes de continuar.");
+    if (emailVar === "" || senhaVar === "") {
+        alert("Preencha todos os campos.");
         return false;
-      }
+    }
 
+<<<<<<< HEAD
+    fetch("/usuarios/autenticar", {
+=======
       // Mostrar o loader
       // document.getElementById("loader").style.display = "block"; 
 
       fetch("/usuarios/autenticar", {
+>>>>>>> 60e4cfc27fae815ad70223a754f81691969d9160
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          emailServer: emailVar,
-          senhaServer: senhaVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
         }),
-      })
+    })
         .then((resposta) => {
-          console.log("Status da resposta HTTP:", resposta.status);
-          if (resposta.ok) {
-            return resposta.json();
-          } else {
-            return resposta.text().then((texto) => {
-              console.error("Erro no login:", texto);
-              throw new Error("Email ou senha inválidos.");
-            });
-          }
-        })
-        .then((json) => {
-          sessionStorage.setItem("EMAIL_USUARIO", json.email);
-          sessionStorage.setItem("NOME_USUARIO", json.nome);
-          sessionStorage.setItem("ID_USUARIO", json.idUsuario);  
+            if (resposta.ok) {
+                resposta.json().then((json) => {
+                    sessionStorage.setItem("NOME_USUARIO", json.nome);
+                    sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
 
-          console.log("Login bem-sucedido:", json);
+                    if (json.nomeFantasia) {
+                        sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                    } else {
+                        sessionStorage.removeItem("NOME_EMPRESA");
+                    }
 
-          // Redireciona para a página desejada
-          setTimeout(() => {
-            window.location.href = "./index-cadastrados.html";
-          }, 1000);
+                    // Armazena o id da empresa
+                    if (json.idEmpresa) {
+                        sessionStorage.setItem("ID_EMPRESA", json.idEmpresa);
+                    } else {
+                        sessionStorage.removeItem("ID_EMPRESA");
+                    }
+
+                    // Redireciona para a página correta
+                    if (json.tipoUsuario === "administrador") {
+                        window.location = "/bobia.html";
+                    } else {
+                        window.location = "/sala-de-maturacao.html";
+                    }
+                });
+            } else {
+                resposta.text().then((mensagem) => {
+                    alert("Erro ao tentar realizar o login: " + mensagem);
+                });
+            }
         })
         .catch((erro) => {
-          console.error("Erro ao realizar o login:", erro.message);
-          exibirMensagemErro(erro.message || "Erro ao realizar o login. Tente novamente.");
-        })
-        .finally(() => {
-          // Esconde o loader após o processo
-          document.getElementById("loader").style.display = "none";
+            console.error("Erro ao realizar o login:", erro);
+            alert("Erro ao realizar o login.");
         });
 
-      return false; // Evita o comportamento padrão do formulário
-    }
+    return false;
+}
 </script>

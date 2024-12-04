@@ -66,46 +66,48 @@ function validarNome(nome) {
     const cardErro = document.getElementById("cardErro");
     cardErro.style.display = "none";
   }
-  function buscarEnderecoPorCEP() {
-    const cep = document.getElementById("cep_input").value.replace(/\D/g, "");
-    
-    // Valida o formato do CEP
-    if (!/^[0-9]{8}$/.test(cep)) {
-        alert("Formato de CEP inválido. Por favor, digite novamente.");
-        limparCamposEndereco();
-        return;
-    }
-
-    // Busca o CEP na API ViaCEP
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then((response) => {
-            if (!response.ok) throw new Error("Erro ao consultar o CEP.");
-            return response.json();
-        })
-        .then((data) => {
-            if (data.erro) {
-                alert("CEP não encontrado.");
-                limparCamposEndereco();
-                return;
-            }
-
-            // Preenche os campos do formulário
-            document.getElementById("logradouro_input").value = data.logradouro;
-            document.getElementById("bairro_input").value = data.bairro;
-            document.getElementById("cidade_input").value = data.localidade;
-            document.getElementById("uf_input").value = data.uf;
-        })
-        .catch((error) => {
-            console.error("Erro ao buscar o CEP:", error);
-            alert("Erro ao buscar o CEP. Tente novamente.");
-            limparCamposEndereco();
-        });
-}
-
-function limparCamposEndereco() {
-    document.getElementById("logradouro_input").value = "";
-    document.getElementById("bairro_input").value = "";
-    document.getElementById("cidade_input").value = "";
-    document.getElementById("uf_input").value = "";
-}
+  
+  var cnpjFinal = null;
+  var cpfFinal = null;
+  
+  function validarCNPJ() {
+      const cnpj = cnpj_input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
+      if (cnpj.length === 14) {
+          cnpjFinal = cnpj; // Armazena o CNPJ válido
+          validacaoCNPJ.innerHTML = `<span style="color: green;">CNPJ válido</span>`;
+      } else {
+          cnpjFinal = null;
+          validacaoCNPJ.innerHTML = `<span style="color: red;">CNPJ inválido. Insira 14 números.</span>`;
+      }
+  }
+  
+  function validarCPF() {
+      const cpf = cpf_input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
+      if (cpf.length === 11) {
+          cpfFinal = cpf; // Armazena o CPF válido
+          validacaoCPF.innerHTML = `<span style="color: green;">CPF válido</span>`;
+      } else {
+          cpfFinal = null;
+          validacaoCPF.innerHTML = `<span style="color: red;">CPF inválido. Insira 11 números.</span>`;
+      }
+  }
+  
+  function validarSenha() {
+      const senha = senha_input.value.trim();
+      if (senha.length >= 7) {
+          validacaoSenha.innerHTML = `<span style="color: green;">Senha válida</span>`;
+      } else {
+          validacaoSenha.innerHTML = `<span style="color: red;">Senha deve ter no mínimo 7 caracteres.</span>`;
+      }
+  }
+  
+  function confirmacaoSenha() {
+      const senha = senha_input.value.trim();
+      const confirmacaoSenha = senha_confirmacao_input.value.trim();
+      if (senha === confirmacaoSenha) {
+          validacaoConfirmacao.innerHTML = `<span style="color: green;">Senhas coincidem</span>`;
+      } else {
+          validacaoConfirmacao.innerHTML = `<span style="color: red;">As senhas não coincidem</span>`;
+      }
+  }
   
