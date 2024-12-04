@@ -88,6 +88,7 @@
   
     // Função para carregar as salas de maturação
     function carregarSalas(empresaId) {
+      empresaId = sessionStorage.getItem("ID_EMPRESA")
       const apiUrl = `http://localhost:3333/salas/${empresaId}`;
   
       fetch(apiUrl)
@@ -102,7 +103,7 @@
           salas.forEach(sala => {
             const card = document.createElement('div');
             card.className = 'kpi1';
-            card.onclick = () => redirecionarParaDashboard(sala.id);
+            card.onclick = () => redirecionarParaDashboard(sala.idLocalMaturacao);
             card.innerHTML = `
               <h1>${sala.nomeLocal}</h1>
               <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">

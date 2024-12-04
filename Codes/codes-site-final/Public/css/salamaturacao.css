@@ -188,6 +188,7 @@ body {
 .kpi2 {
     padding: 15px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin-bottom: 15px;
     background-color:#dfa805;

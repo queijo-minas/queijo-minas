@@ -20,13 +20,8 @@ const serial = async (
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost', // aqui coloca ip
-<<<<<<< HEAD
             user: 'aluno',  
             password: 'Sptech#2024',
-=======
-            user: 'root',  
-            password: '@Gf13932332601',
->>>>>>> 454c851d769fe630d6a07692ef34f82f13af598e
             database: 'queijonopontodb',
             port: 3306  /* porta que faz conexão com a maquina vitual*/
         }
