@@ -10,7 +10,7 @@
     <title>Queijo no Ponto| Entrar</title>
 </head>
 <body>
-    <div  onload="listar()" class="container">
+    <div class="container">
         <div class="form login">
             <header class="title">Entrar</header>
             <form action="#">
@@ -41,18 +41,17 @@
 
 <script src="script/main-cadastro.js"></script>
 <script>
-  
-// Função para autenticar usuário
-function entrar() {
-    const emailVar = email_login_input.value.trim();
-    const senhaVar = senha_login_input.value.trim();
+  // Função para autenticar usuário
+  function entrar() {
+    const emailVar = document.getElementById("email_login_input").value.trim();
+    const senhaVar = document.getElementById("senha_login_input").value.trim();
 
     if (emailVar === "" || senhaVar === "") {
         alert("Preencha todos os campos.");
         return false;
     }
 
-      fetch("/usuarios/autenticar", {
+    fetch("/usuarios/autenticar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -62,42 +61,42 @@ function entrar() {
             senhaServer: senhaVar,
         }),
     })
-        .then((resposta) => {
-            if (resposta.ok) {
-                resposta.json().then((json) => {
-                    sessionStorage.setItem("NOME_USUARIO", json.nome);
-                    sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
+    .then((resposta) => {
+        if (resposta.ok) {
+            resposta.json().then((json) => {
+                sessionStorage.setItem("NOME_USUARIO", json.nome);
+                sessionStorage.setItem("TIPO_USUARIO", json.tipoUsuario);
 
-                    if (json.nomeFantasia) {
-                        sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
-                    } else {
-                        sessionStorage.removeItem("NOME_EMPRESA");
-                    }
+                if (json.nomeFantasia) {
+                    sessionStorage.setItem("NOME_EMPRESA", json.nomeFantasia);
+                } else {
+                    sessionStorage.removeItem("NOME_EMPRESA");
+                }
 
-                    // Armazena o id da empresa
-                    if (json.idEmpresa) {
-                        sessionStorage.setItem("ID_EMPRESA", json.idEmpresa);
-                    } else {
-                        sessionStorage.removeItem("ID_EMPRESA");
-                    }
+                // Armazena o id da empresa
+                if (json.idEmpresa) {
+                    sessionStorage.setItem("ID_EMPRESA", json.idEmpresa);
+                } else {
+                    sessionStorage.removeItem("ID_EMPRESA");
+                }
 
-                    // Redireciona para a página correta
-                    if (json.tipoUsuario === "administrador") {
-                        window.location = "/bobia.html";
-                    } else {
-                        window.location = "/sala-de-maturacao.html";
-                    }
-                });
-            } else {
-                resposta.text().then((mensagem) => {
-                    alert("Erro ao tentar realizar o login: " + mensagem);
-                });
-            }
-        })
-        .catch((erro) => {
-            console.error("Erro ao realizar o login:", erro);
-            alert("Erro ao realizar o login.");
-        });
+                // Redireciona para a página correta
+                if (json.tipoUsuario === "administrador") {
+                    window.location = "/bobia.html";
+                } else {
+                    window.location = "/sala-de-maturacao.html";
+                }
+            });
+        } else {
+            resposta.text().then((mensagem) => {
+                alert("Erro ao tentar realizar o login: " + mensagem);
+            });
+        }
+    })
+    .catch((erro) => {
+        console.error("Erro ao realizar o login:", erro);
+        alert("Erro ao realizar o login.");
+    });
 
     return false;
 }

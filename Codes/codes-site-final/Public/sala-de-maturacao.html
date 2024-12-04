@@ -75,43 +75,95 @@
     </div>
   </section>
 
+  <section class="containerKpi" id="salas-container">
+    <!-- Salas serão carregadas aqui dinamicamente -->
+  </section>
+
   <script>
-    // Função para redirecionar para a dashboard (Sala 1)
-    function redirecionarParaDashboard() {
-      sessionStorage.setItem("ID_SALA_ATUAL", "101"); // Sala 1 como única funcional
+    // Função para redirecionar para a dashboard de uma sala específica
+    function redirecionarParaDashboard(idSala) {
+      sessionStorage.setItem("ID_SALA_ATUAL", idSala); // Armazena o ID da sala no SessionStorage
       window.location.href = "dashboard.html";
     }
-
+  
+    // Função para carregar as salas de maturação
+    function carregarSalas(empresaId) {
+      const apiUrl = `http://localhost:3333/salas/${empresaId}`;
+  
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(salas => {
+          const container = document.getElementById('salas-container');
+  
+          // Limpa o container antes de inserir os novos dados
+          container.innerHTML = '';
+  
+          // Adiciona os cards das salas retornadas pela API
+          salas.forEach(sala => {
+            const card = document.createElement('div');
+            card.className = 'kpi1';
+            card.onclick = () => redirecionarParaDashboard(sala.id);
+            card.innerHTML = `
+              <h1>${sala.nomeSala}</h1>
+              <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
+            `;
+            container.appendChild(card);
+          });
+  
+          // Adiciona o card "Adicionar Sala"
+          const addCard = document.createElement('div');
+          addCard.className = 'kpi2';
+          addCard.onclick = redirecionarParaCadastroSala;
+          addCard.innerHTML = `
+            <h1>Adicionar Sala</h1>
+            <img src="./imgs/adicionar (2).png" alt="Adicionar Sala">
+          `;
+          container.appendChild(addCard);
+        })
+        .catch(error => {
+          console.error('Erro ao carregar salas:', error);
+        });
+    }
+  
+    // Inicializar a página
+    document.addEventListener("DOMContentLoaded", () => {
+      const nome = sessionStorage.getItem("NOME_USUARIO");
+      const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
+      const empresaId = sessionStorage.getItem("ID_EMPRESA"); // ID da empresa do usuário autenticado
+  
+      if (!nome || !empresaId) {
+        alert("Usuário não autenticado. Redirecionando para o login.");
+        window.location = "entrar.html";
+        return;
+      }
+  
+      // Atualiza os detalhes do usuário
+      document.getElementById("nome").textContent = nome;
+      document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
+  
+      // Carrega as salas de maturação para a empresa
+      carregarSalas(empresaId);
+    });
+  
     // Função para redirecionar para o cadastro de nova sala
     function redirecionarParaCadastroSala() {
       window.location.href = "cadastro-sala-maturacao.html";
     }
-
-    // Inicializar informações do usuário
-    document.addEventListener("DOMContentLoaded", () => {
-      const nome = sessionStorage.getItem("NOME_USUARIO");
-      const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
-
-      if (!nome) {
-        alert("Usuário não autenticado. Redirecionando para o login.");
-        window.location = "login.html";
-        return;
-      }
-
-      document.getElementById("nome").textContent = nome;
-      document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
-    });
   </script>
+  
+
 
 </body>
 
 </html>
 <style>
-  .kpi1, .kpi2 {
+  .kpi1,
+  .kpi2 {
     transition: transform 0.3s;
-}
-.kpi1:hover, .kpi2:hover {
-    transform: scale(1.1);
-}
+  }
 
+  .kpi1:hover,
+  .kpi2:hover {
+    transform: scale(1.1);
+  }
 </style>
