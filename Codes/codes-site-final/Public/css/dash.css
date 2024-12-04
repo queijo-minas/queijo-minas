@@ -161,7 +161,8 @@ body {
 .sidebar:hover~.containerDescription,
 .sidebar:hover~.containerKpi, 
 .sidebar:hover~.containerKpis,
-.sidebar:hover~.graphics {
+.sidebar:hover~.graphics,
+.sidebar:hover~.containerTemp {
     width: calc(100% - 260px);
     left: 260px;
 }
@@ -174,9 +175,10 @@ body {
 
 .containerKpis{
     position: relative;
-    width: calc(100% - 85px);
-    left: 85px;
+    width: calc(100% - 180px);
+    left: 133px;
     height: 150px;
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,6 +190,9 @@ body {
 .kpi2,
 .kpi3,
 .kpi4 {
+    margin-bottom: 60px;
+    margin-top: 30px;
+    color: #FFFFFF;
     background-color:#dfa805;
     border-radius: 5px;
     width: 250px;
@@ -210,29 +215,91 @@ body {
 }
 
 .containerKpi .kpi1 {
+    position: relative;
+    width: calc(100% - 85px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:#ffffff;
     border-radius: 5px;
-    padding: 20px;
-    width: 600px;
-    height: 50px;
+    padding: 8px;
+    gap: 20px;
+    height: 150px;
+    background-color:#FFFFFF;
+}
+
+.alerta {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #FFBB00;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 360px;
+    height: 150px;
+    font-size: 12px;
+    font-weight: 600;
     -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
 }
 
-.alerta, .ideal, .critico{
+.ideal{
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    background-color: #129900;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    width: 360px;
+    height: 150px;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
 }
 
-.graphics{
+.critico {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #FF0000;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    width: 360px;
+    height: 150px;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+}
+
+.containerTemp {
     position: relative;
-    width: calc(100% - 85px);
-    left: 85px;
+    width: calc(100% - 180px);
+    left: 133px;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 15px;
+    color: #251605;
+}
+
+.graphics {
+    position: relative;
+    width: calc(100% - 180px);
+    left: 133px;
     height: 420px;
     display: flex;
     justify-content: space-between;
