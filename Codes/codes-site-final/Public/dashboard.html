@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/dash.css">
+    <link rel="stylesheet" href="dash.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,7 +15,6 @@
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="imgs/logo.svg" alt="logo">
-          
         </div>
         <ul class="sidebar-links">
             <h4>
@@ -87,28 +86,40 @@
         <div class="kpi3">
             <h1></h1>
         </div>
-        <div class="kpi4">
-            <h1></h1>
-        </div>
     </section>
 
     <section class="containerKpi">
         <div class="kpi1">
             <div class="alerta">
-                <img src="imgs/CircleAmarelo.svg" alt="">
                 <h1>Alerta</h1>
-                
+                <p>Temperatura: De 12°C a 14°C <br>Temperatura : De 9°C a 7°C<br>
+                            Umidade: De 90%  a 95%<br> Umidade: De 80% a 75%
+                </p>
+
             </div>
             <div class="ideal">
-                <img src="imgs/CircleVerde.svg" alt="">
                 <h1>Ideal</h1>
+                <p>Temperatura: De 9°C a 12°C<br>
+                    Umidade: De 80% a 90%
+                </p>
             </div>
             <div class="critico">
-                <img src="imgs/CircleVermelho.svg" alt="">
                 <h1>Crítico</h1>
+                <p>Temperatura: Acima de 14°C e a baixo de 7°C<br>
+                    Umidade: Acima de 95% e a baixo de 75%
+                </p>
             </div>
         </div>
     </section>
+
+    <div class="containerTemp">
+        <div class="tituloTemp">
+            <h1>Temperatura</h1>
+        </div>
+        <div class="tituloUmi">
+            <h1>Umidade</h1>
+        </div>
+    </div>
 
     <section class="graphics">
         <div class="temp" id="temperatura">
