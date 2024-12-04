@@ -23,6 +23,9 @@ var empresasRouter = require("./src/routes/empresas");
 var historicoRouter = require("./src/routes/historico");
 var bobiaRouter = require('./src/routes/bobia');
 
+var medidaRouter = require("./src/routes/medidas");
+
+
 
 
 app.use(express.json());
@@ -39,6 +42,11 @@ app.use("/salas", salasRouter);
 app.use("/historico", historicoRouter);
 app.use('/bobia', bobiaRouter);
 
+
+
+
+
+app.use("/medidas", medidaRouter);
 
 
 

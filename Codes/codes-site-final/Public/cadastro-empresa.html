@@ -129,18 +129,18 @@
         const telefoneVar = telefone_input.value.trim();
         const representanteLegalVar = representante_input.value.trim();
         const emailVar = email_input.value.trim();
-        const senhaEmpresaVar = senha_input.value.trim();
+        const senhaVar = senha_input.value.trim();
         const CepVar = cep_input.value.trim();
         const logradouroVar = logradouro_input.value.trim();
         const bairroVar = bairro_input.value.trim();
         const cidadeVar = cidade_input.value.trim();
         const ufVar = uf_input.value.trim();
-        const CpfVar =  cpf_input.value.trim();
+        const CpfVar = cpf_input.value.trim();
         const CnpjVar = cnpj_input.value.trim();
 
         // Validação de campos obrigatórios
         if (!razaoSocialVar || !nomeFantasiaVar || !telefoneVar || !representanteLegalVar ||
-            !emailVar || !senhaEmpresaVar || !CepVar || !logradouroVar ||
+            !emailVar || !senhaVar || !CepVar || !logradouroVar ||
             !bairroVar || !cidadeVar || !ufVar) {
             alert("Por favor, preencha todos os campos obrigatórios.");
             return false;
@@ -152,6 +152,22 @@
             alert("Por favor, insira um email válido.");
             return false;
         }
+
+        console.log({
+            cpf: CpfVar,
+            cnpj: CnpjVar,
+            razaoSocial: razaoSocialVar,
+            nomeFantasia: nomeFantasiaVar,
+            telefone: telefoneVar,
+            representanteLegal: representanteLegalVar,
+            email: emailVar,
+            senha: senhaVar,
+            logradouro: logradouroVar,
+            bairro: bairroVar,
+            cidade: cidadeVar,
+            uf: ufVar,
+            cep: CepVar,
+        });
 
         // Envio de dados via fetch
         fetch("/empresas/cadastrar", {
@@ -167,7 +183,7 @@
                 telefone: telefoneVar,
                 representanteLegal: representanteLegalVar,
                 email: emailVar,
-                senhaEmpresa: senhaEmpresaVar,
+                senha: senhaVar,
                 logradouro: logradouroVar,
                 bairro: bairroVar,
                 cidade: cidadeVar,

@@ -6,10 +6,10 @@ USE queijonopontodb;
 -- Tabela Endereço
 CREATE TABLE endereco (
     idEndereco INT AUTO_INCREMENT PRIMARY KEY,
-    uf VARCHAR(50) NOT NULL,
-    logradouro VARCHAR(255),
+    logradouro VARCHAR(50) NOT NULL,
     bairro VARCHAR(255),
-    localidade VARCHAR(255),
+    cidade VARCHAR(255),
+    uf VARCHAR(255),
     cep VARCHAR(25)
 );
 
@@ -20,12 +20,10 @@ CREATE TABLE empresa (
     nomeFantasia VARCHAR(45) NOT NULL,
     cnpj CHAR(14) NOT NULL UNIQUE,
     representanteLegal VARCHAR(45) NOT NULL,
-    cpf CHAR(11) NOT NULL UNIQUE,
+    cpf CHAR(14) NOT NULL UNIQUE,
     telefone VARCHAR(15),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    email VARCHAR(45),
-    senhaEmpresa VARCHAR(10),
-	fkEndereco INT UNIQUE,
+	fkEndereco INT,
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 ) AUTO_INCREMENT = 101;
 
@@ -33,7 +31,7 @@ CREATE TABLE empresa (
 CREATE TABLE usuario (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
-    cpf CHAR(11) NOT NULL UNIQUE,
+    cpf CHAR(11) UNIQUE,
     telefone VARCHAR(15),
     email VARCHAR(45),
     senha VARCHAR(10),
@@ -121,6 +119,7 @@ CREATE TABLE limitesIdeais (
 );
 
 -- SELECT SIMPLES
+
 SHOW TABLES;
 SELECT * FROM empresa;
 SELECT * FROM endereco;
@@ -132,13 +131,16 @@ SELECT * FROM dadosSensor;
 SELECT * FROM historicoSensor;
 SELECT * FROM alertaSensor;
 SELECT * FROM limitesideais;
+select * from empresa join localmaturacao on fkempresa = idEmpresa where idEmpresa = 101;
+
+insert into endereco VALUES (default, 'Rua Margarida Galvão', 'Jardim Silveira', 'Barueri', 'SP', '06434-110');
 
 -- Inserções na tabela Empresa
-INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone, email, senhaEmpresa) 
+INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, representanteLegal, cpf, telefone) 
 VALUES 
-('Queijo Artesanal Ltda', 'Queijos da Serra', '12345678000123', 'João Silva', '12345678901', '35999999999', 'joao@queijodaserra.com', 'senha123'),
-('Delícias do Queijo ME', 'Delícias do Queijo', '98765432000189', 'Maria Oliveira', '98765432101', '31988888888', 'maria@deliciasdoqueijo.com', 'senha456'),
-('Maturação Gourmet SA', 'Gourmet Queijos', '45678912000145', 'Pedro Almeida', '45678912345', '31977777777', 'pedro@gourmetqueijos.com', 'senha789');
+('Queijo Artesanal Ltda', 'Queijos da Serra', '1234567811123', 'João Silva', '12345671101', '35999999999'),
+('Delícias do Queijo ME', 'Delícias do Queijo', '9876113200189', 'Maria Oliveira', '92765432101', '31988888888'),
+('Maturação Gourmet SA', 'Gourmet Queijos', '45678913300145', 'Pedro Almeida', '456789332345', '31977777777');
 
 
 -- Inserções na tabela Usuário
@@ -158,8 +160,8 @@ VALUES
 INSERT INTO localMaturacao (nomeLocal, descricaoLocal, capacidadeEstantes, areaSala, fkEmpresa) 
 VALUES 
 ('Sala 1', 'Sala climatizada para maturação de queijos finos.', 10, '20m²', 101),
-('Sala 2', 'Espaço dedicado à maturação de queijos frescos.', 15, '30m²', 102),
-('Sala 3', 'Área para armazenamento e controle de queijos artesanais.', 20, '40m²', 103);
+('Sala 2', 'Espaço dedicado à maturação de queijos frescos.', 15, '30m²', 101),
+('Sala 3', 'Área para armazenamento e controle de queijos artesanais.', 20, '40m²', 101);
 
 -- Inserções na tabela Local Maturação e Usuário
 INSERT INTO localMaturacaoUsuario (dataAssociacao, fkUsuario, fkLocalMaturacao) 

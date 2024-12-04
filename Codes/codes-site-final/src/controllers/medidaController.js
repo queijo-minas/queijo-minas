@@ -21,28 +21,47 @@ function buscarUltimasMedidas(req, res) {
     });
 }
 
-
 function buscarMedidasEmTempoReal(req, res) {
-
     var idDadosSensor = req.params.idDadosSensor;
 
-    console.log(`Recuperando medidas em tempo real`);
+    console.log(`Recuperando medidas em tempo real para o sensor: ${idDadosSensor}`);
 
-    medidaModel.buscarMedidasEmTempoReal(idDadosSensor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(idDadosSensor)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum dado encontrado!");
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao buscar medidas em tempo real:", erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
+
+function buscarTempoForaIdeal(req, res) {
+    var fkSensor = req.params.fkSensor;
+
+    medidaModel.calcularTempoForaIdeal(fkSensor).then((resultado) => {
         if (resultado.length > 0) {
-            res.status(200).json(resultado);
+            res.status(200).json(resultado[0]);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            res.status(404).send("Nenhum dado encontrado para o sensor informado.");
         }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+    }).catch((erro) => {
+        console.error("Erro ao buscar os tempos fora da média ideal:", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
 
+
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
-
-}
+    buscarTempoForaIdeal,
+    buscarMedidasEmTempoReal, 
+};
