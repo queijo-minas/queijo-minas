@@ -15,7 +15,7 @@
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="imgs/logo.svg" alt="logo">
-          
+            <!-- <h2>Queijo no Ponto</h2> -->
         </div>
         <ul class="sidebar-links">
             <h4>
@@ -77,7 +77,7 @@
         </header>
     </section>
 
-    <section class="containerKpis">
+    <section class="containerKpi">
         <div class="kpi1">
             <h1></h1>
         </div>
@@ -89,24 +89,6 @@
         </div>
         <div class="kpi4">
             <h1></h1>
-        </div>
-    </section>
-
-    <section class="containerKpi">
-        <div class="kpi1">
-            <div class="alerta">
-                <img src="imgs/CircleAmarelo.svg" alt="">
-                <h1>Alerta</h1>
-                
-            </div>
-            <div class="ideal">
-                <img src="imgs/CircleVerde.svg" alt="">
-                <h1>Ideal</h1>
-            </div>
-            <div class="critico">
-                <img src="imgs/CircleVermelho.svg" alt="">
-                <h1>Crítico</h1>
-            </div>
         </div>
     </section>
 
@@ -290,6 +272,212 @@
     });
 
 
+    /*
+    // ESSE CÓDIGO ABAIXO QUE ESTÁ COMENTADO, ESTÁ FUNCIONANDO A DASHBOARD, OS GRÁFICOS ESTÃO 
+    // DINÂMICOS E O SCRIPT ABAIXO DELE ESTÁ FUNCIONANDO, APENAS É PRECISO IMPLEMENTAR PEQUENOS DETALHES DE CSS DO CÓDIGO ACIMA, 
+    // O METÓDO FETCH ESTÁ FUNCIONANDO TAMBÉM - ASSINADO BEATRIZ, DIA 30/11; TESTAR E AJUSTAR NA SEGUNDA-FEIRA 
+    // ESTÁ FUNCIONAL QUANDO OS DADOS SÃO CAPTADOS PELO SENSOR
+    // MELHORIAS DE CSS QEU ESTÃO ACIMA PRONTOS E FRUFRUS 
+   
+            // GRÁFICO DE TEMPERATURA
+   
+            var sensorTemperatura = new Chart(document.getElementById('sensorTemperatura').getContext('2d'), {
+               type: 'line',
+               data: {
+                   labels: [], // Horários fixos
+                   datasets: [
+                       {
+                           label: 'Temperatura Atual (°C)',
+                           borderColor: '#c59506',
+                           fill: true,
+                           data: [] // Dados dinâmicos de temperatura
+                       },
+                           {
+                               label: 'Média Ideal (°C)',
+                               borderColor: 'green',
+                               backgroundColor: 'green',
+                               data: [10, 10, 10, 10, 10, 10], // Linha de referência para a média
+                               borderDash: [10, 5],
+                               fill: false,
+                               borderWidth: 2
+                           },
+                           {
+                               label: 'Mínima (°C)',
+                               borderColor: 'red',
+                               backgroundColor: 'red',
+                               data: [7, 7, 7, 7, 7, 7], // Linha de referência para a mínima
+                               borderDash: [10, 5],
+                               fill: false,
+                               borderWidth: 2
+                           },
+                           {
+                               label: 'Máxima (°C)',
+                               borderColor: 'red',
+                               backgroundColor: 'red',
+                               data: [14, 14, 14, 14, 14, 14], // Linha de referência para a máxima
+                               borderDash: [10, 5],
+                               fill: false,
+                               borderWidth: 2
+                           }
+                   ]
+               },
+               options: {
+                   responsive: true,
+                   plugins: {
+                       legend: {
+                           labels: {
+                               boxWidth: 40,
+                               color: 'white',
+                               font: { size: 12 }
+                           }
+                       }
+                   },
+                   scales: {
+                       x: {
+                           ticks: {
+                               color: 'white' // Cor dos rótulos do eixo X
+                           }
+                       },
+                       y: {
+                           beginAtZero: false,
+                           title: {
+                               display: true,
+                               text: 'Temperatura (°C)',
+                               color: 'white',
+                               font: { size: 12 }
+                           },
+                           ticks: {
+                               color: 'white' // Cor dos rótulos do eixo Y
+                           }
+                       }
+                   }
+               }
+           });
+   
+            // GRÁFICO DE UMIDADE
+   
+            var sensorUmidade = new Chart(document.getElementById('sensorUmidade').getContext('2d'), {
+               type: 'line',
+               data: {
+                   labels: [], // Horários fixos
+                   datasets: [
+                       {
+                           label: 'Umidade Atual (%)',
+                           borderColor: '#1f78b4',
+                           fill: true,
+                           data: [] // Dados dinâmicos de umidade
+                       },
+                       {
+                           label: 'Média Ideal (%)',
+                           borderColor: 'green',
+                           backgroundColor: 'green',
+                           data: [80, 80, 80, 80, 80, 80], 
+                           borderDash: [10, 5],
+                           fill: false,
+                           borderWidth: 2
+                       },
+                       {
+                           label: 'Mínima (%)',
+                           borderColor: 'red',
+                           backgroundColor: 'red',
+                           data: [75, 75, 75, 75, 75, 75],
+                           borderDash: [10, 5],
+                           fill: false,
+                           borderWidth: 2
+                       },
+                       {
+                           label: 'Máxima (%)',
+                           borderColor: 'red',
+                           backgroundColor: 'red',
+                           data: [95, 95, 95, 95, 95, 95], 
+                           borderDash: [10, 5],
+                           fill: false,
+                           borderWidth: 2
+                       }
+                   ]
+               },
+               options: {
+                   responsive: true,
+                   plugins: {
+                       legend: {
+                           labels: {
+   
+                               boxWidth: 40,
+                               color: 'white',
+                               font: { size: 12 }
+                           }
+                       }
+                   },
+                   scales: {
+                       x: {
+                           ticks: {
+                               color: 'white' 
+                           }
+                       },
+                       y: {
+                           beginAtZero: false,
+                           title: {
+                               display: true,
+                               text: 'Umidade (%)',
+                               color: 'white',
+                               font: { size: 12 }
+                           },
+                           ticks: {
+                               color: 'white' 
+                           }
+                       }
+                   }
+               }
+           });
+                   // Função para obter dados dinamicamente e atualizar os gráficos
+                   var paginacao = {};
+                   var tempo = {};
+   
+   
+                   // ENDPOINT AJUSTADO!!!! NÃO ALTERE O FETCH, ESTÁ FUNCIONANDO!!!
+                   : 
+   
+                   function obterDados(grafico, endpoint) {
+                       fetch('http://localhost:3333/dadossensores/' + endpoint)
+                           .then(response => response.json())
+                           .then(valores => {
+                               if (!paginacao[endpoint]) {
+                                   paginacao[endpoint] = 0;
+                               }
+                               if (!tempo[endpoint]) {
+                                   tempo[endpoint] = 0;
+                               }
+   
+                               var ultimaPaginacao = paginacao[endpoint];
+                               paginacao[endpoint] = valores.length;
+                               valores = valores.slice(ultimaPaginacao);
+   
+                               valores.forEach((valor) => {
+                                   // Limite de 10 pontos no gráfico para manter a visualização organizada
+                                   if (grafico.data.labels.length === 10 && grafico.data.datasets[0].data.length === 10) {
+                                       grafico.data.labels.shift();
+                                       grafico.data.datasets[0].data.shift();
+                                   }
+   
+                                   // Atualizando labels e dados dinamicamente
+                                   grafico.data.labels.push(tempo[endpoint]++);
+                                   grafico.data.datasets[0].data.push(parseFloat(valor));
+                                   grafico.update();
+                               });
+                           })
+                           .catch(error => console.error('Erro ao obter dados:', error));
+                   }
+   
+                   // Atualizando os gráficos a cada 1 segundo
+                   setInterval(() => {
+                       obterDados(sensorTemperatura, 'temperatura');
+                       obterDados(sensorUmidade, 'umidade');
+                   }, 1000);
+   
+   
+      */
+
+
 </script>
 
 <script>
@@ -300,11 +488,11 @@
         const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
 
 
-        //if (!nome) {
-            //alert("Usuário não autenticado. Redirecionando para o login.");
-            //window.location = "/login.html";
-            //return;
-        //}
+        if (!nome) {
+            alert("Usuário não autenticado. Redirecionando para o login.");
+            window.location = "/login.html";
+            return;
+        }
 
 
         document.getElementById("nome").textContent = nome;
