@@ -1,161 +1,163 @@
 var empresaModel = require("../models/empresaModel");
 
-// Função para validar os dados obrigatórios
-function validarDadosEmpresa(body) {
-    const camposObrigatorios = [
-        "cnpj",
-        "razaoSocial",
-        "nomeFantasia",
-        "telefone",
-        "representanteLegal",
-        "email",
-        "cpf",
-        "senhaEmpresa",
-        "cep",
-        "logradouro",
-        "bairro",
-        "cidade",
-        "uf",
-    ];
+// async function autenticarEmpresa(req, res) {
+//     const { email, senha } = req.body;  // Pegando email e senha da empresa
 
-    for (const campo of camposObrigatorios) {
-        if (!body[campo]) {
-            return `Campo obrigatório "${campo}" está faltando.`;
-        }
-    }
-    return null;
-}
+//     console.log("Tentando autenticar como empresa...");
 
-// Função para validar o formato de CNPJ, CPF e email
-function isValidCnpj(cnpj) {
-    const regexCnpj = /^\d{14}$/; // Simplificação para validar 14 dígitos numéricos
-    return regexCnpj.test(cnpj);
-}
+//     try {
+//         // Tenta autenticar como empresa
+//         let empresa = await autenticarEmpresa(email, senha);
 
-function isValidCpf(cpf) {
-    const regexCpf = /^\d{11}$/; // Simplificação para validar 11 dígitos numéricos
-    return regexCpf.test(cpf);
-}
+//         if (empresa) {
+//             // Se for uma empresa, retorna os dados da empresa
+//             console.log("Empresa autenticada com sucesso");
+//             return res.status(200).json(empresa);
+//         }
 
-function isValidEmail(email) {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Valida formato de email
-    return regexEmail.test(email);
-}
+//         // Se não encontrar a empresa
+//         console.log("Falha na autenticação, credenciais inválidas");
+//         return res.status(401).json({ message: "Credenciais inválidas" });
 
-// Função principal para cadastrar uma empresa
+//     } catch (erro) {
+//         console.error("Erro ao tentar autenticar: ", erro);
+//         return res.status(500).json({ message: "Erro ao tentar autenticar", error: erro.message || erro });
+//     }
+// }
+
+// const bcrypt = require("bcrypt");
+
 function cadastrar(req, res) {
-    // Validar campos obrigatórios
-    const erroValidacao = validarDadosEmpresa(req.body);
-    if (erroValidacao) {
-        return res.status(400).json({ mensagem: erroValidacao });
-    }
+    var razaoSocial = req.body.razaoSocial;
+    var cpf = req.body.cpf;
+    var cnpj = req.body.cnpj;
+    var nomeFantasia = req.body.nomeFantasia;
+    var telefone = req.body.telefone;
+    var representanteLegal = req.body.representanteLegal;
+    var email = req.body.email;
+    var senha = req.body.senha;
+    var logradouro = req.body.logradouro;
+    var bairro = req.body.bairro;
+    var cidade = req.body.cidade;
+    var uf = req.body.uf;
+    var cep = req.body.cep;
 
-    // Extrair os dados da requisição
-    const {
-        cnpj,
+
+    console.log("== Dados Recebidos no EmpresaController ==")
+
+    console.log({
         razaoSocial,
         nomeFantasia,
+        cnpj,
         telefone,
         representanteLegal,
         email,
         cpf,
-        senhaEmpresa,
+        senha,
         cep,
         logradouro,
         bairro,
         cidade,
-        uf,
-    } = req.body;
+        uf
+    });
 
     // Validar CNPJ, CPF e email
-    if (!isValidCnpj(cnpj)) {
-        return res.status(400).json({ mensagem: "CNPJ inválido! Deve conter 14 dígitos numéricos." });
+    // if (!isValidCnpj(cnpj)) {
+    //     return res.status(400).json({ mensagem: "CNPJ inválido! Deve conter 14 dígitos numéricos." });
+    // }
+
+    // if (!isValidCpf(cpf)) {
+    //     return res.status(400).json({ mensagem: "CPF inválido! Deve conter 11 dígitos numéricos." });
+    // }
+
+    // if (!isValidEmail(email)) {
+    //     return res.status(400).json({ mensagem: "Email inválido!" });
+    // }
+
+    // Verificar se os campos obrigatórios estão preenchidos
+    if (!razaoSocial) {
+        return res.status(400).send("Razão Social está undefined!");
+    } else if (!nomeFantasia) {
+        return res.status(400).send("Nome Fantasia está undefined!");
+    } else if (!telefone) {
+        return res.status(400).send("Telefone está undefined!");
+    } else if (!representanteLegal) {
+        return res.status(400).send("Representante Legal está undefined!");
+    } else if (!email) {
+        return res.status(400).send("Email está undefined!");
+    } else if (!senha) {
+        return res.status(400).send("Senha está undefined!");
+    } else if (!logradouro) {
+        return res.status(400).send("Logradouro está undefined!");
+    } else if (!bairro) {
+        return res.status(400).send("Bairro está undefined!");
+    } else if (!cidade) {
+        return res.status(400).send("Cidade está undefined!");
+    } else if (!uf) {
+        return res.status(400).send("UF está undefined!");
+    } else if (!cep) {
+        return res.status(400).send("CEP está undefined!");
     }
 
-    if (!isValidCpf(cpf)) {
-        return res.status(400).json({ mensagem: "CPF inválido! Deve conter 11 dígitos numéricos." });
-    }
-
-    if (!isValidEmail(email)) {
-        return res.status(400).json({ mensagem: "Email inválido!" });
-    }
-
-    console.log("Dados recebidos no backend:", req.body);
-
-    // Chamar o modelo para cadastrar a empresa
-    empresaModel
-        .cadastrar(
-            razaoSocial,
-            nomeFantasia,
-            cnpj,
-            telefone,
-            representanteLegal,
-            email,
-            cpf,
-            senhaEmpresa,
-            cep,
-            logradouro,
-            bairro,
-            cidade,
-            uf
-        )
-        .then((resultado) => {
-            res.status(201).json({ mensagem: "Empresa cadastrada com sucesso!", resultado });
-        })
-        .catch((erro) => {
-            console.error("Erro ao cadastrar empresa:", erro);
-            res.status(500).json({
-                mensagem: "Erro ao cadastrar empresa",
-                detalhes: erro.sqlMessage || "Erro interno no servidor",
-            });
+    // Aqui, você pode ajustar a inserção no banco de dados (modelo de cadastro)
+    empresaModel.cadastrar(
+        razaoSocial, nomeFantasia, cnpj, telefone, representanteLegal, email,
+        cpf, senha, logradouro, bairro, cidade, uf, cep
+    )
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
+            console.error("Erro ao cadastrar:", erro);
+            res.status(500).json(erro.sqlMessage);
         });
 }
+
 
 // Outras funções do controlador
-function buscarPorCnpj(req, res) {
-    const cnpj = req.query.cnpj;
+// function buscarPorCnpj(req, res) {
+//     const cnpj = req.query.cnpj;
 
-    empresaModel
-        .buscarPorCnpj(cnpj)
-        .then((resultado) => {
-            res.status(200).json(resultado);
-        })
-        .catch((erro) => {
-            console.error("Erro ao buscar por CNPJ:", erro);
-            res.status(500).json({ mensagem: "Erro ao buscar empresa por CNPJ." });
-        });
-}
+//     empresaModel
+//         .buscarPorCnpj(cnpj)
+//         .then((resultado) => {
+//             res.status(200).json(resultado);
+//         })
+//         .catch((erro) => {
+//             console.error("Erro ao buscar por CNPJ:", erro);
+//             res.status(500).json({ mensagem: "Erro ao buscar empresa por CNPJ." });
+//         });
+// }
 
-function listar(req, res) {
-    empresaModel
-        .listar()
-        .then((resultado) => {
-            res.status(200).json(resultado);
-        })
-        .catch((erro) => {
-            console.error("Erro ao listar empresas:", erro);
-            res.status(500).json({ mensagem: "Erro ao listar empresas." });
-        });
-}
+// function listar(req, res) {
+//     empresaModel
+//         .listar()
+//         .then((resultado) => {
+//             res.status(200).json(resultado);
+//         })
+//         .catch((erro) => {
+//             console.error("Erro ao listar empresas:", erro);
+//             res.status(500).json({ mensagem: "Erro ao listar empresas." });
+//         });
+// }
 
-function buscarPorId(req, res) {
-    const id = req.params.id;
+// function buscarPorId(req, res) {
+//     const id = req.params.id;
 
-    empresaModel
-        .buscarPorId(id)
-        .then((resultado) => {
-            res.status(200).json(resultado);
-        })
-        .catch((erro) => {
-            console.error("Erro ao buscar por ID:", erro);
-            res.status(500).json({ mensagem: "Erro ao buscar empresa por ID." });
-        });
-}
+//     empresaModel
+//         .buscarPorId(id)
+//         .then((resultado) => {
+//             res.status(200).json(resultado);
+//         })
+//         .catch((erro) => {
+//             console.error("Erro ao buscar por ID:", erro);
+//             res.status(500).json({ mensagem: "Erro ao buscar empresa por ID." });
+//         });
+// }
 
 // Exportar as funções
 module.exports = {
     cadastrar,
-    buscarPorCnpj,
-    listar,
-    buscarPorId,
+    // buscarPorCnpj,
+    // listar,
+    // buscarPorId,
+    // autenticarEmpresa,
 };
