@@ -160,6 +160,7 @@ body {
 
 .sidebar:hover~.containerDescription,
 .sidebar:hover~.containerKpi, 
+.sidebar:hover~.containerKpis,
 .sidebar:hover~.graphics {
     width: calc(100% - 260px);
     left: 260px;
@@ -171,19 +172,19 @@ body {
     font-size: 22px;
 }
 
-.containerKpi {
+.containerKpis{
     position: relative;
     width: calc(100% - 85px);
     left: 85px;
     height: 150px;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
     align-items: center;
+    padding: 20px;
     transition: all 0.4s ease;
 }
 
-.containerKpi .kpi1,
+.containerKpis .kpi1,
 .kpi2,
 .kpi3,
 .kpi4 {
@@ -194,6 +195,38 @@ body {
     -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+}
+
+.containerKpi {
+    position: relative;
+    width: calc(100% - 85px);
+    left: 85px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.containerKpi .kpi1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    width: 600px;
+    height: 50px;
+    -webkit-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    -moz-box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+    box-shadow: 0px 0px 87px -37px rgba(0,0,0,0.59);
+}
+
+.alerta, .ideal, .critico{
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .graphics{
