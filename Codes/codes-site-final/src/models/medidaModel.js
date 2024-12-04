@@ -44,13 +44,13 @@ function calcularTempoForaIdeal(fkSensor) {
             fkSensor,
             SUM(
                 CASE 
-                    WHEN temperatura < 9 OR temperatura > 12 THEN 1 
+                    WHEN temperatura < 7 OR temperatura > 14 THEN 1 
                     ELSE 0 
                 END
             ) AS tempo_fora_ideal_temperatura,
             SUM(
                 CASE 
-                    WHEN umidade < 80 OR umidade > 90 THEN 1 
+                    WHEN umidade < 75 OR umidade > 95 THEN 1 
                     ELSE 0 
                 END
             ) AS tempo_fora_ideal_umidade
