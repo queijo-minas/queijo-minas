@@ -8,6 +8,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dashboard</title>
 </head>
 
@@ -99,7 +100,7 @@
             <div class="alerta">
                 <h1>Alerta</h1>
                 <p>Temperatura: De 12°C a 14°C <br>Temperatura : De 9°C a 7°C<br>
-                            Umidade: De 90%  a 95%<br> Umidade: De 80% a 75%
+                    Umidade: De 90% a 95%<br> Umidade: De 80% a 75%
                 </p>
 
             </div>
@@ -139,200 +140,228 @@
 </body>
 
 </html>
-    <script>
-        // Variáveis globais para os gráficos
-        let temperaturaChart;
-        let umidadeChart;
-    
-        document.addEventListener("DOMContentLoaded", () => {
-            const ctxTemperatura = document.getElementById("sensorTemperatura").getContext("2d");
-            const ctxUmidade = document.getElementById("sensorUmidade").getContext("2d");
-    
-            // Inicializa os gráficos e associa às variáveis globais
-            temperaturaChart = new Chart(ctxTemperatura, {
-                type: "line",
-                data: {
-                    labels: [],
-                    datasets: [
-                        {
-                            label: "Temperatura Atual (°C)",
-                            borderColor: "#FF5733",
-                            backgroundColor: "rgba(255, 87, 51, 0.2)",
-                            data: [],
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                boxWidth: 40,
-                                color: "black",
-                                font: { size: 12 }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { color: "black" }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Temperatura (°C)",
-                                color: "black",
-                                font: { size: 12 }
-                            },
-                            ticks: { color: "black" }
-                        }
-                    }
-                }
-            });
-    
-            umidadeChart = new Chart(ctxUmidade, {
-                type: "line",
-                data: {
-                    labels: [],
-                    datasets: [
-                        {
-                            label: "Umidade Atual (%)",
-                            borderColor: "#33A2FF",
-                            backgroundColor: "rgba(51, 162, 255, 0.2)",
-                            data: [],
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                boxWidth: 40,
-                                color: "black",
-                                font: { size: 12 }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { color: "black" }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Umidade (%)",
-                                color: "black",
-                                font: { size: 12 }
-                            },
-                            ticks: { color: "black" }
-                        }
-                    }
-                }
-            });
-    
-            // Atualiza os gráficos periodicamente
-            setInterval(atualizarGraficos, 1000);
-        });
- // Declarando a variável fkSensor
-const fkSensor = 101; // Substitua pelo ID correto do sensor
+<script>
 
-// Função para atualizar os gráficos
-async function atualizarGraficos() {
-    try {
-        if (!temperaturaChart || !umidadeChart) {
-            console.warn("Os gráficos ainda não foram inicializados.");
-            return;
-        }
-
-        const temperaturaResponse = await fetch('http://localhost:3300/dadosSensor/temperatura');
-        const umidadeResponse = await fetch('http://localhost:3300/dadosSensor/umidade');
-
-        if (!temperaturaResponse.ok || !umidadeResponse.ok) {
-            console.error("Erro ao buscar dados dos gráficos.");
-            return;
-        }
-
-        const temperaturas = await temperaturaResponse.json();
-        const umidades = await umidadeResponse.json();
-
-        const labels = Array.from({ length: temperaturas.length }, (_, i) => `Dado ${i + 1}`);
-
-        temperaturaChart.data.labels = labels;
-        temperaturaChart.data.datasets[0].data = temperaturas;
-        temperaturaChart.update();
-
-        umidadeChart.data.labels = labels;
-        umidadeChart.data.datasets[0].data = umidades;
-        umidadeChart.update();
-    } catch (error) {
-        console.error("Erro ao atualizar gráficos:", error);
-    }
-}
-
-// Função para atualizar as KPIs de temperatura e umidade
-async function atualizarKPIs() {
-    try {
-        const resposta = await fetch(`http://localhost:3333/medidas/tempo-real/${fkSensor}`);
+    //poupup para por dentro do if de critico
+    Swal.fire({
+        title: "Critico",
+        text: "A temperatura passou de 14 graus!",
+        icon: "error"
         
-        if (resposta.ok) {
-            const dados = await resposta.json();
-            if (dados.length > 0) {
-                const temperatura = dados[0].temperatura;
-                const umidade = dados[0].umidade;
+    });
 
-                document.getElementById("kpiTemperaturaAtual").innerText = `${temperatura} °C`;
-                document.getElementById("kpiUmidadeAtual").innerText = `${umidade} %`;
+
+    // //poupup para por dentro do if de Alerta
+    Swal.fire({
+        title: "Alerta",
+        text: "A temperatura caiu para 9 graus!",
+        icon: "info"
+    });
+
+
+   //poupup para por dentro do if de ideal
+   Swal.fire({
+        title: "ideal",
+        text: "A temperatura está dentro do ideal!",
+        icon: "success"
+    });
+
+
+
+
+    // Variáveis globais para os gráficos
+    let temperaturaChart;
+    let umidadeChart;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const ctxTemperatura = document.getElementById("sensorTemperatura").getContext("2d");
+        const ctxUmidade = document.getElementById("sensorUmidade").getContext("2d");
+
+        // Inicializa os gráficos e associa às variáveis globais
+        temperaturaChart = new Chart(ctxTemperatura, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Temperatura Atual (°C)",
+                        borderColor: "#FF5733",
+                        backgroundColor: "rgba(255, 87, 51, 0.2)",
+                        data: [],
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            boxWidth: 40,
+                            color: "black",
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: "black" }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Temperatura (°C)",
+                            color: "black",
+                            font: { size: 12 }
+                        },
+                        ticks: { color: "black" }
+                    }
+                }
             }
-        } else {
-            console.error("Erro ao buscar KPIs:", resposta.status);
+        });
+
+        umidadeChart = new Chart(ctxUmidade, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Umidade Atual (%)",
+                        borderColor: "#33A2FF",
+                        backgroundColor: "rgba(51, 162, 255, 0.2)",
+                        data: [],
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            boxWidth: 40,
+                            color: "black",
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: "black" }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Umidade (%)",
+                            color: "black",
+                            font: { size: 12 }
+                        },
+                        ticks: { color: "black" }
+                    }
+                }
+            }
+        });
+
+        // Atualiza os gráficos periodicamente
+        setInterval(atualizarGraficos, 1000);
+    });
+    // Declarando a variável fkSensor
+    const fkSensor = 101; // Substitua pelo ID correto do sensor
+
+    // Função para atualizar os gráficos
+    async function atualizarGraficos() {
+        try {
+            if (!temperaturaChart || !umidadeChart) {
+                console.warn("Os gráficos ainda não foram inicializados.");
+                return;
+            }
+
+            const temperaturaResponse = await fetch('http://localhost:3300/dadosSensor/temperatura');
+            const umidadeResponse = await fetch('http://localhost:3300/dadosSensor/umidade');
+
+            if (!temperaturaResponse.ok || !umidadeResponse.ok) {
+                console.error("Erro ao buscar dados dos gráficos.");
+                return;
+            }
+
+            const temperaturas = await temperaturaResponse.json();
+            const umidades = await umidadeResponse.json();
+
+            const labels = Array.from({ length: temperaturas.length }, (_, i) => `Dado ${i + 1}`);
+
+            temperaturaChart.data.labels = labels;
+            temperaturaChart.data.datasets[0].data = temperaturas;
+            temperaturaChart.update();
+
+            umidadeChart.data.labels = labels;
+            umidadeChart.data.datasets[0].data = umidades;
+            umidadeChart.update();
+        } catch (error) {
+            console.error("Erro ao atualizar gráficos:", error);
         }
-    } catch (erro) {
-        console.error("Erro ao atualizar KPIs:", erro);
     }
-}
 
-// Função para atualizar as KPIs de tempo fora do ideal
-async function atualizarKPIsForaIdeal() {
-    try {
-        const resposta = await fetch(`http://localhost:3333/medidas/tempo-fora-ideal/${fkSensor}`);
-        
-        if (resposta.ok) {
-            const dados = await resposta.json();
+    // Função para atualizar as KPIs de temperatura e umidade
+    async function atualizarKPIs() {
+        try {
+            const resposta = await fetch(`http://localhost:3333/medidas/tempo-real/${fkSensor}`);
 
-            const tempoForaTemperatura = dados.tempo_fora_ideal_temperatura;
-            const tempoForaUmidade = dados.tempo_fora_ideal_umidade;
+            if (resposta.ok) {
+                const dados = await resposta.json();
+                if (dados.length > 0) {
+                    const temperatura = dados[0].temperatura;
+                    const umidade = dados[0].umidade;
 
-            document.getElementById("kpiTempoForaTemperatura").innerText = `${tempoForaTemperatura} min fora`;
-            document.getElementById("kpiTempoForaUmidade").innerText = `${tempoForaUmidade} min fora`;
-        } else {
-            console.error("Erro ao buscar KPIs de tempo fora da média:", resposta.status);
+                    document.getElementById("kpiTemperaturaAtual").innerText = `${temperatura} °C`;
+                    document.getElementById("kpiUmidadeAtual").innerText = `${umidade} %`;
+                }
+            } else {
+                console.error("Erro ao buscar KPIs:", resposta.status);
+            }
+        } catch (erro) {
+            console.error("Erro ao atualizar KPIs:", erro);
         }
-    } catch (erro) {
-        console.error("Erro ao atualizar KPIs de tempo fora da média:", erro);
     }
-}
 
-// Configuração de atualizações periódicas
-setInterval(atualizarGraficos, 2000);
-setInterval(atualizarKPIs, 2000);
-setInterval(atualizarKPIsForaIdeal, 5000);
+    // Função para atualizar as KPIs de tempo fora do ideal
+    async function atualizarKPIsForaIdeal() {
+        try {
+            const resposta = await fetch(`http://localhost:3333/medidas/tempo-fora-ideal/${fkSensor}`);
 
-// Chamada inicial
-document.addEventListener("DOMContentLoaded", () => {
-    atualizarGraficos();
-    atualizarKPIs();
-    atualizarKPIsForaIdeal();
-});
+            if (resposta.ok) {
+                const dados = await resposta.json();
 
-    </script>
-    
+                const tempoForaTemperatura = dados.tempo_fora_ideal_temperatura;
+                const tempoForaUmidade = dados.tempo_fora_ideal_umidade;
 
-  
+                document.getElementById("kpiTempoForaTemperatura").innerText = `${tempoForaTemperatura} min fora`;
+                document.getElementById("kpiTempoForaUmidade").innerText = `${tempoForaUmidade} min fora`;
+            } else {
+                console.error("Erro ao buscar KPIs de tempo fora da média:", resposta.status);
+            }
+        } catch (erro) {
+            console.error("Erro ao atualizar KPIs de tempo fora da média:", erro);
+        }
+    }
+
+    // Configuração de atualizações periódicas
+    setInterval(atualizarGraficos, 2000);
+    setInterval(atualizarKPIs, 2000);
+    setInterval(atualizarKPIsForaIdeal, 5000);
+
+    // Chamada inicial
+    document.addEventListener("DOMContentLoaded", () => {
+        atualizarGraficos();
+        atualizarKPIs();
+        atualizarKPIsForaIdeal();
+    });
+
+</script>
+
+
+
 <script>
     // aqui recupera o nome do usuario e da empresa que estão no session
     document.addEventListener("DOMContentLoaded", () => {
@@ -342,9 +371,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         //if (!nome) {
-            //alert("Usuário não autenticado. Redirecionando para o login.");
-            //window.location = "/login.html";
-            //return;
+        //alert("Usuário não autenticado. Redirecionando para o login.");
+        //window.location = "/login.html";
+        //return;
         //}
 
 
