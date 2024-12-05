@@ -1,5 +1,6 @@
 // Definindo ambiente e caminho do arquivo .env
-var ambiente_processo = 'desenvolvimento'; 
+// var ambiente_processo = 'desenvolvimento'; 
+var ambiente_processo = 'producao';
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
