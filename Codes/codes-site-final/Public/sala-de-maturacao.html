@@ -12,7 +12,7 @@
   <title>Salas de Maturação</title>
 </head>
 
-<body onload="carregarSalas()">
+<body>
   <aside class="sidebar">
     <div class="sidebar-header">
       <img src="imgs/logo.svg" alt="logo">
@@ -65,7 +65,7 @@
     </header>
   </section>
 
-  <!-- <section class="containerKpi">
+  <section class="containerKpi">
     <div class="kpi1" onclick="redirecionarParaDashboard()">
       <h1>Sala de Maturação 1</h1>
       <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
@@ -74,7 +74,7 @@
       <h1>Adicionar Sala</h1>
       <img src="./imgs/adicionar (2).png" alt="Adicionar Sala">
     </div>
-  </section> -->
+  </section>
 
   <section class="containerKpi" id="salas-container">
     <!-- Salas serão carregadas aqui dinamicamente -->
@@ -87,70 +87,6 @@
       window.location.href = "dashboard.html";
     }
   
-    // Função para carregar as salas de maturação
-    function carregarSalas(empresaId) {
-      empresaId = sessionStorage.getItem("ID_EMPRESA")
-      const apiUrl = `http://localhost:3333/salas/${empresaId}`;
-  
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(salas => {
-          const container = document.getElementById('salas-container');
-  
-          // Limpa o container antes de inserir os novos dados
-          container.innerHTML = '';
-  
-          // Adiciona os cards das salas retornadas pela API
-          salas.forEach(sala => {
-            const card = document.createElement('div');
-            card.className = 'kpi1';
-            card.onclick = () => redirecionarParaDashboard(sala.idLocalMaturacao);
-            card.innerHTML = `
-              <h1>${sala.nomeLocal}</h1>
-              <img src="./imgs/salaMaturacao.png" alt="Sala de Maturação">
-            `;
-            container.appendChild(card);
-          });
-  
-          // Adiciona o card "Adicionar Sala"
-          const addCard = document.createElement('div');
-          addCard.className = 'kpi2';
-          addCard.onclick = redirecionarParaCadastroSala();
-          addCard.innerHTML = `
-            <h1>Adicionar Sala</h1>
-            <img src="./imgs/adicionar (2).png" alt="Adicionar Sala">
-          `;
-          container.appendChild(addCard);
-        })
-        .catch(error => {
-          console.error('Erro ao carregar salas:', error);
-        });
-    }
-  
-    // Inicializar a página teste
-    document.addEventListener("DOMContentLoaded", () => {
-      const nome = sessionStorage.getItem("NOME_USUARIO");
-      const nomeFantasia = sessionStorage.getItem("NOME_EMPRESA");
-      const empresaId = sessionStorage.getItem("ID_EMPRESA"); // ID da empresa do usuário autenticado
-  
-      if (!nome || !empresaId) {
-        alert("Usuário não autenticado. Redirecionando para o login.");
-        window.location = "entrar.html";
-        return;
-      }
-  
-      // Atualiza os detalhes do usuário
-      document.getElementById("nome").textContent = nome;
-      document.getElementById("nomeFantasia").textContent = nomeFantasia || "Empresa não informada";
-  
-      // Carrega as salas de maturação para a empresa
-      carregarSalas(empresaId);
-    });
-  
-    // Função para redirecionar para o cadastro de nova sala
-    function redirecionarParaCadastroSala() {
-      window.location.href = "cadastro-sala-maturacao.html";
-    }
   </script>
 
 </body>
